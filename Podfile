@@ -3,6 +3,7 @@ platform :ios, '7.0'
 
 target 'Audeecon' do
 pod 'JSQMessagesViewController'
+pod 'AFNetworking'
 end
 
 target 'AudeeconTests' do

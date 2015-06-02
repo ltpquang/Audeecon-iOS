@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4602C9693B38D80112C7248D /* libPods-Audeecon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */; };
+		6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */; };
+		6F03C32E1AD6ACDA0075BD66 /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */; };
 		6F3A8DD71ABBBC31007BFD68 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */; };
 		6F6CC6B81AD4C03F00920935 /* PQMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */; };
 		6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */; };
@@ -160,6 +162,7 @@
 		6FB93B7D1ABB0E4E0067224E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B7B1ABB0E4E0067224E /* LaunchScreen.xib */; };
 		6FB93B891ABB0E4E0067224E /* AudeeconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B881ABB0E4E0067224E /* AudeeconTests.m */; };
 		6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */; };
+		6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */; };
 		6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +178,10 @@
 
 /* Begin PBXFileReference section */
 		225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Audeecon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F03C3291AD6ACAA0075BD66 /* PQSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQSticker.h; path = Models/PQSticker.h; sourceTree = "<group>"; };
+		6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
+		6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPack.h; path = Models/PQStickerPack.h; sourceTree = "<group>"; };
+		6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPack.m; path = Models/PQStickerPack.m; sourceTree = "<group>"; };
 		6F3A8DD51ABBBC31007BFD68 /* PQLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginViewController.h; path = Controllers/PQLoginViewController.h; sourceTree = "<group>"; };
 		6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQLoginViewController.m; path = Controllers/PQLoginViewController.m; sourceTree = "<group>"; };
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
@@ -491,6 +498,8 @@
 		6FB93B881ABB0E4E0067224E /* AudeeconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudeeconTests.m; sourceTree = "<group>"; };
 		6FD21D151ABC296F00C4C92E /* PQFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListViewController.h; path = Controllers/PQFriendListViewController.h; sourceTree = "<group>"; };
 		6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListViewController.m; path = Controllers/PQFriendListViewController.m; sourceTree = "<group>"; };
+		6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListTableViewCell.h; path = Controllers/Cells/PQFriendListTableViewCell.h; sourceTree = "<group>"; };
+		6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListTableViewCell.m; path = Controllers/Cells/PQFriendListTableViewCell.m; sourceTree = "<group>"; };
 		6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeViewController.h; path = Controllers/PQMessageExchangeViewController.h; sourceTree = "<group>"; };
 		6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageExchangeViewController.m; path = Controllers/PQMessageExchangeViewController.m; sourceTree = "<group>"; };
 		DD91CCF038017071F30B3BDD /* Pods-Audeecon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.release.xcconfig"; sourceTree = "<group>"; };
@@ -520,6 +529,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F03C3281AD6AC4C0075BD66 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F03C3291AD6ACAA0075BD66 /* PQSticker.h */,
+				6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */,
+				6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */,
+				6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		6F3A8DD41ABBBC07007BFD68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +569,8 @@
 			children = (
 				6F6CC6B61AD4C03F00920935 /* PQMessageTableViewCell.h */,
 				6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */,
+				6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */,
+				6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1457,6 +1479,7 @@
 		6FB93B6B1ABB0E4E0067224E /* Audeecon */ = {
 			isa = PBXGroup;
 			children = (
+				6F03C3281AD6AC4C0075BD66 /* Models */,
 				6F69AF541ABBFE6B00AE6D6A /* Protocols */,
 				6F3A8DD41ABBBC07007BFD68 /* Controllers */,
 				6FB93B701ABB0E4E0067224E /* AppDelegate.h */,
@@ -1651,6 +1674,7 @@
 				6F9CE55D1ABB16FC00D716EB /* NSNumber+XMPP.m in Sources */,
 				6F9CE5561ABB16FC00D716EB /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				6F9CE58E1ABB16FC00D716EB /* XMPPvCard.xcdatamodeld in Sources */,
+				6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */,
 				6F9CE3ED1ABB14EE00D716EB /* DDMultiFormatter.m in Sources */,
 				6F9CE5C11ABB16FC00D716EB /* XEP_0223.m in Sources */,
 				6F9CE4071ABB15B000D716EB /* DDXMLDocument.m in Sources */,
@@ -1721,6 +1745,7 @@
 				6F9CE5B41ABB16FC00D716EB /* XMPPMessage+XEP_0172.m in Sources */,
 				6F9CE5CF1ABB16FC00D716EB /* XMPPStringPrep.m in Sources */,
 				6F9CE5781ABB16FC00D716EB /* XMPPRoster.m in Sources */,
+				6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */,
 				6F9CE5A91ABB16FC00D716EB /* XMPPCapabilities.xcdatamodel in Sources */,
 				6FB93B721ABB0E4E0067224E /* AppDelegate.m in Sources */,
 				6F9CE5BE1ABB16FC00D716EB /* XMPPAutoTime.m in Sources */,
@@ -1734,6 +1759,7 @@
 				6F9CE5981ABB16FC00D716EB /* XMPPvCardTempLabel.m in Sources */,
 				6F6CC6B81AD4C03F00920935 /* PQMessageTableViewCell.m in Sources */,
 				6F9CE5B81ABB16FC00D716EB /* XMPPBlocking.m in Sources */,
+				6F03C32E1AD6ACDA0075BD66 /* PQStickerPack.m in Sources */,
 				6F9CE5711ABB16FC00D716EB /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				6F9CE5641ABB16FC00D716EB /* XMPPModule.m in Sources */,
 				6F9CE5581ABB16FC00D716EB /* XMPPPlainAuthentication.m in Sources */,

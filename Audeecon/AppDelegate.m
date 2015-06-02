@@ -151,10 +151,15 @@
 }
 
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
-    
+    NSLog(@"%@", iq);
 
     return NO;
     
+}
+
+- (XMPPIQ *)xmppStream:(XMPPStream *)sender willSendIQ:(XMPPIQ *)iq {
+    NSLog(@"%@", iq);
+    return iq;
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
@@ -178,7 +183,7 @@
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
-    
+    NSLog(@"%@", presence);
     NSString *presenceType = [presence type]; // online/offline
     NSString *myUsername = [[sender myJID] user];
     NSString *presenceFromUser = [[presence from] user];
@@ -195,6 +200,8 @@
         }
     }
 }
+
+
 
 #pragma mark - Core Data
 - (NSManagedObjectContext *)managedObjectContext_roster

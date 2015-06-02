@@ -23,6 +23,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //[self FetchFriends];
+}
+
+- (void)FetchFriends
+{
+    NSError *error = [[NSError alloc] init];
+    NSXMLElement *query = [[NSXMLElement alloc] initWithXMLString:@"<query xmlns='jabber:iq:roster'/>"error:&error];
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"type" stringValue:@"get"];
+    [iq addAttributeWithName:@"id" stringValue:@"ANY_ID_NAME"];
+    [iq addAttributeWithName:@"from" stringValue:@"ANY_ID_NAME@weejoob.info"];
+    [iq addChild:query];
+    [[self xmppStream] sendElement:iq];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -67,6 +80,7 @@
 }
 
 #pragma mark - FetchedResultController
+
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController == nil)
     {
