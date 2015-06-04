@@ -7,8 +7,11 @@
 //
 
 #import "PQMessageTableViewCell.h"
+#import <UIImageView+AFNetworking.h>
+
 @interface PQMessageTableViewCell()
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *stickerImage;
 
 @end
 
@@ -25,6 +28,9 @@
 }
 
 - (void)configCellUsingMessage:(NSString *)message {
-    _messageLabel.text = message;
+    //_messageLabel.text = message;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://quangltp.com/pandadog/%@.png", message]];
+    _stickerImage.image = nil;
+    [_stickerImage setImageWithURL:url];
 }
 @end

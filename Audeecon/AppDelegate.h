@@ -32,6 +32,8 @@
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
 @property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
 
+@property (strong, nonatomic) NSArray *_stickerPacks;
+
 - (BOOL)connect;
 - (NSManagedObjectContext *)managedObjectContext_roster;
 

@@ -10,6 +10,10 @@
 		4602C9693B38D80112C7248D /* libPods-Audeecon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */; };
 		6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */; };
 		6F03C32E1AD6ACDA0075BD66 /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */; };
+		6F307E241B1E129D00D2F6DE /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */; };
+		6F307E2B1B1E12D900D2F6DE /* PQParsingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E261B1E12D900D2F6DE /* PQParsingService.m */; };
+		6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E281B1E12D900D2F6DE /* PQRequestingService.m */; };
+		6F307E2D1B1E12D900D2F6DE /* PQUrlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */; };
 		6F3A8DD71ABBBC31007BFD68 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */; };
 		6F6CC6B81AD4C03F00920935 /* PQMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */; };
 		6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */; };
@@ -182,6 +186,14 @@
 		6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
 		6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPack.h; path = Models/PQStickerPack.h; sourceTree = "<group>"; };
 		6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPack.m; path = Models/PQStickerPack.m; sourceTree = "<group>"; };
+		6F307E221B1E129D00D2F6DE /* UIImage+Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Sprite.h"; sourceTree = "<group>"; };
+		6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Sprite.m"; sourceTree = "<group>"; };
+		6F307E251B1E12D900D2F6DE /* PQParsingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQParsingService.h; sourceTree = "<group>"; };
+		6F307E261B1E12D900D2F6DE /* PQParsingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQParsingService.m; sourceTree = "<group>"; };
+		6F307E271B1E12D900D2F6DE /* PQRequestingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQRequestingService.h; sourceTree = "<group>"; };
+		6F307E281B1E12D900D2F6DE /* PQRequestingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQRequestingService.m; sourceTree = "<group>"; };
+		6F307E291B1E12D900D2F6DE /* PQUrlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQUrlService.h; sourceTree = "<group>"; };
+		6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQUrlService.m; sourceTree = "<group>"; };
 		6F3A8DD51ABBBC31007BFD68 /* PQLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginViewController.h; path = Controllers/PQLoginViewController.h; sourceTree = "<group>"; };
 		6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQLoginViewController.m; path = Controllers/PQLoginViewController.m; sourceTree = "<group>"; };
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
@@ -538,6 +550,21 @@
 				6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		6F307E211B1E127600D2F6DE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6F307E251B1E12D900D2F6DE /* PQParsingService.h */,
+				6F307E261B1E12D900D2F6DE /* PQParsingService.m */,
+				6F307E271B1E12D900D2F6DE /* PQRequestingService.h */,
+				6F307E281B1E12D900D2F6DE /* PQRequestingService.m */,
+				6F307E291B1E12D900D2F6DE /* PQUrlService.h */,
+				6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */,
+				6F307E221B1E129D00D2F6DE /* UIImage+Sprite.h */,
+				6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		6F3A8DD41ABBBC07007BFD68 /* Controllers */ = {
@@ -1479,6 +1506,7 @@
 		6FB93B6B1ABB0E4E0067224E /* Audeecon */ = {
 			isa = PBXGroup;
 			children = (
+				6F307E211B1E127600D2F6DE /* Helpers */,
 				6F03C3281AD6AC4C0075BD66 /* Models */,
 				6F69AF541ABBFE6B00AE6D6A /* Protocols */,
 				6F3A8DD41ABBBC07007BFD68 /* Controllers */,
@@ -1669,6 +1697,7 @@
 				6F9CE58A1ABB16FC00D716EB /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
 				6F9CE57D1ABB16FC00D716EB /* XMPPIQ+LastActivity.m in Sources */,
 				6F9CE5691ABB16FC00D716EB /* XMPPCoreDataStorage.m in Sources */,
+				6F307E2D1B1E12D900D2F6DE /* PQUrlService.m in Sources */,
 				6F9CE56A1ABB16FC00D716EB /* XMPPFileTransfer.m in Sources */,
 				6F9CE5821ABB16FC00D716EB /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				6F9CE55D1ABB16FC00D716EB /* NSNumber+XMPP.m in Sources */,
@@ -1676,7 +1705,9 @@
 				6F9CE58E1ABB16FC00D716EB /* XMPPvCard.xcdatamodeld in Sources */,
 				6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */,
 				6F9CE3ED1ABB14EE00D716EB /* DDMultiFormatter.m in Sources */,
+				6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */,
 				6F9CE5C11ABB16FC00D716EB /* XEP_0223.m in Sources */,
+				6F307E241B1E129D00D2F6DE /* UIImage+Sprite.m in Sources */,
 				6F9CE4071ABB15B000D716EB /* DDXMLDocument.m in Sources */,
 				6F9CE5C21ABB16FC00D716EB /* XMPPAttentionModule.m in Sources */,
 				6F9CE3E91ABB14EE00D716EB /* DDLog.m in Sources */,
@@ -1782,6 +1813,7 @@
 				6F9CE5791ABB16FC00D716EB /* XMPPSystemInputActivityMonitor.m in Sources */,
 				6F9CE58F1ABB16FC00D716EB /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				6F9CE5BA1ABB16FC00D716EB /* XMPPStreamManagementStanzas.m in Sources */,
+				6F307E2B1B1E12D900D2F6DE /* PQParsingService.m in Sources */,
 				6F9CE5881ABB16FC00D716EB /* XMPPRoomMemoryStorage.m in Sources */,
 				6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */,
 				6F9CE5631ABB16FC00D716EB /* XMPPMessage.m in Sources */,
