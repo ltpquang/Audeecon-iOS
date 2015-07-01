@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PQMessage.h"
 
 @protocol PQMessageExchangeDelegate <NSObject>
-- (void)didReceiveMessage:(NSDictionary *)messageContent;
+- (void)didReceiveMessage:(PQMessage *)message;
+- (void)reloadStickers;
 @end

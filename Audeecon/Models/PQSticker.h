@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 @class UIImageView;
 
 @interface PQSticker : NSObject
@@ -21,6 +22,10 @@
 @property NSString *sourceUri;
 @property NSString *spriteUri;
 @property NSString *paddedSpriteUri;
+@property NSArray *spriteArray;
+@property (nonatomic) BOOL hasImage;
+@property (nonatomic) BOOL hasThumbnail;
+@property UIImage *thumbnailImage;
 
 - (id)initWithId:(NSString *)objectId
         andWidth:(NSInteger)width

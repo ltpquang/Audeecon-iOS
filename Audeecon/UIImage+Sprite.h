@@ -4,7 +4,7 @@
 //  Created by Rafal Sroka on 11-11-17.
 //  Copyright (c) 2011 Rafal Sroka. All rights reserved.
 //
-//  This code is distributed under the terms and conditions of the MIT license. 
+//  This code is distributed under the terms and conditions of the MIT license.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining
 //  a copy of this software and associated documentation files (the
@@ -29,8 +29,8 @@
 #import <UIKit/UIKit.h>
 
 /**
- Useful UIImage category for handling sprite sheets. This add-on smoothes the way of extracting images from a sprite sheet (texture atlas). 
- Note that for performance reasons you should not fire these methods every time you want to get the array of animation frames. 
+ Useful UIImage category for handling sprite sheets. This add-on smoothes the way of extracting images from a sprite sheet (texture atlas).
+ Note that for performance reasons you should not fire these methods every time you want to get the array of animation frames.
  You should rather fire it once and store the output array somewhere. This is because the Core Graphics image manipulation operations  (especially on large images) are not so fast and your application may slow down.
  */
 @interface UIImage (Sprite)
@@ -56,4 +56,9 @@
 - (NSArray *)spritesWithSpriteSheetImage:(UIImage *)image
                              spriteCount:(NSInteger)count
                               spriteSize:(CGSize)size;
+
+- (NSArray *)spritesWithSpriteSheetImage:(UIImage *)image
+                             columnCount:(NSInteger)columnCount
+                                rowCount:(NSInteger)rowCount
+                             spriteCount:(NSInteger)spriteCount;
 @end

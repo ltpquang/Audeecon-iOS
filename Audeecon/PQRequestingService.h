@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface PQRequestingService : NSObject
-- (void)getAllStickerPacksWithSuccess:(void(^)(NSArray *result))successCall
-                              failure:(void(^)(NSError *error))failureCall;
+- (void)getAllStickerPacksForUser:(NSString *)user
+                          success:(void(^)(NSArray *result))successCall
+                          failure:(void(^)(NSError *error))failureCall;
 - (void)getStickersOfStickerPackWithId:(NSString *)packId
                                success:(void(^)(NSArray *result))successCall
                                failure:(void(^)(NSError *error))failureCall;
+- (void)downloadAudioFileAtUrl:(NSString *)fileUrl
+                      complete:(void(^)(NSURL *filepath))completeCall;
 @end

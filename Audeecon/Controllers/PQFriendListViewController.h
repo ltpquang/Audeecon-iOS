@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "PQStreamConnectDelegate.h"
+#import "PQLoginDelegate.h"
+#import "PQFriendListDelegate.h"
 
-@interface PQFriendListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface PQFriendListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PQStreamConnectDelegate, PQLoginDelegate, PQFriendListDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 

@@ -12,6 +12,4 @@
 @protocol PQLoginDelegate <NSObject>
 - (void)loginDidAuthenticate;
 - (void)loginDidNotAuthenticate:(DDXMLElement *)error;
-- (void)loginDidConnect;
-- (void)loginDidConnectTimeout;
 @end

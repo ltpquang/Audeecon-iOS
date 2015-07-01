@@ -10,5 +10,6 @@
 
 @interface PQUrlService : NSObject
 + (NSString *)urlToGetAllStickerPacks;
++ (NSString *)urlToGetAllStickerPacksForUser:(NSString *)username;
 + (NSString *)urlToGetStickerPackWithId:(NSString *)packId;
 @end

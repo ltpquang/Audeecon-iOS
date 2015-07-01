@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 @class PQRequestingService;
 
 @interface PQStickerPack : NSObject
@@ -17,6 +18,9 @@
 @property NSString *thumbnail;
 @property NSArray *previews;
 @property NSArray *stickers;
+@property UIImage *thumbnailImage;
+@property (nonatomic) BOOL hasImage;
+@property (nonatomic) BOOL hasStickers;
 
 - (id)initWithId:(NSString *)objectId
          andName:(NSString *)name

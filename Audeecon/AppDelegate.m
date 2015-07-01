@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import "XMPP.h"
 #import "XMPPMessage+XEP_0085.h"
+#import "PQHostnameFactory.h"
+#import "PQRequestingService.h"
+#import "PQMessage.h"
+#import <Parse/Parse.h>
+#import "PQFilePathFactory.h"
 
 @interface AppDelegate ()
 
@@ -17,10 +22,28 @@
 @implementation AppDelegate
 
 #pragma mark - Application delegates
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [self clearTemperaryFolder];
+    [self setupParse];
     [self setupStream];
+    
+    
+    NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+    //login = nil;
+    if (login) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [sb instantiateInitialViewController];
+    }
+    else {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginView"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        self.window.rootViewController = navController;
+    }
+    
     return YES;
 }
 
@@ -46,17 +69,55 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - App delegate actions
+- (void)clearTemperaryFolder {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *directory = [[PQFilePathFactory tempDirectory] path];
+    NSError *error = nil;
+    for (NSString *file in [fm contentsOfDirectoryAtPath:directory error:&error]) {
+        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", directory, file] error:&error];
+        if (!success || error) {
+            // it failed.
+        }
+    }
+    
+    
+}
+
+- (void)downloadStickerPacks {
+    NSString *userName = _xmppStream.myJID.user;
+    PQRequestingService *requestingService = [PQRequestingService new];
+    [requestingService getAllStickerPacksForUser:userName
+                                         success:^(NSArray *result) {
+                                             _stickerPacks = result;
+                                             _stickerPacksDownloaded = YES;
+                                             [_messageExchangeDelegate reloadStickers];
+                                             NSLog(@"Packs downloaded");
+                                         }
+                                         failure:^(NSError *error) {
+                                             //
+                                         }];
+}
+
+- (void)setupParse {
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"w6qlLf8jN9xxKJGAMFzDy4EqVbUlZ3DfUwV9T4pj"
+                  clientKey:@"VAn6cTkBRUUpiWkEQ0NcJKhG7qFG7UXSeZ1qGUJR"];
+    
+}
+
 #pragma mark - XMPP setup
 - (void)setupStream {
     _xmppStream = [[XMPPStream alloc] init];
-    [_xmppStream setHostName:@"les-macbook-pro.local"];
+    [_xmppStream setHostName:[PQHostnameFactory hostnameString]];
     [_xmppStream setHostPort:5222];
     
     _xmppRosterCoreDataStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
     
     _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage];
-    _xmppRoster.autoFetchRoster = YES;
-    _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
+    _xmppRoster.autoFetchRoster = NO;
+    _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
     
     _xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
     _xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:_xmppvCardStorage];
@@ -71,6 +132,7 @@
     [_xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
 }
 
+#pragma mark - XMPP actions
 - (void)goOnline {
     XMPPPresence *presence = [XMPPPresence presence];
     [[self xmppStream] sendElement:presence];
@@ -124,66 +186,85 @@
     [_friendListDelegate didDisconnect];
 }
 
-#pragma mark - XMPPStream delegates
-- (void)xmppStreamDidConnect:(XMPPStream *)sender {
-    
-    NSLog(@"didConnect");
-    [_loginDelegate loginDidConnect];
-    _isOpen = YES;
+- (void)authenticateUsingPassword {
     NSError *error = nil;
-    [[self xmppStream] authenticateWithPassword:_password error:&error];
-    
-    
+    [_xmppStream authenticateWithPassword:_password error:&error];
+}
+
+- (void)registerUsingPassword:(NSString *)password {
+    NSError *error = nil;
+    [_xmppStream registerWithPassword:password error:&error];
+}
+
+- (void)fetchRoster {
+    [_xmppRoster fetchRoster];
+}
+
+#pragma mark - XMPPStream connecting delegates
+- (void)xmppStreamDidConnect:(XMPPStream *)sender {
+    NSLog(@"didConnect");
+    _isOpen = YES;
+    [_streamConnectDelegate xmppStreamDidConnect];
 }
 
 - (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender {
-    [_loginDelegate loginDidConnectTimeout];
+    //[_loginDelegate loginDidConnectTimeout];
+}
+
+
+#pragma mark - XMPPStream authenticating delegates
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+    NSLog(@"didAuthenticate");
+    [_loginDelegate loginDidAuthenticate];
+    
+    [self downloadStickerPacks];
+    
+    [self goOnline];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error {
     [_loginDelegate loginDidNotAuthenticate:error];
-}
-
-- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
-    [_loginDelegate loginDidAuthenticate];
-    [self goOnline];
     
 }
 
+#pragma mark - XMPPStream registering delegates
+- (void)xmppStreamDidRegister:(XMPPStream *)sender {
+    
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(DDXMLElement *)error {
+    
+}
+
+#pragma mark - XMPPStream IQ delegates
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
-    NSLog(@"%@", iq);
+    //NSLog(@"%@", iq);
 
     return NO;
     
 }
 
 - (XMPPIQ *)xmppStream:(XMPPStream *)sender willSendIQ:(XMPPIQ *)iq {
-    NSLog(@"%@", iq);
+    //NSLog(@"%@", iq);
     return iq;
 }
 
+
+#pragma mark - XMPPStream messaging delegates
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if ([message hasComposingChatState]) {
         return;
     }
     
-    NSString *msg = [[message elementForName:@"body"] stringValue];
-    NSString *from = [[message attributeForName:@"from"] stringValue];
+    PQMessage *mess = [[PQMessage alloc] initWithXmlElement:message];
     
-    if (!msg || !from) {
-        return;
-    }
-    
-    NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
-    [m setObject:msg forKey:@"msg"];
-    [m setObject:from forKey:@"sender"];
-    
-    [_messageExchangeDelegate didReceiveMessage:m];
+    [_messageExchangeDelegate didReceiveMessage:mess];
     
 }
 
+
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
-    NSLog(@"%@", presence);
+    //NSLog(@"%@", presence);
     NSString *presenceType = [presence type]; // online/offline
     NSString *myUsername = [[sender myJID] user];
     NSString *presenceFromUser = [[presence from] user];
@@ -210,5 +291,21 @@
 }
 
 #pragma mark - XMPPRoster delegates
+- (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(DDXMLElement *)item {
+    NSLog(@"Roster received item");
+    
+}
+
+- (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterPush:(XMPPIQ *)iq {
+    
+}
+
+- (void)xmppRosterDidBeginPopulating:(XMPPRoster *)sender {
+    NSLog(@"Roster begin populating");
+}
+
+- (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender {
+    NSLog(@"Roster end populating");
+}
 
 @end

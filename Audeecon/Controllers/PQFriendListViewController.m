@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "PQLoginViewController.h"
 #import "PQMessageExchangeViewController.h"
+#import "PQJSQMessageExchangeViewController.h"
+#import "XMPPvCardTemp.h"
 
 @interface PQFriendListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,36 +26,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //[self FetchFriends];
-}
-
-- (void)FetchFriends
-{
-    NSError *error = [[NSError alloc] init];
-    NSXMLElement *query = [[NSXMLElement alloc] initWithXMLString:@"<query xmlns='jabber:iq:roster'/>"error:&error];
-    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
-    [iq addAttributeWithName:@"type" stringValue:@"get"];
-    [iq addAttributeWithName:@"id" stringValue:@"ANY_ID_NAME"];
-    [iq addAttributeWithName:@"from" stringValue:@"ANY_ID_NAME@weejoob.info"];
-    [iq addChild:query];
-    [[self xmppStream] sendElement:iq];
+    [[self appDelegate] connect];
+    [[self appDelegate] setStreamConnectDelegate:self];
+    [[self appDelegate] setLoginDelegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
-    
-    if (login) {
-        
-        if ([[self appDelegate] connect]) { // WATCH OUT, MAYBE WE NEED TO SET LOGIN DELEGATE IN THE APP DELEGATE FOR HANDLING LOGIN EVENTS
-            
-            NSLog(@"show buddy list");
-            
-        }
-        
-    } else {
-        
-        [self showLogin];
-        
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,6 +55,45 @@
 
 - (XMPPStream *)xmppStream {
     return [[self appDelegate] xmppStream];
+}
+
+#pragma mark - Stream connect delegate
+- (void)xmppStreamDidConnect {
+    [[self appDelegate] authenticateUsingPassword];
+}
+
+- (void)xmppStreamConnectDidTimeOut {
+    
+}
+
+#pragma mark - Login delegate
+- (void)loginDidAuthenticate {
+    [[self appDelegate] fetchRoster];
+}
+
+- (void)loginDidNotAuthenticate:(DDXMLElement *)error {
+    
+}
+
+#pragma mark - Friend list delegate
+- (void)didBeginReceivingFriendItems {
+    
+}
+
+- (void)didReceiveFriendItem:(DDXMLElement *)friendElement withOnlineStatus:(BOOL)isOnline {
+    
+}
+
+- (void)didEndReceivingFriendItems {
+    
+}
+
+- (void)friendDidOnline:(NSString *)friendName {
+    
+}
+
+- (void)friendDidOffline:(NSString *)friendName {
+    
 }
 
 #pragma mark - FetchedResultController
@@ -198,7 +215,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedIndex = indexPath;
-    [self performSegueWithIdentifier:@"GoToMessageExchangeSegue" sender:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    //[self performSegueWithIdentifier:@"GoToMessageExchangeSegue" sender:self];
+    //[self performSegueWithIdentifier:@"GoToJSQMessageExchangeSegue" sender:self];
+    PQMessageExchangeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MessageExchangeView"];
+    [vc configUsingPartner:[[self fetchedResultsController] objectAtIndexPath:indexPath]];
+    [self.navigationController showViewController:vc sender:self];
 }
 
 #pragma mark - Navigation
@@ -206,10 +229,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([[segue identifier] isEqualToString:@"GoToMessageExchangeSegue"]) {
-        PQMessageExchangeViewController *vc = (PQMessageExchangeViewController *)[segue destinationViewController];
-        [vc setUser:[[self fetchedResultsController] objectAtIndexPath:_selectedIndex]];
-    }
+//    if ([[segue identifier] isEqualToString:@"GoToMessageExchangeSegue"]) {
+//        PQMessageExchangeViewController *vc = (PQMessageExchangeViewController *)[segue destinationViewController];
+//        [vc setUser:[[self fetchedResultsController] objectAtIndexPath:_selectedIndex]];
+//    }
+//    else {
+//        PQJSQMessageExchangeViewController *vc = (PQJSQMessageExchangeViewController *)[segue destinationViewController];
+//        [vc setUser:[[self fetchedResultsController] objectAtIndexPath:_selectedIndex]];
+//    }
 }
 
 

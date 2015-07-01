@@ -10,6 +10,8 @@
 #import "PQRequestingService.h"
 
 @implementation PQStickerPack
+
+
 - (id)initWithId:(NSString *)objectId
          andName:(NSString *)name
        andArtist:(NSString *)artist
@@ -27,6 +29,14 @@ andPackDescription:(NSString *)packDescription
         _stickers = stickers;
     }
     return self;
+}
+
+- (BOOL)hasImage {
+    return _thumbnailImage != nil;
+}
+
+- (BOOL)hasStickers {
+    return _stickers != nil && _stickers.count != 0;
 }
 
 - (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="216" id="B8q-05-Et4" customClass="PQStickerKeyboardView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1ha-7t-OJd">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="166"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="166" id="IPZ-KP-Ykl"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4EL-RX-NEe">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wWg-MF-BKi">
+                    <rect key="frame" x="0.0" y="166" width="320" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="efd-t2-hl2"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="uid-Ga-zlt">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="wWg-MF-BKi" secondAttribute="bottom" id="44i-FQ-v53"/>
+                <constraint firstItem="wWg-MF-BKi" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" id="8bc-9k-wBI"/>
+                <constraint firstItem="1ha-7t-OJd" firstAttribute="top" secondItem="B8q-05-Et4" secondAttribute="top" id="K5I-YF-DJj"/>
+                <constraint firstItem="wWg-MF-BKi" firstAttribute="top" secondItem="1ha-7t-OJd" secondAttribute="bottom" id="M42-Id-DKy"/>
+                <constraint firstAttribute="trailing" secondItem="wWg-MF-BKi" secondAttribute="trailing" id="XSV-no-hnW"/>
+                <constraint firstAttribute="trailing" secondItem="1ha-7t-OJd" secondAttribute="trailing" id="dER-mp-Qee"/>
+                <constraint firstItem="1ha-7t-OJd" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" id="yLy-Yu-O2y"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="packsCollectionView" destination="wWg-MF-BKi" id="IHA-E8-46O"/>
+                <outlet property="stickersCollectionView" destination="1ha-7t-OJd" id="40T-4u-jlZ"/>
+            </connections>
+            <point key="canvasLocation" x="683" y="-232"/>
+        </view>
+    </objects>
+</document>

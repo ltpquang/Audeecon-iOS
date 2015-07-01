@@ -8,6 +8,7 @@
 
 #import "PQSticker.h"
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import "UIImage+Sprite.h"
 #import <UIImageView+AFNetworking.h>
 
@@ -39,14 +40,24 @@ andPaddedSpriteUri:(NSString *)paddedSpriteUri {
     return self;
 }
 
+- (BOOL)hasImage {
+    //return _spriteArray != nil;
+    return self.hasThumbnail && _frameCount == 1;
+}
+
+- (BOOL)hasThumbnail {
+    return _thumbnailImage != nil;
+}
+
 - (void)animateStickerUsingUIImage:(UIImage *)image onUIImageView:(UIImageView *)imageView {
-    //NSArray *sprites = [image spritesWithSpriteSheetImage:image inRange:NSMakeRange(0, _frameCount) spriteSize:CGSizeMake(_width, _height)];
     
-    //NSArray *sprites = [image spritesWithSpriteSheetImage:image spriteSize:CGSizeMake(_width, _height)];
-    
-    NSArray *sprites = [image spritesWithSpriteSheetImage:image spriteCount:_frameCount spriteSize:CGSizeMake(_width, _height)];
+    NSArray *sprites = [image spritesWithSpriteSheetImage:image
+                                              columnCount:(_frameCount - 1) / _framesPerCol + 1
+                                                 rowCount:(_frameCount - 1) / _framesPerRow + 1
+                                              spriteCount:_frameCount];
     
     [imageView setAnimationImages:sprites];
+    //[imageView setAnimationRepeatCount:1];
     [imageView setAnimationDuration:(float)(_frameCount * _frameRate)/1000];
     [imageView startAnimating];
 }
@@ -54,20 +65,15 @@ andPaddedSpriteUri:(NSString *)paddedSpriteUri {
 - (void)populateStickerToUIImageVIew:(UIImageView *)imageView
                           onComplete:(void(^)())completeCall {
     if (_frameCount == 1) {
-        [imageView setImageWithURL:[NSURL URLWithString:_uri]];
+        [imageView setImage:[_spriteArray firstObject]];
         completeCall();
     }
     else {
-        __weak typeof(imageView) weakImageView = imageView;
-        [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_spriteUri]]
-                         placeholderImage:nil
-                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                      [self animateStickerUsingUIImage:image onUIImageView:weakImageView];
-                                      completeCall();
-                                  }
-                                  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                      completeCall();
-                                  }];
+        [imageView setAnimationImages:_spriteArray];
+        [imageView setAnimationDuration:(float)(_frameCount * _frameRate)/1000];
+        [imageView setAnimationRepeatCount:3];
+        [imageView startAnimating];
+        completeCall();
     }
 }
 @end

@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "PQMessageExchangeDelegate.h"
 #import "XMPPFramework.h"
+#import "PQStickerKeyboardView.h"
+#import "PQAudioPlayerAndRecorder.h"
 
-@interface PQMessageExchangeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PQMessageExchangeDelegate>
-@property (nonatomic, strong) XMPPUserCoreDataStorageObject *user;
+@protocol PQStickerKeyboardDelegate;
+@protocol PQMessageCollectionViewCellDelegate;
+
+@interface PQMessageExchangeViewController : UIViewController
+<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PQMessageExchangeDelegate, PQStickerKeyboardDelegate, PQAudioPlayerAndRecorderDelegate, PQMessageCollectionViewCellDelegate>
+- (void)configUsingPartner:(XMPPUserCoreDataStorageObject *)partner;
 @end

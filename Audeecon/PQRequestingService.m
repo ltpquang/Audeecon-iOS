@@ -11,9 +11,12 @@
 #import "PQUrlService.h"
 #import "PQParsingService.h"
 #import "PQStickerPack.h"
+#import "PQFilePathFactory.h"
 
 @interface PQRequestingService()
 @property AFHTTPSessionManager *manager;
+@property AFHTTPSessionManager *downloadManager;
+@property NSURLSessionDownloadTask *downloadTask;
 @end
 
 @implementation PQRequestingService
@@ -26,6 +29,9 @@
 
 - (void)setupManager {
     _manager = [[AFHTTPSessionManager alloc] init];
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    _downloadManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
 }
 
 - (void)configWithExpectationOfJsonInRequest:(BOOL)jsonInRequest
@@ -34,11 +40,12 @@
     _manager.responseSerializer = jsonInResponse?[AFJSONResponseSerializer serializer]:[AFHTTPResponseSerializer serializer];
 }
 
-- (void)getAllStickerPacksWithSuccess:(void(^)(NSArray *result))successCall
-                              failure:(void(^)(NSError *error))failureCall {
+- (void)getAllStickerPacksForUser:(NSString *)user
+                          success:(void(^)(NSArray *result))successCall
+                          failure:(void(^)(NSError *error))failureCall {
     [self configWithExpectationOfJsonInRequest:NO
                              andJsonInResponse:YES];
-    [_manager GET:[PQUrlService urlToGetAllStickerPacks]
+    [_manager GET:[PQUrlService urlToGetAllStickerPacksForUser:user]
        parameters:nil
           success:^(NSURLSessionDataTask *task, id responseObject) {
               //Parse result and call the call back
@@ -66,5 +73,26 @@
           failure:^(NSURLSessionDataTask *task, NSError *error) {
               failureCall(error);
           }];
+}
+
+- (void)downloadAudioFileAtUrl:(NSString *)fileUrl
+                      complete:(void(^)(NSURL *filepath))completeCall {
+    NSURL *URL = [NSURL URLWithString:fileUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    if (_downloadTask) {
+        [_downloadTask cancel];
+    }
+    
+    _downloadTask
+    = [_downloadManager downloadTaskWithRequest:request
+                                       progress:nil
+                                    destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                                        return [PQFilePathFactory filePathInTemporaryDirectoryForFileName:[response suggestedFilename]];
+                                    }
+                              completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                                  completeCall(filePath);
+                              }];
+    [_downloadTask resume];
 }
 @end

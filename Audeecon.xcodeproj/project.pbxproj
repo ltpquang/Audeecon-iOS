@@ -8,14 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		4602C9693B38D80112C7248D /* libPods-Audeecon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */; };
+		6F0048361B367498004B570E /* StickerKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0048351B367498004B570E /* StickerKeyboardView.xib */; };
+		6F00F73B1B37A44600AEE057 /* PQMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73A1B37A44600AEE057 /* PQMessage.m */; };
+		6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */; };
 		6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */; };
 		6F03C32E1AD6ACDA0075BD66 /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */; };
+		6F0EE0321B42E1C900E25EC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */; };
 		6F307E241B1E129D00D2F6DE /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */; };
 		6F307E2B1B1E12D900D2F6DE /* PQParsingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E261B1E12D900D2F6DE /* PQParsingService.m */; };
 		6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E281B1E12D900D2F6DE /* PQRequestingService.m */; };
 		6F307E2D1B1E12D900D2F6DE /* PQUrlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */; };
-		6F3A8DD71ABBBC31007BFD68 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */; };
+		6F366F6A1B41ACEB000B3FA8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F691B41ACEB000B3FA8 /* Parse.framework */; };
+		6F366F6C1B41AD2C000B3FA8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F6B1B41AD2C000B3FA8 /* AudioToolbox.framework */; };
+		6F366F6E1B41AD41000B3FA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F6D1B41AD41000B3FA8 /* CoreGraphics.framework */; };
+		6F366F701B41AD47000B3FA8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F6F1B41AD47000B3FA8 /* CoreLocation.framework */; };
+		6F366F721B41AD51000B3FA8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F711B41AD51000B3FA8 /* MobileCoreServices.framework */; };
+		6F366F741B41AD57000B3FA8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F731B41AD57000B3FA8 /* QuartzCore.framework */; };
+		6F366F761B41AD63000B3FA8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F751B41AD63000B3FA8 /* StoreKit.framework */; };
+		6F366F781B41AD6A000B3FA8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F771B41AD6A000B3FA8 /* SystemConfiguration.framework */; };
+		6F366F7A1B41AD76000B3FA8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F791B41AD76000B3FA8 /* libz.dylib */; };
+		6F366F7C1B41AD7C000B3FA8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F7B1B41AD7C000B3FA8 /* libsqlite3.dylib */; };
+		6F366F7E1B41ADCA000B3FA8 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F7D1B41ADCA000B3FA8 /* Accounts.framework */; };
+		6F366F801B41ADCF000B3FA8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F7F1B41ADCF000B3FA8 /* Social.framework */; };
+		6F366F821B41ADFA000B3FA8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F811B41ADFA000B3FA8 /* Bolts.framework */; };
+		6F366F851B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */; };
+		6F366F881B41B19A000B3FA8 /* PQFilePathFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */; };
+		6F3783C21B27CAAB0066EF08 /* PQRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C11B27CAAB0066EF08 /* PQRegisterViewController.m */; };
+		6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */; };
+		6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */; };
+		6F4517971B2FCE4D006DCB8F /* PQUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4517961B2FCE4D006DCB8F /* PQUser.m */; };
+		6F64E0631B27EA4500B73F61 /* PQXMPPStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F64E0621B27EA4500B73F61 /* PQXMPPStreamHandler.m */; };
 		6F6CC6B81AD4C03F00920935 /* PQMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */; };
+		6F96D08B1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96D08A1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m */; };
 		6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */; };
 		6F9CE3E71ABB14EE00D716EB /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D61ABB14EE00D716EB /* DDASLLogger.m */; };
 		6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D81ABB14EE00D716EB /* DDFileLogger.m */; };
@@ -159,12 +183,19 @@
 		6F9CE5CF1ABB16FC00D716EB /* XMPPStringPrep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE5511ABB16FC00D716EB /* XMPPStringPrep.m */; };
 		6F9CE5D01ABB16FC00D716EB /* XMPPTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE5531ABB16FC00D716EB /* XMPPTimer.m */; };
 		6F9CE5D31ABB17FC00D716EB /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9CE5D21ABB17FC00D716EB /* libresolv.dylib */; };
+		6FAF56021B36BF0B0091281C /* PQStickerKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF56011B36BF0B0091281C /* PQStickerKeyboardView.m */; };
+		6FAF56041B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF56031B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib */; };
+		6FAF56061B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF56051B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib */; };
+		6FAF56091B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF56081B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m */; };
+		6FAF560C1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF560B1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m */; };
+		6FAF560F1B36E74C0091281C /* PQHostnameFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF560E1B36E74C0091281C /* PQHostnameFactory.m */; };
 		6FB93B6F1ABB0E4E0067224E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B6E1ABB0E4E0067224E /* main.m */; };
-		6FB93B721ABB0E4E0067224E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B711ABB0E4E0067224E /* AppDelegate.m */; };
 		6FB93B781ABB0E4E0067224E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B761ABB0E4E0067224E /* Main.storyboard */; };
 		6FB93B7A1ABB0E4E0067224E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B791ABB0E4E0067224E /* Images.xcassets */; };
 		6FB93B7D1ABB0E4E0067224E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B7B1ABB0E4E0067224E /* LaunchScreen.xib */; };
 		6FB93B891ABB0E4E0067224E /* AudeeconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B881ABB0E4E0067224E /* AudeeconTests.m */; };
+		6FC877D31B3A4E7B0049C641 /* PQStickerAndPackDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC877D21B3A4E7B0049C641 /* PQStickerAndPackDownloader.m */; };
+		6FC877D61B3A545F0049C641 /* PQPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC877D51B3A545F0049C641 /* PQPendingOperations.m */; };
 		6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */; };
 		6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */; };
 		6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */; };
@@ -182,10 +213,16 @@
 
 /* Begin PBXFileReference section */
 		225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Audeecon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0048351B367498004B570E /* StickerKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StickerKeyboardView.xib; path = Views/StickerKeyboardView.xib; sourceTree = "<group>"; };
+		6F00F7391B37A44600AEE057 /* PQMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessage.h; path = Models/PQMessage.h; sourceTree = "<group>"; };
+		6F00F73A1B37A44600AEE057 /* PQMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessage.m; path = Models/PQMessage.m; sourceTree = "<group>"; };
+		6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageCollectionViewCell.h; path = Controllers/Cells/PQMessageCollectionViewCell.h; sourceTree = "<group>"; };
+		6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageCollectionViewCell.m; path = Controllers/Cells/PQMessageCollectionViewCell.m; sourceTree = "<group>"; };
 		6F03C3291AD6ACAA0075BD66 /* PQSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQSticker.h; path = Models/PQSticker.h; sourceTree = "<group>"; };
 		6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
 		6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPack.h; path = Models/PQStickerPack.h; sourceTree = "<group>"; };
 		6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPack.m; path = Models/PQStickerPack.m; sourceTree = "<group>"; };
+		6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6F307E221B1E129D00D2F6DE /* UIImage+Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Sprite.h"; sourceTree = "<group>"; };
 		6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Sprite.m"; sourceTree = "<group>"; };
 		6F307E251B1E12D900D2F6DE /* PQParsingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQParsingService.h; sourceTree = "<group>"; };
@@ -194,13 +231,42 @@
 		6F307E281B1E12D900D2F6DE /* PQRequestingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQRequestingService.m; sourceTree = "<group>"; };
 		6F307E291B1E12D900D2F6DE /* PQUrlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQUrlService.h; sourceTree = "<group>"; };
 		6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQUrlService.m; sourceTree = "<group>"; };
-		6F3A8DD51ABBBC31007BFD68 /* PQLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginViewController.h; path = Controllers/PQLoginViewController.h; sourceTree = "<group>"; };
-		6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQLoginViewController.m; path = Controllers/PQLoginViewController.m; sourceTree = "<group>"; };
+		6F366F691B41ACEB000B3FA8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		6F366F6B1B41AD2C000B3FA8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6F366F6D1B41AD41000B3FA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6F366F6F1B41AD47000B3FA8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6F366F711B41AD51000B3FA8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6F366F731B41AD57000B3FA8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6F366F751B41AD63000B3FA8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6F366F771B41AD6A000B3FA8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6F366F791B41AD76000B3FA8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6F366F7B1B41AD7C000B3FA8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		6F366F7D1B41ADCA000B3FA8 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		6F366F7F1B41ADCF000B3FA8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		6F366F811B41ADFA000B3FA8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQAudioPlayerAndRecorder.h; path = Models/PQAudioPlayerAndRecorder.h; sourceTree = "<group>"; };
+		6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQAudioPlayerAndRecorder.m; path = Models/PQAudioPlayerAndRecorder.m; sourceTree = "<group>"; };
+		6F366F861B41B19A000B3FA8 /* PQFilePathFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFilePathFactory.h; path = Helpers/PQFilePathFactory.h; sourceTree = "<group>"; };
+		6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFilePathFactory.m; path = Helpers/PQFilePathFactory.m; sourceTree = "<group>"; };
+		6F3783C01B27CAAB0066EF08 /* PQRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQRegisterViewController.h; path = "Controllers/Login and register/PQRegisterViewController.h"; sourceTree = "<group>"; };
+		6F3783C11B27CAAB0066EF08 /* PQRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQRegisterViewController.m; path = "Controllers/Login and register/PQRegisterViewController.m"; sourceTree = "<group>"; };
+		6F3783C31B27CADA0066EF08 /* PQLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginViewController.h; path = "Controllers/Login and register/PQLoginViewController.h"; sourceTree = "<group>"; };
+		6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQLoginViewController.m; path = "Controllers/Login and register/PQLoginViewController.m"; sourceTree = "<group>"; };
+		6F3783C61B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUpdateAdditionalInfoViewController.h; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.h"; sourceTree = "<group>"; };
+		6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUpdateAdditionalInfoViewController.m; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.m"; sourceTree = "<group>"; };
+		6F4517951B2FCE4D006DCB8F /* PQUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUser.h; path = Models/PQUser.h; sourceTree = "<group>"; };
+		6F4517961B2FCE4D006DCB8F /* PQUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUser.m; path = Models/PQUser.m; sourceTree = "<group>"; };
+		6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQRegisterDelegate.h; path = Protocols/PQRegisterDelegate.h; sourceTree = "<group>"; };
+		6F64E0611B27EA4500B73F61 /* PQXMPPStreamHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQXMPPStreamHandler.h; path = Handlers/PQXMPPStreamHandler.h; sourceTree = "<group>"; };
+		6F64E0621B27EA4500B73F61 /* PQXMPPStreamHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQXMPPStreamHandler.m; path = Handlers/PQXMPPStreamHandler.m; sourceTree = "<group>"; };
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
 		6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeDelegate.h; path = Protocols/PQMessageExchangeDelegate.h; sourceTree = "<group>"; };
 		6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginDelegate.h; path = Protocols/PQLoginDelegate.h; sourceTree = "<group>"; };
 		6F6CC6B61AD4C03F00920935 /* PQMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageTableViewCell.h; path = Controllers/Cells/PQMessageTableViewCell.h; sourceTree = "<group>"; };
 		6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageTableViewCell.m; path = Controllers/Cells/PQMessageTableViewCell.m; sourceTree = "<group>"; };
+		6F8633BF1B281BDE007EB2A9 /* PQStreamConnectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStreamConnectDelegate.h; path = Protocols/PQStreamConnectDelegate.h; sourceTree = "<group>"; };
+		6F96D0891B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQJSQMessageExchangeViewController.h; path = Controllers/PQJSQMessageExchangeViewController.h; sourceTree = "<group>"; };
+		6F96D08A1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQJSQMessageExchangeViewController.m; path = Controllers/PQJSQMessageExchangeViewController.m; sourceTree = "<group>"; };
 		6F9CE3D31ABB14EE00D716EB /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		6F9CE3D51ABB14EE00D716EB /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -497,17 +563,30 @@
 		6F9CE5531ABB16FC00D716EB /* XMPPTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPTimer.m; sourceTree = "<group>"; };
 		6F9CE5D11ABB173000D716EB /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XMPPFramework.h; path = Frameworks/XMPPFramework.h; sourceTree = "<group>"; };
 		6F9CE5D21ABB17FC00D716EB /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		6FAF56001B36BF0B0091281C /* PQStickerKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerKeyboardView.h; path = Controllers/PQStickerKeyboardView.h; sourceTree = "<group>"; };
+		6FAF56011B36BF0B0091281C /* PQStickerKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerKeyboardView.m; path = Controllers/PQStickerKeyboardView.m; sourceTree = "<group>"; };
+		6FAF56031B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardPackCollectionViewCell.xib; path = Views/KeyboardPackCollectionViewCell.xib; sourceTree = "<group>"; };
+		6FAF56051B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardStickerCollectionViewCell.xib; path = Views/KeyboardStickerCollectionViewCell.xib; sourceTree = "<group>"; };
+		6FAF56071B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQKeyboardPackCollectionViewCell.h; path = Controllers/Cells/PQKeyboardPackCollectionViewCell.h; sourceTree = "<group>"; };
+		6FAF56081B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQKeyboardPackCollectionViewCell.m; path = Controllers/Cells/PQKeyboardPackCollectionViewCell.m; sourceTree = "<group>"; };
+		6FAF560A1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQKeyboardStickerCollectionViewCell.h; path = Controllers/Cells/PQKeyboardStickerCollectionViewCell.h; sourceTree = "<group>"; };
+		6FAF560B1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQKeyboardStickerCollectionViewCell.m; path = Controllers/Cells/PQKeyboardStickerCollectionViewCell.m; sourceTree = "<group>"; };
+		6FAF560D1B36E74C0091281C /* PQHostnameFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQHostnameFactory.h; path = Helpers/PQHostnameFactory.h; sourceTree = "<group>"; };
+		6FAF560E1B36E74C0091281C /* PQHostnameFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQHostnameFactory.m; path = Helpers/PQHostnameFactory.m; sourceTree = "<group>"; };
 		6FB93B691ABB0E4E0067224E /* Audeecon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audeecon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB93B6D1ABB0E4E0067224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB93B6E1ABB0E4E0067224E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FB93B701ABB0E4E0067224E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6FB93B711ABB0E4E0067224E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6FB93B771ABB0E4E0067224E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6FB93B791ABB0E4E0067224E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6FB93B7C1ABB0E4E0067224E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		6FB93B821ABB0E4E0067224E /* AudeeconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudeeconTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB93B871ABB0E4E0067224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB93B881ABB0E4E0067224E /* AudeeconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudeeconTests.m; sourceTree = "<group>"; };
+		6FC877D11B3A4E7B0049C641 /* PQStickerAndPackDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerAndPackDownloader.h; path = Models/PQStickerAndPackDownloader.h; sourceTree = "<group>"; };
+		6FC877D21B3A4E7B0049C641 /* PQStickerAndPackDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerAndPackDownloader.m; path = Models/PQStickerAndPackDownloader.m; sourceTree = "<group>"; };
+		6FC877D41B3A545F0049C641 /* PQPendingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQPendingOperations.h; path = Models/PQPendingOperations.h; sourceTree = "<group>"; };
+		6FC877D51B3A545F0049C641 /* PQPendingOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQPendingOperations.m; path = Models/PQPendingOperations.m; sourceTree = "<group>"; };
 		6FD21D151ABC296F00C4C92E /* PQFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListViewController.h; path = Controllers/PQFriendListViewController.h; sourceTree = "<group>"; };
 		6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListViewController.m; path = Controllers/PQFriendListViewController.m; sourceTree = "<group>"; };
 		6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListTableViewCell.h; path = Controllers/Cells/PQFriendListTableViewCell.h; sourceTree = "<group>"; };
@@ -523,10 +602,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9CE5D31ABB17FC00D716EB /* libresolv.dylib in Frameworks */,
+				6F366F801B41ADCF000B3FA8 /* Social.framework in Frameworks */,
+				6F366F7E1B41ADCA000B3FA8 /* Accounts.framework in Frameworks */,
+				6F366F7C1B41AD7C000B3FA8 /* libsqlite3.dylib in Frameworks */,
+				6F366F7A1B41AD76000B3FA8 /* libz.dylib in Frameworks */,
+				6F366F781B41AD6A000B3FA8 /* SystemConfiguration.framework in Frameworks */,
+				6F366F761B41AD63000B3FA8 /* StoreKit.framework in Frameworks */,
 				6F9CE3F21ABB153100D716EB /* Security.framework in Frameworks */,
-				6F9CE40E1ABB16C200D716EB /* libidn.a in Frameworks */,
+				6F366F741B41AD57000B3FA8 /* QuartzCore.framework in Frameworks */,
+				6F366F721B41AD51000B3FA8 /* MobileCoreServices.framework in Frameworks */,
+				6F366F701B41AD47000B3FA8 /* CoreLocation.framework in Frameworks */,
+				6F366F6E1B41AD41000B3FA8 /* CoreGraphics.framework in Frameworks */,
 				6F9CE3F01ABB152C00D716EB /* CFNetwork.framework in Frameworks */,
+				6F366F6C1B41AD2C000B3FA8 /* AudioToolbox.framework in Frameworks */,
+				6F9CE5D31ABB17FC00D716EB /* libresolv.dylib in Frameworks */,
+				6F9CE40E1ABB16C200D716EB /* libidn.a in Frameworks */,
+				6F366F821B41ADFA000B3FA8 /* Bolts.framework in Frameworks */,
+				6F366F6A1B41ACEB000B3FA8 /* Parse.framework in Frameworks */,
 				4602C9693B38D80112C7248D /* libPods-Audeecon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,6 +633,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F0048341B367379004B570E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6FB93B761ABB0E4E0067224E /* Main.storyboard */,
+				6F0048351B367498004B570E /* StickerKeyboardView.xib */,
+				6FAF56031B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib */,
+				6FAF56051B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		6F03C3281AD6AC4C0075BD66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +651,16 @@
 				6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */,
 				6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */,
 				6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */,
+				6F4517951B2FCE4D006DCB8F /* PQUser.h */,
+				6F4517961B2FCE4D006DCB8F /* PQUser.m */,
+				6F00F7391B37A44600AEE057 /* PQMessage.h */,
+				6F00F73A1B37A44600AEE057 /* PQMessage.m */,
+				6FC877D11B3A4E7B0049C641 /* PQStickerAndPackDownloader.h */,
+				6FC877D21B3A4E7B0049C641 /* PQStickerAndPackDownloader.m */,
+				6FC877D41B3A545F0049C641 /* PQPendingOperations.h */,
+				6FC877D51B3A545F0049C641 /* PQPendingOperations.m */,
+				6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */,
+				6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -563,30 +676,70 @@
 				6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */,
 				6F307E221B1E129D00D2F6DE /* UIImage+Sprite.h */,
 				6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */,
+				6FAF560D1B36E74C0091281C /* PQHostnameFactory.h */,
+				6FAF560E1B36E74C0091281C /* PQHostnameFactory.m */,
+				6F366F861B41B19A000B3FA8 /* PQFilePathFactory.h */,
+				6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		6F366F681B41ACA4000B3FA8 /* Parsecom */ = {
+			isa = PBXGroup;
+			children = (
+				6F366F811B41ADFA000B3FA8 /* Bolts.framework */,
+				6F366F691B41ACEB000B3FA8 /* Parse.framework */,
+			);
+			name = Parsecom;
+			sourceTree = "<group>";
+		};
+		6F3783BF1B27CA630066EF08 /* Login and register */ = {
+			isa = PBXGroup;
+			children = (
+				6F3783C31B27CADA0066EF08 /* PQLoginViewController.h */,
+				6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */,
+				6F3783C01B27CAAB0066EF08 /* PQRegisterViewController.h */,
+				6F3783C11B27CAAB0066EF08 /* PQRegisterViewController.m */,
+				6F3783C61B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.h */,
+				6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */,
+			);
+			name = "Login and register";
 			sourceTree = "<group>";
 		};
 		6F3A8DD41ABBBC07007BFD68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6F6CC6B21AD4BF4C00920935 /* Cell */,
-				6F3A8DD51ABBBC31007BFD68 /* PQLoginViewController.h */,
-				6F3A8DD61ABBBC31007BFD68 /* PQLoginViewController.m */,
+				6F3783BF1B27CA630066EF08 /* Login and register */,
 				6FD21D151ABC296F00C4C92E /* PQFriendListViewController.h */,
 				6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */,
 				6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */,
 				6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */,
+				6F96D0891B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.h */,
+				6F96D08A1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m */,
+				6FAF56001B36BF0B0091281C /* PQStickerKeyboardView.h */,
+				6FAF56011B36BF0B0091281C /* PQStickerKeyboardView.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		6F64E0601B27E9F000B73F61 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				6F64E0611B27EA4500B73F61 /* PQXMPPStreamHandler.h */,
+				6F64E0621B27EA4500B73F61 /* PQXMPPStreamHandler.m */,
+			);
+			name = Handlers;
 			sourceTree = "<group>";
 		};
 		6F69AF541ABBFE6B00AE6D6A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				6F8633BF1B281BDE007EB2A9 /* PQStreamConnectDelegate.h */,
+				6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */,
+				6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */,
 				6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */,
 				6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */,
-				6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -598,6 +751,12 @@
 				6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */,
 				6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */,
 				6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */,
+				6FAF56071B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.h */,
+				6FAF56081B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m */,
+				6FAF560A1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.h */,
+				6FAF560B1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m */,
+				6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */,
+				6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1467,6 +1626,19 @@
 		6F9ED1EEC9EFCA59BDF5A2C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F366F7F1B41ADCF000B3FA8 /* Social.framework */,
+				6F366F7D1B41ADCA000B3FA8 /* Accounts.framework */,
+				6F366F7B1B41AD7C000B3FA8 /* libsqlite3.dylib */,
+				6F366F791B41AD76000B3FA8 /* libz.dylib */,
+				6F366F771B41AD6A000B3FA8 /* SystemConfiguration.framework */,
+				6F366F751B41AD63000B3FA8 /* StoreKit.framework */,
+				6F366F731B41AD57000B3FA8 /* QuartzCore.framework */,
+				6F366F711B41AD51000B3FA8 /* MobileCoreServices.framework */,
+				6F366F6F1B41AD47000B3FA8 /* CoreLocation.framework */,
+				6F366F6D1B41AD41000B3FA8 /* CoreGraphics.framework */,
+				6F366F6B1B41AD2C000B3FA8 /* AudioToolbox.framework */,
+				6F366F681B41ACA4000B3FA8 /* Parsecom */,
+				DD52F3D5536CA8365B24797E /* Pods */,
 				6F9CE5D21ABB17FC00D716EB /* libresolv.dylib */,
 				6F9CE5D11ABB173000D716EB /* XMPPFramework.h */,
 				6F9CE3F31ABB158A00D716EB /* libxml2.dylib */,
@@ -1489,7 +1661,6 @@
 				6FB93B6B1ABB0E4E0067224E /* Audeecon */,
 				6FB93B851ABB0E4E0067224E /* AudeeconTests */,
 				6FB93B6A1ABB0E4E0067224E /* Products */,
-				DD52F3D5536CA8365B24797E /* Pods */,
 				6F9ED1EEC9EFCA59BDF5A2C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -1506,13 +1677,14 @@
 		6FB93B6B1ABB0E4E0067224E /* Audeecon */ = {
 			isa = PBXGroup;
 			children = (
+				6F64E0601B27E9F000B73F61 /* Handlers */,
 				6F307E211B1E127600D2F6DE /* Helpers */,
 				6F03C3281AD6AC4C0075BD66 /* Models */,
 				6F69AF541ABBFE6B00AE6D6A /* Protocols */,
 				6F3A8DD41ABBBC07007BFD68 /* Controllers */,
+				6F0048341B367379004B570E /* Views */,
 				6FB93B701ABB0E4E0067224E /* AppDelegate.h */,
-				6FB93B711ABB0E4E0067224E /* AppDelegate.m */,
-				6FB93B761ABB0E4E0067224E /* Main.storyboard */,
+				6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */,
 				6FB93B791ABB0E4E0067224E /* Images.xcassets */,
 				6FB93B7B1ABB0E4E0067224E /* LaunchScreen.xib */,
 				6FB93B6C1ABB0E4E0067224E /* Supporting Files */,
@@ -1637,9 +1809,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F0048361B367498004B570E /* StickerKeyboardView.xib in Resources */,
 				6FB93B781ABB0E4E0067224E /* Main.storyboard in Resources */,
+				6FAF56041B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib in Resources */,
 				6FB93B7D1ABB0E4E0067224E /* LaunchScreen.xib in Resources */,
 				6F9CE3EE1ABB14EE00D716EB /* README.txt in Resources */,
+				6FAF56061B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib in Resources */,
 				6FB93B7A1ABB0E4E0067224E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1692,6 +1867,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F9CE5C51ABB16FC00D716EB /* XMPPMessageCarbons.m in Sources */,
+				6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */,
+				6F3783C21B27CAAB0066EF08 /* PQRegisterViewController.m in Sources */,
 				6F9CE5911ABB16FC00D716EB /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				6F9CE5B11ABB16FC00D716EB /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				6F9CE58A1ABB16FC00D716EB /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
@@ -1706,6 +1883,7 @@
 				6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */,
 				6F9CE3ED1ABB14EE00D716EB /* DDMultiFormatter.m in Sources */,
 				6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */,
+				6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */,
 				6F9CE5C11ABB16FC00D716EB /* XEP_0223.m in Sources */,
 				6F307E241B1E129D00D2F6DE /* UIImage+Sprite.m in Sources */,
 				6F9CE4071ABB15B000D716EB /* DDXMLDocument.m in Sources */,
@@ -1727,14 +1905,16 @@
 				6F9CE5901ABB16FC00D716EB /* XMPPvCardCoreDataStorage.m in Sources */,
 				6F9CE57F1ABB16FC00D716EB /* XMPPPrivacy.m in Sources */,
 				6F9CE5AD1ABB16FC00D716EB /* XMPPCapabilities.m in Sources */,
+				6FAF560F1B36E74C0091281C /* PQHostnameFactory.m in Sources */,
+				6F0EE0321B42E1C900E25EC4 /* AppDelegate.m in Sources */,
 				6F9CE5731ABB16FC00D716EB /* XMPPRosterCoreDataStorage.m in Sources */,
 				6F9CE5CC1ABB16FC00D716EB /* RFImageToDataTransformer.m in Sources */,
 				6F9CE5BD1ABB16FC00D716EB /* XMPPPing.m in Sources */,
 				6F9CE57A1ABB16FC00D716EB /* XMPPIQ+JabberRPC.m in Sources */,
 				6F9CE5B91ABB16FC00D716EB /* XMPPStreamManagementMemoryStorage.m in Sources */,
+				6F4517971B2FCE4D006DCB8F /* PQUser.m in Sources */,
 				6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */,
 				6F9CE5C81ABB16FC00D716EB /* XMPPMessage+XEP_0333.m in Sources */,
-				6F3A8DD71ABBBC31007BFD68 /* PQLoginViewController.m in Sources */,
 				6F9CE3EB1ABB14EE00D716EB /* DDContextFilterLogFormatter.m in Sources */,
 				6F9CE4061ABB15B000D716EB /* NSString+DDXML.m in Sources */,
 				6F9CE5761ABB16FC00D716EB /* XMPPRosterMemoryStorage.m in Sources */,
@@ -1752,9 +1932,11 @@
 				6F9CE5C01ABB16FC00D716EB /* NSXMLElement+XEP_0203.m in Sources */,
 				6F9CE59F1ABB16FC00D716EB /* TURNSocket.m in Sources */,
 				6F9CE56C1ABB16FC00D716EB /* XMPPOutgoingFileTransfer.m in Sources */,
+				6FAF560C1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m in Sources */,
 				6F9CE5541ABB16FC00D716EB /* XMPPAnonymousAuthentication.m in Sources */,
 				6F9CE58B1ABB16FC00D716EB /* XMPPMessage+XEP0045.m in Sources */,
 				6F9CE5751ABB16FC00D716EB /* XMPPResourceMemoryStorageObject.m in Sources */,
+				6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */,
 				6F9CE55E1ABB16FC00D716EB /* NSXMLElement+XMPP.m in Sources */,
 				6F9CE57C1ABB16FC00D716EB /* XMPPJabberRPCModule.m in Sources */,
 				6F9CE5701ABB16FC00D716EB /* XMPPGroupCoreDataStorageObject.m in Sources */,
@@ -1778,12 +1960,12 @@
 				6F9CE5781ABB16FC00D716EB /* XMPPRoster.m in Sources */,
 				6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */,
 				6F9CE5A91ABB16FC00D716EB /* XMPPCapabilities.xcdatamodel in Sources */,
-				6FB93B721ABB0E4E0067224E /* AppDelegate.m in Sources */,
 				6F9CE5BE1ABB16FC00D716EB /* XMPPAutoTime.m in Sources */,
 				6F9CE5611ABB16FC00D716EB /* XMPPIQ.m in Sources */,
 				6F9CE5A01ABB16FC00D716EB /* XMPPIQ+XEP_0066.m in Sources */,
 				6F9CE5CB1ABB16FC00D716EB /* GCDMulticastDelegate.m in Sources */,
 				6F9CE5BC1ABB16FC00D716EB /* XMPPAutoPing.m in Sources */,
+				6FAF56021B36BF0B0091281C /* PQStickerKeyboardView.m in Sources */,
 				6F9CE5B51ABB16FC00D716EB /* XMPPPresence+XEP_0172.m in Sources */,
 				6F9CE5551ABB16FC00D716EB /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				6F9CE5651ABB16FC00D716EB /* XMPPParser.m in Sources */,
@@ -1819,24 +2001,32 @@
 				6F9CE5631ABB16FC00D716EB /* XMPPMessage.m in Sources */,
 				6F9CE5A11ABB16FC00D716EB /* XMPPMessage+XEP_0066.m in Sources */,
 				6F9CE3EA1ABB14EE00D716EB /* DDTTYLogger.m in Sources */,
+				6FC877D31B3A4E7B0049C641 /* PQStickerAndPackDownloader.m in Sources */,
 				6F9CE5AA1ABB16FC00D716EB /* XMPPCapabilitiesCoreDataStorage.m in Sources */,
 				6F9CE55C1ABB16FC00D716EB /* NSData+XMPP.m in Sources */,
+				6F366F851B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m in Sources */,
 				6F9CE5801ABB16FC00D716EB /* XMPPRoom.xcdatamodeld in Sources */,
 				6F9CE56B1ABB16FC00D716EB /* XMPPIncomingFileTransfer.m in Sources */,
 				6F9CE5841ABB16FC00D716EB /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				6F9CE5851ABB16FC00D716EB /* XMPPRoomHybridStorage.m in Sources */,
 				6F9CE5BF1ABB16FC00D716EB /* XMPPTime.m in Sources */,
+				6FAF56091B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m in Sources */,
 				6F9CE5861ABB16FC00D716EB /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				6F9CE4051ABB15B000D716EB /* GCDAsyncSocket.m in Sources */,
 				6F9CE5591ABB16FC00D716EB /* XMPPSCRAMSHA1Authentication.m in Sources */,
 				6F9CE5C91ABB16FC00D716EB /* NSXMLElement+XEP_0335.m in Sources */,
+				6F00F73B1B37A44600AEE057 /* PQMessage.m in Sources */,
+				6F366F881B41B19A000B3FA8 /* PQFilePathFactory.m in Sources */,
 				6F9CE55A1ABB16FC00D716EB /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				6F9CE5721ABB16FC00D716EB /* XMPPRoster.xcdatamodel in Sources */,
+				6F96D08B1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m in Sources */,
 				6F9CE56F1ABB16FC00D716EB /* XMPPReconnect.m in Sources */,
 				6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */,
+				6FC877D61B3A545F0049C641 /* PQPendingOperations.m in Sources */,
 				6F9CE5671ABB16FC00D716EB /* XMPPStream.m in Sources */,
 				6F9CE5A51ABB16FC00D716EB /* XMPPMessage+XEP_0085.m in Sources */,
 				6F9CE58C1ABB16FC00D716EB /* XMPPMUC.m in Sources */,
+				6F64E0631B27EA4500B73F61 /* PQXMPPStreamHandler.m in Sources */,
 				6F9CE5811ABB16FC00D716EB /* XMPPRoomCoreDataStorage.m in Sources */,
 				6F9CE5C41ABB16FC00D716EB /* XMPPMessage+XEP_0280.m in Sources */,
 				6F9CE5991ABB16FC00D716EB /* XMPPvCardTempModule.m in Sources */,
@@ -1980,6 +2170,10 @@
 			baseConfigurationReference = FDB9896BE26FA498FF6E1192 /* Pods-Audeecon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Audeecon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1996,6 +2190,10 @@
 			baseConfigurationReference = DD91CCF038017071F30B3BDD /* Pods-Audeecon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Audeecon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

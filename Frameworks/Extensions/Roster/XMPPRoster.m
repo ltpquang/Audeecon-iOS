@@ -700,6 +700,7 @@ enum XMPPRosterFlags
 		NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
 		
 		XMPPIQ *iq = [XMPPIQ iqWithType:@"get" elementID:[xmppStream generateUUID]];
+        [iq addAttributeWithName:@"from" stringValue:[[xmppStream myJID] full]];
 		[iq addChild:query];
         
         [xmppIDTracker addElement:iq

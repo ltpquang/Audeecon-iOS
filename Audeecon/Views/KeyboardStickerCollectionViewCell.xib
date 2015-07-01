@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="uOn-kB-HWW" customClass="PQKeyboardStickerCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-No-Hoe">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="NEG-No-Hoe" secondAttribute="trailing" id="32X-iv-J1y"/>
+                <constraint firstItem="NEG-No-Hoe" firstAttribute="top" secondItem="uOn-kB-HWW" secondAttribute="top" id="7sU-S7-1Zp"/>
+                <constraint firstItem="NEG-No-Hoe" firstAttribute="leading" secondItem="uOn-kB-HWW" secondAttribute="leading" id="bQq-G0-MKJ"/>
+                <constraint firstAttribute="bottom" secondItem="NEG-No-Hoe" secondAttribute="bottom" id="zJ3-a6-Q3k"/>
+            </constraints>
+            <connections>
+                <outlet property="mainImage" destination="NEG-No-Hoe" id="75g-1X-Hed"/>
+            </connections>
+            <point key="canvasLocation" x="582" y="285"/>
+        </collectionViewCell>
+    </objects>
+</document>

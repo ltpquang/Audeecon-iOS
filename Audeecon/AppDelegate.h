@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PQStreamConnectDelegate.h"
 #import "PQLoginDelegate.h"
+#import "PQRegisterDelegate.h"
 #import "PQFriendListDelegate.h"
 #import "PQMessageExchangeDelegate.h"
 #import "XMPPStream.h"
@@ -28,14 +30,20 @@
 @property NSString *password;
 @property BOOL isOpen;
 
+@property (weak, nonatomic) id<PQStreamConnectDelegate> streamConnectDelegate;
 @property (weak, nonatomic) id<PQLoginDelegate> loginDelegate;
+@property (weak, nonatomic) id<PQRegisterDelegate> registerDelegate;
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
 @property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
 
-@property (strong, nonatomic) NSArray *_stickerPacks;
+@property (strong, nonatomic) NSArray *stickerPacks;
+@property BOOL stickerPacksDownloaded;
 
 - (BOOL)connect;
+- (void)fetchRoster;
 - (NSManagedObjectContext *)managedObjectContext_roster;
+
+- (void)authenticateUsingPassword;
 
 @end
 
