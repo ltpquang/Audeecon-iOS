@@ -26,9 +26,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //[self FetchFriends];
-    [[self appDelegate] connect];
     [[self appDelegate] setStreamConnectDelegate:self];
     [[self appDelegate] setLoginDelegate:self];
+    if ([[[self appDelegate] xmppStream] isDisconnected]) {
+        [[self appDelegate] connect];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -68,7 +70,7 @@
 
 #pragma mark - Login delegate
 - (void)loginDidAuthenticate {
-    [[self appDelegate] fetchRoster];
+    //[[self appDelegate] fetchRoster];
 }
 
 - (void)loginDidNotAuthenticate:(DDXMLElement *)error {

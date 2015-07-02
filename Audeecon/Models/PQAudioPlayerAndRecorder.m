@@ -52,6 +52,7 @@
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error = nil;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:nil];
     [session setActive:YES error:&error];
     
     // Start recording
@@ -71,7 +72,7 @@
     if (_recorder.recording) {
         return;
     }
-    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
     NSError *error = nil;
     _player = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:&error];
     [_player setDelegate:self];

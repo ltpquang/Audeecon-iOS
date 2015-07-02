@@ -31,4 +31,9 @@
     NSLog(@"%@", result);
     return result;
 }
+
++ (NSString *)urlToS3FileWithFileName:(NSString *)fileName {
+    return [@"https://s3.amazonaws.com/audeecon-us/" stringByAppendingString:fileName];
+}
+
 @end

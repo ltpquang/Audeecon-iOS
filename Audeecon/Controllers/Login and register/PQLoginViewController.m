@@ -70,7 +70,6 @@
 
 #pragma mark - Login delegates
 - (void)loginDidAuthenticate {
-    //[self dismissViewControllerAnimated:YES completion:nil];
     [[[self appDelegate] window] setRootViewController:[self.storyboard instantiateInitialViewController]];
 }
 

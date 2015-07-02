@@ -14,6 +14,8 @@
 #import "PQMessage.h"
 #import <Parse/Parse.h>
 #import "PQFilePathFactory.h"
+#import <AWSCore.h>
+#import <AWSS3.h>
 
 @interface AppDelegate ()
 
@@ -29,7 +31,7 @@
     [self clearTemperaryFolder];
     [self setupParse];
     [self setupStream];
-    
+    [self setupAmazon];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
     //login = nil;
@@ -107,6 +109,20 @@
     
 }
 
+- (void)setupAmazon {
+    AWSCognitoCredentialsProvider *credentialsProvider
+    = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1
+                                                 identityPoolId:@"us-east-1:86938877-3794-4eeb-8062-563baf97c462"];
+    
+    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1
+                                                                         credentialsProvider:credentialsProvider];
+    
+    
+    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
+    
+    [AWSS3TransferManager registerS3TransferManagerWithConfiguration:configuration forKey:@"defaulttransfermanager"];
+}
+
 #pragma mark - XMPP setup
 - (void)setupStream {
     _xmppStream = [[XMPPStream alloc] init];
@@ -116,7 +132,7 @@
     _xmppRosterCoreDataStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
     
     _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage];
-    _xmppRoster.autoFetchRoster = NO;
+    _xmppRoster.autoFetchRoster = YES;
     _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
     
     _xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
@@ -150,6 +166,7 @@
     NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"userPassword"];
     
     if (![_xmppStream isDisconnected]) {
+        //[_streamConnectDelegate xmppStreamDidConnect];
         return YES;
     }
     

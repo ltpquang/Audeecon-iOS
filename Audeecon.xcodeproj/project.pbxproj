@@ -594,6 +594,8 @@
 		6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeViewController.h; path = Controllers/PQMessageExchangeViewController.h; sourceTree = "<group>"; };
 		6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageExchangeViewController.m; path = Controllers/PQMessageExchangeViewController.m; sourceTree = "<group>"; };
 		DD91CCF038017071F30B3BDD /* Pods-Audeecon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.release.xcconfig"; sourceTree = "<group>"; };
+		F128F7970A6A7E9FD4E5179B /* Pods-Audeecon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.debug.xcconfig"; sourceTree = "<group>"; };
+		F2477F89A04EA61F51664207 /* Pods-Audeecon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.release.xcconfig"; sourceTree = "<group>"; };
 		FDB9896BE26FA498FF6E1192 /* Pods-Audeecon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1662,6 +1664,7 @@
 				6FB93B851ABB0E4E0067224E /* AudeeconTests */,
 				6FB93B6A1ABB0E4E0067224E /* Products */,
 				6F9ED1EEC9EFCA59BDF5A2C6 /* Frameworks */,
+				845B351AD174E5F406E0AF68 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1716,6 +1719,15 @@
 				6FB93B871ABB0E4E0067224E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		845B351AD174E5F406E0AF68 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F128F7970A6A7E9FD4E5179B /* Pods-Audeecon.debug.xcconfig */,
+				F2477F89A04EA61F51664207 /* Pods-Audeecon.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		DD52F3D5536CA8365B24797E /* Pods */ = {
@@ -2167,7 +2179,7 @@
 		};
 		6FB93B8D1ABB0E4E0067224E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDB9896BE26FA498FF6E1192 /* Pods-Audeecon.debug.xcconfig */;
+			baseConfigurationReference = F128F7970A6A7E9FD4E5179B /* Pods-Audeecon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2187,7 +2199,7 @@
 		};
 		6FB93B8E1ABB0E4E0067224E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD91CCF038017071F30B3BDD /* Pods-Audeecon.release.xcconfig */;
+			baseConfigurationReference = F2477F89A04EA61F51664207 /* Pods-Audeecon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
