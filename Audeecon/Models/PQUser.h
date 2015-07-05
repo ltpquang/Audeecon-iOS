@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "XMPP.h"
+#import <Realm.h>
 
 @interface PQUser : NSObject
 
-@property (strong, nonatomic) XMPPJID *jid;
-@property (strong, nonatomic) NSString *jidString;
-@property (strong, nonatomic) NSString *nickName;
-@property (strong, nonatomic) NSString *displayName;
+@property XMPPJID *jid;
+@property NSString *displayName;
 
 @end
+RLM_ARRAY_TYPE(PQUser)

@@ -28,6 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    _globalContainer = [PQGlobalContainer new];
     [self clearTemperaryFolder];
     [self setupParse];
     [self setupStream];
@@ -91,8 +92,7 @@
     PQRequestingService *requestingService = [PQRequestingService new];
     [requestingService getAllStickerPacksForUser:userName
                                          success:^(NSArray *result) {
-                                             _stickerPacks = result;
-                                             _stickerPacksDownloaded = YES;
+                                             self.globalContainer.stickerPacks = result;//_stickerPacks = result;
                                              [_messageExchangeDelegate reloadStickers];
                                              NSLog(@"Packs downloaded");
                                          }

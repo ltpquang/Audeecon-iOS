@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "PQLoginViewController.h"
 #import "PQMessageExchangeViewController.h"
-#import "PQJSQMessageExchangeViewController.h"
 #import "XMPPvCardTemp.h"
 
 @interface PQFriendListViewController ()

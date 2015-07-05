@@ -10,7 +10,7 @@
 
 @implementation PQUrlService
 + (NSString *)baseUrl {
-    return @"http://audeecon.herokuapp.com/api/v1/packs";
+    return @"http://audeecon.herokuapp.com/api/v2/packs";
 }
 
 + (NSString *)urlToGetAllStickerPacks {
@@ -20,7 +20,7 @@
 }
 
 + (NSString *)urlToGetAllStickerPacksForUser:(NSString *)username {
-    NSString *result = [NSString stringWithFormat:@"http://audeecon.herokuapp.com/api/v1/users/%@/packs", username];
+    NSString *result = [NSString stringWithFormat:@"http://audeecon.herokuapp.com/api/v2/users/%@/packs", username];
     NSLog(@"%@", result);
     return result;
 }

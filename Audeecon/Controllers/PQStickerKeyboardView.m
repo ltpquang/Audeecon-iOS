@@ -76,24 +76,23 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag == 0) { //pack
-        //Stop all current sticker downloaders
         [_stickerPendingOperations reset];
         PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
         _selectedPack = pack;
-        if (pack.hasStickers) {
-            _stickers = pack.stickers;
-            [_stickersCollectionView reloadData];
-        }
-        else {
-            [pack downloadStickersUsingRequestingService:_requestingService
-                                                 success:^{
-                                                     _stickers = pack.stickers;
-                                                     [_stickersCollectionView reloadData];
-                                                 }
-                                                 failure:^(NSError *error) {
-                                                     //
-                                                 }];
-        }
+//        if (pack.hasStickers) {
+//            _stickers = pack.stickers;
+//            [_stickersCollectionView reloadData];
+//        }
+//        else {
+//            [pack downloadStickersUsingRequestingService:_requestingService
+//                                                 success:^{
+//                                                     _stickers = pack.stickers;
+//                                                     [_stickersCollectionView reloadData];
+//                                                 }
+//                                                 failure:^(NSError *error) {
+//                                                     //
+//                                                 }];
+//        }
     }
 }
 
@@ -102,25 +101,25 @@
         PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
         PQKeyboardPackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
         [cell resetContent];
-        if (pack.hasImage) {
-            [cell configCellUsingStickerPack:pack];
-        }
-        else {
-            [self startDownloadingOperationForPack:pack atIndexPath:indexPath];
-        }
+//        if (pack.hasImage) {
+//            [cell configCellUsingStickerPack:pack];
+//        }
+//        else {
+//            [self startDownloadingOperationForPack:pack atIndexPath:indexPath];
+//        }
         return cell;
     }
     else {
         PQSticker *sticker = [_stickers objectAtIndex:indexPath.row];
         PQKeyboardStickerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardStickerCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
         [cell resetContent];
-        if (sticker.hasThumbnail) {
-            [cell configCellUsingSticker:sticker
-                                delegate:self];
-        }
-        else {
-            [self startDownloadingOperationForSticker:sticker atIndexPath:indexPath];
-        }
+//        if (sticker.hasThumbnail) {
+//            [cell configCellUsingSticker:sticker
+//                                delegate:self];
+//        }
+//        else {
+//            [self startDownloadingOperationForSticker:sticker atIndexPath:indexPath];
+//        }
         return cell;
     }
     return nil;

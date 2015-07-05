@@ -14,13 +14,19 @@
 
 #pragma mark - Sticker pack
 + (PQStickerPack *)parseStickerPackFromDictionary:(NSDictionary *)pack {
-    PQStickerPack *result = [[PQStickerPack alloc] initWithId:(NSString *)[pack valueForKey:@"_id"]
-                                                      andName:(NSString *)[pack valueForKey:@"name"]
-                                                    andArtist:(NSString *)[pack valueForKey:@"artist"]
-                                           andPackDescription:(NSString *)[pack valueForKey:@"description"]
-                                                 andThumbnail:(NSString *)[pack valueForKey:@"profile_image"]
-                                                  andPreviews:(NSArray *)[pack valueForKey:@"previews"]
-                                                  andStickers:nil];
+//    PQStickerPack *result = [[PQStickerPack alloc] initWithId:(NSString *)[pack valueForKey:@"_id"]
+//                                                      andName:(NSString *)[pack valueForKey:@"name"]
+//                                                    andArtist:(NSString *)[pack valueForKey:@"artist"]
+//                                           andPackDescription:(NSString *)[pack valueForKey:@"description"]
+//                                                 andThumbnail:(NSString *)[pack valueForKey:@"profile_image"]
+//                                                  andPreviews:(NSArray *)[pack valueForKey:@"previews"]
+//                                                  andStickers:nil];
+//    return result;
+    PQStickerPack *result = [[PQStickerPack alloc] initWithPackId:pack[@"_id"]
+                                                          andName:pack[@"name"]
+                                                        andArtist:pack[@"artist"]
+                                                   andDescription:pack[@"description"]
+                                                  andThumbnailUri:pack[@"profile_image"]];
     return result;
 }
 
@@ -37,17 +43,20 @@
 
 #pragma mark - Sticker
 + (PQSticker *)parseStickerFromDictionary:(NSDictionary *)sticker {
-    PQSticker *result = [[PQSticker alloc] initWithId:(NSString *)[sticker objectForKey:@"sticker_id"]
-                                             andWidth:[[sticker valueForKey:@"width"] integerValue]
-                                            andHeight:[[sticker valueForKey:@"height"] integerValue]
-                                        andFrameCount:[[sticker valueForKey:@"frame_count"] integerValue]
-                                         andFrameRate:[[sticker valueForKey:@"frame_rate"] integerValue]
-                                      andFramesPerCol:[[sticker valueForKey:@"frames_per_col"] integerValue]
-                                      andFramesPerRow:[[sticker valueForKey:@"frames_per_row"] integerValue]
-                                               andUri:(NSString *)[sticker valueForKey:@"uri"]
-                                         andSourceUri:(NSString *)[sticker valueForKey:@"source_uri"]
-                                         andSpriteUri:(NSString *)[sticker valueForKey:@"sprite_uri"]
-                                   andPaddedSpriteUri:(NSString *)[sticker valueForKey:@"padded_sprite_uri"]];
+//    PQSticker *result = [[PQSticker alloc] initWithId:(NSString *)[sticker objectForKey:@"sticker_id"]
+//                                             andWidth:[[sticker valueForKey:@"width"] integerValue]
+//                                            andHeight:[[sticker valueForKey:@"height"] integerValue]
+//                                        andFrameCount:[[sticker valueForKey:@"frame_count"] integerValue]
+//                                         andFrameRate:[[sticker valueForKey:@"frame_rate"] integerValue]
+//                                      andFramesPerCol:[[sticker valueForKey:@"frames_per_col"] integerValue]
+//                                      andFramesPerRow:[[sticker valueForKey:@"frames_per_row"] integerValue]
+//                                               andUri:(NSString *)[sticker valueForKey:@"uri"]
+//                                         andSourceUri:(NSString *)[sticker valueForKey:@"source_uri"]
+//                                         andSpriteUri:(NSString *)[sticker valueForKey:@"sprite_uri"]
+//                                   andPaddedSpriteUri:(NSString *)[sticker valueForKey:@"padded_sprite_uri"]];
+//    return result;
+    PQSticker *result = [[PQSticker alloc] initWithStickerId:sticker[@"_id"]
+                                                       andUri:sticker[@"uri"]];
     return result;
 }
 

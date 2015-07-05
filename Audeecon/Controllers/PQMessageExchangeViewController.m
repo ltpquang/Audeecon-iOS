@@ -9,7 +9,6 @@
 #import "PQMessageExchangeViewController.h"
 #import "AppDelegate.h"
 #import "XMPPFramework.h"
-#import "PQMessageTableViewCell.h"
 #import "PQMessage.h"
 #import "PQMessageCollectionViewCell.h"
 #import "PQStickerKeyboardView.h"
@@ -49,7 +48,7 @@
     if (_keyboardView == nil) {
         _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
         [_keyboardView setFrame:CGRectMake(0, self.view.bounds.size.height - 216, 320, 216)];
-        [_keyboardView configKeyboardWithStickerPacks:[[self appDelegate] stickerPacks]
+        [_keyboardView configKeyboardWithStickerPacks:[[[self appDelegate] globalContainer] stickerPacks]
                                              delegate:self];
     }
     return _keyboardView;
@@ -107,7 +106,7 @@
 }
 
 - (void)reloadStickers {
-    [_keyboardView reloadKeyboardUsingPacks:[[self appDelegate] stickerPacks]];
+    [_keyboardView reloadKeyboardUsingPacks:[[[self appDelegate] globalContainer] stickerPacks]];
 }
 
 #pragma mark - Collection view datasource
@@ -125,13 +124,13 @@
 #pragma mark - Keyboard delegate
 - (void)didStartHoldingOnSticker:(PQSticker *)sticker
                    ofStickerPack:(PQStickerPack *)pack {
-    NSLog(@"Start holding on sticker %@ of pack %@", sticker.objectId, pack.objectId);
+    NSLog(@"Start holding on sticker %@ of pack %@", sticker.stickerId, pack.packId);
     [_audioRecorderAndPlayer startRecording];
 }
 
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
                   ofStickerPack:(PQStickerPack *)pack {
-    NSLog(@"Stop- holding on sticker %@ of pack %@", sticker.objectId, pack.objectId);
+    NSLog(@"Stop- holding on sticker %@ of pack %@", sticker.stickerId, pack.packId);
     
     NSString *from = [[[self xmppStream] myJID] user];
     NSString *to = [[[self partner] jid] user];

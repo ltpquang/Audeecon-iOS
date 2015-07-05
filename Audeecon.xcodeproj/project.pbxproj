@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4602C9693B38D80112C7248D /* libPods-Audeecon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */; };
+		6A3EF5DA164B4B5AB0489F22 /* libPods-AudeeconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 398BADCE41D10685045E4E3E /* libPods-AudeeconTests.a */; };
 		6F0048361B367498004B570E /* StickerKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0048351B367498004B570E /* StickerKeyboardView.xib */; };
 		6F00F73B1B37A44600AEE057 /* PQMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73A1B37A44600AEE057 /* PQMessage.m */; };
 		6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */; };
-		6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */; };
-		6F03C32E1AD6ACDA0075BD66 /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */; };
 		6F0EE0321B42E1C900E25EC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */; };
+		6F2505601B48C99800F00274 /* PQGlobalContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25055F1B48C99800F00274 /* PQGlobalContainer.m */; };
+		6F2505641B48D99E00F00274 /* PQStickerDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */; };
+		6F2505671B48DC4200F00274 /* PQStickerPackDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */; };
 		6F307E241B1E129D00D2F6DE /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */; };
 		6F307E2B1B1E12D900D2F6DE /* PQParsingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E261B1E12D900D2F6DE /* PQParsingService.m */; };
 		6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E281B1E12D900D2F6DE /* PQRequestingService.m */; };
@@ -37,9 +38,19 @@
 		6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */; };
 		6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */; };
 		6F4517971B2FCE4D006DCB8F /* PQUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4517961B2FCE4D006DCB8F /* PQUser.m */; };
-		6F64E0631B27EA4500B73F61 /* PQXMPPStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F64E0621B27EA4500B73F61 /* PQXMPPStreamHandler.m */; };
-		6F6CC6B81AD4C03F00920935 /* PQMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */; };
-		6F96D08B1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96D08A1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m */; };
+		6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */; };
+		6F4607771B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607631B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m */; };
+		6F4607781B48387000B637C7 /* PKCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607651B48387000B637C7 /* PKCircleProgressView.m */; };
+		6F4607791B48387000B637C7 /* PKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607671B48387000B637C7 /* PKCircleView.m */; };
+		6F46077A1B48387000B637C7 /* PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607691B48387000B637C7 /* PKDownloadButton.m */; };
+		6F46077B1B48387000B637C7 /* PKPendingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F46076C1B48387000B637C7 /* PKPendingView.m */; };
+		6F46077C1B48387000B637C7 /* PKStopDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F46076E1B48387000B637C7 /* PKStopDownloadButton.m */; };
+		6F46077D1B48387000B637C7 /* UIButton+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607701B48387000B637C7 /* UIButton+PKDownloadButton.m */; };
+		6F46077E1B48387000B637C7 /* UIColor+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */; };
+		6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */; };
+		6F8AF40C1B46F6FC0099F63A /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40B1B46F6FC0099F63A /* PQSticker.m */; };
+		6F8AF40F1B46FB0B0099F63A /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */; };
+		6F935FE91B46E20500F0FD03 /* PQCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F935FE81B46E20500F0FD03 /* PQCurrentUser.m */; };
 		6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */; };
 		6F9CE3E71ABB14EE00D716EB /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D61ABB14EE00D716EB /* DDASLLogger.m */; };
 		6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D81ABB14EE00D716EB /* DDFileLogger.m */; };
@@ -198,7 +209,11 @@
 		6FC877D61B3A545F0049C641 /* PQPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC877D51B3A545F0049C641 /* PQPendingOperations.m */; };
 		6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */; };
 		6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */; };
+		6FE61B151B47902E0035C39F /* PQStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE61B141B47902E0035C39F /* PQStoreViewController.m */; };
+		6FE61B181B4790E10035C39F /* PQStickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE61B171B4790E10035C39F /* PQStickerTableViewController.m */; };
+		6FF3EC941B47D9AE0038AF0C /* PQStickerPackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */; };
 		6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */; };
+		9F8E1ED0EFAB2BB917352272 /* libPods-Audeecon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 385347232C760932839CEED6 /* libPods-Audeecon.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,17 +227,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Audeecon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		385347232C760932839CEED6 /* libPods-Audeecon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Audeecon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		398BADCE41D10685045E4E3E /* libPods-AudeeconTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AudeeconTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0048351B367498004B570E /* StickerKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StickerKeyboardView.xib; path = Views/StickerKeyboardView.xib; sourceTree = "<group>"; };
 		6F00F7391B37A44600AEE057 /* PQMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessage.h; path = Models/PQMessage.h; sourceTree = "<group>"; };
 		6F00F73A1B37A44600AEE057 /* PQMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessage.m; path = Models/PQMessage.m; sourceTree = "<group>"; };
 		6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageCollectionViewCell.h; path = Controllers/Cells/PQMessageCollectionViewCell.h; sourceTree = "<group>"; };
 		6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageCollectionViewCell.m; path = Controllers/Cells/PQMessageCollectionViewCell.m; sourceTree = "<group>"; };
-		6F03C3291AD6ACAA0075BD66 /* PQSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQSticker.h; path = Models/PQSticker.h; sourceTree = "<group>"; };
-		6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
-		6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPack.h; path = Models/PQStickerPack.h; sourceTree = "<group>"; };
-		6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPack.m; path = Models/PQStickerPack.m; sourceTree = "<group>"; };
 		6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6F25055E1B48C99800F00274 /* PQGlobalContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQGlobalContainer.h; path = Models/PQGlobalContainer.h; sourceTree = "<group>"; };
+		6F25055F1B48C99800F00274 /* PQGlobalContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQGlobalContainer.m; path = Models/PQGlobalContainer.m; sourceTree = "<group>"; };
+		6F2505621B48D99E00F00274 /* PQStickerDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerDownloadOperation.h; path = Models/PQStickerDownloadOperation.h; sourceTree = "<group>"; };
+		6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerDownloadOperation.m; path = Models/PQStickerDownloadOperation.m; sourceTree = "<group>"; };
+		6F2505651B48DC4200F00274 /* PQStickerPackDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPackDownloadOperation.h; path = Models/PQStickerPackDownloadOperation.h; sourceTree = "<group>"; };
+		6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPackDownloadOperation.m; path = Models/PQStickerPackDownloadOperation.m; sourceTree = "<group>"; };
 		6F307E221B1E129D00D2F6DE /* UIImage+Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Sprite.h"; sourceTree = "<group>"; };
 		6F307E231B1E129D00D2F6DE /* UIImage+Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Sprite.m"; sourceTree = "<group>"; };
 		6F307E251B1E12D900D2F6DE /* PQParsingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQParsingService.h; sourceTree = "<group>"; };
@@ -256,17 +274,38 @@
 		6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUpdateAdditionalInfoViewController.m; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.m"; sourceTree = "<group>"; };
 		6F4517951B2FCE4D006DCB8F /* PQUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUser.h; path = Models/PQUser.h; sourceTree = "<group>"; };
 		6F4517961B2FCE4D006DCB8F /* PQUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUser.m; path = Models/PQUser.m; sourceTree = "<group>"; };
+		6F4607601B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+PKDownloadButtonAnimations.h"; sourceTree = "<group>"; };
+		6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+PKDownloadButtonAnimations.m"; sourceTree = "<group>"; };
+		6F4607621B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PKDownloadButton.h"; sourceTree = "<group>"; };
+		6F4607631B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PKDownloadButton.m"; sourceTree = "<group>"; };
+		6F4607641B48387000B637C7 /* PKCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCircleProgressView.h; sourceTree = "<group>"; };
+		6F4607651B48387000B637C7 /* PKCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCircleProgressView.m; sourceTree = "<group>"; };
+		6F4607661B48387000B637C7 /* PKCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCircleView.h; sourceTree = "<group>"; };
+		6F4607671B48387000B637C7 /* PKCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCircleView.m; sourceTree = "<group>"; };
+		6F4607681B48387000B637C7 /* PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDownloadButton.h; sourceTree = "<group>"; };
+		6F4607691B48387000B637C7 /* PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDownloadButton.m; sourceTree = "<group>"; };
+		6F46076A1B48387000B637C7 /* PKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMacros.h; sourceTree = "<group>"; };
+		6F46076B1B48387000B637C7 /* PKPendingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPendingView.h; sourceTree = "<group>"; };
+		6F46076C1B48387000B637C7 /* PKPendingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPendingView.m; sourceTree = "<group>"; };
+		6F46076D1B48387000B637C7 /* PKStopDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStopDownloadButton.h; sourceTree = "<group>"; };
+		6F46076E1B48387000B637C7 /* PKStopDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStopDownloadButton.m; sourceTree = "<group>"; };
+		6F46076F1B48387000B637C7 /* UIButton+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PKDownloadButton.h"; sourceTree = "<group>"; };
+		6F4607701B48387000B637C7 /* UIButton+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PKDownloadButton.m"; sourceTree = "<group>"; };
+		6F4607711B48387000B637C7 /* UIColor+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PKDownloadButton.h"; sourceTree = "<group>"; };
+		6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PKDownloadButton.m"; sourceTree = "<group>"; };
+		6F4607731B48387000B637C7 /* UIImage+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PKDownloadButton.h"; sourceTree = "<group>"; };
+		6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PKDownloadButton.m"; sourceTree = "<group>"; };
 		6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQRegisterDelegate.h; path = Protocols/PQRegisterDelegate.h; sourceTree = "<group>"; };
-		6F64E0611B27EA4500B73F61 /* PQXMPPStreamHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQXMPPStreamHandler.h; path = Handlers/PQXMPPStreamHandler.h; sourceTree = "<group>"; };
-		6F64E0621B27EA4500B73F61 /* PQXMPPStreamHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQXMPPStreamHandler.m; path = Handlers/PQXMPPStreamHandler.m; sourceTree = "<group>"; };
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
 		6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeDelegate.h; path = Protocols/PQMessageExchangeDelegate.h; sourceTree = "<group>"; };
 		6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginDelegate.h; path = Protocols/PQLoginDelegate.h; sourceTree = "<group>"; };
-		6F6CC6B61AD4C03F00920935 /* PQMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageTableViewCell.h; path = Controllers/Cells/PQMessageTableViewCell.h; sourceTree = "<group>"; };
-		6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageTableViewCell.m; path = Controllers/Cells/PQMessageTableViewCell.m; sourceTree = "<group>"; };
 		6F8633BF1B281BDE007EB2A9 /* PQStreamConnectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStreamConnectDelegate.h; path = Protocols/PQStreamConnectDelegate.h; sourceTree = "<group>"; };
-		6F96D0891B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQJSQMessageExchangeViewController.h; path = Controllers/PQJSQMessageExchangeViewController.h; sourceTree = "<group>"; };
-		6F96D08A1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQJSQMessageExchangeViewController.m; path = Controllers/PQJSQMessageExchangeViewController.m; sourceTree = "<group>"; };
+		6F8AF40A1B46F6FC0099F63A /* PQSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQSticker.h; path = Models/PQSticker.h; sourceTree = "<group>"; };
+		6F8AF40B1B46F6FC0099F63A /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
+		6F8AF40D1B46FB0B0099F63A /* PQStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPack.h; path = Models/PQStickerPack.h; sourceTree = "<group>"; };
+		6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPack.m; path = Models/PQStickerPack.m; sourceTree = "<group>"; };
+		6F935FE71B46E20500F0FD03 /* PQCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQCurrentUser.h; path = Models/PQCurrentUser.h; sourceTree = "<group>"; };
+		6F935FE81B46E20500F0FD03 /* PQCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQCurrentUser.m; path = Models/PQCurrentUser.m; sourceTree = "<group>"; };
 		6F9CE3D31ABB14EE00D716EB /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		6F9CE3D51ABB14EE00D716EB /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -591,8 +630,16 @@
 		6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListViewController.m; path = Controllers/PQFriendListViewController.m; sourceTree = "<group>"; };
 		6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListTableViewCell.h; path = Controllers/Cells/PQFriendListTableViewCell.h; sourceTree = "<group>"; };
 		6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListTableViewCell.m; path = Controllers/Cells/PQFriendListTableViewCell.m; sourceTree = "<group>"; };
+		6FE61B131B47902E0035C39F /* PQStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStoreViewController.h; path = Controllers/Store/PQStoreViewController.h; sourceTree = "<group>"; };
+		6FE61B141B47902E0035C39F /* PQStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStoreViewController.m; path = Controllers/Store/PQStoreViewController.m; sourceTree = "<group>"; };
+		6FE61B161B4790E10035C39F /* PQStickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerTableViewController.h; path = Controllers/Store/PQStickerTableViewController.h; sourceTree = "<group>"; };
+		6FE61B171B4790E10035C39F /* PQStickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerTableViewController.m; path = Controllers/Store/PQStickerTableViewController.m; sourceTree = "<group>"; };
+		6FF3EC921B47D9AE0038AF0C /* PQStickerPackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPackTableViewCell.h; path = Controllers/Cells/PQStickerPackTableViewCell.h; sourceTree = "<group>"; };
+		6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPackTableViewCell.m; path = Controllers/Cells/PQStickerPackTableViewCell.m; sourceTree = "<group>"; };
 		6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeViewController.h; path = Controllers/PQMessageExchangeViewController.h; sourceTree = "<group>"; };
 		6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageExchangeViewController.m; path = Controllers/PQMessageExchangeViewController.m; sourceTree = "<group>"; };
+		B8355753FACF106C4FE9C49F /* Pods-AudeeconTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudeeconTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudeeconTests/Pods-AudeeconTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CC2BB5136F48EE3DE3377AD3 /* Pods-AudeeconTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudeeconTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudeeconTests/Pods-AudeeconTests.release.xcconfig"; sourceTree = "<group>"; };
 		DD91CCF038017071F30B3BDD /* Pods-Audeecon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.release.xcconfig"; sourceTree = "<group>"; };
 		F128F7970A6A7E9FD4E5179B /* Pods-Audeecon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.debug.xcconfig"; sourceTree = "<group>"; };
 		F2477F89A04EA61F51664207 /* Pods-Audeecon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audeecon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Audeecon/Pods-Audeecon.release.xcconfig"; sourceTree = "<group>"; };
@@ -621,7 +668,7 @@
 				6F9CE40E1ABB16C200D716EB /* libidn.a in Frameworks */,
 				6F366F821B41ADFA000B3FA8 /* Bolts.framework in Frameworks */,
 				6F366F6A1B41ACEB000B3FA8 /* Parse.framework in Frameworks */,
-				4602C9693B38D80112C7248D /* libPods-Audeecon.a in Frameworks */,
+				9F8E1ED0EFAB2BB917352272 /* libPods-Audeecon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +676,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A3EF5DA164B4B5AB0489F22 /* libPods-AudeeconTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,12 +697,9 @@
 		6F03C3281AD6AC4C0075BD66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6F03C3291AD6ACAA0075BD66 /* PQSticker.h */,
-				6F03C32A1AD6ACAA0075BD66 /* PQSticker.m */,
-				6F03C32C1AD6ACDA0075BD66 /* PQStickerPack.h */,
-				6F03C32D1AD6ACDA0075BD66 /* PQStickerPack.m */,
-				6F4517951B2FCE4D006DCB8F /* PQUser.h */,
-				6F4517961B2FCE4D006DCB8F /* PQUser.m */,
+				6F2505611B48D95600F00274 /* Operations */,
+				6F935FE51B46E1A500F0FD03 /* Users */,
+				6F935FE61B46E1B000F0FD03 /* Stickers */,
 				6F00F7391B37A44600AEE057 /* PQMessage.h */,
 				6F00F73A1B37A44600AEE057 /* PQMessage.m */,
 				6FC877D11B3A4E7B0049C641 /* PQStickerAndPackDownloader.h */,
@@ -663,8 +708,21 @@
 				6FC877D51B3A545F0049C641 /* PQPendingOperations.m */,
 				6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */,
 				6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */,
+				6F25055E1B48C99800F00274 /* PQGlobalContainer.h */,
+				6F25055F1B48C99800F00274 /* PQGlobalContainer.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		6F2505611B48D95600F00274 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				6F2505621B48D99E00F00274 /* PQStickerDownloadOperation.h */,
+				6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */,
+				6F2505651B48DC4200F00274 /* PQStickerPackDownloadOperation.h */,
+				6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */,
+			);
+			name = Operations;
 			sourceTree = "<group>";
 		};
 		6F307E211B1E127600D2F6DE /* Helpers */ = {
@@ -713,25 +771,52 @@
 			children = (
 				6F6CC6B21AD4BF4C00920935 /* Cell */,
 				6F3783BF1B27CA630066EF08 /* Login and register */,
+				6FE61B121B478F7C0035C39F /* Store */,
 				6FD21D151ABC296F00C4C92E /* PQFriendListViewController.h */,
 				6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */,
 				6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */,
 				6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */,
-				6F96D0891B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.h */,
-				6F96D08A1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m */,
 				6FAF56001B36BF0B0091281C /* PQStickerKeyboardView.h */,
 				6FAF56011B36BF0B0091281C /* PQStickerKeyboardView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		6F64E0601B27E9F000B73F61 /* Handlers */ = {
+		6F46075D1B4837CC00B637C7 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				6F64E0611B27EA4500B73F61 /* PQXMPPStreamHandler.h */,
-				6F64E0621B27EA4500B73F61 /* PQXMPPStreamHandler.m */,
+				6F46075E1B48387000B637C7 /* DownloadButton */,
 			);
-			name = Handlers;
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		6F46075E1B48387000B637C7 /* DownloadButton */ = {
+			isa = PBXGroup;
+			children = (
+				6F4607601B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.h */,
+				6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */,
+				6F4607621B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.h */,
+				6F4607631B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m */,
+				6F4607641B48387000B637C7 /* PKCircleProgressView.h */,
+				6F4607651B48387000B637C7 /* PKCircleProgressView.m */,
+				6F4607661B48387000B637C7 /* PKCircleView.h */,
+				6F4607671B48387000B637C7 /* PKCircleView.m */,
+				6F4607681B48387000B637C7 /* PKDownloadButton.h */,
+				6F4607691B48387000B637C7 /* PKDownloadButton.m */,
+				6F46076A1B48387000B637C7 /* PKMacros.h */,
+				6F46076B1B48387000B637C7 /* PKPendingView.h */,
+				6F46076C1B48387000B637C7 /* PKPendingView.m */,
+				6F46076D1B48387000B637C7 /* PKStopDownloadButton.h */,
+				6F46076E1B48387000B637C7 /* PKStopDownloadButton.m */,
+				6F46076F1B48387000B637C7 /* UIButton+PKDownloadButton.h */,
+				6F4607701B48387000B637C7 /* UIButton+PKDownloadButton.m */,
+				6F4607711B48387000B637C7 /* UIColor+PKDownloadButton.h */,
+				6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */,
+				6F4607731B48387000B637C7 /* UIImage+PKDownloadButton.h */,
+				6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */,
+			);
+			name = DownloadButton;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		6F69AF541ABBFE6B00AE6D6A /* Protocols */ = {
@@ -749,8 +834,6 @@
 		6F6CC6B21AD4BF4C00920935 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				6F6CC6B61AD4C03F00920935 /* PQMessageTableViewCell.h */,
-				6F6CC6B71AD4C03F00920935 /* PQMessageTableViewCell.m */,
 				6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */,
 				6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */,
 				6FAF56071B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.h */,
@@ -759,8 +842,32 @@
 				6FAF560B1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m */,
 				6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */,
 				6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */,
+				6FF3EC921B47D9AE0038AF0C /* PQStickerPackTableViewCell.h */,
+				6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		6F935FE51B46E1A500F0FD03 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				6F4517951B2FCE4D006DCB8F /* PQUser.h */,
+				6F4517961B2FCE4D006DCB8F /* PQUser.m */,
+				6F935FE71B46E20500F0FD03 /* PQCurrentUser.h */,
+				6F935FE81B46E20500F0FD03 /* PQCurrentUser.m */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		6F935FE61B46E1B000F0FD03 /* Stickers */ = {
+			isa = PBXGroup;
+			children = (
+				6F8AF40A1B46F6FC0099F63A /* PQSticker.h */,
+				6F8AF40B1B46F6FC0099F63A /* PQSticker.m */,
+				6F8AF40D1B46FB0B0099F63A /* PQStickerPack.h */,
+				6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */,
+			);
+			name = Stickers;
 			sourceTree = "<group>";
 		};
 		6F9CE3B41ABB146000D716EB /* Vendor */ = {
@@ -1652,7 +1759,8 @@
 				6F9CE4471ABB16FC00D716EB /* Extensions */,
 				6F9CE5451ABB16FC00D716EB /* Utilities */,
 				6F9CE3B41ABB146000D716EB /* Vendor */,
-				225E1CA9B16A34CC939E6EA8 /* libPods-Audeecon.a */,
+				385347232C760932839CEED6 /* libPods-Audeecon.a */,
+				398BADCE41D10685045E4E3E /* libPods-AudeeconTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1680,7 +1788,7 @@
 		6FB93B6B1ABB0E4E0067224E /* Audeecon */ = {
 			isa = PBXGroup;
 			children = (
-				6F64E0601B27E9F000B73F61 /* Handlers */,
+				6F46075D1B4837CC00B637C7 /* Controls */,
 				6F307E211B1E127600D2F6DE /* Helpers */,
 				6F03C3281AD6AC4C0075BD66 /* Models */,
 				6F69AF541ABBFE6B00AE6D6A /* Protocols */,
@@ -1721,11 +1829,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6FE61B121B478F7C0035C39F /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				6FE61B131B47902E0035C39F /* PQStoreViewController.h */,
+				6FE61B141B47902E0035C39F /* PQStoreViewController.m */,
+				6FE61B161B4790E10035C39F /* PQStickerTableViewController.h */,
+				6FE61B171B4790E10035C39F /* PQStickerTableViewController.m */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
 		845B351AD174E5F406E0AF68 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				F128F7970A6A7E9FD4E5179B /* Pods-Audeecon.debug.xcconfig */,
 				F2477F89A04EA61F51664207 /* Pods-Audeecon.release.xcconfig */,
+				B8355753FACF106C4FE9C49F /* Pods-AudeeconTests.debug.xcconfig */,
+				CC2BB5136F48EE3DE3377AD3 /* Pods-AudeeconTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1765,9 +1886,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FB93B8F1ABB0E4E0067224E /* Build configuration list for PBXNativeTarget "AudeeconTests" */;
 			buildPhases = (
+				56F9898E8502F7773924FBC5 /* Check Pods Manifest.lock */,
 				6FB93B7E1ABB0E4E0067224E /* Sources */,
 				6FB93B7F1ABB0E4E0067224E /* Frameworks */,
 				6FB93B801ABB0E4E0067224E /* Resources */,
+				6A6B5CE10B7113D0FE876776 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1856,6 +1979,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		56F9898E8502F7773924FBC5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6A6B5CE10B7113D0FE876776 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudeeconTests/Pods-AudeeconTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		98FF7F62F149857D16CFDFDB /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1881,8 +2034,10 @@
 				6F9CE5C51ABB16FC00D716EB /* XMPPMessageCarbons.m in Sources */,
 				6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */,
 				6F3783C21B27CAAB0066EF08 /* PQRegisterViewController.m in Sources */,
+				6FE61B181B4790E10035C39F /* PQStickerTableViewController.m in Sources */,
 				6F9CE5911ABB16FC00D716EB /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				6F9CE5B11ABB16FC00D716EB /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
+				6F2505671B48DC4200F00274 /* PQStickerPackDownloadOperation.m in Sources */,
 				6F9CE58A1ABB16FC00D716EB /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
 				6F9CE57D1ABB16FC00D716EB /* XMPPIQ+LastActivity.m in Sources */,
 				6F9CE5691ABB16FC00D716EB /* XMPPCoreDataStorage.m in Sources */,
@@ -1892,8 +2047,8 @@
 				6F9CE55D1ABB16FC00D716EB /* NSNumber+XMPP.m in Sources */,
 				6F9CE5561ABB16FC00D716EB /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				6F9CE58E1ABB16FC00D716EB /* XMPPvCard.xcdatamodeld in Sources */,
-				6F03C32B1AD6ACAA0075BD66 /* PQSticker.m in Sources */,
 				6F9CE3ED1ABB14EE00D716EB /* DDMultiFormatter.m in Sources */,
+				6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */,
 				6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */,
 				6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */,
 				6F9CE5C11ABB16FC00D716EB /* XEP_0223.m in Sources */,
@@ -1910,6 +2065,7 @@
 				6F9CE57B1ABB16FC00D716EB /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				6F9CE5B01ABB16FC00D716EB /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				6F9CE5A31ABB16FC00D716EB /* NSDate+XMPPDateTimeProfiles.m in Sources */,
+				6F4607771B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m in Sources */,
 				6F9CE5941ABB16FC00D716EB /* XMPPvCardTempAdr.m in Sources */,
 				6F9CE5B71ABB16FC00D716EB /* XMPPMessageDeliveryReceipts.m in Sources */,
 				6F9CE5A81ABB16FC00D716EB /* NSString+XEP_0106.m in Sources */,
@@ -1926,9 +2082,11 @@
 				6F9CE5B91ABB16FC00D716EB /* XMPPStreamManagementMemoryStorage.m in Sources */,
 				6F4517971B2FCE4D006DCB8F /* PQUser.m in Sources */,
 				6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */,
+				6FE61B151B47902E0035C39F /* PQStoreViewController.m in Sources */,
 				6F9CE5C81ABB16FC00D716EB /* XMPPMessage+XEP_0333.m in Sources */,
 				6F9CE3EB1ABB14EE00D716EB /* DDContextFilterLogFormatter.m in Sources */,
 				6F9CE4061ABB15B000D716EB /* NSString+DDXML.m in Sources */,
+				6F2505641B48D99E00F00274 /* PQStickerDownloadOperation.m in Sources */,
 				6F9CE5761ABB16FC00D716EB /* XMPPRosterMemoryStorage.m in Sources */,
 				6F9CE56D1ABB16FC00D716EB /* XMPPGoogleSharedStatus.m in Sources */,
 				6F9CE5C31ABB16FC00D716EB /* XMPPMessage+XEP_0224.m in Sources */,
@@ -1939,6 +2097,9 @@
 				6F9CE5CA1ABB16FC00D716EB /* DDList.m in Sources */,
 				6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */,
 				6F9CE3EC1ABB14EE00D716EB /* DDDispatchQueueLogFormatter.m in Sources */,
+				6F8AF40C1B46F6FC0099F63A /* PQSticker.m in Sources */,
+				6F8AF40F1B46FB0B0099F63A /* PQStickerPack.m in Sources */,
+				6F46077E1B48387000B637C7 /* UIColor+PKDownloadButton.m in Sources */,
 				6F9CE5AF1ABB16FC00D716EB /* XMPPMessageArchiving_Contact_CoreDataObject.m in Sources */,
 				6F9CE5921ABB16FC00D716EB /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
 				6F9CE5C01ABB16FC00D716EB /* NSXMLElement+XEP_0203.m in Sources */,
@@ -1947,6 +2108,8 @@
 				6FAF560C1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m in Sources */,
 				6F9CE5541ABB16FC00D716EB /* XMPPAnonymousAuthentication.m in Sources */,
 				6F9CE58B1ABB16FC00D716EB /* XMPPMessage+XEP0045.m in Sources */,
+				6F935FE91B46E20500F0FD03 /* PQCurrentUser.m in Sources */,
+				6F46077A1B48387000B637C7 /* PKDownloadButton.m in Sources */,
 				6F9CE5751ABB16FC00D716EB /* XMPPResourceMemoryStorageObject.m in Sources */,
 				6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */,
 				6F9CE55E1ABB16FC00D716EB /* NSXMLElement+XMPP.m in Sources */,
@@ -1970,6 +2133,7 @@
 				6F9CE5B41ABB16FC00D716EB /* XMPPMessage+XEP_0172.m in Sources */,
 				6F9CE5CF1ABB16FC00D716EB /* XMPPStringPrep.m in Sources */,
 				6F9CE5781ABB16FC00D716EB /* XMPPRoster.m in Sources */,
+				6F4607781B48387000B637C7 /* PKCircleProgressView.m in Sources */,
 				6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */,
 				6F9CE5A91ABB16FC00D716EB /* XMPPCapabilities.xcdatamodel in Sources */,
 				6F9CE5BE1ABB16FC00D716EB /* XMPPAutoTime.m in Sources */,
@@ -1982,15 +2146,15 @@
 				6F9CE5551ABB16FC00D716EB /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				6F9CE5651ABB16FC00D716EB /* XMPPParser.m in Sources */,
 				6F9CE5981ABB16FC00D716EB /* XMPPvCardTempLabel.m in Sources */,
-				6F6CC6B81AD4C03F00920935 /* PQMessageTableViewCell.m in Sources */,
 				6F9CE5B81ABB16FC00D716EB /* XMPPBlocking.m in Sources */,
-				6F03C32E1AD6ACDA0075BD66 /* PQStickerPack.m in Sources */,
 				6F9CE5711ABB16FC00D716EB /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				6F9CE5641ABB16FC00D716EB /* XMPPModule.m in Sources */,
 				6F9CE5581ABB16FC00D716EB /* XMPPPlainAuthentication.m in Sources */,
 				6F9CE5B31ABB16FC00D716EB /* XMPPvCardAvatarModule.m in Sources */,
 				6F9CE5AB1ABB16FC00D716EB /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				6F9CE5A21ABB16FC00D716EB /* XMPPRegistration.m in Sources */,
+				6F4607791B48387000B637C7 /* PKCircleView.m in Sources */,
+				6F46077C1B48387000B637C7 /* PKStopDownloadButton.m in Sources */,
 				6F9CE5661ABB16FC00D716EB /* XMPPPresence.m in Sources */,
 				6F9CE5951ABB16FC00D716EB /* XMPPvCardTempAdrTypes.m in Sources */,
 				6F9CE5A71ABB16FC00D716EB /* XMPPTransports.m in Sources */,
@@ -2008,12 +2172,14 @@
 				6F9CE58F1ABB16FC00D716EB /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				6F9CE5BA1ABB16FC00D716EB /* XMPPStreamManagementStanzas.m in Sources */,
 				6F307E2B1B1E12D900D2F6DE /* PQParsingService.m in Sources */,
+				6F2505601B48C99800F00274 /* PQGlobalContainer.m in Sources */,
 				6F9CE5881ABB16FC00D716EB /* XMPPRoomMemoryStorage.m in Sources */,
 				6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */,
 				6F9CE5631ABB16FC00D716EB /* XMPPMessage.m in Sources */,
 				6F9CE5A11ABB16FC00D716EB /* XMPPMessage+XEP_0066.m in Sources */,
 				6F9CE3EA1ABB14EE00D716EB /* DDTTYLogger.m in Sources */,
 				6FC877D31B3A4E7B0049C641 /* PQStickerAndPackDownloader.m in Sources */,
+				6FF3EC941B47D9AE0038AF0C /* PQStickerPackTableViewCell.m in Sources */,
 				6F9CE5AA1ABB16FC00D716EB /* XMPPCapabilitiesCoreDataStorage.m in Sources */,
 				6F9CE55C1ABB16FC00D716EB /* NSData+XMPP.m in Sources */,
 				6F366F851B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m in Sources */,
@@ -2024,6 +2190,7 @@
 				6F9CE5BF1ABB16FC00D716EB /* XMPPTime.m in Sources */,
 				6FAF56091B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m in Sources */,
 				6F9CE5861ABB16FC00D716EB /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
+				6F46077D1B48387000B637C7 /* UIButton+PKDownloadButton.m in Sources */,
 				6F9CE4051ABB15B000D716EB /* GCDAsyncSocket.m in Sources */,
 				6F9CE5591ABB16FC00D716EB /* XMPPSCRAMSHA1Authentication.m in Sources */,
 				6F9CE5C91ABB16FC00D716EB /* NSXMLElement+XEP_0335.m in Sources */,
@@ -2031,19 +2198,19 @@
 				6F366F881B41B19A000B3FA8 /* PQFilePathFactory.m in Sources */,
 				6F9CE55A1ABB16FC00D716EB /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				6F9CE5721ABB16FC00D716EB /* XMPPRoster.xcdatamodel in Sources */,
-				6F96D08B1B233CF5007DB3D9 /* PQJSQMessageExchangeViewController.m in Sources */,
 				6F9CE56F1ABB16FC00D716EB /* XMPPReconnect.m in Sources */,
 				6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */,
 				6FC877D61B3A545F0049C641 /* PQPendingOperations.m in Sources */,
 				6F9CE5671ABB16FC00D716EB /* XMPPStream.m in Sources */,
 				6F9CE5A51ABB16FC00D716EB /* XMPPMessage+XEP_0085.m in Sources */,
 				6F9CE58C1ABB16FC00D716EB /* XMPPMUC.m in Sources */,
-				6F64E0631B27EA4500B73F61 /* PQXMPPStreamHandler.m in Sources */,
+				6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */,
 				6F9CE5811ABB16FC00D716EB /* XMPPRoomCoreDataStorage.m in Sources */,
 				6F9CE5C41ABB16FC00D716EB /* XMPPMessage+XEP_0280.m in Sources */,
 				6F9CE5991ABB16FC00D716EB /* XMPPvCardTempModule.m in Sources */,
 				6F9CE58D1ABB16FC00D716EB /* XMPPRoom.m in Sources */,
 				6F9CE5B61ABB16FC00D716EB /* XMPPMessage+XEP_0184.m in Sources */,
+				6F46077B1B48387000B637C7 /* PKPendingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2219,6 +2386,7 @@
 		};
 		6FB93B901ABB0E4E0067224E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8355753FACF106C4FE9C49F /* Pods-AudeeconTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2238,6 +2406,7 @@
 		};
 		6FB93B911ABB0E4E0067224E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC2BB5136F48EE3DE3377AD3 /* Pods-AudeeconTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

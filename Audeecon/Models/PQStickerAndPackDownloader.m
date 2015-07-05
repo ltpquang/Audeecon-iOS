@@ -43,38 +43,37 @@
         if (self.isCancelled) {
             return;
         }
-        
-        NSString *imgUri = self.forPack ? _pack.thumbnail : _sticker.uri;
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgUri]];
-        
-        if (self.isCancelled) {
-            imgData = nil;
-            return;
-        }
-        
-        if (self.forPack) {
-            _pack.thumbnailImage = [UIImage imageWithData:imgData];
-        }
-        else {
-            _sticker.thumbnailImage = [UIImage imageWithData:imgData];
-        }
-        
-        imgData = nil;
-        
-        if (self.isCancelled) {
-            return;
-        }
-        
-        if (self.forPack) {
-            [(NSObject *)self.downloaderDelegate performSelectorOnMainThread:@selector(packDownloaderDidFinish:)
-                                                                  withObject:self
-                                                               waitUntilDone:NO];
-        }
-        else {
-            [(NSObject *)self.downloaderDelegate performSelectorOnMainThread:@selector(stickerDownloaderDidFinish:)
-                                                                  withObject:self
-                                                               waitUntilDone:NO];
-        }
+//        NSString *imgUri = self.forPack ? _pack.thumbnail : _sticker.uri;
+//        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgUri]];
+//        
+//        if (self.isCancelled) {
+//            imgData = nil;
+//            return;
+//        }
+//        
+//        if (self.forPack) {
+//            _pack.thumbnailImage = [UIImage imageWithData:imgData];
+//        }
+//        else {
+//            _sticker.thumbnailImage = [UIImage imageWithData:imgData];
+//        }
+//        
+//        imgData = nil;
+//        
+//        if (self.isCancelled) {
+//            return;
+//        }
+//        
+//        if (self.forPack) {
+//            [(NSObject *)self.downloaderDelegate performSelectorOnMainThread:@selector(packDownloaderDidFinish:)
+//                                                                  withObject:self
+//                                                               waitUntilDone:NO];
+//        }
+//        else {
+//            [(NSObject *)self.downloaderDelegate performSelectorOnMainThread:@selector(stickerDownloaderDidFinish:)
+//                                                                  withObject:self
+//                                                               waitUntilDone:NO];
+//        }
     }
 }
 

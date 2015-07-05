@@ -14,6 +14,7 @@
 #import "PQMessageExchangeDelegate.h"
 #import "XMPPStream.h"
 #import "XMPPFramework.h"
+#import "PQGlobalContainer.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, XMPPStreamDelegate, XMPPRosterDelegate>
 
@@ -36,8 +37,9 @@
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
 @property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
 
-@property (strong, nonatomic) NSArray *stickerPacks;
-@property BOOL stickerPacksDownloaded;
+//@property (strong, nonatomic) NSArray *stickerPacks;
+@property (strong, nonatomic) PQGlobalContainer *globalContainer;
+//@property BOOL stickerPacksDownloaded;
 
 - (BOOL)connect;
 - (void)fetchRoster;

@@ -9,7 +9,7 @@
 #import "PQMessageCollectionViewCell.h"
 #import "PQMessage.h"
 #import "PQSticker.h"
-#import <UIImageView+AFNetworking.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface PQMessageCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;

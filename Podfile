@@ -1,8 +1,9 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '7.0'
 
+
 target 'Audeecon' do
-pod 'JSQMessagesViewController'
+pod 'Realm'
 pod 'AFNetworking'
 pod 'AWSCore'
 pod 'AWSAutoScaling'
@@ -23,6 +24,6 @@ pod 'AWSCognito'
 end
 
 target 'AudeeconTests' do
-
+pod 'Realm/Headers'
 end
 

@@ -2,7 +2,7 @@
 //  PQStickerPack.m
 //  Audeecon
 //
-//  Created by Le Thai Phuc Quang on 4/9/15.
+//  Created by Le Thai Phuc Quang on 7/4/15.
 //  Copyright (c) 2015 QuangLTP. All rights reserved.
 //
 
@@ -10,45 +10,64 @@
 #import "PQRequestingService.h"
 
 @implementation PQStickerPack
+@synthesize thumbnailData = _thumbnailData;
+@synthesize thumbnailImage = _thumbnailImage;
 
-
-- (id)initWithId:(NSString *)objectId
-         andName:(NSString *)name
-       andArtist:(NSString *)artist
-andPackDescription:(NSString *)packDescription
-    andThumbnail:(NSString *)thumbnail
-     andPreviews:(NSArray *)previews
-     andStickers:(NSArray *)stickers {
+- (id)initWithPackId:(NSString *)packId
+             andName:(NSString *)name
+           andArtist:(NSString *)artist
+      andDescription:(NSString *)packDescription
+     andThumbnailUri:(NSString *)thumbnailUri {
     if (self = [super init]) {
-        _objectId = objectId;
+        _packId = packId;
         _name = name;
         _artist = artist;
         _packDescription = packDescription;
-        _thumbnail = thumbnail;
-        _previews = previews;
-        _stickers = stickers;
+        _thumbnailUri = thumbnailUri;
     }
     return self;
 }
 
-- (BOOL)hasImage {
-    return _thumbnailImage != nil;
+- (UIImage *)thumbnailImage {
+    if (_thumbnailImage == nil) {
+        _thumbnailImage = [UIImage imageWithData:_thumbnailData];
+    }
+    return _thumbnailImage;
 }
 
-- (BOOL)hasStickers {
-    return _stickers != nil && _stickers.count != 0;
+- (void)downloadThumbnail {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_thumbnailUri]];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               self.thumbnailData = data;
+                           }];
 }
 
 - (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
                                        success:(void(^)())successCall
                                        failure:(void(^)(NSError *error))failureCall {
-    [requestingService getStickersOfStickerPackWithId:_objectId
+    [requestingService getStickersOfStickerPackWithId:self.packId
                                               success:^(NSArray *result) {
-                                                  _stickers = result;
+                                                  [self.stickers addObjects:result];
                                                   successCall();
                                               }
                                               failure:^(NSError *error) {
                                                   failureCall(error);
                                               }];
 }
+// Specify default values for properties
+
+//+ (NSDictionary *)defaultPropertyValues
+//{
+//    return @{};
+//}
+
+// Specify properties to ignore (Realm won't persist these)
+
++ (NSArray *)ignoredProperties
+{
+    return @[@"thumbnailImage"];
+}
+
 @end

@@ -51,9 +51,9 @@ PODS:
     - AWSCore (= 2.2.0)
   - AWSSQS (2.2.0):
     - AWSCore (= 2.2.0)
-  - JSQMessagesViewController (7.1.0):
-    - JSQSystemSoundPlayer (~> 2.0.1)
-  - JSQSystemSoundPlayer (2.0.1)
+  - Realm (0.93.2):
+    - Realm/Headers (= 0.93.2)
+  - Realm/Headers (0.93.2)
 
 DEPENDENCIES:
   - AFNetworking
@@ -73,7 +73,8 @@ DEPENDENCIES:
   - AWSSimpleDB
   - AWSSNS
   - AWSSQS
-  - JSQMessagesViewController
+  - Realm
+  - Realm/Headers
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -93,7 +94,6 @@ SPEC CHECKSUMS:
   AWSSimpleDB: f2b3e0cf1c5a8e6ddc7b921b6844fe17dd4489f9
   AWSSNS: aec37737c542007a0f45017886b263d39ce2e0a9
   AWSSQS: 08f547b79e13d68b18d4af230f78f109fb6d36c7
-  JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
-  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
 
 COCOAPODS: 0.37.0

@@ -45,7 +45,8 @@
                           failure:(void(^)(NSError *error))failureCall {
     [self configWithExpectationOfJsonInRequest:NO
                              andJsonInResponse:YES];
-    [_manager GET:[PQUrlService urlToGetAllStickerPacksForUser:user]
+    NSString *url = user.length == 0 ? [PQUrlService urlToGetAllStickerPacks] : [PQUrlService urlToGetAllStickerPacksForUser:user];
+    [_manager GET:url
        parameters:nil
           success:^(NSURLSessionDataTask *task, id responseObject) {
               //Parse result and call the call back
