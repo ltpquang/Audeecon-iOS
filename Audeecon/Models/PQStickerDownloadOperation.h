@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PQStickerDownloadOperationDelegate;
 @class PQSticker;
+@protocol PQStickerDownloadOperationDelegate;
 
 @interface PQStickerDownloadOperation : NSOperation
 - (id)initWithSticker:(PQSticker *)sticker
@@ -17,7 +17,6 @@
 @end
 
 @protocol PQStickerDownloadOperationDelegate <NSObject>
-
-- (void)stickerDidFinishDownloading;
-
+- (void)stickerDownloadOperation:(PQStickerDownloadOperation *)operation
+     didFinishDownloadingSticker:(PQSticker *)sticker;
 @end

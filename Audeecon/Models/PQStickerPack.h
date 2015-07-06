@@ -9,9 +9,10 @@
 #import <Realm/Realm.h>
 #import <UIKit/UIKit.h>
 #import "PQSticker.h"
+#import "PQStickerPackDownloadOperation.h"
 
 @class PQRequestingService;
-@interface PQStickerPack : RLMObject
+@interface PQStickerPack : RLMObject <PQStickerPackDownloadOperationDelegate>
 @property NSString *packId;
 @property NSString *name;
 @property NSString *artist;
@@ -29,6 +30,8 @@
 - (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
                                        success:(void(^)())successCall
                                        failure:(void(^)(NSError *error))failureCall;
+- (void)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
+                                          progress:(void(^)(NSInteger percentage))progressCall;
 @end
 
 // This protocol enables typed collections. i.e.:

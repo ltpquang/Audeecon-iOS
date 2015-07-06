@@ -56,6 +56,29 @@
                                                   failureCall(error);
                                               }];
 }
+
+- (void)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
+                                          progress:(void(^)(NSInteger percentage))progressCall {
+    PQStickerPackDownloadOperation *operation = [[PQStickerPackDownloadOperation alloc]
+                                                 initWithStickerPack:self
+                                                 delegate:self];
+    [queue addOperation:operation];
+}
+
+- (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
+     didFinishDownloadingStickerPack:(PQStickerPack *)pack
+                               error:(NSError *)error {
+    NSLog(@"Pack downloaded");
+    NSLog(@"Pack image: %@", [UIImage imageWithData:self.thumbnailData]);
+    for (PQSticker *sticker in self.stickers) {
+        NSLog(@"Sticker image: %@", [UIImage imageWithData:sticker.thumbnailData]);
+    }
+}
+
+- (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
+               didUpdateWithProgress:(NSInteger)percentage {
+    NSLog(@"%i", percentage);
+}
 // Specify default values for properties
 
 //+ (NSDictionary *)defaultPropertyValues

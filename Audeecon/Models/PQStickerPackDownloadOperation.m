@@ -10,6 +10,8 @@
 #import "PQSticker.h"
 #import "PQStickerPack.h"
 #import "PQStickerDownloadOperation.h"
+#import "PQRequestingService.h"
+#import <AFNetworking.h>
 
 @interface PQStickerPackDownloadOperation() {
     BOOL executing;
@@ -17,7 +19,7 @@
 }
 @property PQStickerPack *pack;
 @property NSOperationQueue *downloadQueue;
-@property id<PQStickerPackDownloadOperationDelegate> delegate;
+@property (weak) id<PQStickerPackDownloadOperationDelegate> delegate;
 @end
 
 @implementation PQStickerPackDownloadOperation
@@ -47,49 +49,60 @@
     // If the operation is not canceled, begin executing the task.
     [self willChangeValueForKey:@"isExecuting"];
     self.downloadQueue = [[NSOperationQueue alloc] init];
-    self.downloadQueue.maxConcurrentOperationCount = 4;
+    self.downloadQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
     [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
     executing = YES;
     [self didChangeValueForKey:@"isExecuting"];
 }
 
 - (void)main {
-    
-    if (self.isCancelled) {
+    if ([self isCancelled])
+    {
+        // Must move the operation to the finished state if it is canceled.
+        [self willChangeValueForKey:@"isFinished"];
+        finished = YES;
+        [self didChangeValueForKey:@"isFinished"];
         return;
     }
     
-    NSBlockOperation *blockOpe = [NSBlockOperation blockOperationWithBlock:^{
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.pack.thumbnailUri]];
-        if (self.isCancelled) {
-            imgData = nil;
-            return;
-        }
-        self.pack.thumbnailData = imgData;
-        if (self.isCancelled) {
-            imgData = nil;
-            return;
-        }
-    }];
-    [blockOpe setCompletionBlock:^{
-        [self completeOperation];
-    }];
+    [self.pack downloadStickersUsingRequestingService:[PQRequestingService new]
+                                              success:^{
+                                                  //
+                                                  NSBlockOperation *downloadPackThumbnailOperation = [NSBlockOperation blockOperationWithBlock:^{
+                                                      if ([self isCancelled]) {
+                                                          return;
+                                                      }
+                                                      NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.pack.thumbnailUri]];
+                                                      self.pack.thumbnailData = imgData;
+                                                  }];
+                                                  [downloadPackThumbnailOperation setCompletionBlock:^{
+                                                      [self.delegate stickerPackDownloadOperation:self
+                                                                            didUpdateWithProgress:100];
+                                                      [self completeOperation];
+                                                      [self.delegate stickerPackDownloadOperation:self
+                                                                  didFinishDownloadingStickerPack:self.pack
+                                                                                            error:nil];
+                                                  }];
+                                                  
+                                                  for (PQSticker *sticker in self.pack.stickers) {
+                                                      PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc]
+                                                                                                        initWithSticker:sticker
+                                                                                                        delegate:self];
+                                                      [downloadPackThumbnailOperation addDependency:stickerDownloadOpe];
+                                                      [self.downloadQueue addOperation:stickerDownloadOpe];
+                                                  }
+                                                  
+                                                  [self.downloadQueue addOperation:downloadPackThumbnailOperation];
+                                              }
+                                              failure:^(NSError *error) {
+                                                  //
+                                                  [self.delegate stickerPackDownloadOperation:self
+                                                              didFinishDownloadingStickerPack:self.pack
+                                                                                        error:error];
+                                              }];
     
-    for (PQSticker *sticker in self.pack.stickers) {
-        PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc] initWithSticker:sticker
-                                                                                                    delegate:self];
-        [blockOpe addDependency:stickerDownloadOpe];
-        [self.downloadQueue addOperation:stickerDownloadOpe];
-    }
-    [self.downloadQueue addOperation:blockOpe];
+    
 }
-
-- (void)stickerDidFinishDownloading {
-    if (self.downloadQueue.operationCount == 0) {
-        NSLog(@"Complete");
-    }
-}
-
 
 - (void)completeOperation {
     [self willChangeValueForKey:@"isFinished"];
@@ -112,5 +125,12 @@
 
 - (BOOL)isFinished {
     return finished;
+}
+
+- (void)stickerDownloadOperation:(PQStickerDownloadOperation *)operation
+     didFinishDownloadingSticker:(PQSticker *)sticker {
+    NSInteger percentage = (NSInteger)(100 * (1 - (float)(self.downloadQueue.operationCount)/(float)(self.pack.stickers.count + 1)));
+    [self.delegate stickerPackDownloadOperation:self
+                          didUpdateWithProgress:percentage];
 }
 @end

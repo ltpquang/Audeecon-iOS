@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "PQStickerDownloadOperation.h"
 
-@protocol PQStickerPackDownloadOperationDelegate;
 @class PQStickerPack;
+@protocol PQStickerPackDownloadOperationDelegate;
 
 @interface PQStickerPackDownloadOperation : NSOperation <PQStickerDownloadOperationDelegate>
 - (id)initWithStickerPack:(PQStickerPack *)pack
@@ -19,7 +19,9 @@
 
 
 @protocol PQStickerPackDownloadOperationDelegate <NSObject>
-
-- (void)stickerPackDidFinishDownloading;
-
+- (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
+     didFinishDownloadingStickerPack:(PQStickerPack *)pack
+                               error:(NSError *)error;
+- (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
+               didUpdateWithProgress:(NSInteger)percentage;
 @end

@@ -205,12 +205,12 @@
 		6FB93B7A1ABB0E4E0067224E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B791ABB0E4E0067224E /* Images.xcassets */; };
 		6FB93B7D1ABB0E4E0067224E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B7B1ABB0E4E0067224E /* LaunchScreen.xib */; };
 		6FB93B891ABB0E4E0067224E /* AudeeconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B881ABB0E4E0067224E /* AudeeconTests.m */; };
-		6FC877D31B3A4E7B0049C641 /* PQStickerAndPackDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC877D21B3A4E7B0049C641 /* PQStickerAndPackDownloader.m */; };
-		6FC877D61B3A545F0049C641 /* PQPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC877D51B3A545F0049C641 /* PQPendingOperations.m */; };
 		6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */; };
 		6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */; };
 		6FE61B151B47902E0035C39F /* PQStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE61B141B47902E0035C39F /* PQStoreViewController.m */; };
 		6FE61B181B4790E10035C39F /* PQStickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE61B171B4790E10035C39F /* PQStickerTableViewController.m */; };
+		6FEC4AC01B4A698200C29D17 /* PQPendingOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4ABD1B4A698200C29D17 /* PQPendingOperations.m */; };
+		6FEC4AC11B4A698200C29D17 /* PQStickerAndPackDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4ABF1B4A698200C29D17 /* PQStickerAndPackDownloader.m */; };
 		6FF3EC941B47D9AE0038AF0C /* PQStickerPackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */; };
 		6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */; };
 		9F8E1ED0EFAB2BB917352272 /* libPods-Audeecon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 385347232C760932839CEED6 /* libPods-Audeecon.a */; };
@@ -622,10 +622,6 @@
 		6FB93B821ABB0E4E0067224E /* AudeeconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudeeconTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB93B871ABB0E4E0067224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB93B881ABB0E4E0067224E /* AudeeconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudeeconTests.m; sourceTree = "<group>"; };
-		6FC877D11B3A4E7B0049C641 /* PQStickerAndPackDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerAndPackDownloader.h; path = Models/PQStickerAndPackDownloader.h; sourceTree = "<group>"; };
-		6FC877D21B3A4E7B0049C641 /* PQStickerAndPackDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerAndPackDownloader.m; path = Models/PQStickerAndPackDownloader.m; sourceTree = "<group>"; };
-		6FC877D41B3A545F0049C641 /* PQPendingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQPendingOperations.h; path = Models/PQPendingOperations.h; sourceTree = "<group>"; };
-		6FC877D51B3A545F0049C641 /* PQPendingOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQPendingOperations.m; path = Models/PQPendingOperations.m; sourceTree = "<group>"; };
 		6FD21D151ABC296F00C4C92E /* PQFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListViewController.h; path = Controllers/PQFriendListViewController.h; sourceTree = "<group>"; };
 		6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListViewController.m; path = Controllers/PQFriendListViewController.m; sourceTree = "<group>"; };
 		6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListTableViewCell.h; path = Controllers/Cells/PQFriendListTableViewCell.h; sourceTree = "<group>"; };
@@ -634,6 +630,10 @@
 		6FE61B141B47902E0035C39F /* PQStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStoreViewController.m; path = Controllers/Store/PQStoreViewController.m; sourceTree = "<group>"; };
 		6FE61B161B4790E10035C39F /* PQStickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerTableViewController.h; path = Controllers/Store/PQStickerTableViewController.h; sourceTree = "<group>"; };
 		6FE61B171B4790E10035C39F /* PQStickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerTableViewController.m; path = Controllers/Store/PQStickerTableViewController.m; sourceTree = "<group>"; };
+		6FEC4ABC1B4A698200C29D17 /* PQPendingOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQPendingOperations.h; path = Models/PQPendingOperations.h; sourceTree = "<group>"; };
+		6FEC4ABD1B4A698200C29D17 /* PQPendingOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQPendingOperations.m; path = Models/PQPendingOperations.m; sourceTree = "<group>"; };
+		6FEC4ABE1B4A698200C29D17 /* PQStickerAndPackDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerAndPackDownloader.h; path = Models/PQStickerAndPackDownloader.h; sourceTree = "<group>"; };
+		6FEC4ABF1B4A698200C29D17 /* PQStickerAndPackDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerAndPackDownloader.m; path = Models/PQStickerAndPackDownloader.m; sourceTree = "<group>"; };
 		6FF3EC921B47D9AE0038AF0C /* PQStickerPackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPackTableViewCell.h; path = Controllers/Cells/PQStickerPackTableViewCell.h; sourceTree = "<group>"; };
 		6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPackTableViewCell.m; path = Controllers/Cells/PQStickerPackTableViewCell.m; sourceTree = "<group>"; };
 		6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeViewController.h; path = Controllers/PQMessageExchangeViewController.h; sourceTree = "<group>"; };
@@ -702,10 +702,10 @@
 				6F935FE61B46E1B000F0FD03 /* Stickers */,
 				6F00F7391B37A44600AEE057 /* PQMessage.h */,
 				6F00F73A1B37A44600AEE057 /* PQMessage.m */,
-				6FC877D11B3A4E7B0049C641 /* PQStickerAndPackDownloader.h */,
-				6FC877D21B3A4E7B0049C641 /* PQStickerAndPackDownloader.m */,
-				6FC877D41B3A545F0049C641 /* PQPendingOperations.h */,
-				6FC877D51B3A545F0049C641 /* PQPendingOperations.m */,
+				6FEC4ABC1B4A698200C29D17 /* PQPendingOperations.h */,
+				6FEC4ABD1B4A698200C29D17 /* PQPendingOperations.m */,
+				6FEC4ABE1B4A698200C29D17 /* PQStickerAndPackDownloader.h */,
+				6FEC4ABF1B4A698200C29D17 /* PQStickerAndPackDownloader.m */,
 				6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */,
 				6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */,
 				6F25055E1B48C99800F00274 /* PQGlobalContainer.h */,
@@ -2089,6 +2089,7 @@
 				6F2505641B48D99E00F00274 /* PQStickerDownloadOperation.m in Sources */,
 				6F9CE5761ABB16FC00D716EB /* XMPPRosterMemoryStorage.m in Sources */,
 				6F9CE56D1ABB16FC00D716EB /* XMPPGoogleSharedStatus.m in Sources */,
+				6FEC4AC11B4A698200C29D17 /* PQStickerAndPackDownloader.m in Sources */,
 				6F9CE5C31ABB16FC00D716EB /* XMPPMessage+XEP_0224.m in Sources */,
 				6F9CE59B1ABB16FC00D716EB /* NSXMLElement+XEP_0059.m in Sources */,
 				6F9CE5AE1ABB16FC00D716EB /* XMPPMessageArchiving.xcdatamodeld in Sources */,
@@ -2111,6 +2112,7 @@
 				6F935FE91B46E20500F0FD03 /* PQCurrentUser.m in Sources */,
 				6F46077A1B48387000B637C7 /* PKDownloadButton.m in Sources */,
 				6F9CE5751ABB16FC00D716EB /* XMPPResourceMemoryStorageObject.m in Sources */,
+				6FEC4AC01B4A698200C29D17 /* PQPendingOperations.m in Sources */,
 				6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */,
 				6F9CE55E1ABB16FC00D716EB /* NSXMLElement+XMPP.m in Sources */,
 				6F9CE57C1ABB16FC00D716EB /* XMPPJabberRPCModule.m in Sources */,
@@ -2178,7 +2180,6 @@
 				6F9CE5631ABB16FC00D716EB /* XMPPMessage.m in Sources */,
 				6F9CE5A11ABB16FC00D716EB /* XMPPMessage+XEP_0066.m in Sources */,
 				6F9CE3EA1ABB14EE00D716EB /* DDTTYLogger.m in Sources */,
-				6FC877D31B3A4E7B0049C641 /* PQStickerAndPackDownloader.m in Sources */,
 				6FF3EC941B47D9AE0038AF0C /* PQStickerPackTableViewCell.m in Sources */,
 				6F9CE5AA1ABB16FC00D716EB /* XMPPCapabilitiesCoreDataStorage.m in Sources */,
 				6F9CE55C1ABB16FC00D716EB /* NSData+XMPP.m in Sources */,
@@ -2200,7 +2201,6 @@
 				6F9CE5721ABB16FC00D716EB /* XMPPRoster.xcdatamodel in Sources */,
 				6F9CE56F1ABB16FC00D716EB /* XMPPReconnect.m in Sources */,
 				6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */,
-				6FC877D61B3A545F0049C641 /* PQPendingOperations.m in Sources */,
 				6F9CE5671ABB16FC00D716EB /* XMPPStream.m in Sources */,
 				6F9CE5A51ABB16FC00D716EB /* XMPPMessage+XEP_0085.m in Sources */,
 				6F9CE58C1ABB16FC00D716EB /* XMPPMUC.m in Sources */,

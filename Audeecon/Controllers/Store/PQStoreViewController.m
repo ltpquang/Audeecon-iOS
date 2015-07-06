@@ -58,30 +58,36 @@
     //
     NSArray *packs = [[[self appDelegate] globalContainer] stickerPacks];
     NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
-    PQRequestingService *requestingService = [PQRequestingService new];
+    //PQRequestingService *requestingService = [PQRequestingService new];
     PQStickerPack *pack = [packs objectAtIndex:0];
+    
+    [pack downloadDataAndStickersUsingOperationQueue:queue
+                                            progress:^(NSInteger percentage) {
+                                                NSLog(@"%i", percentage);
+                                            }];
+    
     //for (PQStickerPack *pack in packs) {
         
-        [pack downloadStickersUsingRequestingService:requestingService
-                                             success:^{
-                                                 //
-                                                 PQStickerPackDownloadOperation *ope = [[PQStickerPackDownloadOperation alloc]
-                                                                                        initWithStickerPack:pack
-                                                                                        delegate:nil];
-                                                 [ope setCompletionBlock:^{
-                                                     //
-                                                     PQStickerPack *array = [[[[self appDelegate] globalContainer] stickerPacks] objectAtIndex:0];
-                                                     for (PQSticker *sticker in array.stickers) {
-                                                         NSLog(@"%lu", (unsigned long)sticker.thumbnailData.length);
-                                                     }
-                                                     NSLog(@"Complete download pack");
-                                                 }];
-                                                 [queue addOperation:ope];
-                                             }
-                                             failure:^(NSError *error) {
-                                                 //
-                                             }];
-        
+//        [pack downloadStickersUsingRequestingService:requestingService
+//                                             success:^{
+//                                                 //
+//                                                 PQStickerPackDownloadOperation *ope = [[PQStickerPackDownloadOperation alloc]
+//                                                                                        initWithStickerPack:pack
+//                                                                                        delegate:nil];
+//                                                 [ope setCompletionBlock:^{
+//                                                     //
+//                                                     PQStickerPack *array = [[[[self appDelegate] globalContainer] stickerPacks] objectAtIndex:0];
+//                                                     for (PQSticker *sticker in array.stickers) {
+//                                                         NSLog(@"%lu", (unsigned long)sticker.thumbnailData.length);
+//                                                     }
+//                                                     NSLog(@"Complete download pack");
+//                                                 }];
+//                                                 [queue addOperation:ope];
+//                                             }
+//                                             failure:^(NSError *error) {
+//                                                 //
+//                                             }];
+    
         
     //}
 }
