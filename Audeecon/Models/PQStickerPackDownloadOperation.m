@@ -78,6 +78,7 @@
                                                   [downloadPackThumbnailOperation setCompletionBlock:^{
                                                       [self.delegate stickerPackDownloadOperation:self
                                                                             didUpdateWithProgress:100];
+                                                      self.percentage = 100;
                                                       [self completeOperation];
                                                       [self.delegate stickerPackDownloadOperation:self
                                                                   didFinishDownloadingStickerPack:self.pack
@@ -130,6 +131,7 @@
 - (void)stickerDownloadOperation:(PQStickerDownloadOperation *)operation
      didFinishDownloadingSticker:(PQSticker *)sticker {
     NSInteger percentage = (NSInteger)(100 * (1 - (float)(self.downloadQueue.operationCount)/(float)(self.pack.stickers.count + 1)));
+    self.percentage = percentage;
     [self.delegate stickerPackDownloadOperation:self
                           didUpdateWithProgress:percentage];
 }

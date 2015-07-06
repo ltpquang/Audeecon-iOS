@@ -13,6 +13,7 @@
 @protocol PQStickerPackDownloadOperationDelegate;
 
 @interface PQStickerPackDownloadOperation : NSOperation <PQStickerDownloadOperationDelegate>
+@property NSInteger percentage;
 - (id)initWithStickerPack:(PQStickerPack *)pack
                  delegate:(id<PQStickerPackDownloadOperationDelegate>)delegate;
 @end

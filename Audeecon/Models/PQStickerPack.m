@@ -9,9 +9,12 @@
 #import "PQStickerPack.h"
 #import "PQRequestingService.h"
 
+@interface PQStickerPack()
+@property (weak) PQStickerPackDownloadOperation *downloadOperation;
+@end
+
 @implementation PQStickerPack
-@synthesize thumbnailData = _thumbnailData;
-@synthesize thumbnailImage = _thumbnailImage;
+
 
 - (id)initWithPackId:(NSString *)packId
              andName:(NSString *)name
@@ -24,6 +27,7 @@
         _artist = artist;
         _packDescription = packDescription;
         _thumbnailUri = thumbnailUri;
+        _status = StickerPackStatusNotAvailable;
     }
     return self;
 }
@@ -33,6 +37,10 @@
         _thumbnailImage = [UIImage imageWithData:_thumbnailData];
     }
     return _thumbnailImage;
+}
+
+- (NSInteger)percentage {
+    return self.downloadOperation.percentage;
 }
 
 - (void)downloadThumbnail {
@@ -62,22 +70,29 @@
     PQStickerPackDownloadOperation *operation = [[PQStickerPackDownloadOperation alloc]
                                                  initWithStickerPack:self
                                                  delegate:self];
+    self.downloadOperation = operation;
     [queue addOperation:operation];
+    self.status = StickerPackStatusPending;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
 }
 
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
      didFinishDownloadingStickerPack:(PQStickerPack *)pack
                                error:(NSError *)error {
-    NSLog(@"Pack downloaded");
-    NSLog(@"Pack image: %@", [UIImage imageWithData:self.thumbnailData]);
-    for (PQSticker *sticker in self.stickers) {
-        NSLog(@"Sticker image: %@", [UIImage imageWithData:sticker.thumbnailData]);
-    }
+    self.status = StickerPackStatusDownloaded;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
+//    NSLog(@"Pack downloaded");
+//    NSLog(@"Pack image: %@", [UIImage imageWithData:self.thumbnailData]);
+//    for (PQSticker *sticker in self.stickers) {
+//        NSLog(@"Sticker image: %@", [UIImage imageWithData:sticker.thumbnailData]);
+//    }
 }
 
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
                didUpdateWithProgress:(NSInteger)percentage {
-    NSLog(@"%i", percentage);
+    self.status = StickerPackStatusDownloading;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
+//    NSLog(@"%i", percentage);
 }
 // Specify default values for properties
 
@@ -90,7 +105,7 @@
 
 + (NSArray *)ignoredProperties
 {
-    return @[@"thumbnailImage"];
+    return @[@"thumbnailImage", @"status", @"downloadOperation"];
 }
 
 @end

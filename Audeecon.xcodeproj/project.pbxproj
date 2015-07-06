@@ -19,19 +19,6 @@
 		6F307E2B1B1E12D900D2F6DE /* PQParsingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E261B1E12D900D2F6DE /* PQParsingService.m */; };
 		6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E281B1E12D900D2F6DE /* PQRequestingService.m */; };
 		6F307E2D1B1E12D900D2F6DE /* PQUrlService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */; };
-		6F366F6A1B41ACEB000B3FA8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F691B41ACEB000B3FA8 /* Parse.framework */; };
-		6F366F6C1B41AD2C000B3FA8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F6B1B41AD2C000B3FA8 /* AudioToolbox.framework */; };
-		6F366F6E1B41AD41000B3FA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F6D1B41AD41000B3FA8 /* CoreGraphics.framework */; };
-		6F366F701B41AD47000B3FA8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F6F1B41AD47000B3FA8 /* CoreLocation.framework */; };
-		6F366F721B41AD51000B3FA8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F711B41AD51000B3FA8 /* MobileCoreServices.framework */; };
-		6F366F741B41AD57000B3FA8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F731B41AD57000B3FA8 /* QuartzCore.framework */; };
-		6F366F761B41AD63000B3FA8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F751B41AD63000B3FA8 /* StoreKit.framework */; };
-		6F366F781B41AD6A000B3FA8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F771B41AD6A000B3FA8 /* SystemConfiguration.framework */; };
-		6F366F7A1B41AD76000B3FA8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F791B41AD76000B3FA8 /* libz.dylib */; };
-		6F366F7C1B41AD7C000B3FA8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F7B1B41AD7C000B3FA8 /* libsqlite3.dylib */; };
-		6F366F7E1B41ADCA000B3FA8 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F7D1B41ADCA000B3FA8 /* Accounts.framework */; };
-		6F366F801B41ADCF000B3FA8 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F7F1B41ADCF000B3FA8 /* Social.framework */; };
-		6F366F821B41ADFA000B3FA8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F811B41ADFA000B3FA8 /* Bolts.framework */; };
 		6F366F851B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */; };
 		6F366F881B41B19A000B3FA8 /* PQFilePathFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */; };
 		6F3783C21B27CAAB0066EF08 /* PQRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C11B27CAAB0066EF08 /* PQRegisterViewController.m */; };
@@ -60,8 +47,6 @@
 		6F9CE3EC1ABB14EE00D716EB /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3E21ABB14EE00D716EB /* DDDispatchQueueLogFormatter.m */; };
 		6F9CE3ED1ABB14EE00D716EB /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3E41ABB14EE00D716EB /* DDMultiFormatter.m */; };
 		6F9CE3EE1ABB14EE00D716EB /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F9CE3E51ABB14EE00D716EB /* README.txt */; };
-		6F9CE3F01ABB152C00D716EB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9CE3EF1ABB152C00D716EB /* CFNetwork.framework */; };
-		6F9CE3F21ABB153100D716EB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9CE3F11ABB153100D716EB /* Security.framework */; };
 		6F9CE4051ABB15B000D716EB /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3F71ABB15B000D716EB /* GCDAsyncSocket.m */; };
 		6F9CE4061ABB15B000D716EB /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3FB1ABB15B000D716EB /* NSString+DDXML.m */; };
 		6F9CE4071ABB15B000D716EB /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3FE1ABB15B000D716EB /* DDXMLDocument.m */; };
@@ -249,7 +234,6 @@
 		6F307E281B1E12D900D2F6DE /* PQRequestingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQRequestingService.m; sourceTree = "<group>"; };
 		6F307E291B1E12D900D2F6DE /* PQUrlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PQUrlService.h; sourceTree = "<group>"; };
 		6F307E2A1B1E12D900D2F6DE /* PQUrlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PQUrlService.m; sourceTree = "<group>"; };
-		6F366F691B41ACEB000B3FA8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		6F366F6B1B41AD2C000B3FA8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6F366F6D1B41AD41000B3FA8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F366F6F1B41AD47000B3FA8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -261,7 +245,6 @@
 		6F366F7B1B41AD7C000B3FA8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6F366F7D1B41ADCA000B3FA8 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		6F366F7F1B41ADCF000B3FA8 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		6F366F811B41ADFA000B3FA8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQAudioPlayerAndRecorder.h; path = Models/PQAudioPlayerAndRecorder.h; sourceTree = "<group>"; };
 		6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQAudioPlayerAndRecorder.m; path = Models/PQAudioPlayerAndRecorder.m; sourceTree = "<group>"; };
 		6F366F861B41B19A000B3FA8 /* PQFilePathFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFilePathFactory.h; path = Helpers/PQFilePathFactory.h; sourceTree = "<group>"; };
@@ -651,23 +634,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F366F801B41ADCF000B3FA8 /* Social.framework in Frameworks */,
-				6F366F7E1B41ADCA000B3FA8 /* Accounts.framework in Frameworks */,
-				6F366F7C1B41AD7C000B3FA8 /* libsqlite3.dylib in Frameworks */,
-				6F366F7A1B41AD76000B3FA8 /* libz.dylib in Frameworks */,
-				6F366F781B41AD6A000B3FA8 /* SystemConfiguration.framework in Frameworks */,
-				6F366F761B41AD63000B3FA8 /* StoreKit.framework in Frameworks */,
-				6F9CE3F21ABB153100D716EB /* Security.framework in Frameworks */,
-				6F366F741B41AD57000B3FA8 /* QuartzCore.framework in Frameworks */,
-				6F366F721B41AD51000B3FA8 /* MobileCoreServices.framework in Frameworks */,
-				6F366F701B41AD47000B3FA8 /* CoreLocation.framework in Frameworks */,
-				6F366F6E1B41AD41000B3FA8 /* CoreGraphics.framework in Frameworks */,
-				6F9CE3F01ABB152C00D716EB /* CFNetwork.framework in Frameworks */,
-				6F366F6C1B41AD2C000B3FA8 /* AudioToolbox.framework in Frameworks */,
 				6F9CE5D31ABB17FC00D716EB /* libresolv.dylib in Frameworks */,
 				6F9CE40E1ABB16C200D716EB /* libidn.a in Frameworks */,
-				6F366F821B41ADFA000B3FA8 /* Bolts.framework in Frameworks */,
-				6F366F6A1B41ACEB000B3FA8 /* Parse.framework in Frameworks */,
 				9F8E1ED0EFAB2BB917352272 /* libPods-Audeecon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,15 +710,6 @@
 				6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		6F366F681B41ACA4000B3FA8 /* Parsecom */ = {
-			isa = PBXGroup;
-			children = (
-				6F366F811B41ADFA000B3FA8 /* Bolts.framework */,
-				6F366F691B41ACEB000B3FA8 /* Parse.framework */,
-			);
-			name = Parsecom;
 			sourceTree = "<group>";
 		};
 		6F3783BF1B27CA630066EF08 /* Login and register */ = {
@@ -1746,7 +1705,6 @@
 				6F366F6F1B41AD47000B3FA8 /* CoreLocation.framework */,
 				6F366F6D1B41AD41000B3FA8 /* CoreGraphics.framework */,
 				6F366F6B1B41AD2C000B3FA8 /* AudioToolbox.framework */,
-				6F366F681B41ACA4000B3FA8 /* Parsecom */,
 				DD52F3D5536CA8365B24797E /* Pods */,
 				6F9CE5D21ABB17FC00D716EB /* libresolv.dylib */,
 				6F9CE5D11ABB173000D716EB /* XMPPFramework.h */,

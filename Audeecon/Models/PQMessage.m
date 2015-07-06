@@ -11,7 +11,7 @@
 #import "DDXML.h"
 #import "DDXMLElement.h"
 #import "NSXMLElement+XMPP.h"
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
 #import "PQRequestingService.h"
 #import <AWSCore.h>
 #import <AWSS3.h>

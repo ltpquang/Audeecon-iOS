@@ -12,7 +12,7 @@
 #import "PQHostnameFactory.h"
 #import "PQRequestingService.h"
 #import "PQMessage.h"
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
 #import "PQFilePathFactory.h"
 #import <AWSCore.h>
 #import <AWSS3.h>
@@ -30,7 +30,7 @@
     // Override point for customization after application launch.
     _globalContainer = [PQGlobalContainer new];
     [self clearTemperaryFolder];
-    [self setupParse];
+    //[self setupParse];
     [self setupStream];
     [self setupAmazon];
     
@@ -101,13 +101,13 @@
                                          }];
 }
 
-- (void)setupParse {
-    
-    // Initialize Parse.
-    [Parse setApplicationId:@"w6qlLf8jN9xxKJGAMFzDy4EqVbUlZ3DfUwV9T4pj"
-                  clientKey:@"VAn6cTkBRUUpiWkEQ0NcJKhG7qFG7UXSeZ1qGUJR"];
-    
-}
+//- (void)setupParse {
+//    
+//    // Initialize Parse.
+//    [Parse setApplicationId:@"w6qlLf8jN9xxKJGAMFzDy4EqVbUlZ3DfUwV9T4pj"
+//                  clientKey:@"VAn6cTkBRUUpiWkEQ0NcJKhG7qFG7UXSeZ1qGUJR"];
+//    
+//}
 
 - (void)setupAmazon {
     AWSCognitoCredentialsProvider *credentialsProvider
