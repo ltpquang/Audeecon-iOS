@@ -33,8 +33,15 @@
                                              RLMRealm *realm = [RLMRealm defaultRealm];
                                              if ([self stickerPacksNeedToBeReplacedByStickerPacks:result]) {
                                                  [realm beginWriteTransaction];
+                                                 
+                                                 [realm deleteObjects:self.ownedStickerPack];
                                                  [self.ownedStickerPack removeAllObjects];
-                                                 [self.ownedStickerPack addObjects:result];
+                                                 
+                                                 for (PQStickerPack *pack in result) {
+                                                     PQStickerPack *returnPack = [PQStickerPack createOrUpdateInDefaultRealmWithValue:pack];
+                                                     [self.ownedStickerPack addObject:returnPack];
+                                                 }
+                                                 
                                                  [realm commitWriteTransaction];
                                              }
                                              

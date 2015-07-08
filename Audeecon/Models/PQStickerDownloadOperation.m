@@ -40,7 +40,6 @@
         [self didChangeValueForKey:@"isFinished"];
         return;
     }
-    //NSLog(@"Start download pack");
     // If the operation is not canceled, begin executing the task.
     [self willChangeValueForKey:@"isExecuting"];
     [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
@@ -49,25 +48,34 @@
 }
 
 - (void)main {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.sticker.uri]];
-    if ([self isCancelled])
-    {
-        // Must move the operation to the finished state if it is canceled.
-        [self completeOperation];
-        return;
-    }
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               if ([self isCancelled]) {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *uri = self.sticker.uri;
+        
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:uri]];
+        if ([self isCancelled])
+        {
+            // Must move the operation to the finished state if it is canceled.
+            [self completeOperation];
+            return;
+        }
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   if ([self isCancelled]) {
+                                       [self completeOperation];
+                                       return;
+                                   }
+                                   RLMRealm *realm = [RLMRealm defaultRealm];
+                                   [realm beginWriteTransaction];
+                                   self.sticker.thumbnailData = data;
+                                   [realm commitWriteTransaction];
                                    [self completeOperation];
-                                   return;
-                               }
-                               self.sticker.thumbnailData = data;
-                               [self completeOperation];
-                               [self.delegate stickerDownloadOperation:self
-                                           didFinishDownloadingSticker:self.sticker];
-                           }];
+                                   [self.delegate stickerDownloadOperation:self
+                                               didFinishDownloadingSticker:self.sticker];
+                               }];
+    });
 }
 
 - (void)completeOperation {

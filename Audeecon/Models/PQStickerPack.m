@@ -57,32 +57,6 @@
     return NO;
 }
 
-- (void)downloadThumbnail {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_thumbnailUri]];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               self.thumbnailData = data;
-                           }];
-}
-
-- (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
-                                       success:(void(^)())successCall
-                                       failure:(void(^)(NSError *error))failureCall {
-    
-    [requestingService getStickersOfStickerPackWithId:self.packId
-                                              success:^(NSArray *result) {
-                                                  RLMRealm *realm = [RLMRealm defaultRealm];
-                                                  [realm beginWriteTransaction];
-                                                  [self.stickers removeAllObjects];
-                                                  [self.stickers addObjects:result];
-                                                  [realm commitWriteTransaction];
-                                                  successCall();
-                                              }
-                                              failure:^(NSError *error) {
-                                                  failureCall(error);
-                                              }];
-}
 
 - (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
                                                    progress:(void(^)(NSInteger percentage))progressCall {
@@ -96,7 +70,6 @@
     }
     else {
         PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPack:self];
-        //PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPackId:self.packId];
         
         PQStickerPackDownloadOperation *operation = [[PQStickerPackDownloadOperation alloc]
                                                      initWithStickerPack:self
@@ -118,11 +91,6 @@
                                error:(NSError *)error {
     self.status = StickerPackStatusDownloaded;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
-//    NSLog(@"Pack downloaded");
-//    NSLog(@"Pack image: %@", [UIImage imageWithData:self.thumbnailData]);
-//    for (PQSticker *sticker in self.stickers) {
-//        NSLog(@"Sticker image: %@", [UIImage imageWithData:sticker.thumbnailData]);
-//    }
 }
 
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation

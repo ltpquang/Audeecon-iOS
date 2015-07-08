@@ -37,9 +37,9 @@ typedef enum : NSUInteger {
            andArtist:(NSString *)artist
       andDescription:(NSString *)packDescription
      andThumbnailUri:(NSString *)thumbnailUri;
-- (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
-                                       success:(void(^)())successCall
-                                       failure:(void(^)(NSError *error))failureCall;
+//- (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
+//                                       success:(void(^)())successCall
+//                                       failure:(void(^)(NSError *error))failureCall;
 - (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
                                                    progress:(void(^)(NSInteger percentage))progressCall;
 @end

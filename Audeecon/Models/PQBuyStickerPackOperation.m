@@ -49,18 +49,22 @@
 }
 
 - (void)main {
-    [[PQRequestingService new] buyStickerPack:self.pack.packId
-                                      forUser:[[[self appDelegate] currentUser] username]
-                                      success:^{
-                                          //
-                                          [self completeOperation];
-                                          NSLog(@"Buy complete");
-                                      }
-                                      failure:^(NSError *error) {
-                                          //
-                                          NSLog(@"Error in buy sticker operation");
-                                          [self completeOperation];
-                                      }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *packId = self.pack.packId;
+        NSString *currentUserName = [[[self appDelegate] currentUser] username];
+        [[PQRequestingService new] buyStickerPack:packId
+                                          forUser:currentUserName
+                                          success:^{
+                                              //
+                                              [self completeOperation];
+                                              NSLog(@"Buy complete");
+                                          }
+                                          failure:^(NSError *error) {
+                                              //
+                                              NSLog(@"Error in buy sticker operation");
+                                              [self completeOperation];
+                                          }];
+    });
 }
 
 - (void)completeOperation {

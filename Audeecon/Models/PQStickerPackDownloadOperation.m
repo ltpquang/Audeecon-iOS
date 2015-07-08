@@ -14,6 +14,7 @@
 #import "PQBuyStickerPackOperation.h"
 #import "PQGetStickersInfoOperation.h"
 #import <AFNetworking.h>
+#import <Realm.h>
 
 @interface PQStickerPackDownloadOperation() {
     BOOL executing;
@@ -51,7 +52,7 @@
     // If the operation is not canceled, begin executing the task.
     [self willChangeValueForKey:@"isExecuting"];
     self.downloadQueue = [[NSOperationQueue alloc] init];
-    self.downloadQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+    self.downloadQueue.maxConcurrentOperationCount = 4; //NSOperationQueueDefaultMaxConcurrentOperationCount;
     [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
     
     executing = YES;
@@ -59,7 +60,6 @@
 }
 
 - (void)main {
-    RLMRealm *realm = [RLMRealm defaultRealm];
     if ([self isCancelled])
     {
         // Must move the operation to the finished state if it is canceled.
@@ -69,45 +69,58 @@
         return;
     }
     
-    //PQGetStickersInfoOperation *getStickersOpe = [[PQGetStickersInfoOperation alloc] initWithStickerPack:self.pack];
-    
-    
-    NSBlockOperation *downloadPackThumbnailOperation = [NSBlockOperation blockOperationWithBlock:^{
-        if ([self isCancelled]) {
-            return;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSBlockOperation *downloadPackThumbnailOperation = [NSBlockOperation blockOperationWithBlock:^{
+            if ([self isCancelled]) {
+                return;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *urlString = self.pack.thumbnailUri;
+                NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+                [NSURLConnection sendAsynchronousRequest:urlRequest
+                                                   queue:[NSOperationQueue mainQueue]
+                                       completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                           
+                                           RLMRealm *realm = [RLMRealm defaultRealm];
+                                           [realm beginWriteTransaction];
+                                           self.pack.thumbnailData = data;
+                                           [realm commitWriteTransaction];
+                                       }];
+                
+            });
+            
+        }];
+        
+        PQBuyStickerPackOperation *buyStickerPackOpe = [[PQBuyStickerPackOperation alloc] initWithStickerPack:self.pack];
+        
+        [buyStickerPackOpe setCompletionBlock:^{
+            [self.delegate stickerPackDownloadOperation:self
+                                  didUpdateWithProgress:100];
+            self.percentage = 100;
+            [self completeOperation];
+            [self.delegate stickerPackDownloadOperation:self
+                        didFinishDownloadingStickerPack:self.pack
+                                                  error:nil];
+        }];
+        
+        [buyStickerPackOpe addDependency:downloadPackThumbnailOperation];
+        
+        
+        RLMArray<PQSticker> *stickers = self.pack.stickers;
+        
+        for (PQSticker *sticker in stickers) {
+            PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc]
+                                                              initWithSticker:sticker
+                                                              delegate:self];
+            
+            [buyStickerPackOpe addDependency:stickerDownloadOpe];
+            [self.downloadQueue addOperation:stickerDownloadOpe];
         }
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.pack.thumbnailUri]];
-        self.pack.thumbnailData = imgData;
-    }];
+        [self.downloadQueue addOperation:downloadPackThumbnailOperation];
+        [self.downloadQueue addOperation:buyStickerPackOpe];
+    });
     
-    PQBuyStickerPackOperation *buyStickerPackOpe = [[PQBuyStickerPackOperation alloc] initWithStickerPack:self.pack];
-    
-    [buyStickerPackOpe setCompletionBlock:^{
-        [self.delegate stickerPackDownloadOperation:self
-                              didUpdateWithProgress:100];
-        self.percentage = 100;
-        [self completeOperation];
-        [self.delegate stickerPackDownloadOperation:self
-                    didFinishDownloadingStickerPack:self.pack
-                                              error:nil];
-    }];
-    
-    //[downloadPackThumbnailOperation addDependency:getStickersOpe];
-    [buyStickerPackOpe addDependency:downloadPackThumbnailOperation];
-    
-    PQSticker *sticker = [self.pack.stickers objectAtIndex:0];
-    
-    for (PQSticker *sticker in self.pack.stickers) {
-        PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc]
-                                                          initWithSticker:sticker
-                                                          delegate:self];
-        //[stickerDownloadOpe addDependency:getStickersOpe];
-        [buyStickerPackOpe addDependency:stickerDownloadOpe];
-        [self.downloadQueue addOperation:stickerDownloadOpe];
-    }
-    //[self.downloadQueue addOperation:getStickersOpe];
-    [self.downloadQueue addOperation:downloadPackThumbnailOperation];
-    [self.downloadQueue addOperation:buyStickerPackOpe];
 }
 
 - (void)completeOperation {

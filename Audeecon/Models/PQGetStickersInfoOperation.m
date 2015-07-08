@@ -8,6 +8,7 @@
 
 #import "PQGetStickersInfoOperation.h"
 #import "PQStickerPack.h"
+#import "PQSticker.h"
 #import "PQRequestingService.h"
 #import <RLMRealm.h>
 
@@ -16,7 +17,6 @@
     BOOL finished;
 }
 @property PQStickerPack *pack;
-@property NSString *packId;
 
 @end
 
@@ -30,14 +30,6 @@
     return self;
 }
 
-- (id)initWithStickerPackId:(NSString *)packId {
-    if (self = [super init]) {
-        executing = NO;
-        finished = NO;
-        _packId = packId;
-    }
-    return self;
-}
 
 - (void)start {
     // Always check for cancellation before launching the task.
@@ -58,31 +50,26 @@
 }
 
 - (void)main {
-    __block NSString *packId = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
-        packId = self.pack.packId;
+        NSString *packId = self.pack.packId;
+        
+        [[PQRequestingService new] getStickersOfStickerPackWithId:packId
+                                                          success:^(NSArray *result) {
+                                                              RLMRealm *realm = [RLMRealm defaultRealm];
+                                                              
+                                                              [realm beginWriteTransaction];
+                                                              [self.pack.stickers removeAllObjects];
+                                                              for (PQSticker *sticker in result) {
+                                                                  PQSticker *returnSticker = [PQSticker createOrUpdateInDefaultRealmWithValue:sticker];
+                                                                  [self.pack.stickers addObject:returnSticker];
+                                                              }
+                                                              [realm commitWriteTransaction];
+                                                              [self completeOperation];
+                                                          }
+                                                          failure:^(NSError *error) {
+                                                              //
+                                                          }];
     });
-    [[PQRequestingService new] getStickersOfStickerPackWithId:packId//self.packId
-                                                      success:^(NSArray *result) {
-                                                          RLMRealm *realm = [RLMRealm defaultRealm];
-                                                          PQStickerPack *pack = [PQStickerPack objectForPrimaryKey:self.packId];
-                                                          [realm beginWriteTransaction];
-                                                          [pack.stickers removeAllObjects];
-                                                          [pack.stickers addObjects:result];
-                                                          [realm commitWriteTransaction];
-                                                          [self completeOperation];
-                                                      }
-                                                      failure:^(NSError *error) {
-                                                          //
-                                                      }];
-//    [pack downloadStickersUsingRequestingService:[PQRequestingService new]
-//                                              success:^{
-//                                                  [self completeOperation];
-//                                              }
-//                                              failure:^(NSError *error) {
-//                                                  NSLog(@"Error in get stickers info operation");
-//                                                  [self completionBlock];
-//                                              }];
 }
 
 - (void)completeOperation {

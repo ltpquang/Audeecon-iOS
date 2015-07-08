@@ -28,14 +28,6 @@
     return _thumbnailImage;
 }
 
-- (void)downloadImage {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_uri]];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               self.thumbnailData = data;
-                           }];
-}
 
 // Specify default values for properties
 
