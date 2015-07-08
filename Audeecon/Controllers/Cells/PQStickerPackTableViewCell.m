@@ -92,10 +92,7 @@
             self.downloadButton.state = kPKDownloadButtonState_Pending;
             // Download sticker pack info
             NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
-            [self.pack downloadDataAndStickersUsingOperationQueue:queue
-                                                         progress:^(NSInteger percentage) {
-                                                             NSLog(@"%i", percentage);
-                                                         }];
+            [self.pack downloadDataAndStickersUsingOperationQueue:queue];
             break;
         }
         case kPKDownloadButtonState_Pending:

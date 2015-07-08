@@ -36,7 +36,7 @@
 
 - (UIImage *)thumbnailImage {
     if (_thumbnailImage == nil) {
-        _thumbnailImage = [UIImage imageWithData:_thumbnailData];
+        _thumbnailImage = [UIImage imageWithData:self.thumbnailData];
     }
     return _thumbnailImage;
 }
@@ -58,8 +58,7 @@
 }
 
 
-- (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
-                                                   progress:(void(^)(NSInteger percentage))progressCall {
+- (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue {
     if (![self needToBeUpdated]) {
         [self stickerPackDownloadOperation:nil
            didFinishDownloadingStickerPack:self

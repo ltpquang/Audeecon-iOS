@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PQStickerAndPackDownloader.h"
 #import "PQKeyboardStickerCollectionViewCell.h"
 
 @class PQSticker;
@@ -15,7 +14,7 @@
 
 @protocol PQStickerKeyboardDelegate;
 
-@interface PQStickerKeyboardView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, PQStickerAndPackDownloaderDelegate, PQKeyboardStickerCellDelegate>
+@interface PQStickerKeyboardView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, PQKeyboardStickerCellDelegate>
 - (void)configKeyboardWithStickerPacks:(NSArray *)packs
                               delegate:(id<PQStickerKeyboardDelegate>)delegate;
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs;

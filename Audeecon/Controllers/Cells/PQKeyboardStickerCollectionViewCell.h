@@ -22,7 +22,6 @@
 
 - (void)configCellUsingSticker:(PQSticker *)sticker
                       delegate:(id<PQKeyboardStickerCellDelegate>)delegate;
-- (void)resetContent;
 
 @end
 

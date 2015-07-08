@@ -15,5 +15,4 @@
 + (NSString *)reuseIdentifier;
 
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack;
-- (void)resetContent;
 @end

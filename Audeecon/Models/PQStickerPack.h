@@ -40,8 +40,7 @@ typedef enum : NSUInteger {
 //- (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
 //                                       success:(void(^)())successCall
 //                                       failure:(void(^)(NSError *error))failureCall;
-- (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
-                                                   progress:(void(^)(NSInteger percentage))progressCall;
+- (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue;
 @end
 
 // This protocol enables typed collections. i.e.:

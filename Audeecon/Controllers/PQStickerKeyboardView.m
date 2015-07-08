@@ -8,8 +8,7 @@
 
 #import "PQStickerKeyboardView.h"
 #import "PQKeyboardPackCollectionViewCell.h"
-//#import "PQKeyboardStickerCollectionViewCell.h"
-#import "PQPendingOperations.h"
+
 #import "PQRequestingService.h"
 #import "PQStickerPack.h"
 #import "PQSticker.h"
@@ -21,8 +20,6 @@
 @property (strong, nonatomic) NSArray *packs;
 @property (strong, nonatomic) NSArray *stickers;
 
-@property (strong, nonatomic) PQPendingOperations *packPendingOperations;
-@property (strong, nonatomic) PQPendingOperations *stickerPendingOperations;
 @property (strong, nonatomic) PQRequestingService *requestingService;
 
 @property (strong, nonatomic) PQStickerPack *selectedPack;
@@ -51,9 +48,6 @@
     
     _packs = packs;
     _delegate = delegate;
-    
-    _packPendingOperations = [PQPendingOperations new];
-    _stickerPendingOperations = [PQPendingOperations new];
 
     _requestingService = [[PQRequestingService alloc] init];
 }
@@ -76,23 +70,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag == 0) { //pack
-        [_stickerPendingOperations reset];
         PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
         _selectedPack = pack;
-//        if (pack.hasStickers) {
-//            _stickers = pack.stickers;
-//            [_stickersCollectionView reloadData];
-//        }
-//        else {
-//            [pack downloadStickersUsingRequestingService:_requestingService
-//                                                 success:^{
-//                                                     _stickers = pack.stickers;
-//                                                     [_stickersCollectionView reloadData];
-//                                                 }
-//                                                 failure:^(NSError *error) {
-//                                                     //
-//                                                 }];
-//        }
+        if (![pack needToBeUpdated]) {
+            _stickers = [pack.stickers valueForKey:@"self"];
+            [_stickersCollectionView reloadData];
+        }
+        else {
+            [pack downloadDataAndStickersUsingOperationQueue:[NSOperationQueue mainQueue]];
+        }
     }
 }
 
@@ -100,64 +86,20 @@
     if (collectionView.tag == 0) { //pack
         PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
         PQKeyboardPackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
-        [cell resetContent];
-//        if (pack.hasImage) {
-//            [cell configCellUsingStickerPack:pack];
-//        }
-//        else {
-//            [self startDownloadingOperationForPack:pack atIndexPath:indexPath];
-//        }
+
+        [cell configCellUsingStickerPack:pack];
         return cell;
     }
     else {
         PQSticker *sticker = [_stickers objectAtIndex:indexPath.row];
         PQKeyboardStickerCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardStickerCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
-        [cell resetContent];
-//        if (sticker.hasThumbnail) {
-//            [cell configCellUsingSticker:sticker
-//                                delegate:self];
-//        }
-//        else {
-//            [self startDownloadingOperationForSticker:sticker atIndexPath:indexPath];
-//        }
+        [cell configCellUsingSticker:sticker
+                            delegate:self];
         return cell;
     }
     return nil;
 }
 
-#pragma mark - Download operation actions
-- (void)startDownloadingOperationForPack:(PQStickerPack *)pack atIndexPath:(NSIndexPath *)indexPath {
-    if (![_packPendingOperations.downloadsInProgress.allKeys containsObject:indexPath]) {
-        PQStickerAndPackDownloader *downloader = [[PQStickerAndPackDownloader alloc] initWithStickerPack:pack
-                                                                                       atIndexPath:indexPath
-                                                                                          delegate:self];
-        [_packPendingOperations.downloadsInProgress setObject:downloader forKey:indexPath];
-        [_packPendingOperations.downloadQueue addOperation:downloader];
-    }
-}
-
-- (void)startDownloadingOperationForSticker:(PQSticker *)sticker atIndexPath:(NSIndexPath *)indexPath {
-    if (![_stickerPendingOperations.downloadsInProgress.allKeys containsObject:indexPath]) {
-        PQStickerAndPackDownloader *downloader = [[PQStickerAndPackDownloader alloc] initWithSticker:sticker
-                                                                                         atIndexPath:indexPath
-                                                                                            delegate:self];
-        [_stickerPendingOperations.downloadsInProgress setObject:downloader forKey:indexPath];
-        [_stickerPendingOperations.downloadQueue addOperation:downloader];
-    }
-}
-
-#pragma mark - Downloader delegates
-- (void)packDownloaderDidFinish:(PQStickerAndPackDownloader *)downloader {
-    NSIndexPath *path = downloader.indexPath;
-    [_packsCollectionView reloadItemsAtIndexPaths:@[path]];
-    [_packPendingOperations.downloadsInProgress removeObjectForKey:path];
-}
-
-- (void)stickerDownloaderDidFinish:(PQStickerAndPackDownloader *)downloader {
-    NSIndexPath *path = downloader.indexPath;
-    [_stickersCollectionView reloadItemsAtIndexPaths:@[path]];
-    [_packPendingOperations.downloadsInProgress removeObjectForKey:path];
-}
 
 #pragma mark - Keyboard sticker cell delegates
 - (void)didStartHoldingOnCell:(UICollectionViewCell *)cell {

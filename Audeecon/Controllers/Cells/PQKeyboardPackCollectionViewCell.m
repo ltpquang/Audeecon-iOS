@@ -26,8 +26,4 @@
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack {
     _mainImage.image = pack.thumbnailImage;
 }
-
-- (void)resetContent {
-    _mainImage.image = nil;
-}
 @end

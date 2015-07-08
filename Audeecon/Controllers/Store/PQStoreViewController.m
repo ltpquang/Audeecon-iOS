@@ -61,10 +61,7 @@
     //PQRequestingService *requestingService = [PQRequestingService new];
     PQStickerPack *pack = [packs objectAtIndex:0];
     
-    [pack downloadDataAndStickersUsingOperationQueue:queue
-                                            progress:^(NSInteger percentage) {
-                                                NSLog(@"%i", percentage);
-                                            }];
+    [pack downloadDataAndStickersUsingOperationQueue:queue];
     
 }
 

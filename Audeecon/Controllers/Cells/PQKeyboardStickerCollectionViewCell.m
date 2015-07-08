@@ -44,10 +44,6 @@
     }
 }
 
-- (void)resetContent {
-    _mainImage.image = nil;
-}
-
 - (void)setupCell {
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                       action:@selector(longPressHandler:)];

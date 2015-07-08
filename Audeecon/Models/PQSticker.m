@@ -23,7 +23,7 @@
 
 - (UIImage *)thumbnailImage {
     if (_thumbnailImage == nil) {
-        _thumbnailImage = [UIImage imageWithData:_thumbnailData];
+        _thumbnailImage = [UIImage imageWithData:self.thumbnailData];
     }
     return _thumbnailImage;
 }

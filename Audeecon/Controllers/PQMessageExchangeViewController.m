@@ -15,6 +15,7 @@
 #import "PQSticker.h"
 #import "PQStickerPack.h"
 #import "PQRequestingService.h"
+#import "PQCurrentUser.h"
 
 @interface PQMessageExchangeViewController ()
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject *partner;
@@ -48,7 +49,7 @@
     if (_keyboardView == nil) {
         _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
         [_keyboardView setFrame:CGRectMake(0, self.view.bounds.size.height - 216, 320, 216)];
-        [_keyboardView configKeyboardWithStickerPacks:[[[self appDelegate] globalContainer] stickerPacks]
+        [_keyboardView configKeyboardWithStickerPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]
                                              delegate:self];
     }
     return _keyboardView;
@@ -88,6 +89,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Handle gesture
 - (void)tapGestureHandler {
     NSLog(@"Double tap");
     [self.view addSubview:self.keyboardView];

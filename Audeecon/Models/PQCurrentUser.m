@@ -51,8 +51,7 @@
                                              }];
                                              
                                              for (PQStickerPack *pack in self.ownedStickerPack) {
-                                                 [ope addDependency:[pack downloadDataAndStickersUsingOperationQueue:queue
-                                                                                                            progress:nil]];
+                                                 [ope addDependency:[pack downloadDataAndStickersUsingOperationQueue:queue]];
                                              }
                                              [queue addOperation:ope];
                                          }
