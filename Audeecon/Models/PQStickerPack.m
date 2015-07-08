@@ -95,8 +95,8 @@
         return operation;
     }
     else {
-        //PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPack:self];
-        PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPackId:self.packId];
+        PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPack:self];
+        //PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPackId:self.packId];
         
         PQStickerPackDownloadOperation *operation = [[PQStickerPackDownloadOperation alloc]
                                                      initWithStickerPack:self

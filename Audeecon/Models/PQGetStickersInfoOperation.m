@@ -58,7 +58,11 @@
 }
 
 - (void)main {
-    [[PQRequestingService new] getStickersOfStickerPackWithId:self.packId
+    __block NSString *packId = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        packId = self.pack.packId;
+    });
+    [[PQRequestingService new] getStickersOfStickerPackWithId:packId//self.packId
                                                       success:^(NSArray *result) {
                                                           RLMRealm *realm = [RLMRealm defaultRealm];
                                                           PQStickerPack *pack = [PQStickerPack objectForPrimaryKey:self.packId];
