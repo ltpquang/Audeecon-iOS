@@ -2,18 +2,16 @@
 //  PQUser.h
 //  Audeecon
 //
-//  Created by Le Thai Phuc Quang on 6/16/15.
+//  Created by Le Thai Phuc Quang on 7/7/15.
 //  Copyright (c) 2015 QuangLTP. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "XMPP.h"
-#import <Realm.h>
+#import <Realm/Realm.h>
 
-@interface PQUser : NSObject
-
-@property XMPPJID *jid;
-@property NSString *displayName;
-
+@interface PQUser : RLMObject
+<# Add properties here to define the model #>
 @end
+
+// This protocol enables typed collections. i.e.:
+// RLMArray<PQUser>
 RLM_ARRAY_TYPE(PQUser)
