@@ -10,6 +10,14 @@
 
 @implementation PQUser
 
+- (id)initWithXMPPJID:(XMPPJID *)jid {
+    if (self = [super init]) {
+        _jid = jid;
+        _username = [jid user];
+    }
+    return self;
+}
+
 // Specify default values for properties
 
 //+ (NSDictionary *)defaultPropertyValues
@@ -19,9 +27,13 @@
 
 // Specify properties to ignore (Realm won't persist these)
 
-//+ (NSArray *)ignoredProperties
-//{
-//    return @[];
-//}
++ (NSArray *)ignoredProperties
+{
+    return @[@"jid"];
+}
+
++ (NSString *)primaryKey {
+    return @"username";
+}
 
 @end

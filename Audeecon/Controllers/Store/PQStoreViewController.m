@@ -66,30 +66,6 @@
                                                 NSLog(@"%i", percentage);
                                             }];
     
-    //for (PQStickerPack *pack in packs) {
-        
-//        [pack downloadStickersUsingRequestingService:requestingService
-//                                             success:^{
-//                                                 //
-//                                                 PQStickerPackDownloadOperation *ope = [[PQStickerPackDownloadOperation alloc]
-//                                                                                        initWithStickerPack:pack
-//                                                                                        delegate:nil];
-//                                                 [ope setCompletionBlock:^{
-//                                                     //
-//                                                     PQStickerPack *array = [[[[self appDelegate] globalContainer] stickerPacks] objectAtIndex:0];
-//                                                     for (PQSticker *sticker in array.stickers) {
-//                                                         NSLog(@"%lu", (unsigned long)sticker.thumbnailData.length);
-//                                                     }
-//                                                     NSLog(@"Complete download pack");
-//                                                 }];
-//                                                 [queue addOperation:ope];
-//                                             }
-//                                             failure:^(NSError *error) {
-//                                                 //
-//                                             }];
-    
-        
-    //}
 }
 
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender {

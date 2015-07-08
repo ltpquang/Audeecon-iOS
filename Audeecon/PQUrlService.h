@@ -14,4 +14,6 @@
 + (NSString *)urlToGetStickerPackWithId:(NSString *)packId;
 
 + (NSString *)urlToS3FileWithFileName:(NSString *)fileName;
+
++ (NSString *)urlToBuyStickerPackForUser:(NSString *)username;
 @end

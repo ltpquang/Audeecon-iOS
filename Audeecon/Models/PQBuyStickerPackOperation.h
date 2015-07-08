@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+@class PQStickerPack;
 
-@interface PQBuyStickerOperation : NSOperation
-
+@interface PQBuyStickerPackOperation : NSOperation
+- (id)initWithStickerPack:(PQStickerPack *)pack;
 @end

@@ -76,6 +76,23 @@
           }];
 }
 
+- (void)buyStickerPack:(NSString *)packId
+               forUser:(NSString *)username
+               success:(void(^)())successCall
+               failure:(void(^)(NSError *error))failureCall {
+    NSDictionary *param = @{@"pack_id":packId};
+    [self configWithExpectationOfJsonInRequest:YES
+                             andJsonInResponse:YES];
+    [_manager POST:[PQUrlService urlToBuyStickerPackForUser:username]
+        parameters:param
+           success:^(NSURLSessionDataTask *task, id responseObject) {
+               successCall();
+           }
+           failure:^(NSURLSessionDataTask *task, NSError *error) {
+               failureCall(error);
+           }];
+}
+
 - (void)downloadAudioFileAtUrl:(NSString *)fileUrl
                       complete:(void(^)(NSURL *filepath))completeCall {
     NSURL *URL = [NSURL URLWithString:fileUrl];

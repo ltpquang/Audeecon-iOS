@@ -11,6 +11,8 @@
 #import "PQStickerPack.h"
 #import "PQStickerDownloadOperation.h"
 #import "PQRequestingService.h"
+#import "PQBuyStickerPackOperation.h"
+#import "PQGetStickersInfoOperation.h"
 #import <AFNetworking.h>
 
 @interface PQStickerPackDownloadOperation() {
@@ -51,11 +53,13 @@
     self.downloadQueue = [[NSOperationQueue alloc] init];
     self.downloadQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
     [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
+    
     executing = YES;
     [self didChangeValueForKey:@"isExecuting"];
 }
 
 - (void)main {
+    RLMRealm *realm = [RLMRealm defaultRealm];
     if ([self isCancelled])
     {
         // Must move the operation to the finished state if it is canceled.
@@ -65,44 +69,45 @@
         return;
     }
     
-    [self.pack downloadStickersUsingRequestingService:[PQRequestingService new]
-                                              success:^{
-                                                  //
-                                                  NSBlockOperation *downloadPackThumbnailOperation = [NSBlockOperation blockOperationWithBlock:^{
-                                                      if ([self isCancelled]) {
-                                                          return;
-                                                      }
-                                                      NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.pack.thumbnailUri]];
-                                                      self.pack.thumbnailData = imgData;
-                                                  }];
-                                                  [downloadPackThumbnailOperation setCompletionBlock:^{
-                                                      [self.delegate stickerPackDownloadOperation:self
-                                                                            didUpdateWithProgress:100];
-                                                      self.percentage = 100;
-                                                      [self completeOperation];
-                                                      [self.delegate stickerPackDownloadOperation:self
-                                                                  didFinishDownloadingStickerPack:self.pack
-                                                                                            error:nil];
-                                                  }];
-                                                  
-                                                  for (PQSticker *sticker in self.pack.stickers) {
-                                                      PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc]
-                                                                                                        initWithSticker:sticker
-                                                                                                        delegate:self];
-                                                      [downloadPackThumbnailOperation addDependency:stickerDownloadOpe];
-                                                      [self.downloadQueue addOperation:stickerDownloadOpe];
-                                                  }
-                                                  
-                                                  [self.downloadQueue addOperation:downloadPackThumbnailOperation];
-                                              }
-                                              failure:^(NSError *error) {
-                                                  //
-                                                  [self.delegate stickerPackDownloadOperation:self
-                                                              didFinishDownloadingStickerPack:self.pack
-                                                                                        error:error];
-                                              }];
+    //PQGetStickersInfoOperation *getStickersOpe = [[PQGetStickersInfoOperation alloc] initWithStickerPack:self.pack];
     
     
+    NSBlockOperation *downloadPackThumbnailOperation = [NSBlockOperation blockOperationWithBlock:^{
+        if ([self isCancelled]) {
+            return;
+        }
+        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.pack.thumbnailUri]];
+        self.pack.thumbnailData = imgData;
+    }];
+    
+    PQBuyStickerPackOperation *buyStickerPackOpe = [[PQBuyStickerPackOperation alloc] initWithStickerPack:self.pack];
+    
+    [buyStickerPackOpe setCompletionBlock:^{
+        [self.delegate stickerPackDownloadOperation:self
+                              didUpdateWithProgress:100];
+        self.percentage = 100;
+        [self completeOperation];
+        [self.delegate stickerPackDownloadOperation:self
+                    didFinishDownloadingStickerPack:self.pack
+                                              error:nil];
+    }];
+    
+    //[downloadPackThumbnailOperation addDependency:getStickersOpe];
+    [buyStickerPackOpe addDependency:downloadPackThumbnailOperation];
+    
+    PQSticker *sticker = [self.pack.stickers objectAtIndex:0];
+    
+    for (PQSticker *sticker in self.pack.stickers) {
+        PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc]
+                                                          initWithSticker:sticker
+                                                          delegate:self];
+        //[stickerDownloadOpe addDependency:getStickersOpe];
+        [buyStickerPackOpe addDependency:stickerDownloadOpe];
+        [self.downloadQueue addOperation:stickerDownloadOpe];
+    }
+    //[self.downloadQueue addOperation:getStickersOpe];
+    [self.downloadQueue addOperation:downloadPackThumbnailOperation];
+    [self.downloadQueue addOperation:buyStickerPackOpe];
 }
 
 - (void)completeOperation {

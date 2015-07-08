@@ -41,7 +41,9 @@
 
 + (NSDictionary *)defaultPropertyValues
 {
-    return @{};
+    return @{@"stickerId":@"",
+             @"uri":@"",
+             @"thumbnailData":[NSData new]};
 }
 
 // Specify properties to ignore (Realm won't persist these)
@@ -49,6 +51,10 @@
 + (NSArray *)ignoredProperties
 {
     return @[@"thumbnailImage"];
+}
+
++ (NSString *)primaryKey {
+    return @"stickerId";
 }
 
 @end

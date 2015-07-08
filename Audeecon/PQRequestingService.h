@@ -17,4 +17,8 @@
                                failure:(void(^)(NSError *error))failureCall;
 - (void)downloadAudioFileAtUrl:(NSString *)fileUrl
                       complete:(void(^)(NSURL *filepath))completeCall;
+- (void)buyStickerPack:(NSString *)packId
+               forUser:(NSString *)username
+               success:(void(^)())successCall
+               failure:(void(^)(NSError *error))failureCall;
 @end

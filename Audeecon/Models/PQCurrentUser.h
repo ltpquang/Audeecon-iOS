@@ -7,9 +7,15 @@
 //
 
 #import <Realm/Realm.h>
+#import "PQStickerPack.h"
+#import "PQUser.h"
 
-@interface PQCurrentUser : RLMObject
-<# Add properties here to define the model #>
+@interface PQCurrentUser : PQUser
+@property RLMArray<PQStickerPack> *ownedStickerPack;
+
+- (void)updateOwnedStickerPackUsingQueue:(NSOperationQueue *)queue
+                                 success:(void(^)())successCall
+                                 failure:(void(^)(NSError *error))failureCall;
 @end
 
 // This protocol enables typed collections. i.e.:

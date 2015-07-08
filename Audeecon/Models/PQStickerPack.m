@@ -8,6 +8,8 @@
 
 #import "PQStickerPack.h"
 #import "PQRequestingService.h"
+#import "PQGetStickersInfoOperation.h"
+#import <RLMRealm.h>
 
 @interface PQStickerPack()
 @property (weak) PQStickerPackDownloadOperation *downloadOperation;
@@ -43,6 +45,18 @@
     return self.downloadOperation.percentage;
 }
 
+- (BOOL)needToBeUpdated {
+    if (self.thumbnailData.length == 0) {
+        return YES;
+    }
+    for (PQSticker *sticker in self.stickers) {
+        if (sticker.thumbnailData.length == 0) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (void)downloadThumbnail {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_thumbnailUri]];
     [NSURLConnection sendAsynchronousRequest:request
@@ -55,9 +69,14 @@
 - (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
                                        success:(void(^)())successCall
                                        failure:(void(^)(NSError *error))failureCall {
+    
     [requestingService getStickersOfStickerPackWithId:self.packId
                                               success:^(NSArray *result) {
+                                                  RLMRealm *realm = [RLMRealm defaultRealm];
+                                                  [realm beginWriteTransaction];
+                                                  [self.stickers removeAllObjects];
                                                   [self.stickers addObjects:result];
+                                                  [realm commitWriteTransaction];
                                                   successCall();
                                               }
                                               failure:^(NSError *error) {
@@ -65,15 +84,33 @@
                                               }];
 }
 
-- (void)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
-                                          progress:(void(^)(NSInteger percentage))progressCall {
-    PQStickerPackDownloadOperation *operation = [[PQStickerPackDownloadOperation alloc]
-                                                 initWithStickerPack:self
-                                                 delegate:self];
-    self.downloadOperation = operation;
-    [queue addOperation:operation];
-    self.status = StickerPackStatusPending;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
+- (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
+                                                   progress:(void(^)(NSInteger percentage))progressCall {
+    if (![self needToBeUpdated]) {
+        [self stickerPackDownloadOperation:nil
+           didFinishDownloadingStickerPack:self
+                                     error:nil];
+        NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{}];
+        [queue addOperation:operation];
+        return operation;
+    }
+    else {
+        //PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPack:self];
+        PQGetStickersInfoOperation *getStickerInfos = [[PQGetStickersInfoOperation alloc] initWithStickerPackId:self.packId];
+        
+        PQStickerPackDownloadOperation *operation = [[PQStickerPackDownloadOperation alloc]
+                                                     initWithStickerPack:self
+                                                     delegate:self];
+        
+        [operation addDependency:getStickerInfos];
+        
+        self.downloadOperation = operation;
+        [queue addOperation:getStickerInfos];
+        [queue addOperation:operation];
+        self.status = StickerPackStatusPending;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
+        return operation;
+    }
 }
 
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
@@ -92,20 +129,32 @@
                didUpdateWithProgress:(NSInteger)percentage {
     self.status = StickerPackStatusDownloading;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
-//    NSLog(@"%i", percentage);
+    NSLog(@"%i", percentage);
 }
 // Specify default values for properties
 
-//+ (NSDictionary *)defaultPropertyValues
-//{
-//    return @{};
-//}
++ (NSDictionary *)defaultPropertyValues
+{
+    return @{@"packId":@"",
+             @"name":@"",
+             @"artist":@"",
+             @"packDescription":@"",
+             @"thumbnailUri":@"",
+             @"thumbnailData":[NSData new]};
+}
 
 // Specify properties to ignore (Realm won't persist these)
 
 + (NSArray *)ignoredProperties
 {
-    return @[@"thumbnailImage", @"status", @"downloadOperation"];
+    return @[@"thumbnailImage",
+             @"status",
+             @"downloadOperation",
+             @"percentage",
+             @"needToBeUpdated"];
 }
 
++ (NSString *)primaryKey {
+    return @"packId";
+}
 @end

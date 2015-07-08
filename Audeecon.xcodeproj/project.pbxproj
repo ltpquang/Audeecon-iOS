@@ -24,7 +24,6 @@
 		6F3783C21B27CAAB0066EF08 /* PQRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C11B27CAAB0066EF08 /* PQRegisterViewController.m */; };
 		6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */; };
 		6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */; };
-		6F4517971B2FCE4D006DCB8F /* PQUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4517961B2FCE4D006DCB8F /* PQUser.m */; };
 		6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */; };
 		6F4607771B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607631B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m */; };
 		6F4607781B48387000B637C7 /* PKCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607651B48387000B637C7 /* PKCircleProgressView.m */; };
@@ -37,7 +36,7 @@
 		6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */; };
 		6F8AF40C1B46F6FC0099F63A /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40B1B46F6FC0099F63A /* PQSticker.m */; };
 		6F8AF40F1B46FB0B0099F63A /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */; };
-		6F935FE91B46E20500F0FD03 /* PQCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F935FE81B46E20500F0FD03 /* PQCurrentUser.m */; };
+		6F8FFCC31B4B01A200D8C06B /* PQBuyStickerPackOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */; };
 		6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */; };
 		6F9CE3E71ABB14EE00D716EB /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D61ABB14EE00D716EB /* DDASLLogger.m */; };
 		6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE3D81ABB14EE00D716EB /* DDFileLogger.m */; };
@@ -185,6 +184,9 @@
 		6FAF56091B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF56081B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m */; };
 		6FAF560C1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF560B1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m */; };
 		6FAF560F1B36E74C0091281C /* PQHostnameFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF560E1B36E74C0091281C /* PQHostnameFactory.m */; };
+		6FB4EBC91B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EBC81B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m */; };
+		6FB4EBCC1B4B94C7003E9DE9 /* PQUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EBCB1B4B94C7003E9DE9 /* PQUser.m */; };
+		6FB4EBCF1B4B94E2003E9DE9 /* PQCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4EBCE1B4B94E2003E9DE9 /* PQCurrentUser.m */; };
 		6FB93B6F1ABB0E4E0067224E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B6E1ABB0E4E0067224E /* main.m */; };
 		6FB93B781ABB0E4E0067224E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B761ABB0E4E0067224E /* Main.storyboard */; };
 		6FB93B7A1ABB0E4E0067224E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B791ABB0E4E0067224E /* Images.xcassets */; };
@@ -255,8 +257,6 @@
 		6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQLoginViewController.m; path = "Controllers/Login and register/PQLoginViewController.m"; sourceTree = "<group>"; };
 		6F3783C61B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUpdateAdditionalInfoViewController.h; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.h"; sourceTree = "<group>"; };
 		6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUpdateAdditionalInfoViewController.m; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.m"; sourceTree = "<group>"; };
-		6F4517951B2FCE4D006DCB8F /* PQUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUser.h; path = Models/PQUser.h; sourceTree = "<group>"; };
-		6F4517961B2FCE4D006DCB8F /* PQUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUser.m; path = Models/PQUser.m; sourceTree = "<group>"; };
 		6F4607601B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+PKDownloadButtonAnimations.h"; sourceTree = "<group>"; };
 		6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+PKDownloadButtonAnimations.m"; sourceTree = "<group>"; };
 		6F4607621B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PKDownloadButton.h"; sourceTree = "<group>"; };
@@ -287,8 +287,8 @@
 		6F8AF40B1B46F6FC0099F63A /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
 		6F8AF40D1B46FB0B0099F63A /* PQStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPack.h; path = Models/PQStickerPack.h; sourceTree = "<group>"; };
 		6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPack.m; path = Models/PQStickerPack.m; sourceTree = "<group>"; };
-		6F935FE71B46E20500F0FD03 /* PQCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQCurrentUser.h; path = Models/PQCurrentUser.h; sourceTree = "<group>"; };
-		6F935FE81B46E20500F0FD03 /* PQCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQCurrentUser.m; path = Models/PQCurrentUser.m; sourceTree = "<group>"; };
+		6F8FFCC11B4B01A200D8C06B /* PQBuyStickerPackOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQBuyStickerPackOperation.h; path = Models/PQBuyStickerPackOperation.h; sourceTree = "<group>"; };
+		6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQBuyStickerPackOperation.m; path = Models/PQBuyStickerPackOperation.m; sourceTree = "<group>"; };
 		6F9CE3D31ABB14EE00D716EB /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		6F9CE3D41ABB14EE00D716EB /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		6F9CE3D51ABB14EE00D716EB /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -595,6 +595,12 @@
 		6FAF560B1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQKeyboardStickerCollectionViewCell.m; path = Controllers/Cells/PQKeyboardStickerCollectionViewCell.m; sourceTree = "<group>"; };
 		6FAF560D1B36E74C0091281C /* PQHostnameFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQHostnameFactory.h; path = Helpers/PQHostnameFactory.h; sourceTree = "<group>"; };
 		6FAF560E1B36E74C0091281C /* PQHostnameFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQHostnameFactory.m; path = Helpers/PQHostnameFactory.m; sourceTree = "<group>"; };
+		6FB4EBC71B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQGetStickersInfoOperation.h; path = Models/PQGetStickersInfoOperation.h; sourceTree = "<group>"; };
+		6FB4EBC81B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQGetStickersInfoOperation.m; path = Models/PQGetStickersInfoOperation.m; sourceTree = "<group>"; };
+		6FB4EBCA1B4B94C7003E9DE9 /* PQUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUser.h; path = Models/PQUser.h; sourceTree = "<group>"; };
+		6FB4EBCB1B4B94C7003E9DE9 /* PQUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUser.m; path = Models/PQUser.m; sourceTree = "<group>"; };
+		6FB4EBCD1B4B94E2003E9DE9 /* PQCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQCurrentUser.h; path = Models/PQCurrentUser.h; sourceTree = "<group>"; };
+		6FB4EBCE1B4B94E2003E9DE9 /* PQCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQCurrentUser.m; path = Models/PQCurrentUser.m; sourceTree = "<group>"; };
 		6FB93B691ABB0E4E0067224E /* Audeecon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audeecon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB93B6D1ABB0E4E0067224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB93B6E1ABB0E4E0067224E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -685,8 +691,12 @@
 		6F2505611B48D95600F00274 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				6FB4EBC71B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.h */,
+				6FB4EBC81B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m */,
 				6F2505621B48D99E00F00274 /* PQStickerDownloadOperation.h */,
 				6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */,
+				6F8FFCC11B4B01A200D8C06B /* PQBuyStickerPackOperation.h */,
+				6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */,
 				6F2505651B48DC4200F00274 /* PQStickerPackDownloadOperation.h */,
 				6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */,
 			);
@@ -810,10 +820,10 @@
 		6F935FE51B46E1A500F0FD03 /* Users */ = {
 			isa = PBXGroup;
 			children = (
-				6F4517951B2FCE4D006DCB8F /* PQUser.h */,
-				6F4517961B2FCE4D006DCB8F /* PQUser.m */,
-				6F935FE71B46E20500F0FD03 /* PQCurrentUser.h */,
-				6F935FE81B46E20500F0FD03 /* PQCurrentUser.m */,
+				6FB4EBCA1B4B94C7003E9DE9 /* PQUser.h */,
+				6FB4EBCB1B4B94C7003E9DE9 /* PQUser.m */,
+				6FB4EBCD1B4B94E2003E9DE9 /* PQCurrentUser.h */,
+				6FB4EBCE1B4B94E2003E9DE9 /* PQCurrentUser.m */,
 			);
 			name = Users;
 			sourceTree = "<group>";
@@ -1989,6 +1999,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB4EBCC1B4B94C7003E9DE9 /* PQUser.m in Sources */,
 				6F9CE5C51ABB16FC00D716EB /* XMPPMessageCarbons.m in Sources */,
 				6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */,
 				6F3783C21B27CAAB0066EF08 /* PQRegisterViewController.m in Sources */,
@@ -2038,7 +2049,6 @@
 				6F9CE5BD1ABB16FC00D716EB /* XMPPPing.m in Sources */,
 				6F9CE57A1ABB16FC00D716EB /* XMPPIQ+JabberRPC.m in Sources */,
 				6F9CE5B91ABB16FC00D716EB /* XMPPStreamManagementMemoryStorage.m in Sources */,
-				6F4517971B2FCE4D006DCB8F /* PQUser.m in Sources */,
 				6FFB3E501ACB905A00FE8901 /* PQMessageExchangeViewController.m in Sources */,
 				6FE61B151B47902E0035C39F /* PQStoreViewController.m in Sources */,
 				6F9CE5C81ABB16FC00D716EB /* XMPPMessage+XEP_0333.m in Sources */,
@@ -2067,7 +2077,6 @@
 				6FAF560C1B36C5D30091281C /* PQKeyboardStickerCollectionViewCell.m in Sources */,
 				6F9CE5541ABB16FC00D716EB /* XMPPAnonymousAuthentication.m in Sources */,
 				6F9CE58B1ABB16FC00D716EB /* XMPPMessage+XEP0045.m in Sources */,
-				6F935FE91B46E20500F0FD03 /* PQCurrentUser.m in Sources */,
 				6F46077A1B48387000B637C7 /* PKDownloadButton.m in Sources */,
 				6F9CE5751ABB16FC00D716EB /* XMPPResourceMemoryStorageObject.m in Sources */,
 				6FEC4AC01B4A698200C29D17 /* PQPendingOperations.m in Sources */,
@@ -2106,9 +2115,11 @@
 				6F9CE5551ABB16FC00D716EB /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				6F9CE5651ABB16FC00D716EB /* XMPPParser.m in Sources */,
 				6F9CE5981ABB16FC00D716EB /* XMPPvCardTempLabel.m in Sources */,
+				6FB4EBC91B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m in Sources */,
 				6F9CE5B81ABB16FC00D716EB /* XMPPBlocking.m in Sources */,
 				6F9CE5711ABB16FC00D716EB /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				6F9CE5641ABB16FC00D716EB /* XMPPModule.m in Sources */,
+				6F8FFCC31B4B01A200D8C06B /* PQBuyStickerPackOperation.m in Sources */,
 				6F9CE5581ABB16FC00D716EB /* XMPPPlainAuthentication.m in Sources */,
 				6F9CE5B31ABB16FC00D716EB /* XMPPvCardAvatarModule.m in Sources */,
 				6F9CE5AB1ABB16FC00D716EB /* XMPPCapsCoreDataStorageObject.m in Sources */,
@@ -2159,6 +2170,7 @@
 				6F9CE5721ABB16FC00D716EB /* XMPPRoster.xcdatamodel in Sources */,
 				6F9CE56F1ABB16FC00D716EB /* XMPPReconnect.m in Sources */,
 				6F9CE3E81ABB14EE00D716EB /* DDFileLogger.m in Sources */,
+				6FB4EBCF1B4B94E2003E9DE9 /* PQCurrentUser.m in Sources */,
 				6F9CE5671ABB16FC00D716EB /* XMPPStream.m in Sources */,
 				6F9CE5A51ABB16FC00D716EB /* XMPPMessage+XEP_0085.m in Sources */,
 				6F9CE58C1ABB16FC00D716EB /* XMPPMUC.m in Sources */,

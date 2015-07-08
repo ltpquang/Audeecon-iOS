@@ -16,6 +16,9 @@
 #import "XMPPFramework.h"
 #import "PQGlobalContainer.h"
 
+@class RLMRealm;
+@class PQCurrentUser;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, XMPPStreamDelegate, XMPPRosterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -39,6 +42,8 @@
 
 //@property (strong, nonatomic) NSArray *stickerPacks;
 @property (strong, nonatomic) PQGlobalContainer *globalContainer;
+@property (strong, nonatomic) RLMRealm *realm;
+@property (strong, nonatomic) PQCurrentUser *currentUser;
 //@property BOOL stickerPacksDownloaded;
 
 - (BOOL)connect;

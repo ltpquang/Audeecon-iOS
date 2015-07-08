@@ -7,8 +7,53 @@
 //
 
 #import "PQCurrentUser.h"
+#import "PQRequestingService.h"
+#import "PQStickerPack.h"
+#import <Realm.h>
 
 @implementation PQCurrentUser
+
+- (BOOL)stickerPacksNeedToBeReplacedByStickerPacks:(NSArray *)newArray {
+    NSArray *oldIds = [self.ownedStickerPack valueForKeyPath:@"packId"];
+    NSArray *newIds = [newArray valueForKeyPath:@"packId"];
+    
+    NSCountedSet *oldSet = [NSCountedSet setWithArray:oldIds];
+    NSCountedSet *newSet = [NSCountedSet setWithArray:newIds];
+    
+    return ![oldSet isEqualToSet:newSet];
+}
+
+- (void)updateOwnedStickerPackUsingQueue:(NSOperationQueue *)queue
+                                 success:(void(^)())successCall
+                                 failure:(void(^)(NSError *error))failureCall {
+    PQRequestingService *requestingService = [PQRequestingService new];
+    [requestingService getAllStickerPacksForUser:self.username
+                                         success:^(NSArray *result) {
+                                             
+                                             RLMRealm *realm = [RLMRealm defaultRealm];
+                                             if ([self stickerPacksNeedToBeReplacedByStickerPacks:result]) {
+                                                 [realm beginWriteTransaction];
+                                                 [self.ownedStickerPack removeAllObjects];
+                                                 [self.ownedStickerPack addObjects:result];
+                                                 [realm commitWriteTransaction];
+                                             }
+                                             
+                                             NSBlockOperation *ope = [NSBlockOperation blockOperationWithBlock:^{
+                                                 successCall();
+                                                 NSLog(@"Packs downloaded");
+                                             }];
+                                             
+                                             for (PQStickerPack *pack in self.ownedStickerPack) {
+                                                 [ope addDependency:[pack downloadDataAndStickersUsingOperationQueue:queue
+                                                                                                            progress:nil]];
+                                             }
+                                             [queue addOperation:ope];
+                                         }
+                                         failure:^(NSError *error) {
+                                             //
+                                             failureCall(error);
+                                         }];
+}
 
 // Specify default values for properties
 

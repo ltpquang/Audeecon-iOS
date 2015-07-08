@@ -25,10 +25,12 @@ typedef enum : NSUInteger {
 @property NSString *packDescription;
 @property NSString *thumbnailUri;
 @property NSData *thumbnailData;
+@property RLMArray<PQSticker> *stickers;
+//Excluded in realm
 @property (nonatomic) UIImage *thumbnailImage;
 @property StickerPackStatus status;
 @property (nonatomic) NSInteger percentage;
-@property RLMArray<PQSticker> *stickers;
+@property (nonatomic) BOOL needToBeUpdated;
 
 - (id)initWithPackId:(NSString *)packId
              andName:(NSString *)name
@@ -38,8 +40,8 @@ typedef enum : NSUInteger {
 - (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
                                        success:(void(^)())successCall
                                        failure:(void(^)(NSError *error))failureCall;
-- (void)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
-                                          progress:(void(^)(NSInteger percentage))progressCall;
+- (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue
+                                                   progress:(void(^)(NSInteger percentage))progressCall;
 @end
 
 // This protocol enables typed collections. i.e.:

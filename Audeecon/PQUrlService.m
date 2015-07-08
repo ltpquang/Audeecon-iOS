@@ -10,30 +10,55 @@
 
 @implementation PQUrlService
 + (NSString *)baseUrl {
-    return @"http://audeecon.herokuapp.com/api/v2/packs";
+    return @"http://audeecon.herokuapp.com/api/v2";
 }
 
 + (NSString *)urlToGetAllStickerPacks {
-    NSString *result = [NSString stringWithFormat:@"%@", [self baseUrl]];
+    NSString *result = [[self baseUrl]
+                        stringByAppendingString:@"/packs"];
+    NSLog(@"%@", result);
+    return result;
+}
+
++ (NSString *)urlToGetAllUsers {
+    NSString *result = [[self baseUrl]
+                        stringByAppendingString:@"/users"];
     NSLog(@"%@", result);
     return result;
 }
 
 + (NSString *)urlToGetAllStickerPacksForUser:(NSString *)username {
-    NSString *result = [NSString stringWithFormat:@"http://audeecon.herokuapp.com/api/v2/users/%@/packs", username];
+    NSString *result = [[[[self urlToGetAllUsers]
+                        stringByAppendingString:@"/"]
+                        stringByAppendingString:username]
+                        stringByAppendingString:@"/packs"];
     NSLog(@"%@", result);
     return result;
 }
 
 + (NSString *)urlToGetStickerPackWithId:(NSString *)packId {
     //?size=240
-    NSString *result = [NSString stringWithFormat:@"%@/%@?size=120", [self urlToGetAllStickerPacks], packId];
+    NSString *result = [[[[self urlToGetAllStickerPacks]
+                        stringByAppendingString:@"/"]
+                        stringByAppendingString:packId]
+                        stringByAppendingString:@"?size=240"];
     NSLog(@"%@", result);
     return result;
 }
 
 + (NSString *)urlToS3FileWithFileName:(NSString *)fileName {
     return [@"https://s3.amazonaws.com/audeecon-us/" stringByAppendingString:fileName];
+}
+
++ (NSString *)urlToBuyStickerPackForUser:(NSString *)username {
+    //audeecon.herokuapp.com/api/v1/users/:username/purchase
+    //pack_id:
+    NSString *result = [[[[self urlToGetAllUsers]
+                        stringByAppendingString:@"/"]
+                        stringByAppendingString:username]
+                        stringByAppendingString:@"/purchase"];
+    NSLog(@"%@", result);
+    return result;
 }
 
 @end

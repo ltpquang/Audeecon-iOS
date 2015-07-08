@@ -11,6 +11,7 @@
 #import "PQStickerPackTableViewCell.h"
 #import "PQStickerPack.h"
 #import "AppDelegate.h"
+#import "PQCurrentUser.h"
 
 @interface PQStickerTableViewController ()
 // Data
@@ -84,20 +85,45 @@
 
 #pragma mark - Refresh control delegate
 - (void)refresh {
-    [self.requestingService getAllStickerPacksForUser:@"gaulois"
-                                              success:^(NSArray *result) {
-                                                  //
-                                                  [[self appDelegate] globalContainer].stickerPacks = result;
-                                                  self.stickerPacks = result;
-                                                  [self.tableView reloadData];
-                                                  [self.refreshControl endRefreshing];
-                                              }
-                                              failure:^(NSError *error) {
-                                                  //
-                                                  [self.refreshControl endRefreshing];
-                                              }];
+    NSString *username = self.forOnlineStore ? @"" : [[[self appDelegate] currentUser] username];
+    if (self.forOnlineStore) {
+        [self.requestingService getAllStickerPacksForUser:username
+                                                  success:^(NSArray *result) {
+                                                      //
+                                                      [[self appDelegate] globalContainer].stickerPacks = result;
+                                                      self.stickerPacks = [self updateStickerPacksArray:[result mutableCopy]
+                                                                                 usingStickerPacksArray:[[[self appDelegate] globalContainer] stickerPacks]];
+                                                      [self.tableView reloadData];
+                                                      [self.refreshControl endRefreshing];
+                                                  }
+                                                  failure:^(NSError *error) {
+                                                      //
+                                                      [self.refreshControl endRefreshing];
+                                                  }];
+    }
+    else {
+        self.stickerPacks = [[[self appDelegate] globalContainer] stickerPacks];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }
 }
-#pragma mark - Table view data source
+#pragma mark - Utilities
+- (NSArray *)updateStickerPacksArray:(NSMutableArray *)packs
+              usingStickerPacksArray:(NSArray *)ownedPacks {
+    NSMutableDictionary *idsAndPacks = [NSMutableDictionary new];
+    for (PQStickerPack *pack in ownedPacks) {
+        idsAndPacks[pack.packId] = pack;
+    }
+    NSArray *keyArray = [idsAndPacks allKeys];
+    for (int i = 0; i < packs.count; ++i) {
+        PQStickerPack *pack = packs[i];
+        if ([keyArray containsObject:pack.packId]) {
+            [packs replaceObjectAtIndex:i withObject:idsAndPacks[pack.packId]];
+        }
+    }
+    return packs;
+}
+
 
 #pragma mark - Table view data source
 

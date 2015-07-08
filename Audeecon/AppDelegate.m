@@ -12,10 +12,12 @@
 #import "PQHostnameFactory.h"
 #import "PQRequestingService.h"
 #import "PQMessage.h"
-//#import <Parse/Parse.h>
 #import "PQFilePathFactory.h"
 #import <AWSCore.h>
 #import <AWSS3.h>
+#import <Realm.h>
+#import "PQUser.h"
+#import "PQCurrentUser.h"
 
 @interface AppDelegate ()
 
@@ -28,11 +30,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    _globalContainer = [PQGlobalContainer new];
     [self clearTemperaryFolder];
     //[self setupParse];
     [self setupStream];
     [self setupAmazon];
+    [self updateRealmSchema];
+    self.realm = [RLMRealm defaultRealm];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
     //login = nil;
@@ -73,6 +76,20 @@
 }
 
 #pragma mark - App delegate actions
+- (PQGlobalContainer *)globalContainer {
+    if (_globalContainer == nil) {
+        _globalContainer = [PQGlobalContainer new];
+    }
+    return _globalContainer;
+}
+
+- (RLMRealm *)realm {
+    if (_realm == nil) {
+        _realm = [RLMRealm defaultRealm];
+    }
+    return _realm;
+}
+
 - (void)clearTemperaryFolder {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *directory = [[PQFilePathFactory tempDirectory] path];
@@ -83,8 +100,6 @@
             // it failed.
         }
     }
-    
-    
 }
 
 - (void)downloadStickerPacks {
@@ -123,6 +138,13 @@
     [AWSS3TransferManager registerS3TransferManagerWithConfiguration:configuration forKey:@"defaulttransfermanager"];
 }
 
+- (void)updateRealmSchema {
+    [RLMRealm setSchemaVersion:1
+                forRealmAtPath:[RLMRealm defaultRealmPath]
+            withMigrationBlock:^(RLMMigration *migration, uint64_t oldSchemaVersion) {
+                
+            }];
+}
 #pragma mark - XMPP setup
 - (void)setupStream {
     _xmppStream = [[XMPPStream alloc] init];
@@ -234,7 +256,32 @@
     NSLog(@"didAuthenticate");
     [_loginDelegate loginDidAuthenticate];
     
-    [self downloadStickerPacks];
+    //[self downloadStickerPacks];
+    
+    // Load user from database
+    NSString *predicateString = [NSString stringWithFormat:@"username = '%@'", [[[self xmppStream] myJID] user]];
+    RLMResults *users = [PQCurrentUser objectsWhere:predicateString];
+    self.currentUser = [users firstObject];
+    // If not, create a new one
+    if (self.currentUser == nil) {
+        self.currentUser = [[PQCurrentUser alloc] initWithXMPPJID:[[self xmppStream] myJID]];
+        [self.realm beginWriteTransaction];
+        [self.realm addObject:self.currentUser];
+        [self.realm commitWriteTransaction];
+    }
+    
+    [self.currentUser updateOwnedStickerPackUsingQueue:[[self globalContainer] stickerPackDownloadQueue]
+                                               success:^{
+                                                   //
+                                                   [_messageExchangeDelegate reloadStickers];
+                                                   NSLog(@"Packs downloaded");
+                                               }
+                                               failure:^(NSError *error) {
+                                                   //
+                                                   NSLog(@"Update sticker packs failure");
+                                               }];
+    
+    // Then update sticker pack for that user
     
     [self goOnline];
 }

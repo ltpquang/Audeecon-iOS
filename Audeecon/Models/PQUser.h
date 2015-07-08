@@ -7,9 +7,13 @@
 //
 
 #import <Realm/Realm.h>
+#import "XMPP.h"
 
 @interface PQUser : RLMObject
-<# Add properties here to define the model #>
+@property XMPPJID *jid;
+@property NSString *username;
+
+- (id)initWithXMPPJID:(XMPPJID *)jid;
 @end
 
 // This protocol enables typed collections. i.e.:
