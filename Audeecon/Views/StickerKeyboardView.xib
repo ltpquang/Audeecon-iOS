@@ -11,16 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1ha-7t-OJd">
-                    <rect key="frame" x="0.0" y="3" width="320" height="175"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="4EL-RX-NEe">
-                        <size key="itemSize" width="60" height="60"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wWg-MF-BKi">
                     <rect key="frame" x="58" y="181" width="262" height="35"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,6 +50,9 @@
                         <constraint firstAttribute="height" constant="1" id="0QA-bt-qXf"/>
                     </constraints>
                 </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytQ-j9-fCe">
+                    <rect key="frame" x="0.0" y="3" width="320" height="175"/>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -67,34 +60,30 @@
                 <constraint firstItem="F94-7d-v3d" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" constant="2" id="3zu-lq-28Y"/>
                 <constraint firstAttribute="bottom" secondItem="wWg-MF-BKi" secondAttribute="bottom" id="44i-FQ-v53"/>
                 <constraint firstAttribute="trailing" secondItem="z8K-R9-2Uo" secondAttribute="trailing" id="5e2-LG-Ihf"/>
-                <constraint firstItem="F94-7d-v3d" firstAttribute="top" secondItem="1ha-7t-OJd" secondAttribute="bottom" constant="2" id="8wn-uT-pTX"/>
+                <constraint firstAttribute="trailing" secondItem="ytQ-j9-fCe" secondAttribute="trailing" id="Cux-w6-IK1"/>
+                <constraint firstItem="ytQ-j9-fCe" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" id="GKl-JK-9EA"/>
                 <constraint firstItem="z8K-R9-2Uo" firstAttribute="top" secondItem="B8q-05-Et4" secondAttribute="top" id="HpR-Q1-hUk"/>
-                <constraint firstItem="1ha-7t-OJd" firstAttribute="top" secondItem="B8q-05-Et4" secondAttribute="top" id="K5I-YF-DJj"/>
-                <constraint firstItem="wWg-MF-BKi" firstAttribute="top" secondItem="1ha-7t-OJd" secondAttribute="bottom" id="M42-Id-DKy"/>
+                <constraint firstItem="ytQ-j9-fCe" firstAttribute="top" secondItem="z8K-R9-2Uo" secondAttribute="bottom" constant="2" id="NcF-do-Bqz"/>
                 <constraint firstAttribute="bottom" secondItem="a2Q-Rr-HPq" secondAttribute="bottom" constant="2" id="T8t-bo-60K"/>
                 <constraint firstItem="a2Q-Rr-HPq" firstAttribute="leading" secondItem="8yG-aq-jWa" secondAttribute="trailing" constant="4" id="Vkz-62-fps"/>
                 <constraint firstAttribute="trailing" secondItem="wWg-MF-BKi" secondAttribute="trailing" id="XSV-no-hnW"/>
                 <constraint firstItem="wWg-MF-BKi" firstAttribute="top" secondItem="F94-7d-v3d" secondAttribute="bottom" constant="2" id="aCQ-hC-zzX"/>
                 <constraint firstItem="wWg-MF-BKi" firstAttribute="leading" secondItem="a2Q-Rr-HPq" secondAttribute="trailing" constant="2" id="ckq-yg-J8s"/>
-                <constraint firstAttribute="trailing" secondItem="1ha-7t-OJd" secondAttribute="trailing" id="dER-mp-Qee"/>
+                <constraint firstItem="F94-7d-v3d" firstAttribute="top" secondItem="ytQ-j9-fCe" secondAttribute="bottom" constant="2" id="gJB-hK-FFf"/>
                 <constraint firstItem="8yG-aq-jWa" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" constant="2" id="oH4-07-rOg"/>
                 <constraint firstItem="wWg-MF-BKi" firstAttribute="top" secondItem="F94-7d-v3d" secondAttribute="bottom" id="or1-xd-UiH"/>
-                <constraint firstItem="1ha-7t-OJd" firstAttribute="top" secondItem="z8K-R9-2Uo" secondAttribute="bottom" constant="2" id="rMv-JD-LkL"/>
                 <constraint firstAttribute="bottom" secondItem="8yG-aq-jWa" secondAttribute="bottom" constant="2" id="swo-uf-Dwv"/>
                 <constraint firstAttribute="trailing" secondItem="F94-7d-v3d" secondAttribute="trailing" constant="2" id="xls-fU-8h7"/>
-                <constraint firstItem="1ha-7t-OJd" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" id="yLy-Yu-O2y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="K5I-YF-DJj"/>
-                    <exclude reference="M42-Id-DKy"/>
                     <exclude reference="aCQ-hC-zzX"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="packsCollectionView" destination="wWg-MF-BKi" id="IHA-E8-46O"/>
-                <outlet property="stickersCollectionView" destination="1ha-7t-OJd" id="40T-4u-jlZ"/>
+                <outlet property="stickersScrollView" destination="ytQ-j9-fCe" id="4aT-0G-zOC"/>
             </connections>
             <point key="canvasLocation" x="688" y="-203"/>
         </view>

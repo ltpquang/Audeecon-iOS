@@ -22,6 +22,10 @@
     return @"KeyboardStickerCollectionViewCell";
 }
 
++ (CGSize)cellSize {
+    return CGSizeMake(60, 60);
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         [self setupCell];

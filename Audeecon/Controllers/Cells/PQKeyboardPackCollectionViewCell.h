@@ -13,6 +13,7 @@
 @interface PQKeyboardPackCollectionViewCell : UICollectionViewCell
 + (UINib *)nib;
 + (NSString *)reuseIdentifier;
++ (CGSize)cellSize;
 
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack;
 @end

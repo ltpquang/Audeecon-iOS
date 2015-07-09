@@ -23,6 +23,10 @@
     return @"KeyboardPackCollectionViewCell";
 }
 
++ (CGSize)cellSize {
+    return CGSizeMake(37, 33);
+}
+
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack {
     _mainImage.image = pack.thumbnailImage;
 }

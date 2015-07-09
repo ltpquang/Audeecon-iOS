@@ -19,6 +19,7 @@
 
 + (UINib *)nib;
 + (NSString *)reuseIdentifier;
++ (CGSize)cellSize;
 
 - (void)configCellUsingSticker:(PQSticker *)sticker
                       delegate:(id<PQKeyboardStickerCellDelegate>)delegate;
