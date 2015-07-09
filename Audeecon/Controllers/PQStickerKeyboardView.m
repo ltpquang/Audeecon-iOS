@@ -50,6 +50,11 @@
     _delegate = delegate;
 
     _requestingService = [[PQRequestingService alloc] init];
+    
+    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                       animated:YES
+                                 scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    [self collectionView:self.packsCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs {

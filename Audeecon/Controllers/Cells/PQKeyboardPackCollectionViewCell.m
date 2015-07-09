@@ -26,4 +26,15 @@
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack {
     _mainImage.image = pack.thumbnailImage;
 }
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    if (selected) {
+        self.backgroundColor = [UIColor lightGrayColor];
+    }
+    else {
+        self.backgroundColor = [UIColor clearColor];
+    }
+}
+
 @end
