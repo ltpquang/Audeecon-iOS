@@ -47,7 +47,6 @@
                                              
                                              NSBlockOperation *ope = [NSBlockOperation blockOperationWithBlock:^{
                                                  successCall();
-                                                 NSLog(@"Packs downloaded");
                                              }];
                                              
                                              for (PQStickerPack *pack in self.ownedStickerPack) {

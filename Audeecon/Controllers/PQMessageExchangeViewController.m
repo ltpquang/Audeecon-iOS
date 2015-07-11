@@ -152,7 +152,7 @@
 #pragma mark - Audio recorder delegate
 - (void)didFinishRecordingAndSaveToFileAtUrl:(NSURL *)savedFile {
     PQMessage *message = [[PQMessage alloc] initWithSender:[[[self xmppStream] myJID] user]
-                                             andStickerUri:_selectedSticker.uri
+                                             andStickerUri:_selectedSticker.thumbnailUri
                                         andOfflineAudioUri:[savedFile path]];
     
     [message uploadAudioWithCompletion:^(BOOL succeeded, NSError *error) {

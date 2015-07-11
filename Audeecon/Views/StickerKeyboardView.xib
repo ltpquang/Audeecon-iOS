@@ -85,7 +85,7 @@
                 <outlet property="packsCollectionView" destination="wWg-MF-BKi" id="IHA-E8-46O"/>
                 <outlet property="stickersScrollView" destination="ytQ-j9-fCe" id="4aT-0G-zOC"/>
             </connections>
-            <point key="canvasLocation" x="688" y="-203"/>
+            <point key="canvasLocation" x="823" y="-208"/>
         </view>
     </objects>
 </document>

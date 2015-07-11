@@ -19,6 +19,7 @@
 - (NSOperationQueue *)stickerPackDownloadQueue {
     if (_stickerPackDownloadQueue == nil) {
         _stickerPackDownloadQueue = [NSOperationQueue new];
+        _stickerPackDownloadQueue.maxConcurrentOperationCount = 1;
     }
     return _stickerPackDownloadQueue;
 }

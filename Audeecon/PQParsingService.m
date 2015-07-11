@@ -43,20 +43,14 @@
 
 #pragma mark - Sticker
 + (PQSticker *)parseStickerFromDictionary:(NSDictionary *)sticker {
-//    PQSticker *result = [[PQSticker alloc] initWithId:(NSString *)[sticker objectForKey:@"sticker_id"]
-//                                             andWidth:[[sticker valueForKey:@"width"] integerValue]
-//                                            andHeight:[[sticker valueForKey:@"height"] integerValue]
-//                                        andFrameCount:[[sticker valueForKey:@"frame_count"] integerValue]
-//                                         andFrameRate:[[sticker valueForKey:@"frame_rate"] integerValue]
-//                                      andFramesPerCol:[[sticker valueForKey:@"frames_per_col"] integerValue]
-//                                      andFramesPerRow:[[sticker valueForKey:@"frames_per_row"] integerValue]
-//                                               andUri:(NSString *)[sticker valueForKey:@"uri"]
-//                                         andSourceUri:(NSString *)[sticker valueForKey:@"source_uri"]
-//                                         andSpriteUri:(NSString *)[sticker valueForKey:@"sprite_uri"]
-//                                   andPaddedSpriteUri:(NSString *)[sticker valueForKey:@"padded_sprite_uri"]];
-//    return result;
     PQSticker *result = [[PQSticker alloc] initWithStickerId:sticker[@"_id"]
-                                                       andUri:sticker[@"uri"]];
+                                             andThumbnailUri:sticker[@"thumbnail_uri"]
+                                              andFullsizeUri:sticker[@"fullsize_uri"]
+                                                andSpriteUri:sticker[@"fullsize_sprite_uri"]
+                                               andFrameCount:[sticker[@"frame_count"] integerValue]
+                                                andFrameRate:[sticker[@"frame_rate"] integerValue]
+                                             andFramesPerCol:[sticker[@"frames_per_col"] integerValue]
+                                             andFramesPerRow:[sticker[@"frames_per_row"] integerValue]];
     return result;
 }
 

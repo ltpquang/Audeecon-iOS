@@ -13,6 +13,8 @@
 
 @interface PQStickerDownloadOperation : NSOperation
 - (id)initWithSticker:(PQSticker *)sticker
+             andQueue:(NSOperationQueue *)queue
+     andDownloadQueue:(NSOperationQueue *)downloadQueue
              delegate:(id<PQStickerDownloadOperationDelegate>)delegate;
 @end
 

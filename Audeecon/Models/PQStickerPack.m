@@ -50,7 +50,7 @@
         return YES;
     }
     for (PQSticker *sticker in self.stickers) {
-        if (sticker.thumbnailData.length == 0) {
+        if ([sticker needToBeUpdated]) {
             return YES;
         }
     }
@@ -88,6 +88,15 @@
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
      didFinishDownloadingStickerPack:(PQStickerPack *)pack
                                error:(NSError *)error {
+//    NSLog(@"Pack downloaded: %@", pack.packId);
+//    NSLog(@"Thumbnail: %lu", (unsigned long)self.thumbnailData.length);
+//    for (PQSticker *sticker in pack.stickers) {
+//        NSLog(@"--Sticker: %@", sticker.stickerId);
+//        NSLog(@"------Thumbnail: %lu - %lu", (unsigned long)sticker.thumbnailUri.length, (unsigned long)sticker.thumbnailData.length);
+//        NSLog(@"------Fullsize: %lu - %lu", (unsigned long)sticker.fullsizeUri.length, (unsigned long)sticker.fullsizeUri.length);
+//        NSLog(@"------Sprite: %lu - %lu", (unsigned long)sticker.spriteUri.length, (unsigned long)sticker.spriteData.length);
+//        
+//    }
     self.status = StickerPackStatusDownloaded;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
 }
@@ -96,7 +105,7 @@
                didUpdateWithProgress:(NSInteger)percentage {
     self.status = StickerPackStatusDownloading;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
-    NSLog(@"%i", percentage);
+    //NSLog(@"%i", percentage);
 }
 // Specify default values for properties
 

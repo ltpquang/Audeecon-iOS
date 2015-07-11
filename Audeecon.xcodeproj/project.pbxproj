@@ -12,6 +12,7 @@
 		6F00F73B1B37A44600AEE057 /* PQMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73A1B37A44600AEE057 /* PQMessage.m */; };
 		6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */; };
 		6F0EE0321B42E1C900E25EC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */; };
+		6F2189C11B502C6E000572BD /* PQImageUriToDataDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2189C01B502C6E000572BD /* PQImageUriToDataDownloadOperation.m */; };
 		6F2505601B48C99800F00274 /* PQGlobalContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25055F1B48C99800F00274 /* PQGlobalContainer.m */; };
 		6F2505641B48D99E00F00274 /* PQStickerDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */; };
 		6F2505671B48DC4200F00274 /* PQStickerPackDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */; };
@@ -221,6 +222,8 @@
 		6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageCollectionViewCell.h; path = Controllers/Cells/PQMessageCollectionViewCell.h; sourceTree = "<group>"; };
 		6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageCollectionViewCell.m; path = Controllers/Cells/PQMessageCollectionViewCell.m; sourceTree = "<group>"; };
 		6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6F2189BF1B502C6E000572BD /* PQImageUriToDataDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQImageUriToDataDownloadOperation.h; path = Models/PQImageUriToDataDownloadOperation.h; sourceTree = "<group>"; };
+		6F2189C01B502C6E000572BD /* PQImageUriToDataDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQImageUriToDataDownloadOperation.m; path = Models/PQImageUriToDataDownloadOperation.m; sourceTree = "<group>"; };
 		6F25055E1B48C99800F00274 /* PQGlobalContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQGlobalContainer.h; path = Models/PQGlobalContainer.h; sourceTree = "<group>"; };
 		6F25055F1B48C99800F00274 /* PQGlobalContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQGlobalContainer.m; path = Models/PQGlobalContainer.m; sourceTree = "<group>"; };
 		6F2505621B48D99E00F00274 /* PQStickerDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerDownloadOperation.h; path = Models/PQStickerDownloadOperation.h; sourceTree = "<group>"; };
@@ -681,13 +684,23 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		6F2189BB1B5026DE000572BD /* Stickers download */ = {
+			isa = PBXGroup;
+			children = (
+				6F2505621B48D99E00F00274 /* PQStickerDownloadOperation.h */,
+				6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */,
+			);
+			name = "Stickers download";
+			sourceTree = "<group>";
+		};
 		6F2505611B48D95600F00274 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				6F2189BF1B502C6E000572BD /* PQImageUriToDataDownloadOperation.h */,
+				6F2189C01B502C6E000572BD /* PQImageUriToDataDownloadOperation.m */,
 				6FB4EBC71B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.h */,
 				6FB4EBC81B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m */,
-				6F2505621B48D99E00F00274 /* PQStickerDownloadOperation.h */,
-				6F2505631B48D99E00F00274 /* PQStickerDownloadOperation.m */,
+				6F2189BB1B5026DE000572BD /* Stickers download */,
 				6F8FFCC11B4B01A200D8C06B /* PQBuyStickerPackOperation.h */,
 				6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */,
 				6F2505651B48DC4200F00274 /* PQStickerPackDownloadOperation.h */,
@@ -2184,6 +2197,7 @@
 				6F9CE5671ABB16FC00D716EB /* XMPPStream.m in Sources */,
 				6F9CE5A51ABB16FC00D716EB /* XMPPMessage+XEP_0085.m in Sources */,
 				6F9CE58C1ABB16FC00D716EB /* XMPPMUC.m in Sources */,
+				6F2189C11B502C6E000572BD /* PQImageUriToDataDownloadOperation.m in Sources */,
 				6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */,
 				6F9CE5811ABB16FC00D716EB /* XMPPRoomCoreDataStorage.m in Sources */,
 				6F9CE5C41ABB16FC00D716EB /* XMPPMessage+XEP_0280.m in Sources */,

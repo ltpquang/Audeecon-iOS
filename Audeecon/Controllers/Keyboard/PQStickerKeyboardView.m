@@ -71,7 +71,8 @@
 
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs {
     _packs = packs;
-    [_packsCollectionView reloadData];
+    //[_packsCollectionView reloadData];
+    [self configKeyboardWithStickerPacks:packs delegate:self.delegate];
 }
 
 
