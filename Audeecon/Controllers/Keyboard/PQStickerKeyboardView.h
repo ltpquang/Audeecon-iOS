@@ -29,5 +29,6 @@
                 ofStickerPack:(PQStickerPack *)pack;
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
                ofStickerPack:(PQStickerPack *)pack;
+- (void)didChangeLayout;
 
 @end

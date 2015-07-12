@@ -15,9 +15,18 @@
 #import "PQSticker.h"
 
 @interface PQStickerKeyboardView()
-@property (weak, nonatomic) IBOutlet UICollectionView *packsCollectionView;
-@property (weak, nonatomic) IBOutlet UIScrollView *stickersScrollView;
+@property (strong, nonatomic) IBOutlet UICollectionView *packsCollectionView;
+@property (strong, nonatomic) IBOutlet UIScrollView *stickersScrollView;
 
+@property (strong, nonatomic) IBOutlet UISwitch *modeSwitch;
+@property (strong, nonatomic) IBOutlet UIView *topHorizontalHairline;
+@property (strong, nonatomic) IBOutlet UIView *middleHorizontalHairline;
+@property (strong, nonatomic) IBOutlet UIView *middleVerticalHairline;
+
+@property (strong, nonatomic) IBOutlet UIImageView *mainRecommendationImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *upComingRecommendationImageView;
+
+// Data
 @property (strong, nonatomic) NSArray *packs;
 @property (strong, nonatomic) NSMutableArray *keyboardCollectionViews;
 
@@ -62,19 +71,513 @@
 
     
     
-    
+
     [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                            animated:YES
                                      scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     [self collectionView:self.packsCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    [self updateLayoutForNormalLayout];
+    //[self updateLayoutForAutoRecommendationLayout];
+    
 }
 
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs {
     _packs = packs;
-    //[_packsCollectionView reloadData];
     [self configKeyboardWithStickerPacks:packs delegate:self.delegate];
 }
 
+- (void)removeAllConstraints {
+    NSArray *views = @[self.packsCollectionView,
+                       self.stickersScrollView,
+                       self.modeSwitch,
+                       self.topHorizontalHairline,
+                       self.middleHorizontalHairline,
+                       self.middleVerticalHairline,
+                       self.mainRecommendationImageView,
+                       self.upComingRecommendationImageView];
+    for (UIView *view in views) {
+        [view removeConstraints:view.constraints];
+        [view removeFromSuperview];
+    }
+    [self removeConstraints:self.constraints];
+}
+
+- (void)updateLayoutForAutoRecommendationLayout {
+    [self removeAllConstraints];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    
+    [self addSubview:self.mainRecommendationImageView];
+    [self addSubview:self.upComingRecommendationImageView];
+    
+    [self addSubview:self.modeSwitch];
+    [self addSubview:self.topHorizontalHairline];
+    [self addSubview:self.middleHorizontalHairline];
+    [self addSubview:self.middleVerticalHairline];
+    
+    [self setConstraintsForAutoRecommendationLayout];
+    
+    [self finishUpdateConstraints];
+    
+    
+    self.upComingRecommendationImageView.image = [(PQStickerPack *)self.packs[0] thumbnailImage];
+    self.mainRecommendationImageView.image = [(PQStickerPack *)self.packs[1] thumbnailImage];
+}
+
+- (void)updateLayoutForNormalLayout {
+    [self removeAllConstraints];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    
+    [self addSubview:self.packsCollectionView];
+    [self addSubview:self.stickersScrollView];
+    
+    [self addSubview:self.modeSwitch];
+    [self addSubview:self.topHorizontalHairline];
+    [self addSubview:self.middleHorizontalHairline];
+    [self addSubview:self.middleVerticalHairline];
+    
+    [self setConstraintsForNormalLayout];
+    
+    [self finishUpdateConstraints];
+}
+
+- (void)setConstraintsForAutoRecommendationLayout {
+    
+    CGFloat switchWidth = 51.0; //self.modeSwitch.frame.size.width;
+    CGFloat switchHeight = 31.0; //self.modeSwitch.frame.size.height;
+    // Switch leading
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeLeading
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeLeading
+                                                               multiplier:1.0
+                                                                 constant:2.0]];
+    // Switch bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                      constant:2.0]];
+    // Switch width
+    [self.modeSwitch addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1.0
+                                                                 constant:switchWidth]];
+    // Switch height
+    [self.modeSwitch addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1.0
+                                                                 constant:switchHeight]];
+    // Middle horizontal hairline height
+    [self.middleHorizontalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                                              attribute:NSLayoutAttributeHeight
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:nil
+                                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                                             multiplier:1.0
+                                                                               constant:1.0]];
+    // Middle horizontal hairline width
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:switchWidth]];
+    // Middle horizontal hairline left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                     attribute:NSLayoutAttributeLeading
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeLeading
+                                                    multiplier:1.0
+                                                      constant:2.0]];
+    // Middle horizontal hairline bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeBottom
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self.middleHorizontalHairline
+                                                     attribute:NSLayoutAttributeBottom
+                                                    multiplier:1.0
+                                                      constant:switchHeight + 4.0]];
+    // Middle vertical hairline width
+    [self.middleVerticalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.middleVerticalHairline
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1.0
+                                                                             constant:1.0]];
+    // Middle vertical hairline bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeBottom
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self.middleVerticalHairline
+                                                     attribute:NSLayoutAttributeBottom
+                                                    multiplier:1.0
+                                                      constant:0.0]];
+    
+    // Middle vertical hairline left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleVerticalHairline
+                                                     attribute:NSLayoutAttributeLeading
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self.middleHorizontalHairline
+                                                     attribute:NSLayoutAttributeTrailing
+                                                    multiplier:1.0
+                                                      constant:2.0]];
+    // Middle vertical hairline height
+    [self.middleVerticalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.middleVerticalHairline
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:switchWidth]];
+    // Up coming recommendation image view height
+    [self.upComingRecommendationImageView addConstraint:[NSLayoutConstraint constraintWithItem:self.upComingRecommendationImageView
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:0.0
+                                                      constant:switchHeight]];
+    // Up coming recommendation image view width
+    [self.upComingRecommendationImageView addConstraint:[NSLayoutConstraint constraintWithItem:self.upComingRecommendationImageView
+                                                     attribute:NSLayoutAttributeWidth
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:0.0
+                                                      constant:switchHeight]];
+    // Up comming recommendation image view horizontal center
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.upComingRecommendationImageView
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self.middleHorizontalHairline
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1.0
+                                                      constant:0.0]];
+    // Up coming recommendation image view bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                                            attribute:NSLayoutAttributeTop
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.upComingRecommendationImageView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:2.0]];
+    
+    // Top horizontal hairline height
+    [self.topHorizontalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:1.0]];
+    // Top horizontal hairline left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeLeading
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeLeading
+                                                                          multiplier:1.0
+                                                                            constant:0.0]];
+    // Top horizontal hairline top
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeTop
+                                                                          multiplier:1.0
+                                                                            constant:0.0]];
+    // Top horizontal hairline right
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                          multiplier:1.0
+                                                                            constant:0.0]];
+    // Top horizontal hairline bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.upComingRecommendationImageView
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeBottom
+                                                                          multiplier:1.0
+                                                                            constant:2.0]];
+    // Main recommendation image width
+    [self.mainRecommendationImageView addConstraint:[NSLayoutConstraint constraintWithItem:self.mainRecommendationImageView
+                                                                                 attribute:NSLayoutAttributeWidth
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:self.mainRecommendationImageView
+                                                                                 attribute:NSLayoutAttributeHeight
+                                                                                multiplier:1.0
+                                                                                  constant:0.0]];
+    // Main recommendatioin image top
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.mainRecommendationImageView
+                                                                                 attribute:NSLayoutAttributeTop
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:self.topHorizontalHairline
+                                                                                 attribute:NSLayoutAttributeBottom
+                                                                                multiplier:1.0
+                                                                                  constant:2.0]];
+    // Main recommendatioin image bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeBottom
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self.mainRecommendationImageView
+                                                     attribute:NSLayoutAttributeBottom
+                                                    multiplier:1.0
+                                                      constant:2.0]];
+    // Main recommendatioin image horizontal center
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.mainRecommendationImageView
+                                                                                 attribute:NSLayoutAttributeCenterX
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:self
+                                                                                 attribute:NSLayoutAttributeCenterX
+                                                                                multiplier:1.0
+                                                                                  constant:0.0]];
+}
+
+- (void)setConstraintsForNormalLayout {
+    
+    CGFloat switchWidth = 51.0; //self.modeSwitch.frame.size.width;
+    CGFloat switchHeight = 31.0; //self.modeSwitch.frame.size.height;
+    // Switch leading
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeLeading
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeLeading
+                                                               multiplier:1.0
+                                                                 constant:2.0]];
+    // Switch bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:2.0]];
+    // Switch width
+    [self.modeSwitch addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1.0
+                                                                 constant:switchWidth]];
+    // Switch height
+    [self.modeSwitch addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1.0
+                                                                 constant:switchHeight]];
+    // Middle horizontal hairline height
+    [self.middleHorizontalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                                              attribute:NSLayoutAttributeHeight
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:nil
+                                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                                             multiplier:1.0
+                                                                               constant:1.0]];
+    // Middle horizontal hairline right
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                              attribute:NSLayoutAttributeTrailing
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.middleHorizontalHairline
+                                                                              attribute:NSLayoutAttributeTrailing
+                                                                             multiplier:1.0
+                                                                               constant:2.0]];
+    // Middle horizontal hairline left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                                              attribute:NSLayoutAttributeLeading
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self
+                                                                              attribute:NSLayoutAttributeLeading
+                                                                             multiplier:1.0
+                                                                               constant:2.0]];
+    // Middle horizontal hairline bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.modeSwitch
+                                                                              attribute:NSLayoutAttributeTop
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.middleHorizontalHairline
+                                                                              attribute:NSLayoutAttributeBottom
+                                                                             multiplier:1.0
+                                                                               constant:2.0]];
+    // Middle vertical hairline width
+    [self.middleVerticalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.middleVerticalHairline
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1.0
+                                                                             constant:1.0]];
+    // Middle vertical hairline bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.middleVerticalHairline
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:2.0]];
+    
+    // Middle vertical hairline left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleVerticalHairline
+                                                                            attribute:NSLayoutAttributeLeading
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeLeading
+                                                                           multiplier:1.0
+                                                                             constant:switchWidth + 4.0]];
+    // Middle vertical hairline top
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleVerticalHairline
+                                                                            attribute:NSLayoutAttributeTop
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.middleHorizontalHairline
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:2.0]];
+    // Pack collection view left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.packsCollectionView
+                                                                         attribute:NSLayoutAttributeLeading
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.middleVerticalHairline
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                        multiplier:1.0
+                                                                          constant:2.0]];
+    // Pack collection view top
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.packsCollectionView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.middleHorizontalHairline
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                        multiplier:1.0
+                                                                          constant:0.0]];
+    // Pack collection view right
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.packsCollectionView
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                        multiplier:1.0
+                                                                          constant:2.0]];
+    // Pack collection view bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.packsCollectionView
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                        multiplier:1.0
+                                                                          constant:0.0]];
+    // Sticker scroll view left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.stickersScrollView
+                                                                        attribute:NSLayoutAttributeLeading
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeLeading
+                                                                       multiplier:1.0
+                                                                         constant:2.0]];
+    // Sticker scroll view right
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stickersScrollView
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                       multiplier:1.0
+                                                                         constant:2.0]];
+    // Sticker scroll view bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.middleHorizontalHairline
+                                                                        attribute:NSLayoutAttributeTop
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stickersScrollView
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0
+                                                                         constant:2.0]];
+    // Sticker scroll view height
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.stickersScrollView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.modeSwitch
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:6.0
+                                                                         constant:0.0]];
+    // Top horizontal hairline height
+    [self.topHorizontalHairline addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:1.0]];
+    // Top horizontal hairline left
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeLeading
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeLeading
+                                                                          multiplier:1.0
+                                                                            constant:0.0]];
+    // Top horizontal hairline top
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeTop
+                                                                          multiplier:1.0
+                                                                            constant:0.0]];
+    // Top horizontal hairline right
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                          multiplier:1.0
+                                                                            constant:0.0]];
+    // Top horizontal hairline bottom
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.stickersScrollView
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.topHorizontalHairline
+                                                                           attribute:NSLayoutAttributeBottom
+                                                                          multiplier:1.0
+                                                                            constant:2.0]];
+}
+
+- (void)finishUpdateConstraints {
+    [self setNeedsUpdateConstraints];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    [self.delegate didChangeLayout];
+}
+
+- (IBAction)modeSwitchValueChanged:(UISwitch *)sender {
+    
+    if ([sender isOn]) {
+        [self updateLayoutForAutoRecommendationLayout];
+    }
+    else {
+        [self updateLayoutForNormalLayout];
+    }
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat width = scrollView.frame.size.width;

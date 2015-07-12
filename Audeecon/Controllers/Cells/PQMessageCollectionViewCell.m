@@ -24,7 +24,7 @@
     _mainImage.image = nil;
     _delegate = delegate;
     NSURL *url = [NSURL URLWithString:message.stickerUri];
-    NSLog(@"%@", url);
+    //NSLog(@"%@", url);
     [_mainImage setImageWithURL:url];
 }
 

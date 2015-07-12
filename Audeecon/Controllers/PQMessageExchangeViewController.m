@@ -48,9 +48,6 @@
 - (PQStickerKeyboardView *)keyboardView {
     if (_keyboardView == nil) {
         _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
-        [_keyboardView setFrame:CGRectMake(0, self.view.bounds.size.height - 216, 320, 216)];
-        [_keyboardView configKeyboardWithStickerPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]
-                                             delegate:self];
     }
     return _keyboardView;
 }
@@ -93,9 +90,35 @@
 - (void)tapGestureHandler {
     NSLog(@"Double tap");
     [self.view addSubview:self.keyboardView];
-    UIEdgeInsets newInset = [self.collectionView contentInset];
-    [self.collectionView setContentInset:UIEdgeInsetsMake(newInset.top, newInset.left, self.keyboardView.bounds.size.height, newInset.right)];
+    [self.keyboardView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
+                                                          attribute:NSLayoutAttributeLeading
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.keyboardView
+                                                          attribute:NSLayoutAttributeLeading
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.keyboardView
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.keyboardView
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    
+    [self.keyboardView configKeyboardWithStickerPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]
+                                         delegate:self];
+
 }
+
+
 
 #pragma mark - Message exchange delegates
 - (void)didReceiveMessage:(PQMessage *)message {
@@ -108,7 +131,7 @@
 }
 
 - (void)reloadStickers {
-    [_keyboardView reloadKeyboardUsingPacks:[[[self appDelegate] globalContainer] stickerPacks]];
+    [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
 }
 
 #pragma mark - Collection view datasource
@@ -147,6 +170,14 @@
     
     [_audioRecorderAndPlayer stopRecordingAndSaveFileWithInfo:infoDict];
     
+}
+
+- (void)didChangeLayout {
+    CGPoint offsets = self.collectionView.contentOffset;
+    UIEdgeInsets insets = self.collectionView.contentInset;
+    [self.collectionView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height, insets.right)];
+    
+    [self.collectionView setContentOffset:CGPointMake(offsets.x, offsets.y - insets.bottom + self.collectionView.contentInset.bottom) animated:YES];
 }
 
 #pragma mark - Audio recorder delegate
