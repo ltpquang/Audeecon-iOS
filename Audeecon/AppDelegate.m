@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "XMPP.h"
+#import "XMPPvCardTemp.h"
 #import "XMPPMessage+XEP_0085.h"
 #import "PQHostnameFactory.h"
 #import "PQRequestingService.h"
@@ -102,27 +103,7 @@
     }
 }
 
-- (void)downloadStickerPacks {
-    NSString *userName = _xmppStream.myJID.user;
-    PQRequestingService *requestingService = [PQRequestingService new];
-    [requestingService getAllStickerPacksForUser:userName
-                                         success:^(NSArray *result) {
-                                             self.globalContainer.stickerPacks = result;//_stickerPacks = result;
-                                             [_messageExchangeDelegate reloadStickers];
-                                             NSLog(@"Packs downloaded");
-                                         }
-                                         failure:^(NSError *error) {
-                                             //
-                                         }];
-}
 
-//- (void)setupParse {
-//    
-//    // Initialize Parse.
-//    [Parse setApplicationId:@"w6qlLf8jN9xxKJGAMFzDy4EqVbUlZ3DfUwV9T4pj"
-//                  clientKey:@"VAn6cTkBRUUpiWkEQ0NcJKhG7qFG7UXSeZ1qGUJR"];
-//    
-//}
 
 - (void)setupAmazon {
     AWSCognitoCredentialsProvider *credentialsProvider
@@ -157,6 +138,8 @@
     _xmppRoster.autoFetchRoster = YES;
     _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
     
+    
+
     _xmppvCardStorage = [XMPPvCardCoreDataStorage sharedInstance];
     _xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:_xmppvCardStorage];
     
@@ -168,6 +151,8 @@
     
     [_xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [_xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [_xmppvCardTempModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [_xmppvCardAvatarModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
 }
 
 #pragma mark - XMPP actions
@@ -273,8 +258,8 @@
     [self.currentUser updateOwnedStickerPackUsingQueue:[[self globalContainer] stickerPackDownloadQueue]
                                                success:^{
                                                    //
+                                                   NSLog(@"Callback success on app delegate");
                                                    [_messageExchangeDelegate reloadStickers];
-                                                   NSLog(@"Packs downloaded");
                                                }
                                                failure:^(NSError *error) {
                                                    //
@@ -319,7 +304,8 @@
     if ([message hasComposingChatState]) {
         return;
     }
-    
+    NSLog(@"Received message");
+#warning DO REMEMBER TO CHECK BODY LENGTH WITH OFFLINE MESSAGES
     PQMessage *mess = [[PQMessage alloc] initWithXmlElement:message];
     
     [_messageExchangeDelegate didReceiveMessage:mess];
@@ -371,5 +357,29 @@
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender {
     NSLog(@"Roster end populating");
 }
+
+#pragma mark - XMPPvCardAvatar delegates
+- (void)xmppvCardAvatarModule:(XMPPvCardAvatarModule *)vCardTempModule
+              didReceivePhoto:(UIImage *)photo
+                       forJID:(XMPPJID *)jid {
+    
+}
+
+#pragma mark - XMPPvCardTempModule delegates
+- (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
+        didReceivevCardTemp:(XMPPvCardTemp *)vCardTemp
+                     forJID:(XMPPJID *)jid {
+    
+}
+
+- (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
+      failedToUpdateMyvCard:(DDXMLElement *)error {
+    
+}
+
+- (void)xmppvCardTempModuleDidUpdateMyvCard:(XMPPvCardTempModule *)vCardTempModule {
+    
+}
+
 
 @end

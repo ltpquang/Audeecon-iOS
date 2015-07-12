@@ -9,12 +9,12 @@
 #import "PQGlobalContainer.h"
 
 @implementation PQGlobalContainer
-- (NSArray *)stickerPacks {
-    if (_stickerPacks == nil) {
-        _stickerPacks = [NSArray new];
-    }
-    return _stickerPacks;
-}
+//- (NSArray *)stickerPacks {
+//    if (_stickerPacks == nil) {
+//        _stickerPacks = [NSArray new];
+//    }
+//    return _stickerPacks;
+//}
 
 - (NSOperationQueue *)stickerPackDownloadQueue {
     if (_stickerPackDownloadQueue == nil) {

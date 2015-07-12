@@ -85,27 +85,27 @@
 
 #pragma mark - Refresh control delegate
 - (void)refresh {
-    NSString *username = self.forOnlineStore ? @"" : [[[self appDelegate] currentUser] username];
-    if (self.forOnlineStore) {
-        [self.requestingService getAllStickerPacksForUser:username
-                                                  success:^(NSArray *result) {
-                                                      //
-                                                      [[self appDelegate] globalContainer].stickerPacks = result;
-                                                      self.stickerPacks = [self updateStickerPacksArray:[result mutableCopy]
-                                                                                 usingStickerPacksArray:[[[self appDelegate] globalContainer] stickerPacks]];
-                                                      [self.tableView reloadData];
-                                                      [self.refreshControl endRefreshing];
-                                                  }
-                                                  failure:^(NSError *error) {
-                                                      //
-                                                      [self.refreshControl endRefreshing];
-                                                  }];
-    }
-    else {
-        self.stickerPacks = [[[self appDelegate] globalContainer] stickerPacks];
-        [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
-    }
+//    NSString *username = self.forOnlineStore ? @"" : [[[self appDelegate] currentUser] username];
+//    if (self.forOnlineStore) {
+//        [self.requestingService getAllStickerPacksForUser:username
+//                                                  success:^(NSArray *result) {
+//                                                      //
+//                                                      [[self appDelegate] globalContainer].stickerPacks = result;
+//                                                      self.stickerPacks = [self updateStickerPacksArray:[result mutableCopy]
+//                                                                                 usingStickerPacksArray:[[[self appDelegate] globalContainer] stickerPacks]];
+//                                                      [self.tableView reloadData];
+//                                                      [self.refreshControl endRefreshing];
+//                                                  }
+//                                                  failure:^(NSError *error) {
+//                                                      //
+//                                                      [self.refreshControl endRefreshing];
+//                                                  }];
+//    }
+//    else {
+//        self.stickerPacks = [[[self appDelegate] globalContainer] stickerPacks];
+//        [self.tableView reloadData];
+//        [self.refreshControl endRefreshing];
+//    }
 }
 #pragma mark - Utilities
 - (NSArray *)updateStickerPacksArray:(NSMutableArray *)packs

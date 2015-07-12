@@ -42,7 +42,6 @@
     // config pack collection view
     _packsCollectionView.delegate = self;
     _packsCollectionView.dataSource = self;
-    _packsCollectionView.tag = 0;
     [_packsCollectionView registerNib:[PQKeyboardPackCollectionViewCell nib]
            forCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier]];
     
@@ -68,14 +67,14 @@
         [self.stickersScrollView addSubview:keyboard.view];
     }
     
-
     
     
-
-    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                           animated:YES
-                                     scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-    [self collectionView:self.packsCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    if ([[(PQStickerPack *)packs[0] thumbnailData] length] != 0) {
+        [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                               animated:YES
+                                         scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    }
     
     [self updateLayoutForNormalLayout];
     //[self updateLayoutForAutoRecommendationLayout];
@@ -85,6 +84,11 @@
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs {
     _packs = packs;
     [self configKeyboardWithStickerPacks:packs delegate:self.delegate];
+    [self.packsCollectionView reloadData];
+    
+    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                           animated:YES
+                                     scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 - (void)removeAllConstraints {
@@ -610,7 +614,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
+    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
     PQKeyboardPackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
     
     [cell configCellUsingStickerPack:pack];

@@ -56,13 +56,13 @@
 
 - (IBAction)closeButtonTUI:(id)sender {
     //
-    NSArray *packs = [[[self appDelegate] globalContainer] stickerPacks];
-    NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
-    //PQRequestingService *requestingService = [PQRequestingService new];
-    PQStickerPack *pack = [packs objectAtIndex:0];
-    
-    [pack downloadDataAndStickersUsingOperationQueue:queue];
-    
+//    NSArray *packs = [[[self appDelegate] globalContainer] stickerPacks];
+//    NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
+//    //PQRequestingService *requestingService = [PQRequestingService new];
+//    PQStickerPack *pack = [packs objectAtIndex:0];
+//    
+//    [pack downloadDataAndStickersUsingOperationQueue:queue];
+//    
 }
 
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender {

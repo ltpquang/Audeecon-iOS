@@ -131,7 +131,9 @@
 }
 
 - (void)reloadStickers {
-    [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
+    });
 }
 
 #pragma mark - Collection view datasource

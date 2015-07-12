@@ -33,7 +33,6 @@
                                              RLMRealm *realm = [RLMRealm defaultRealm];
                                              if ([self stickerPacksNeedToBeReplacedByStickerPacks:result]) {
                                                  [realm beginWriteTransaction];
-                                                 
                                                  [realm deleteObjects:self.ownedStickerPack];
                                                  [self.ownedStickerPack removeAllObjects];
                                                  
@@ -44,8 +43,8 @@
                                                  
                                                  [realm commitWriteTransaction];
                                              }
-                                             
                                              NSBlockOperation *ope = [NSBlockOperation blockOperationWithBlock:^{
+                                                 NSLog(@"Finish block called in current user");
                                                  successCall();
                                              }];
                                              
@@ -53,6 +52,7 @@
                                                  [ope addDependency:[pack downloadDataAndStickersUsingOperationQueue:queue]];
                                              }
                                              [queue addOperation:ope];
+                                             
                                          }
                                          failure:^(NSError *error) {
                                              //

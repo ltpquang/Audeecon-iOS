@@ -10,7 +10,7 @@
 
 @interface PQGlobalContainer : NSObject
 // to store sticker pack bought by current user
-@property (nonatomic, strong) NSArray *stickerPacks;
+//@property (nonatomic, strong) NSArray *stickerPacks;
 
 @property (nonatomic, strong) NSOperationQueue *stickerPackDownloadQueue;
 @end

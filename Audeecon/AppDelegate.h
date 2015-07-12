@@ -19,7 +19,8 @@
 @class RLMRealm;
 @class PQCurrentUser;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, XMPPStreamDelegate, XMPPRosterDelegate>
+@interface AppDelegate : UIResponder
+<UIApplicationDelegate, XMPPStreamDelegate, XMPPRosterDelegate, XMPPvCardAvatarDelegate, XMPPvCardTempModuleDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
