@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PQLoginViewController">
+            <connections>
+                <outlet property="loginPasswordTextField" destination="alZ-dz-rF5" id="Zda-tC-e1W"/>
+                <outlet property="loginUsernameTextField" destination="vBG-fD-Ptu" id="T8m-8O-x69"/>
+                <outlet property="loginView" destination="iN0-l3-epB" id="Pyg-J5-sV4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heS-m1-hUa">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="MHb-Pe-QSf"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vBG-fD-Ptu" customClass="PQTextField">
+                    <rect key="frame" x="0.0" y="1" width="320" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="aLs-T3-PlV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                            <real key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                            <real key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQf-V8-huy">
+                    <rect key="frame" x="40" y="36" width="240" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Rtd-Ah-VPP"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="alZ-dz-rF5" customClass="PQTextField">
+                    <rect key="frame" x="0.0" y="37" width="320" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="25T-6k-jzB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                            <real key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                            <real key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQB-oA-Bg3">
+                    <rect key="frame" x="0.0" y="72" width="320" height="1"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="6X5-ic-La6"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOT-dc-iGh">
+                    <rect key="frame" x="126" y="282" width="68" height="30"/>
+                    <state key="normal" title="Log me in"/>
+                    <connections>
+                        <action selector="logMeInButtonTUI:" destination="-1" eventType="touchUpInside" id="OPj-2n-Of6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCn-ne-FzY">
+                    <rect key="frame" x="181" y="81" width="104" height="27"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="I need an account ">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="registerButtonTUI:" destination="-1" eventType="touchUpInside" id="CZ2-Qe-Eoe"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="vBG-fD-Ptu" firstAttribute="top" secondItem="heS-m1-hUa" secondAttribute="bottom" id="2ia-46-KDH"/>
+                <constraint firstAttribute="trailing" secondItem="vBG-fD-Ptu" secondAttribute="trailing" id="Ged-sf-sBG"/>
+                <constraint firstAttribute="trailing" secondItem="iQf-V8-huy" secondAttribute="trailing" constant="40" id="I0X-ya-VaV"/>
+                <constraint firstItem="vBG-fD-Ptu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LQO-Xh-mPF"/>
+                <constraint firstItem="iQf-V8-huy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="M4Y-Kk-hic"/>
+                <constraint firstAttribute="trailing" secondItem="alZ-dz-rF5" secondAttribute="trailing" id="Mqc-Sx-S83"/>
+                <constraint firstAttribute="trailing" secondItem="VCn-ne-FzY" secondAttribute="trailing" constant="35" id="OXC-1k-79q"/>
+                <constraint firstAttribute="centerX" secondItem="iOT-dc-iGh" secondAttribute="centerX" id="RgB-2e-ls5"/>
+                <constraint firstAttribute="trailing" secondItem="fQB-oA-Bg3" secondAttribute="trailing" id="VNK-bD-XHG"/>
+                <constraint firstItem="heS-m1-hUa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="X4l-SG-vyq"/>
+                <constraint firstItem="fQB-oA-Bg3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Z9H-We-BfR"/>
+                <constraint firstItem="fQB-oA-Bg3" firstAttribute="top" secondItem="alZ-dz-rF5" secondAttribute="bottom" id="fu6-we-0sA"/>
+                <constraint firstItem="alZ-dz-rF5" firstAttribute="top" secondItem="iQf-V8-huy" secondAttribute="bottom" id="fyc-ED-BmI"/>
+                <constraint firstItem="alZ-dz-rF5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="j5Y-9I-CZk"/>
+                <constraint firstItem="iQf-V8-huy" firstAttribute="top" secondItem="vBG-fD-Ptu" secondAttribute="bottom" id="kBd-so-gvR"/>
+                <constraint firstItem="VCn-ne-FzY" firstAttribute="top" secondItem="fQB-oA-Bg3" secondAttribute="bottom" constant="8" id="ng2-CV-rPf"/>
+                <constraint firstItem="heS-m1-hUa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tWw-Pq-lPP"/>
+                <constraint firstAttribute="bottom" secondItem="iOT-dc-iGh" secondAttribute="bottom" constant="8" id="uuA-zz-hYW"/>
+                <constraint firstAttribute="trailing" secondItem="heS-m1-hUa" secondAttribute="trailing" id="yeN-79-sfK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="347" y="171"/>
+        </view>
+    </objects>
+</document>
