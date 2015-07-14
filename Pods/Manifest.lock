@@ -20,37 +20,41 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AWSAutoScaling (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSCloudWatch (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSCognito (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSCore (2.2.0)
-  - AWSDynamoDB (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSEC2 (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSElasticLoadBalancing (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSKinesis (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSLambda (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSMachineLearning (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSMobileAnalytics (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSS3 (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSSES (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSSimpleDB (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSSNS (2.2.0):
-    - AWSCore (= 2.2.0)
-  - AWSSQS (2.2.0):
-    - AWSCore (= 2.2.0)
+  - AWSAutoScaling (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSCloudWatch (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSCognito (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSCore (2.2.1)
+  - AWSDynamoDB (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSEC2 (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSElasticLoadBalancing (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSKinesis (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSLambda (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSMachineLearning (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSMobileAnalytics (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSS3 (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSSES (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSSimpleDB (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSSNS (2.2.1):
+    - AWSCore (= 2.2.1)
+  - AWSSQS (2.2.1):
+    - AWSCore (= 2.2.1)
+  - DBCamera (2.3.16):
+    - GPUImage (~> 0.1)
+  - GPUImage (0.1.7)
+  - MBProgressHUD (0.9.1)
   - Realm (0.93.2):
     - Realm/Headers (= 0.93.2)
   - Realm/Headers (0.93.2)
@@ -73,27 +77,32 @@ DEPENDENCIES:
   - AWSSimpleDB
   - AWSSNS
   - AWSSQS
+  - DBCamera
+  - MBProgressHUD
   - Realm
   - Realm/Headers
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AWSAutoScaling: f3da5982444dee41391a1cb0c1b9664d504c55b1
-  AWSCloudWatch: e35b6040087e15010d6957986aecbfd949b508fb
-  AWSCognito: d351a9e42e23747bb7e5bae37c62af38008d2bd0
-  AWSCore: 36712cbe827a50b81f1660349e0c202339797f23
-  AWSDynamoDB: d22680504585e4c7a344e3490459bcfd2972c41c
-  AWSEC2: cdee0bead09d5cb6a4619756010de1c3e12f7c18
-  AWSElasticLoadBalancing: bf299b22243ae46dcf58a207f41a0d66dc8a0e16
-  AWSKinesis: c06624c3e5dc542ca47128e5a008544b3d20e20a
-  AWSLambda: 6905d2128545689478514d6cbb31adbe6c7b24d8
-  AWSMachineLearning: 2f680b120dd5859765b88369947a223eb1863824
-  AWSMobileAnalytics: 213632654384eeb1af24a505d3b3299073ff9125
-  AWSS3: 5efcdff6010353fe53ef065be7760d60419c65b1
-  AWSSES: 84045d8e09afc7ca688d73aa77dd5badb1ff1317
-  AWSSimpleDB: f2b3e0cf1c5a8e6ddc7b921b6844fe17dd4489f9
-  AWSSNS: aec37737c542007a0f45017886b263d39ce2e0a9
-  AWSSQS: 08f547b79e13d68b18d4af230f78f109fb6d36c7
+  AWSAutoScaling: 91669a38141a4bd670ec11fbb2edfc7200f73643
+  AWSCloudWatch: 0b6afcafeea1f830cae6904d98da998223e5eea8
+  AWSCognito: 840a78da67d095aed4f197065c0ce5c84991cd11
+  AWSCore: 55eb0d5e85bc1c7a05637957a05a7328be0b06dc
+  AWSDynamoDB: 4a16bdc5b9da19f43fba92d880ed90df6a7ec911
+  AWSEC2: 27cd6dfcdfb151525c628ef788645618aa646d5a
+  AWSElasticLoadBalancing: e4fdbc719ecac4385827c19b3f4107da25216e4b
+  AWSKinesis: c6697d9d7b7dce04f092a707e3b9b53d96a92013
+  AWSLambda: aec56e621b22f32373734b989eaa12cdccd484eb
+  AWSMachineLearning: cc4ac11c6c9c0176a83e36cdceafac4e69b6ff73
+  AWSMobileAnalytics: 5d89d09881b66a549b660c784321fd0b3ba56416
+  AWSS3: 665de364b4a7bfb573660b01a88dc1f71bf5c13d
+  AWSSES: 8f81c5d8a10ce909197e7a12b072e7b505e41492
+  AWSSimpleDB: cd1f7fb83090b63d89b8c635bdcea62525ec9977
+  AWSSNS: 95ed9aa1f9fa8ed48579d4cc7d7beb6ca026f82a
+  AWSSQS: 8d8d3f973d33cfc1a9786c137106d034f8a9a5e8
+  DBCamera: c88a0deea468d153f54196e56a423301c7092737
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Realm: 2fdd0ae74f730e190384e0338d8a0d3654df8220
 
 COCOAPODS: 0.37.0

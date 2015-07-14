@@ -37,6 +37,7 @@
 		6F46077D1B48387000B637C7 /* UIButton+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607701B48387000B637C7 /* UIButton+PKDownloadButton.m */; };
 		6F46077E1B48387000B637C7 /* UIColor+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */; };
 		6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */; };
+		6F5D85931B5439B000EA518D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5D85921B5439B000EA518D /* UIImage+Resize.m */; };
 		6F8AF40C1B46F6FC0099F63A /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40B1B46F6FC0099F63A /* PQSticker.m */; };
 		6F8AF40F1B46FB0B0099F63A /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */; };
 		6F8FFCC31B4B01A200D8C06B /* PQBuyStickerPackOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */; };
@@ -198,6 +199,8 @@
 		6FCC0C981B4EC08700114BA7 /* PQStickerKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC0C971B4EC08700114BA7 /* PQStickerKeyboardView.m */; };
 		6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */; };
 		6FD409561ADBBFCB0020DF8D /* PQFriendListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */; };
+		6FDA9DBD1B54BE800053D4DC /* UpdateInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDA9DBC1B54BE800053D4DC /* UpdateInfoView.xib */; };
+		6FDA9DBE1B54D1CD0053D4DC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F366F731B41AD57000B3FA8 /* QuartzCore.framework */; };
 		6FE61B151B47902E0035C39F /* PQStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE61B141B47902E0035C39F /* PQStoreViewController.m */; };
 		6FE61B181B4790E10035C39F /* PQStickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE61B171B4790E10035C39F /* PQStickerTableViewController.m */; };
 		6FF3EC941B47D9AE0038AF0C /* PQStickerPackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */; };
@@ -284,6 +287,9 @@
 		6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PKDownloadButton.m"; sourceTree = "<group>"; };
 		6F4607731B48387000B637C7 /* UIImage+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PKDownloadButton.h"; sourceTree = "<group>"; };
 		6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PKDownloadButton.m"; sourceTree = "<group>"; };
+		6F5D85901B541E3C00EA518D /* PQvCardModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQvCardModuleDelegate.h; path = Protocols/PQvCardModuleDelegate.h; sourceTree = "<group>"; };
+		6F5D85911B5439B000EA518D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Helpers/UIImage+Resize.h"; sourceTree = "<group>"; };
+		6F5D85921B5439B000EA518D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Helpers/UIImage+Resize.m"; sourceTree = "<group>"; };
 		6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQRegisterDelegate.h; path = Protocols/PQRegisterDelegate.h; sourceTree = "<group>"; };
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
 		6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeDelegate.h; path = Protocols/PQMessageExchangeDelegate.h; sourceTree = "<group>"; };
@@ -623,6 +629,7 @@
 		6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListViewController.m; path = Controllers/PQFriendListViewController.m; sourceTree = "<group>"; };
 		6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListTableViewCell.h; path = Controllers/Cells/PQFriendListTableViewCell.h; sourceTree = "<group>"; };
 		6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFriendListTableViewCell.m; path = Controllers/Cells/PQFriendListTableViewCell.m; sourceTree = "<group>"; };
+		6FDA9DBC1B54BE800053D4DC /* UpdateInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateInfoView.xib; path = Views/UpdateInfoView.xib; sourceTree = "<group>"; };
 		6FE61B131B47902E0035C39F /* PQStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStoreViewController.h; path = Controllers/Store/PQStoreViewController.h; sourceTree = "<group>"; };
 		6FE61B141B47902E0035C39F /* PQStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStoreViewController.m; path = Controllers/Store/PQStoreViewController.m; sourceTree = "<group>"; };
 		6FE61B161B4790E10035C39F /* PQStickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerTableViewController.h; path = Controllers/Store/PQStickerTableViewController.h; sourceTree = "<group>"; };
@@ -644,6 +651,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FDA9DBE1B54D1CD0053D4DC /* QuartzCore.framework in Frameworks */,
 				6F9CE5D31ABB17FC00D716EB /* libresolv.dylib in Frameworks */,
 				6F9CE40E1ABB16C200D716EB /* libidn.a in Frameworks */,
 				9F8E1ED0EFAB2BB917352272 /* libPods-Audeecon.a in Frameworks */,
@@ -670,6 +678,7 @@
 				6FAF56051B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib */,
 				6F18334D1B52ABA600893379 /* RegisterView.xib */,
 				6F18334F1B52ABED00893379 /* LoginView.xib */,
+				6FDA9DBC1B54BE800053D4DC /* UpdateInfoView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -732,6 +741,8 @@
 				6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */,
 				6F1833511B52D42300893379 /* PQTextField.h */,
 				6F1833521B52D42300893379 /* PQTextField.m */,
+				6F5D85911B5439B000EA518D /* UIImage+Resize.h */,
+				6F5D85921B5439B000EA518D /* UIImage+Resize.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -805,6 +816,7 @@
 				6F8633BF1B281BDE007EB2A9 /* PQStreamConnectDelegate.h */,
 				6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */,
 				6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */,
+				6F5D85901B541E3C00EA518D /* PQvCardModuleDelegate.h */,
 				6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */,
 				6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */,
 			);
@@ -1947,6 +1959,7 @@
 				6F1833501B52ABED00893379 /* LoginView.xib in Resources */,
 				6FB93B781ABB0E4E0067224E /* Main.storyboard in Resources */,
 				6FAF56041B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib in Resources */,
+				6FDA9DBD1B54BE800053D4DC /* UpdateInfoView.xib in Resources */,
 				6FB93B7D1ABB0E4E0067224E /* LaunchScreen.xib in Resources */,
 				6F9CE3EE1ABB14EE00D716EB /* README.txt in Resources */,
 				6FAF56061B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib in Resources */,
@@ -2207,6 +2220,7 @@
 				6F1833531B52D42300893379 /* PQTextField.m in Sources */,
 				6F2189C11B502C6E000572BD /* PQImageUriToDataDownloadOperation.m in Sources */,
 				6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */,
+				6F5D85931B5439B000EA518D /* UIImage+Resize.m in Sources */,
 				6F9CE5811ABB16FC00D716EB /* XMPPRoomCoreDataStorage.m in Sources */,
 				6F9CE5C41ABB16FC00D716EB /* XMPPMessage+XEP_0280.m in Sources */,
 				6F9CE5991ABB16FC00D716EB /* XMPPvCardTempModule.m in Sources */,

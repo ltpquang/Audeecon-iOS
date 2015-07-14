@@ -50,6 +50,10 @@
     return [@"https://s3.amazonaws.com/audeecon-us/" stringByAppendingString:fileName];
 }
 
++ (NSString *)urlToDefaultAvatar {
+    return @"https://s3.amazonaws.com/audeecon-us/default/defaultavatar.jpeg";
+}
+
 + (NSString *)urlToBuyStickerPackForUser:(NSString *)username {
     //audeecon.herokuapp.com/api/v1/users/:username/purchase
     //pack_id:

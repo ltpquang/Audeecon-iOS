@@ -20,14 +20,12 @@
 }
 
 + (NSURL *)filePathInTemporaryDirectoryForRecordedAudio {
-    /*
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"MyAudioMemo.m4a",
-                               nil];
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
-    return outputFileURL; */
     NSURL *result = [self filePathInTemporaryDirectoryForFileName:@"temprecorded.m4a"];
+    return result;
+}
+
++ (NSURL *)filePathInTemporaryDirectoryForAvatarImage {
+    NSURL *result = [self filePathInTemporaryDirectoryForFileName:@"avatar.jpeg"];
     return result;
 }
 

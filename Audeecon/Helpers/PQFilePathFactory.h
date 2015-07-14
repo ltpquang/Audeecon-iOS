@@ -12,6 +12,7 @@
 + (NSURL *)tempDirectory;
 + (NSURL *)filePathInTemporaryDirectoryForFileName:(NSString *)fileName;
 + (NSURL *)filePathInTemporaryDirectoryForRecordedAudio;
++ (NSURL *)filePathInTemporaryDirectoryForAvatarImage;
 + (NSURL *)filePathForFileAfterRenameFileAtPath:(NSURL *)oldFile
                                          toName:(NSString *)newName;
 @end

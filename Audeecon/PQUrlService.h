@@ -14,6 +14,8 @@
 + (NSString *)urlToGetStickerPackWithId:(NSString *)packId;
 
 + (NSString *)urlToS3FileWithFileName:(NSString *)fileName;
++ (NSString *)urlToDefaultAvatar;
 
++ (NSString *)urlToGetAllUsers;
 + (NSString *)urlToBuyStickerPackForUser:(NSString *)username;
 @end

@@ -215,9 +215,9 @@
     [_xmppStream authenticateWithPassword:_password error:&error];
 }
 
-- (void)registerUsingPassword:(NSString *)password {
+- (void)registerUsingPassword {
     NSError *error = nil;
-    [_xmppStream registerWithPassword:password error:&error];
+    [_xmppStream registerWithPassword:_password error:&error];
 }
 
 - (void)fetchRoster {
@@ -241,8 +241,7 @@
     NSLog(@"didAuthenticate");
     [_loginDelegate loginDidAuthenticate];
     
-    //[self downloadStickerPacks];
-    
+
     // Load user from database
     NSString *predicateString = [NSString stringWithFormat:@"username = '%@'", [[[self xmppStream] myJID] user]];
     RLMResults *users = [PQCurrentUser objectsWhere:predicateString];
@@ -278,11 +277,11 @@
 
 #pragma mark - XMPPStream registering delegates
 - (void)xmppStreamDidRegister:(XMPPStream *)sender {
-    
+    [_registerDelegate registerDidSuccess];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(DDXMLElement *)error {
-    
+    [_registerDelegate registerDidNotSuccess:error];
 }
 
 #pragma mark - XMPPStream IQ delegates
@@ -301,14 +300,15 @@
 
 #pragma mark - XMPPStream messaging delegates
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
+#warning CHECK AND AVOID WELCOME MESSAGE
     if ([message hasComposingChatState]) {
         return;
     }
     NSLog(@"Received message");
 #warning DO REMEMBER TO CHECK BODY LENGTH WITH OFFLINE MESSAGES
-    PQMessage *mess = [[PQMessage alloc] initWithXmlElement:message];
+    //PQMessage *mess = [[PQMessage alloc] initWithXmlElement:message];
     
-    [_messageExchangeDelegate didReceiveMessage:mess];
+    //[_messageExchangeDelegate didReceiveMessage:mess];
     
 }
 
@@ -372,13 +372,13 @@
     
 }
 
-- (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
-      failedToUpdateMyvCard:(DDXMLElement *)error {
-    
+- (void)xmppvCardTempModuleDidUpdateMyvCard:(XMPPvCardTempModule *)vCardTempModule {
+    [self.vCardModuleDelegate vCardModuleDidUpdateMyvCard];
 }
 
-- (void)xmppvCardTempModuleDidUpdateMyvCard:(XMPPvCardTempModule *)vCardTempModule {
-    
+- (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
+      failedToUpdateMyvCard:(DDXMLElement *)error {
+    [self.vCardModuleDelegate vCardModuleDidNotUpdateMyvCard:error];
 }
 
 

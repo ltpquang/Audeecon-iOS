@@ -5,6 +5,8 @@ platform :ios, '7.0'
 target 'Audeecon' do
 pod 'Realm'
 pod 'AFNetworking'
+pod 'DBCamera'
+pod 'MBProgressHUD'
 pod 'AWSCore'
 pod 'AWSAutoScaling'
 pod 'AWSCloudWatch'

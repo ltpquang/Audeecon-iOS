@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PQStreamConnectDelegate.h"
 #import "PQLoginDelegate.h"
+#import "PQRegisterDelegate.h"
+#import "PQvCardModuleDelegate.h"
+#import <DBCameraViewController.h>
+#import <MBProgressHUD.h>
 
-@interface PQLoginViewController : UIViewController <PQLoginDelegate, PQStreamConnectDelegate>
+@interface PQLoginViewController : UIViewController <PQLoginDelegate, PQStreamConnectDelegate, PQRegisterDelegate, PQvCardModuleDelegate, DBCameraViewControllerDelegate, MBProgressHUDDelegate>
 
 @end

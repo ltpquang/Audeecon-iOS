@@ -10,6 +10,7 @@
 #import "PQStreamConnectDelegate.h"
 #import "PQLoginDelegate.h"
 #import "PQRegisterDelegate.h"
+#import "PQvCardModuleDelegate.h"
 #import "PQFriendListDelegate.h"
 #import "PQMessageExchangeDelegate.h"
 #import "XMPPStream.h"
@@ -38,6 +39,7 @@
 @property (weak, nonatomic) id<PQStreamConnectDelegate> streamConnectDelegate;
 @property (weak, nonatomic) id<PQLoginDelegate> loginDelegate;
 @property (weak, nonatomic) id<PQRegisterDelegate> registerDelegate;
+@property (weak, nonatomic) id<PQvCardModuleDelegate> vCardModuleDelegate;
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
 @property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
 
@@ -52,6 +54,6 @@
 - (NSManagedObjectContext *)managedObjectContext_roster;
 
 - (void)authenticateUsingPassword;
-
+- (void)registerUsingPassword;
 @end
 
