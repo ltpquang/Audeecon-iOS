@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XMPPUserCoreDataStorageObject;
 
 @interface PQFriendListTableViewCell : UITableViewCell
-
+- (void)configUsingUser:(XMPPUserCoreDataStorageObject *)user;
 @end
