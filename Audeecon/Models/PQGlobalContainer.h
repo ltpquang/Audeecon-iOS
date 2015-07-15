@@ -13,4 +13,5 @@
 //@property (nonatomic, strong) NSArray *stickerPacks;
 
 @property (nonatomic, strong) NSOperationQueue *stickerPackDownloadQueue;
+@property (nonatomic, strong) NSOperationQueue *avatarDownloadQueue;
 @end

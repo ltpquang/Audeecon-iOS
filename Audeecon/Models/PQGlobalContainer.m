@@ -23,4 +23,12 @@
     }
     return _stickerPackDownloadQueue;
 }
+
+- (NSOperationQueue *)avatarDownloadQueue {
+    if (_avatarDownloadQueue == nil) {
+        _avatarDownloadQueue = [NSOperationQueue new];
+        _avatarDownloadQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+    }
+    return _avatarDownloadQueue;
+}
 @end

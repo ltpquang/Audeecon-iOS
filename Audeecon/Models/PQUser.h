@@ -7,13 +7,25 @@
 //
 
 #import <Realm/Realm.h>
+#import <UIKit/UIKit.h>
 #import "XMPP.h"
+
+@class XMPPvCardTemp;
 
 @interface PQUser : RLMObject
 @property XMPPJID *jid;
 @property NSString *username;
+@property NSString *nickname;
+@property NSData *avatarData;
+@property NSString *avatarUrl;
+
+//Excluded
+@property (nonatomic) UIImage *avatarImage;
+
 
 - (id)initWithXMPPJID:(XMPPJID *)jid;
+
+- (void)updateInfoUsingvCard:(XMPPvCardTemp *)vCard;
 @end
 
 // This protocol enables typed collections. i.e.:

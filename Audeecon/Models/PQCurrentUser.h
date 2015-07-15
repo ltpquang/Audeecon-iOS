@@ -9,13 +9,25 @@
 #import <Realm/Realm.h>
 #import "PQStickerPack.h"
 #import "PQUser.h"
+#import "PQOtherUser.h"
+#import "XMPP.h"
+#import "PQRealmString.h"
 
 @interface PQCurrentUser : PQUser
+@property RLMArray<PQOtherUser> *friends;
 @property RLMArray<PQStickerPack> *ownedStickerPack;
+//Excluded
+@property (nonatomic) NSMutableArray *awatingJIDs;
 
 - (void)updateOwnedStickerPackUsingQueue:(NSOperationQueue *)queue
                                  success:(void(^)())successCall
                                  failure:(void(^)(NSError *error))failureCall;
+
+- (void)updateFriendListUsingXMPPJID:(XMPPJID *)jid;
+- (void)updateInfoForFriendWithXMPPJID:(XMPPJID *)jid
+                        usingvCardTemp:(XMPPvCardTemp *)vCard;
+- (void)addAwaitingJid:(XMPPJID *)awaitingJid;
+- (XMPPJID *)awaitingJidToProcess;
 @end
 
 // This protocol enables typed collections. i.e.:

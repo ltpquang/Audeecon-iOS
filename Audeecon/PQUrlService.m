@@ -51,7 +51,8 @@
 }
 
 + (NSString *)urlToDefaultAvatar {
-    return @"https://s3.amazonaws.com/audeecon-us/default/defaultavatar.jpeg";
+    //return @"https://s3.amazonaws.com/audeecon-us/default/defaultavatar.jpeg";
+    return @"";
 }
 
 + (NSString *)urlToBuyStickerPackForUser:(NSString *)username {

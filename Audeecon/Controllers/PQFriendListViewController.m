@@ -12,6 +12,8 @@
 #import "PQMessageExchangeViewController.h"
 #import "XMPPvCardTemp.h"
 #import "PQFriendListTableViewCell.h"
+#import "PQHostnameFactory.h"
+#import "PQCurrentUser.h"
 
 @interface PQFriendListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,6 +33,8 @@
     if ([[[self appDelegate] xmppStream] isDisconnected]) {
         [[self appDelegate] connect];
     }
+    
+    [self setupAddFriendButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -44,11 +48,76 @@
 - (void)showLogin {
     UIStoryboard *sb = [self storyboard];
     PQLoginViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginView"];
-    [self presentViewController:loginVC animated:YES completion:^{
-        //
-    }];
+    [self presentViewController:loginVC animated:YES completion:nil];
 }
 
+#pragma mark - Add friends
+- (void)setupAddFriendButton {
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                               target:self
+                                                                               action:@selector(addButtonTUI:)];
+    self.navigationItem.rightBarButtonItem = addButton;
+}
+
+- (void)addButtonTUI:(UIButton *)sender {
+    if ([[[[self appDelegate] currentUser] awatingJIDs] count] != 0) {
+        XMPPJID *awaitingJid = [[[[self appDelegate] currentUser] awatingJIDs] objectAtIndex:0];
+        [self confirmFriendRequestAlertViewForJID:awaitingJid];
+    }
+    else {
+        [self addFriendAlertView];
+    }
+}
+
+- (void)addFriendAlertView {
+    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Add a friend"
+                                                 message:@"Input friend's username"
+                                                delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"Add",nil];
+    al.alertViewStyle = UIAlertViewStylePlainTextInput;
+    al.tag = 0;
+    [al show];
+}
+
+- (void)confirmFriendRequestAlertViewForJID:(XMPPJID *)jid {
+    NSString *message = [NSString stringWithFormat:@"'%@' requested to add you as a friend.", jid.user];
+    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Friend request"
+                                                 message:message
+                                                delegate:self
+                                       cancelButtonTitle:@"Decline"
+                                       otherButtonTitles:@"Accept", nil];
+    al.tag = 1;
+    [al show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex && alertView.tag == 1) {
+        // Decline request
+        [self rejectFirstAwaitingFriendRequest];
+    }
+    else {
+        if (alertView.tag == 0) {
+            NSString *usernameToAdd = [[alertView textFieldAtIndex:0] text];
+            XMPPJID *jidToAdd = [XMPPJID jidWithString:[PQHostnameFactory nicknameWithHostName:usernameToAdd]];
+            [[[self appDelegate] xmppRoster] addUser:jidToAdd withNickname:@""];
+        }
+        else if (alertView.tag == 1) {
+            [self acceptFirstAwaitingFriendRequest];
+        }
+    }
+}
+
+- (void)rejectFirstAwaitingFriendRequest {
+    XMPPJID *jidToReject = [[[self appDelegate] currentUser] awaitingJidToProcess];
+    [[[self appDelegate] xmppRoster] rejectPresenceSubscriptionRequestFrom:jidToReject];
+}
+
+- (void)acceptFirstAwaitingFriendRequest {
+    XMPPJID *jidToAccept = [[[self appDelegate] currentUser] awaitingJidToProcess];
+    [[[self appDelegate] xmppRoster] acceptPresenceSubscriptionRequestFrom:jidToAccept andAddToRoster:YES];
+}
+#pragma mark - Buttons handler
 
 #pragma mark - App utilities
 - (AppDelegate *)appDelegate {
@@ -141,26 +210,6 @@
     //NSFetchedResultsController *frc = [self fetchedResultsController];
 }
 
-//#pragma mark UITableViewCell helpers
-//- (void)configurePhotoForCell:(UITableViewCell *)cell user:(XMPPUserCoreDataStorageObject *)user {
-//    // Our xmppRosterStorage will cache photos as they arrive from the xmppvCardAvatarModule.
-//    // We only need to ask the avatar module for a photo, if the roster doesn't have it.
-//    
-//    if (user.photo != nil)
-//    {
-//        cell.imageView.image = user.photo;
-//    }
-//    else
-//    {
-//        NSData *photoData = [[[self appDelegate] xmppvCardAvatarModule] photoDataForJID:user.jid];
-//        
-//        if (photoData != nil)
-//            cell.imageView.image = [UIImage imageWithData:photoData];
-//        else
-//            cell.imageView.image = [UIImage imageNamed:@"defaultPerson"];
-//    }
-//}
-
 #pragma mark UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[[self fetchedResultsController] sections] count];
@@ -211,8 +260,6 @@
     _selectedIndex = indexPath;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    //[self performSegueWithIdentifier:@"GoToMessageExchangeSegue" sender:self];
-    //[self performSegueWithIdentifier:@"GoToJSQMessageExchangeSegue" sender:self];
     PQMessageExchangeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MessageExchangeView"];
     [vc configUsingPartner:[[self fetchedResultsController] objectAtIndexPath:indexPath]];
     [self.navigationController showViewController:vc sender:self];

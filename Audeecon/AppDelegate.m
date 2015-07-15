@@ -135,8 +135,7 @@
     _xmppRosterCoreDataStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
     
     _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage];
-    _xmppRoster.autoFetchRoster = YES;
-    _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
+    _xmppRoster.autoFetchRoster = NO;
     
     
 
@@ -266,7 +265,7 @@
                                                }];
     
     // Then update sticker pack for that user
-    
+    [[self xmppRoster] fetchRoster];
     [self goOnline];
 }
 
@@ -341,9 +340,17 @@
 }
 
 #pragma mark - XMPPRoster delegates
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {
+    //[self.xmppRoster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
+    NSLog(@"%@", presence);
+    [self.currentUser addAwaitingJid:presence.from];
+}
+
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(DDXMLElement *)item {
     NSLog(@"Roster received item");
-    
+    NSString *jidString = [[item attributeForName:@"jid"] stringValue];
+    XMPPJID *jid = [XMPPJID jidWithString:jidString];
+    [self.currentUser updateFriendListUsingXMPPJID:jid];
 }
 
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterPush:(XMPPIQ *)iq {
@@ -369,7 +376,8 @@
 - (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
         didReceivevCardTemp:(XMPPvCardTemp *)vCardTemp
                      forJID:(XMPPJID *)jid {
-    
+    [self.currentUser updateInfoForFriendWithXMPPJID:jid
+                                      usingvCardTemp:vCardTemp];
 }
 
 - (void)xmppvCardTempModuleDidUpdateMyvCard:(XMPPvCardTempModule *)vCardTempModule {

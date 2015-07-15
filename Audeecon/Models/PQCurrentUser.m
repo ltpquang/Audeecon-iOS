@@ -10,8 +10,16 @@
 #import "PQRequestingService.h"
 #import "PQStickerPack.h"
 #import <Realm.h>
+#import "XMPPvCardTemp.h"
 
 @implementation PQCurrentUser
+
+- (NSMutableArray *)awatingJIDs {
+    if (!_awatingJIDs) {
+        _awatingJIDs = [NSMutableArray new];
+    }
+    return  _awatingJIDs;
+}
 
 - (BOOL)stickerPacksNeedToBeReplacedByStickerPacks:(NSArray *)newArray {
     NSArray *oldIds = [self.ownedStickerPack valueForKeyPath:@"packId"];
@@ -60,6 +68,50 @@
                                          }];
 }
 
+
+- (void)updateFriendListUsingXMPPJID:(XMPPJID *)jid {
+    if ([jid.user isEqualToString:self.username]) {
+        return;
+    }
+    for (PQOtherUser *user in self.friends) {
+        if ([user.username isEqualToString:jid.user]) {
+            user.jid = jid;
+            user.isUpdated = YES;
+            return;
+        }
+    }
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [self.friends addObject:[[PQOtherUser alloc] initWithXMPPJID:jid]];
+    [realm commitWriteTransaction];
+    
+}
+
+
+- (void)updateInfoForFriendWithXMPPJID:(XMPPJID *)jid
+                        usingvCardTemp:(XMPPvCardTemp *)vCard {
+    if ([jid.user isEqualToString:self.username]) {
+        [self updateInfoUsingvCard:vCard];
+        return;
+    }
+    
+    for (PQOtherUser *user in self.friends) {
+        if ([user.username isEqualToString:jid.user]) {
+            [user updateInfoUsingvCard:vCard];
+            return;
+        }
+    }
+}
+
+- (void)addAwaitingJid:(XMPPJID *)awaitingJid {
+    [self.awatingJIDs addObject:awaitingJid];
+}
+
+- (XMPPJID *)awaitingJidToProcess {
+    XMPPJID *result = self.awatingJIDs.firstObject;
+    [self.awatingJIDs removeObjectAtIndex:0];
+    return result;
+}
 // Specify default values for properties
 
 //+ (NSDictionary *)defaultPropertyValues
@@ -69,9 +121,9 @@
 
 // Specify properties to ignore (Realm won't persist these)
 
-//+ (NSArray *)ignoredProperties
-//{
-//    return @[];
-//}
++ (NSArray *)ignoredProperties
+{
+    return @[@"awatingJIDs"];
+}
 
 @end

@@ -128,10 +128,10 @@
         self.loginUsernameTextField.text = @"gaulois";
         self.loginPasswordTextField.text = @"123123";
         
-//        self.registerFullnameTextField.text = @"Lê Thái Phúc Quang";
-//        self.registerUsernameTextField.text = @"regtest";
-//        self.registerPasswordTextField.text = @"123123";
-//        self.registerConfirmPasswordTextField.text = @"123123";
+        self.registerFullnameTextField.text = @"Add Friend Test ";
+        self.registerUsernameTextField.text = @"addtest";
+        self.registerPasswordTextField.text = @"123123";
+        self.registerConfirmPasswordTextField.text = @"123123";
     }
 }
 
@@ -306,8 +306,9 @@
     [UIImageJPEGRepresentation(image, 1.0) writeToFile:fileUrl.path atomically:YES];
     //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     //NSString *filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"avatar.png"];
-
-    NSString *onlineFileName = [self.username stringByAppendingString:@".jpeg"];
+    
+    NSString *timestamp = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970] * 1000];
+    NSString *onlineFileName = [NSString stringWithFormat:@"%@-%@.jpeg", self.username, timestamp]; // [self.username stringByAppendingString:@".jpeg"];
     
     AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
     uploadRequest.bucket = @"audeecon-us/avatar";
