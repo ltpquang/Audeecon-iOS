@@ -11,7 +11,12 @@
 
 @implementation PQSticker
 
-
+- (id)initWithStickerId:(NSString *)stickerId {
+    if (self = [super init]) {
+        _stickerId = stickerId;
+    }
+    return self;
+}
 
 - (id)initWithStickerId:(NSString *)stickerId
         andThumbnailUri:(NSString *)thumbnailUri

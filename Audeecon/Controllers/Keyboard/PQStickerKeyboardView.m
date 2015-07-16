@@ -70,7 +70,7 @@
     
     
     
-    if ([[(PQStickerPack *)packs[0] thumbnailData] length] != 0) {
+    if (packs.count != 0 && [[(PQStickerPack *)packs[0] thumbnailData] length] != 0) {
         [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                                animated:YES
                                          scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];

@@ -20,44 +20,74 @@
 
 @implementation PQMessage
 
-- (id)initWithSender:(NSString *)sender
-       andStickerUri:(NSString *)stickerUri
-  andOfflineAudioUri:(NSString *)offlineAudioUri {
+-(id)initWithSticker:(PQSticker *)sticker
+   andOnlineAudioUri:(NSString *)onlineAudioUri
+       fromJIDString:(NSString *)fromJIDString
+         toJIDString:(NSString *)toJIDString
+          isOutgoing:(BOOL)isOutgoing {
     if (self = [super init]) {
-        _sender = sender;
-        _stickerUri = stickerUri;
+        _sticker = sticker;
+        _onlineAudioUri = onlineAudioUri;
+        _fromJIDString = fromJIDString;
+        _toJIDString = toJIDString;
+        _isOutgoing = isOutgoing;
+    }
+    return self;
+}
+
+-(id)initWithSticker:(PQSticker *)sticker
+  andOfflineAudioUri:(NSString *)offlineAudioUri
+       fromJIDString:(NSString *)fromJIDString
+         toJIDString:(NSString *)toJIDString
+          isOutgoing:(BOOL)isOutgoing {
+    if (self = [super init]) {
+        _sticker = sticker;
         _offlineAudioUri = offlineAudioUri;
+        _fromJIDString = fromJIDString;
+        _toJIDString = toJIDString;
+        _isOutgoing = isOutgoing;
     }
     return self;
 }
 
-- (id)initWithXmlElement:(DDXMLElement *)element {
-    if (self = [super init]) {
-        NSString *body = [[element elementForName:@"body"] stringValue];
-        NSString *from = [[element attributeForName:@"from"] stringValue];
-        
-        _sender = from;
-        
-        NSArray *arr = [body componentsSeparatedByString:@"|"];
-        _stickerUri = arr[0];
-        _onlineAudioUri = arr[1];
-    }
-    return self;
-}
+//- (id)initWithSender:(NSString *)sender
+//       andStickerUri:(NSString *)stickerUri
+//  andOfflineAudioUri:(NSString *)offlineAudioUri {
+//    if (self = [super init]) {
+//        _sender = sender;
+//        _stickerUri = stickerUri;
+//        _offlineAudioUri = offlineAudioUri;
+//    }
+//    return self;
+//}
 
-- (DDXMLElement *)xmlElementSendTo:(NSString *)toUser {
-    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-    NSArray *arr = @[_stickerUri, _onlineAudioUri];
-    NSString *bodyString = [arr componentsJoinedByString:@"|"];
-    [body setStringValue:bodyString];
-    
-    NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-    [message addAttributeWithName:@"type" stringValue:@"chat"];
-    [message addAttributeWithName:@"to" stringValue:toUser];
-    [message addChild:body];
-    
-    return message;
-}
+//- (id)initWithXmlElement:(DDXMLElement *)element {
+//    if (self = [super init]) {
+//        NSString *body = [[element elementForName:@"body"] stringValue];
+//        NSString *from = [[element attributeForName:@"from"] stringValue];
+//        
+//        _sender = from;
+//        
+//        NSArray *arr = [body componentsSeparatedByString:@"|"];
+//        _stickerUri = arr[0];
+//        _onlineAudioUri = arr[1];
+//    }
+//    return self;
+//}
+//
+//- (DDXMLElement *)xmlElementSendTo:(NSString *)toUser {
+//    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+//    NSArray *arr = @[_stickerUri, _onlineAudioUri];
+//    NSString *bodyString = [arr componentsJoinedByString:@"|"];
+//    [body setStringValue:bodyString];
+//    
+//    NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+//    [message addAttributeWithName:@"type" stringValue:@"chat"];
+//    [message addAttributeWithName:@"to" stringValue:toUser];
+//    [message addChild:body];
+//    
+//    return message;
+//}
 
 - (void)uploadAudioWithCompletion:(void(^)(BOOL, NSError *))complete {
     if (_offlineAudioUri.length == 0) {

@@ -14,8 +14,9 @@
 
 @protocol PQStickerKeyboardDelegate;
 @protocol PQMessageCollectionViewCellDelegate;
+@class PQOtherUser;
 
 @interface PQMessageExchangeViewController : UIViewController
 <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PQMessageExchangeDelegate, PQStickerKeyboardDelegate, PQAudioPlayerAndRecorderDelegate, PQMessageCollectionViewCellDelegate>
-- (void)configUsingPartner:(XMPPUserCoreDataStorageObject *)partner;
+- (void)configUsingPartner:(PQOtherUser *)partner;
 @end

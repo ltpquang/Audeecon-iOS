@@ -16,6 +16,7 @@
 #import "XMPPStream.h"
 #import "XMPPFramework.h"
 #import "PQGlobalContainer.h"
+#import "PQMessagingCenter.h"
 
 @class RLMRealm;
 @class PQCurrentUser;
@@ -46,6 +47,7 @@
 @property (strong, nonatomic) PQGlobalContainer *globalContainer;
 //@property (strong, nonatomic) RLMRealm *realm;
 @property (strong, nonatomic) PQCurrentUser *currentUser;
+@property (strong, nonatomic) PQMessagingCenter *messagingCenter;
 
 - (BOOL)connect;
 - (void)fetchRoster;

@@ -16,18 +16,21 @@
 #import "PQStickerPack.h"
 #import "PQRequestingService.h"
 #import "PQCurrentUser.h"
+#import "PQOtherUser.h"
+#import "PQMessagingCenter.h"
 
 @interface PQMessageExchangeViewController ()
-@property (nonatomic, strong) XMPPUserCoreDataStorageObject *partner;
-@property (strong, nonatomic) NSMutableArray *messages;
+@property (nonatomic, strong) PQOtherUser *partner;
+//@property (strong, nonatomic) NSMutableArray *messages;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) PQStickerKeyboardView *keyboardView;
 @property (nonatomic, strong) PQAudioPlayerAndRecorder *audioRecorderAndPlayer;
 @property (nonatomic, strong) PQSticker *selectedSticker;
-@property (nonatomic, strong) PQStickerPack *selectedPack;
+//@property (nonatomic, strong) PQStickerPack *selectedPack;
 @property (nonatomic, strong) PQMessageCollectionViewCell *playingCell;
 @property (nonatomic, strong) PQRequestingService *requestingService;
+@property (nonatomic, strong) PQMessagingCenter *messagingCenter;
 @end
 
 @implementation PQMessageExchangeViewController
@@ -41,8 +44,10 @@
 }
 
 #pragma mark - Controller delegates
-- (void)configUsingPartner:(XMPPUserCoreDataStorageObject *)partner {
+- (void)configUsingPartner:(PQOtherUser *)partner {
     _partner = partner;
+    _messagingCenter = [[self appDelegate] messagingCenter];
+    self.title = partner.username;
 }
 
 - (PQStickerKeyboardView *)keyboardView {
@@ -58,7 +63,6 @@
     [[self appDelegate] setMessageExchangeDelegate:self];
     
     [self configCollectionView];
-    _messages = [NSMutableArray new];
     _audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self];
     _requestingService = [PQRequestingService new];
 }
@@ -66,6 +70,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self tapGestureHandler];
+    [self registerNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)configCollectionView {
@@ -84,6 +93,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Notifications
+- (void)registerNotifications {
+    NSString *receiveNotiName = [@"Received:" stringByAppendingString:self.partner.jidString];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotificationHandler:)
+                                                 name:receiveNotiName
+                                               object:nil];
+}
+
+- (void)receiveNotificationHandler:(NSNotification *)noti {
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Handle gesture
@@ -121,14 +143,14 @@
 
 
 #pragma mark - Message exchange delegates
-- (void)didReceiveMessage:(PQMessage *)message {
-    [_messages addObject:message];
-    [_collectionView reloadData];
-    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1
-                                                                inSection:0]
-                            atScrollPosition:UICollectionViewScrollPositionBottom
-                                    animated:YES];
-}
+//- (void)didReceiveMessage:(PQMessage *)message {
+//    [_messages addObject:message];
+//    [_collectionView reloadData];
+//    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1
+//                                                                inSection:0]
+//                            atScrollPosition:UICollectionViewScrollPositionBottom
+//                                    animated:YES];
+//}
 
 - (void)reloadStickers {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -138,12 +160,13 @@
 
 #pragma mark - Collection view datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _messages.count;
+    return [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PQMessageCollectionViewCell *cell = (PQMessageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MessageCell" forIndexPath:indexPath];
-    [cell configCellUsingMessage:[_messages objectAtIndex:indexPath.row]
+    [cell configCellUsingMessage:[self.messagingCenter messageAtIndexPath:indexPath
+                                                     withPartnerJIDString:self.partner.jidString]
                         delegate:self];
     return cell;
 }
@@ -160,15 +183,16 @@
     NSLog(@"Stop- holding on sticker %@ of pack %@", sticker.stickerId, pack.packId);
     
     NSString *from = [[[self xmppStream] myJID] user];
-    NSString *to = [[[self partner] jid] user];
+    NSString *to = self.partner.jidString;
     NSString *timestamp = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970] * 1000];
     
-    NSDictionary *infoDict = @{@"from":from,
+    NSDictionary *infoDict = @{@"sticker":sticker,
+                               @"from":from,
                                @"to":to,
                                @"timestamp":timestamp};
     
-    _selectedPack = pack;
-    _selectedSticker = sticker;
+    //_selectedPack = pack;
+    self.selectedSticker = sticker;
     
     [_audioRecorderAndPlayer stopRecordingAndSaveFileWithInfo:infoDict];
     
@@ -184,19 +208,18 @@
 
 #pragma mark - Audio recorder delegate
 - (void)didFinishRecordingAndSaveToFileAtUrl:(NSURL *)savedFile {
-    PQMessage *message = [[PQMessage alloc] initWithSender:[[[self xmppStream] myJID] user]
-                                             andStickerUri:_selectedSticker.thumbnailUri
-                                        andOfflineAudioUri:[savedFile path]];
+    
+    PQMessage *message = [[PQMessage alloc] initWithSticker:self.selectedSticker
+                                         andOfflineAudioUri:savedFile.path
+                                              fromJIDString:[[[self xmppStream] myJID] bare]
+                                                toJIDString:self.partner.jidString
+                                                 isOutgoing:YES];
     
     [message uploadAudioWithCompletion:^(BOOL succeeded, NSError *error) {
-        [[self xmppStream] sendElement:[message xmlElementSendTo:[_partner jidStr]]];
-        
-        [_messages addObject:message];
-        
-        NSLog(@"%@", message.offlineAudioUri);
-        NSLog(@"%@", message.onlineAudioUri);
-        [_collectionView reloadData];
-        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1
+        [self.messagingCenter sendMessage:message];
+        [self.collectionView reloadData];
+        NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
                                                                     inSection:0]
                                 atScrollPosition:UICollectionViewScrollPositionBottom
                                         animated:YES];
@@ -215,12 +238,12 @@
 #pragma mark - Message cell delegate
 - (void)didReceiveRequestToPlayCell:(PQMessageCollectionViewCell *)cell {
     [self didFinishPlaying];
-    _playingCell = cell;
-    NSIndexPath *path = [_collectionView indexPathForCell:_playingCell];
-    PQMessage *message = [_messages objectAtIndex:path.row];
-    [message downloadAudioUsingRequestingService:_requestingService
+    self.playingCell = cell;
+    NSIndexPath *path = [self.collectionView indexPathForCell:self.playingCell];
+    PQMessage *message = [self.messagingCenter messageAtIndexPath:path withPartnerJIDString:self.partner.jidString];
+    [message downloadAudioUsingRequestingService:self.requestingService
                                         complete:^(NSURL *offlineFile) {
-                                            [_audioRecorderAndPlayer playAudioFileAtUrl:offlineFile];
+                                            [self.audioRecorderAndPlayer playAudioFileAtUrl:offlineFile];
                                         }];
     
 }

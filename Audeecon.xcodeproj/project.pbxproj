@@ -196,6 +196,7 @@
 		6FB93B7A1ABB0E4E0067224E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B791ABB0E4E0067224E /* Images.xcassets */; };
 		6FB93B7D1ABB0E4E0067224E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB93B7B1ABB0E4E0067224E /* LaunchScreen.xib */; };
 		6FB93B891ABB0E4E0067224E /* AudeeconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB93B881ABB0E4E0067224E /* AudeeconTests.m */; };
+		6FC042821B57D8EA003B56D2 /* PQMessagingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC042811B57D8EA003B56D2 /* PQMessagingCenter.m */; };
 		6FCC0C951B4EC05700114BA7 /* PQStickerKeyboardCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC0C941B4EC05700114BA7 /* PQStickerKeyboardCollectionViewController.m */; };
 		6FCC0C981B4EC08700114BA7 /* PQStickerKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC0C971B4EC08700114BA7 /* PQStickerKeyboardView.m */; };
 		6FD21D171ABC296F00C4C92E /* PQFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */; };
@@ -625,6 +626,8 @@
 		6FB93B821ABB0E4E0067224E /* AudeeconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudeeconTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB93B871ABB0E4E0067224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB93B881ABB0E4E0067224E /* AudeeconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudeeconTests.m; sourceTree = "<group>"; };
+		6FC042801B57D8EA003B56D2 /* PQMessagingCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessagingCenter.h; path = Models/PQMessagingCenter.h; sourceTree = "<group>"; };
+		6FC042811B57D8EA003B56D2 /* PQMessagingCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessagingCenter.m; path = Models/PQMessagingCenter.m; sourceTree = "<group>"; };
 		6FCC0C931B4EC05700114BA7 /* PQStickerKeyboardCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerKeyboardCollectionViewController.h; path = Controllers/Keyboard/PQStickerKeyboardCollectionViewController.h; sourceTree = "<group>"; };
 		6FCC0C941B4EC05700114BA7 /* PQStickerKeyboardCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerKeyboardCollectionViewController.m; path = Controllers/Keyboard/PQStickerKeyboardCollectionViewController.m; sourceTree = "<group>"; };
 		6FCC0C961B4EC08700114BA7 /* PQStickerKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerKeyboardView.h; path = Controllers/Keyboard/PQStickerKeyboardView.h; sourceTree = "<group>"; };
@@ -697,6 +700,8 @@
 				6F935FE61B46E1B000F0FD03 /* Stickers */,
 				6F00F7391B37A44600AEE057 /* PQMessage.h */,
 				6F00F73A1B37A44600AEE057 /* PQMessage.m */,
+				6FC042801B57D8EA003B56D2 /* PQMessagingCenter.h */,
+				6FC042811B57D8EA003B56D2 /* PQMessagingCenter.m */,
 				6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */,
 				6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */,
 				6F25055E1B48C99800F00274 /* PQGlobalContainer.h */,
@@ -2136,6 +2141,7 @@
 				6F9CE5751ABB16FC00D716EB /* XMPPResourceMemoryStorageObject.m in Sources */,
 				6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */,
 				6F9CE55E1ABB16FC00D716EB /* NSXMLElement+XMPP.m in Sources */,
+				6FC042821B57D8EA003B56D2 /* PQMessagingCenter.m in Sources */,
 				6F9CE57C1ABB16FC00D716EB /* XMPPJabberRPCModule.m in Sources */,
 				6F9CE5701ABB16FC00D716EB /* XMPPGroupCoreDataStorageObject.m in Sources */,
 				6F9CE5831ABB16FC00D716EB /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,

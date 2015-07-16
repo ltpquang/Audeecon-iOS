@@ -35,6 +35,8 @@
 @property (nonatomic) NSArray *spriteArray;
 @property (nonatomic) BOOL needToBeUpdated;
 
+- (id)initWithStickerId:(NSString *)stickerId;
+
 - (id)initWithStickerId:(NSString *)stickerId
         andThumbnailUri:(NSString *)thumbnailUri
          andFullsizeUri:(NSString *)fullsizeUri

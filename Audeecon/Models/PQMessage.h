@@ -13,18 +13,31 @@
 @class PQRequestingService;
 
 @interface PQMessage : NSObject
-@property NSString *sender;
-@property NSString *stickerUri;
+@property PQSticker *sticker;
 @property NSString *onlineAudioUri;
 @property NSString *offlineAudioUri;
+@property NSString *fromJIDString;
+@property NSString *toJIDString;
+@property BOOL isOutgoing;
 
-- (id)initWithSender:(NSString *)sender
-       andStickerUri:(NSString *)stickerUri
-  andOfflineAudioUri:(NSString *)offlineAudioUri;
+- (id)initWithSticker:(PQSticker *)sticker
+    andOnlineAudioUri:(NSString *)onlineAudioUri
+        fromJIDString:(NSString *)fromJIDString
+          toJIDString:(NSString *)toJIDString
+           isOutgoing:(BOOL)isOutgoing;
+- (id)initWithSticker:(PQSticker *)sticker
+   andOfflineAudioUri:(NSString *)offlineAudioUri
+        fromJIDString:(NSString *)fromJIDString
+          toJIDString:(NSString *)toJIDString
+           isOutgoing:(BOOL)isOutgoing;
 
-- (id)initWithXmlElement:(DDXMLElement *)element;
+//- (id)initWithSender:(NSString *)sender
+//       andStickerUri:(NSString *)stickerUri
+//  andOfflineAudioUri:(NSString *)offlineAudioUri;
 
-- (DDXMLElement *)xmlElementSendTo:(NSString *)toUser;
+//- (id)initWithXmlElement:(DDXMLElement *)element;
+//
+//- (DDXMLElement *)xmlElementSendTo:(NSString *)toUser;
 
 - (void)uploadAudioWithCompletion:(void(^)(BOOL, NSError *))complete;
 - (void)downloadAudioUsingRequestingService:(PQRequestingService *)requestingService

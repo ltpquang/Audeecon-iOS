@@ -83,6 +83,13 @@
     return _globalContainer;
 }
 
+- (PQMessagingCenter *)messagingCenter {
+    if (_messageExchangeDelegate == nil) {
+        _messagingCenter = [[PQMessagingCenter alloc] initWithXMPPStream:_xmppStream];
+    }
+    return _messagingCenter;
+}
+
 
 - (void)clearTemperaryFolder {
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -302,16 +309,15 @@
 
 #pragma mark - XMPPStream messaging delegates
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-#warning CHECK AND AVOID WELCOME MESSAGE
     if ([message hasComposingChatState]) {
         return;
     }
     NSLog(@"Received message");
-#warning DO REMEMBER TO CHECK BODY LENGTH WITH OFFLINE MESSAGES
-    //PQMessage *mess = [[PQMessage alloc] initWithXmlElement:message];
+    if (message.isChatMessageWithBody) {
+        [self.messagingCenter receiveMessage:message];
+    }
     
     //[_messageExchangeDelegate didReceiveMessage:mess];
-    
 }
 
 

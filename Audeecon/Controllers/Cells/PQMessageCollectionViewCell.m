@@ -23,9 +23,9 @@
                       delegate:(id<PQMessageCollectionViewCellDelegate>)delegate {
     _mainImage.image = nil;
     _delegate = delegate;
-    NSURL *url = [NSURL URLWithString:message.stickerUri];
+    //NSURL *url = [NSURL URLWithString:message.stickerUri];
     //NSLog(@"%@", url);
-    [_mainImage setImageWithURL:url];
+    //[_mainImage setImageWithURL:url];
 }
 
 - (void)reshowPlayButton {

@@ -157,89 +157,14 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - FetchedResultController
-
-//- (NSFetchedResultsController *)fetchedResultsController {
-//    if (_fetchedResultsController == nil)
-//    {
-//        NSManagedObjectContext *moc = [[self appDelegate] managedObjectContext_roster];
-//        
-//        NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject"
-//                                                  inManagedObjectContext:moc];
-//        
-//        NSSortDescriptor *sd1 = [[NSSortDescriptor alloc] initWithKey:@"sectionNum" ascending:YES];
-//        NSSortDescriptor *sd2 = [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES];
-//        
-//        NSArray *sortDescriptors = @[sd1, sd2];
-//        
-//        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//        [fetchRequest setEntity:entity];
-//        [fetchRequest setSortDescriptors:sortDescriptors];
-//        [fetchRequest setFetchBatchSize:10];
-//        
-//        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-//                                                                       managedObjectContext:moc
-//                                                                         sectionNameKeyPath:@"sectionNum"
-//                                                                                  cacheName:nil];
-//        [_fetchedResultsController setDelegate:self];
-//        
-//        
-//        NSError *error = nil;
-//        if (![_fetchedResultsController performFetch:&error])
-//        {
-//            //DDLogError(@"Error performing fetch: %@", error);
-//        }
-//        
-//    }
-//    
-//    return _fetchedResultsController;
-//}
-
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-//    [[self tableView] reloadData];
-//    //NSFetchedResultsController *frc = [self fetchedResultsController];
-//}
-
-#pragma mark UITableView
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return [[[self fetchedResultsController] sections] count];
-//}
-
-//- (NSString *)tableView:(UITableView *)sender titleForHeaderInSection:(NSInteger)sectionIndex {
-//    NSArray *sections = [[self fetchedResultsController] sections];
-//    
-//    if (sectionIndex < [sections count])
-//    {
-//        id <NSFetchedResultsSectionInfo> sectionInfo = sections[sectionIndex];
-//        
-//        int section = [sectionInfo.name intValue];
-//        switch (section)
-//        {
-//            case 0  : return @"Available";
-//            case 1  : return @"Away";
-//            default : return @"Offline";
-//        }
-//    }
-//    
-//    return @"";
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
-//    NSArray *sections = [[self fetchedResultsController] sections];
-//    
-//    if (sectionIndex < [sections count])
-//    {
-//        id <NSFetchedResultsSectionInfo> sectionInfo = sections[sectionIndex];
-//        return sectionInfo.numberOfObjects;
-//    }
     return self.friends.count;
-    //return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PQFriendListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendListTableCell" forIndexPath:indexPath];
     
-    //XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     PQOtherUser *user = [self.friends objectAtIndex:indexPath.row];
     
     [cell configUsingUser:user];
@@ -252,7 +177,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     PQMessageExchangeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MessageExchangeView"];
-    [vc configUsingPartner:[[self fetchedResultsController] objectAtIndexPath:indexPath]];
+    PQOtherUser *partner = [self.friends objectAtIndex:indexPath.row];
+    [vc configUsingPartner:partner];
     [self.navigationController showViewController:vc sender:self];
 }
 

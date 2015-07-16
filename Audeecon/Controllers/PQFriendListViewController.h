@@ -14,6 +14,5 @@
 
 @interface PQFriendListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PQStreamConnectDelegate, PQLoginDelegate, PQFriendListDelegate, NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
