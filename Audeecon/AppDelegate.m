@@ -36,7 +36,6 @@
     [self setupStream];
     [self setupAmazon];
     [self updateRealmSchema];
-    self.realm = [RLMRealm defaultRealm];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
     //login = nil;
@@ -84,12 +83,6 @@
     return _globalContainer;
 }
 
-- (RLMRealm *)realm {
-    if (_realm == nil) {
-        _realm = [RLMRealm defaultRealm];
-    }
-    return _realm;
-}
 
 - (void)clearTemperaryFolder {
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -240,17 +233,25 @@
     NSLog(@"didAuthenticate");
     [_loginDelegate loginDidAuthenticate];
     
+    NSString *dfRealmPath = [[[[RLMRealm defaultRealmPath]
+                               stringByDeletingLastPathComponent]
+                              stringByAppendingPathComponent:[[[self xmppStream] myJID] user]]
+                             stringByAppendingPathExtension:@"realm"];
+    
+    [RLMRealm setDefaultRealmPath:dfRealmPath];
 
     // Load user from database
     NSString *predicateString = [NSString stringWithFormat:@"username = '%@'", [[[self xmppStream] myJID] user]];
     RLMResults *users = [PQCurrentUser objectsWhere:predicateString];
     self.currentUser = [users firstObject];
     // If not, create a new one
+    
     if (self.currentUser == nil) {
         self.currentUser = [[PQCurrentUser alloc] initWithXMPPJID:[[self xmppStream] myJID]];
-        [self.realm beginWriteTransaction];
-        [self.realm addObject:self.currentUser];
-        [self.realm commitWriteTransaction];
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm addObject:self.currentUser];
+        [realm commitWriteTransaction];
     }
     
     [self.currentUser updateOwnedStickerPackUsingQueue:[[self globalContainer] stickerPackDownloadQueue]
@@ -265,6 +266,8 @@
                                                }];
     
     // Then update sticker pack for that user
+    [self.currentUser markFriendListForUpdating];
+    [_friendListDelegate friendListDidUpdate];
     [[self xmppRoster] fetchRoster];
     [self goOnline];
 }
@@ -314,20 +317,10 @@
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
     //NSLog(@"%@", presence);
-    NSString *presenceType = [presence type]; // online/offline
     NSString *myUsername = [[sender myJID] user];
     NSString *presenceFromUser = [[presence from] user];
     if (![presenceFromUser isEqualToString:myUsername]) {
-        
-        if ([presenceType isEqualToString:@"available"]) {
-            
-            [_friendListDelegate friendDidOnline:[NSString stringWithFormat:@"%@@%@", presenceFromUser, @"YOURSERVER"]];
-            
-        } else if ([presenceType isEqualToString:@"unavailable"]) {
-            
-            [_friendListDelegate friendDidOnline:[NSString stringWithFormat:@"%@@%@", presenceFromUser, @"YOURSERVER"]];
-            
-        }
+        [self.currentUser updateFriendListUsingPresence:presence];
     }
 }
 
@@ -341,7 +334,6 @@
 
 #pragma mark - XMPPRoster delegates
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {
-    //[self.xmppRoster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
     NSLog(@"%@", presence);
     [self.currentUser addAwaitingJid:presence.from];
 }
@@ -351,6 +343,8 @@
     NSString *jidString = [[item attributeForName:@"jid"] stringValue];
     XMPPJID *jid = [XMPPJID jidWithString:jidString];
     [self.currentUser updateFriendListUsingXMPPJID:jid];
+    [_xmppvCardTempModule fetchvCardTempForJID:jid ignoreStorage:YES];
+    [_friendListDelegate friendListDidUpdate];
 }
 
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterPush:(XMPPIQ *)iq {
@@ -363,6 +357,8 @@
 
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender {
     NSLog(@"Roster end populating");
+    [self.currentUser removeNotUpdatedFriends];
+    [_friendListDelegate friendListDidUpdate];
 }
 
 #pragma mark - XMPPvCardAvatar delegates

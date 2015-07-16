@@ -13,7 +13,7 @@
 @class XMPPvCardTemp;
 
 @interface PQUser : RLMObject
-@property XMPPJID *jid;
+@property NSString *jidString;
 @property NSString *username;
 @property NSString *nickname;
 @property NSData *avatarData;

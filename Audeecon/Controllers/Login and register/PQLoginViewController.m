@@ -125,7 +125,7 @@
     [super viewDidAppear:animated];
     if (!self.viewLoaded) {
         [self setupView];
-        self.loginUsernameTextField.text = @"gaulois";
+        self.loginUsernameTextField.text = @"ltpquang";
         self.loginPasswordTextField.text = @"123123";
         
         self.registerFullnameTextField.text = @"Add Friend Test ";
@@ -153,7 +153,7 @@
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.hud.delegate = self;
-    self.hud.labelText = @"Loging in...";
+    self.hud.labelText = @"Logging in...";
     self.hud.minSize = CGSizeMake(135.f, 135.f);
 }
 

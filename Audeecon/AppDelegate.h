@@ -43,11 +43,9 @@
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
 @property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
 
-//@property (strong, nonatomic) NSArray *stickerPacks;
 @property (strong, nonatomic) PQGlobalContainer *globalContainer;
-@property (strong, nonatomic) RLMRealm *realm;
+//@property (strong, nonatomic) RLMRealm *realm;
 @property (strong, nonatomic) PQCurrentUser *currentUser;
-//@property BOOL stickerPacksDownloaded;
 
 - (BOOL)connect;
 - (void)fetchRoster;

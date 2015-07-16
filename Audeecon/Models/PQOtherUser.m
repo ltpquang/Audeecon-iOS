@@ -12,17 +12,17 @@
 
 // Specify default values for properties
 
-//+ (NSDictionary *)defaultPropertyValues
-//{
-//    return @{};
-//}
+
++ (NSDictionary *)defaultPropertyValues
+{
+    return @{@"isOnline":@NO};
+}
 
 // Specify properties to ignore (Realm won't persist these)
 
 + (NSArray *)ignoredProperties
 {
-    return @[@"status",
-             @"isUpdated"];
+    return @[];
 }
 
 @end

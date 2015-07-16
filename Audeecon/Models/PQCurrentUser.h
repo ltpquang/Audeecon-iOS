@@ -24,10 +24,15 @@
                                  failure:(void(^)(NSError *error))failureCall;
 
 - (void)updateFriendListUsingXMPPJID:(XMPPJID *)jid;
+- (void)markFriendListForUpdating;
+- (void)removeNotUpdatedFriends;
 - (void)updateInfoForFriendWithXMPPJID:(XMPPJID *)jid
                         usingvCardTemp:(XMPPvCardTemp *)vCard;
 - (void)addAwaitingJid:(XMPPJID *)awaitingJid;
 - (XMPPJID *)awaitingJidToProcess;
+
+- (void)updateFriendListUsingPresence:(XMPPPresence *)presence;
+
 @end
 
 // This protocol enables typed collections. i.e.:

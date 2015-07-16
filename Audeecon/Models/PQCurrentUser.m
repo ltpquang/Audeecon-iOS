@@ -70,23 +70,48 @@
 
 
 - (void)updateFriendListUsingXMPPJID:(XMPPJID *)jid {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
     if ([jid.user isEqualToString:self.username]) {
+        [realm commitWriteTransaction];
         return;
     }
     for (PQOtherUser *user in self.friends) {
         if ([user.username isEqualToString:jid.user]) {
-            user.jid = jid;
+            user.jidString = jid.bare;
             user.isUpdated = YES;
+            [realm commitWriteTransaction];
             return;
         }
     }
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm beginWriteTransaction];
-    [self.friends addObject:[[PQOtherUser alloc] initWithXMPPJID:jid]];
+    PQOtherUser *user = [[PQOtherUser alloc] initWithXMPPJID:jid];
+    user.isUpdated = YES;
+    [self.friends addObject:user];
     [realm commitWriteTransaction];
     
 }
 
+- (void)markFriendListForUpdating {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    for (PQOtherUser *user in self.friends) {
+        user.isUpdated = NO;
+        user.isOnline = NO;
+    }
+    [realm commitWriteTransaction];
+}
+- (void)removeNotUpdatedFriends {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    for (int i = self.friends.count - 1; i >= 0; --i) {
+        PQOtherUser *user = [self.friends objectAtIndex:i];
+        if (!user.isUpdated) {
+            [self.friends removeObjectAtIndex:i];
+            [realm deleteObject:user];
+        }
+    }
+    [realm commitWriteTransaction];
+}
 
 - (void)updateInfoForFriendWithXMPPJID:(XMPPJID *)jid
                         usingvCardTemp:(XMPPvCardTemp *)vCard {
@@ -111,6 +136,28 @@
     XMPPJID *result = self.awatingJIDs.firstObject;
     [self.awatingJIDs removeObjectAtIndex:0];
     return result;
+}
+
+- (void)updateFriendListUsingPresence:(XMPPPresence *)presence {
+    NSString *presenceType = [presence type]; // online/offline
+    NSString *presenceFromUser = [[presence from] user];
+    for (PQOtherUser *user in self.friends) {
+        if ([user.username isEqualToString:presenceFromUser]) {
+            RLMRealm *realm = [RLMRealm defaultRealm];
+            [realm beginWriteTransaction];
+            if ([presenceType isEqualToString:@"available"]) {
+                user.isOnline = YES;
+            }
+            else if ([presenceType isEqualToString:@"unavailable"]) {
+                user.isOnline = NO;
+            }
+            [realm commitWriteTransaction];
+            
+            NSString *onlineNoti = [user.username stringByAppendingString:@"IsOnlineChanged"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:onlineNoti object:user];
+            NSLog(@"Posted: %@", onlineNoti);
+        }
+    }
 }
 // Specify default values for properties
 
