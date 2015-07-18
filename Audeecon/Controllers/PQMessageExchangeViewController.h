@@ -13,10 +13,10 @@
 #import "PQAudioPlayerAndRecorder.h"
 
 @protocol PQStickerKeyboardDelegate;
-@protocol PQMessageCollectionViewCellDelegate;
+@protocol PQMessageTableViewCellDelegate;
 @class PQOtherUser;
 
 @interface PQMessageExchangeViewController : UIViewController
-<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PQMessageExchangeDelegate, PQStickerKeyboardDelegate, PQAudioPlayerAndRecorderDelegate, PQMessageCollectionViewCellDelegate>
+<UITableViewDelegate, UITableViewDataSource, PQMessageExchangeDelegate, PQStickerKeyboardDelegate, PQAudioPlayerAndRecorderDelegate, PQMessageTableViewCellDelegate>
 - (void)configUsingPartner:(PQOtherUser *)partner;
 @end

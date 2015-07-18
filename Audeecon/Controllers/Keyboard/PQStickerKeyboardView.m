@@ -77,8 +77,31 @@
     }
     
     [self updateLayoutForNormalLayout];
-    //[self updateLayoutForAutoRecommendationLayout];
     
+    [self setupLongPressRecognizerForMainRecommendationImageView];
+}
+
+- (void)setupLongPressRecognizerForMainRecommendationImageView {
+    //self.backgroundColor = [UIColor darkGrayColor];
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                      action:@selector(longPressHandler:)];
+    [longPressRecognizer setMinimumPressDuration:0.25];
+    [self.mainRecommendationImageView addGestureRecognizer:longPressRecognizer];
+}
+
+- (void)longPressHandler:(UILongPressGestureRecognizer *)gesture {
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+            //
+            [self.delegate didStartHoldingOnSticker:nil withGesture:gesture];
+            break;
+        case UIGestureRecognizerStateEnded:
+            //
+            [self.delegate didStopHoldingOnSticker:nil withGesture:gesture];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs {
@@ -581,6 +604,7 @@
     else {
         [self updateLayoutForNormalLayout];
     }
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

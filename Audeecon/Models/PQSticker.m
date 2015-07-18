@@ -86,14 +86,25 @@
         else {
             UIImage *spriteSheet = [UIImage imageWithData:self.spriteData];
             _spriteArray = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
-                                                  columnCount:(_frameCount - 1) / _framesPerCol + 1
-                                                     rowCount:(_frameCount - 1) / _framesPerRow + 1
-                                                  spriteCount:_frameCount];
+                                                  columnCount:(self.frameCount - 1) / self.framesPerCol + 1
+                                                     rowCount:(self.frameCount - 1) / self.framesPerRow + 1
+                                                  spriteCount:self.frameCount];
         }
     }
     return _spriteArray;
 }
 
+- (void)animateStickerOnImageView:(UIImageView *)imageView {
+    if (self.frameCount == 0) {
+        imageView.image = self.fullsizeImage;
+    }
+    else {
+        [imageView setAnimationImages:self.spriteArray];
+        //[imageView setAnimationRepeatCount:1];
+        [imageView setAnimationDuration:(float)(self.frameCount * self.frameRate)/1000];
+        [imageView startAnimating];
+    }
+}
 
 // Specify default values for properties
 

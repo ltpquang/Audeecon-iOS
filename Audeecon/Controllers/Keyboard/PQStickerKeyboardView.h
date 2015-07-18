@@ -26,9 +26,9 @@
 @protocol PQStickerKeyboardDelegate
 
 - (void)didStartHoldingOnSticker:(PQSticker *)sticker
-                ofStickerPack:(PQStickerPack *)pack;
+                     withGesture:(UIGestureRecognizer *)gesture;
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
-               ofStickerPack:(PQStickerPack *)pack;
+                    withGesture:(UIGestureRecognizer *)gesture;
 - (void)didChangeLayout;
 
 @end

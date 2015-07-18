@@ -10,7 +10,8 @@
 
 @implementation PQFilePathFactory
 + (NSURL *)tempDirectory {
-    NSURL *result = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    NSURL *result = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];// URLByAppendingPathComponent:@"audeecon"];
+    
     return result;
 }
 

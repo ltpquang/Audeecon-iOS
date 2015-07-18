@@ -50,6 +50,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *updateInfoAvatarImageView;
 
+
 @end
 
 @implementation PQLoginViewController

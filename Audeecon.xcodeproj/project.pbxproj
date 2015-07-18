@@ -10,7 +10,7 @@
 		6A3EF5DA164B4B5AB0489F22 /* libPods-AudeeconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 398BADCE41D10685045E4E3E /* libPods-AudeeconTests.a */; };
 		6F0048361B367498004B570E /* StickerKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0048351B367498004B570E /* StickerKeyboardView.xib */; };
 		6F00F73B1B37A44600AEE057 /* PQMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73A1B37A44600AEE057 /* PQMessage.m */; };
-		6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */; };
+		6F00F73E1B37AAA500AEE057 /* PQMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00F73D1B37AAA500AEE057 /* PQMessageTableViewCell.m */; };
 		6F0EE0321B42E1C900E25EC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */; };
 		6F18334E1B52ABA600893379 /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F18334D1B52ABA600893379 /* RegisterView.xib */; };
 		6F1833501B52ABED00893379 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F18334F1B52ABED00893379 /* LoginView.xib */; };
@@ -39,6 +39,10 @@
 		6F46077E1B48387000B637C7 /* UIColor+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */; };
 		6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */; };
 		6F5D85931B5439B000EA518D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5D85921B5439B000EA518D /* UIImage+Resize.m */; };
+		6F7AD0971B590396007C4DCD /* PQMessageAudioUploadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD0961B590396007C4DCD /* PQMessageAudioUploadOperation.m */; };
+		6F7AD09A1B590582007C4DCD /* PQNotificationNameFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD0991B590582007C4DCD /* PQNotificationNameFactory.m */; };
+		6F7AD09C1B591AE4007C4DCD /* RecordingOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F7AD09B1B591AE4007C4DCD /* RecordingOverlayView.xib */; };
+		6F7AD0A01B5967B2007C4DCD /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD09F1B5967B2007C4DCD /* SCSiriWaveformView.m */; };
 		6F8AF40C1B46F6FC0099F63A /* PQSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40B1B46F6FC0099F63A /* PQSticker.m */; };
 		6F8AF40F1B46FB0B0099F63A /* PQStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */; };
 		6F8FFCC31B4B01A200D8C06B /* PQBuyStickerPackOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */; };
@@ -227,8 +231,8 @@
 		6F0048351B367498004B570E /* StickerKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StickerKeyboardView.xib; path = Views/StickerKeyboardView.xib; sourceTree = "<group>"; };
 		6F00F7391B37A44600AEE057 /* PQMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessage.h; path = Models/PQMessage.h; sourceTree = "<group>"; };
 		6F00F73A1B37A44600AEE057 /* PQMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessage.m; path = Models/PQMessage.m; sourceTree = "<group>"; };
-		6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageCollectionViewCell.h; path = Controllers/Cells/PQMessageCollectionViewCell.h; sourceTree = "<group>"; };
-		6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageCollectionViewCell.m; path = Controllers/Cells/PQMessageCollectionViewCell.m; sourceTree = "<group>"; };
+		6F00F73C1B37AAA500AEE057 /* PQMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageTableViewCell.h; path = Controllers/Cells/PQMessageTableViewCell.h; sourceTree = "<group>"; };
+		6F00F73D1B37AAA500AEE057 /* PQMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageTableViewCell.m; path = Controllers/Cells/PQMessageTableViewCell.m; sourceTree = "<group>"; };
 		6F0EE0311B42E1C900E25EC4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6F18334D1B52ABA600893379 /* RegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterView.xib; path = Views/RegisterView.xib; sourceTree = "<group>"; };
 		6F18334F1B52ABED00893379 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = Views/LoginView.xib; sourceTree = "<group>"; };
@@ -299,6 +303,13 @@
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
 		6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeDelegate.h; path = Protocols/PQMessageExchangeDelegate.h; sourceTree = "<group>"; };
 		6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginDelegate.h; path = Protocols/PQLoginDelegate.h; sourceTree = "<group>"; };
+		6F7AD0951B590396007C4DCD /* PQMessageAudioUploadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageAudioUploadOperation.h; path = Models/PQMessageAudioUploadOperation.h; sourceTree = "<group>"; };
+		6F7AD0961B590396007C4DCD /* PQMessageAudioUploadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageAudioUploadOperation.m; path = Models/PQMessageAudioUploadOperation.m; sourceTree = "<group>"; };
+		6F7AD0981B590582007C4DCD /* PQNotificationNameFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQNotificationNameFactory.h; path = Helpers/PQNotificationNameFactory.h; sourceTree = "<group>"; };
+		6F7AD0991B590582007C4DCD /* PQNotificationNameFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQNotificationNameFactory.m; path = Helpers/PQNotificationNameFactory.m; sourceTree = "<group>"; };
+		6F7AD09B1B591AE4007C4DCD /* RecordingOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordingOverlayView.xib; path = Views/RecordingOverlayView.xib; sourceTree = "<group>"; };
+		6F7AD09E1B5967B2007C4DCD /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
+		6F7AD09F1B5967B2007C4DCD /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
 		6F8633BF1B281BDE007EB2A9 /* PQStreamConnectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStreamConnectDelegate.h; path = Protocols/PQStreamConnectDelegate.h; sourceTree = "<group>"; };
 		6F8AF40A1B46F6FC0099F63A /* PQSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQSticker.h; path = Models/PQSticker.h; sourceTree = "<group>"; };
 		6F8AF40B1B46F6FC0099F63A /* PQSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQSticker.m; path = Models/PQSticker.m; sourceTree = "<group>"; };
@@ -688,6 +699,7 @@
 				6F18334D1B52ABA600893379 /* RegisterView.xib */,
 				6F18334F1B52ABED00893379 /* LoginView.xib */,
 				6FDA9DBC1B54BE800053D4DC /* UpdateInfoView.xib */,
+				6F7AD09B1B591AE4007C4DCD /* RecordingOverlayView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -695,13 +707,10 @@
 		6F03C3281AD6AC4C0075BD66 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6F060D7B1B5A015800955A45 /* Messages */,
 				6F2505611B48D95600F00274 /* Operations */,
 				6F935FE51B46E1A500F0FD03 /* Users */,
 				6F935FE61B46E1B000F0FD03 /* Stickers */,
-				6F00F7391B37A44600AEE057 /* PQMessage.h */,
-				6F00F73A1B37A44600AEE057 /* PQMessage.m */,
-				6FC042801B57D8EA003B56D2 /* PQMessagingCenter.h */,
-				6FC042811B57D8EA003B56D2 /* PQMessagingCenter.m */,
 				6F366F831B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.h */,
 				6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */,
 				6F25055E1B48C99800F00274 /* PQGlobalContainer.h */,
@@ -710,6 +719,17 @@
 				6FEF6D181B56164D000F0FBD /* PQRealmString.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		6F060D7B1B5A015800955A45 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				6F00F7391B37A44600AEE057 /* PQMessage.h */,
+				6F00F73A1B37A44600AEE057 /* PQMessage.m */,
+				6FC042801B57D8EA003B56D2 /* PQMessagingCenter.h */,
+				6FC042811B57D8EA003B56D2 /* PQMessagingCenter.m */,
+			);
+			name = Messages;
 			sourceTree = "<group>";
 		};
 		6F2189BB1B5026DE000572BD /* Stickers download */ = {
@@ -726,13 +746,8 @@
 			children = (
 				6F2189BF1B502C6E000572BD /* PQImageUriToDataDownloadOperation.h */,
 				6F2189C01B502C6E000572BD /* PQImageUriToDataDownloadOperation.m */,
-				6FB4EBC71B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.h */,
-				6FB4EBC81B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m */,
-				6F2189BB1B5026DE000572BD /* Stickers download */,
-				6F8FFCC11B4B01A200D8C06B /* PQBuyStickerPackOperation.h */,
-				6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */,
-				6F2505651B48DC4200F00274 /* PQStickerPackDownloadOperation.h */,
-				6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */,
+				6F7AD0931B5902D9007C4DCD /* Packs */,
+				6F7AD0941B5902EE007C4DCD /* Messages */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -756,6 +771,8 @@
 				6F1833521B52D42300893379 /* PQTextField.m */,
 				6F5D85911B5439B000EA518D /* UIImage+Resize.h */,
 				6F5D85921B5439B000EA518D /* UIImage+Resize.m */,
+				6F7AD0981B590582007C4DCD /* PQNotificationNameFactory.h */,
+				6F7AD0991B590582007C4DCD /* PQNotificationNameFactory.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -789,6 +806,7 @@
 		6F46075D1B4837CC00B637C7 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				6F7AD09D1B59676F007C4DCD /* SCSiriWaveformView */,
 				6F46075E1B48387000B637C7 /* DownloadButton */,
 			);
 			name = Controls;
@@ -842,12 +860,44 @@
 				6FE95F411B4D641300759564 /* Keyboard */,
 				6FD409541ADBBFCB0020DF8D /* PQFriendListTableViewCell.h */,
 				6FD409551ADBBFCB0020DF8D /* PQFriendListTableViewCell.m */,
-				6F00F73C1B37AAA500AEE057 /* PQMessageCollectionViewCell.h */,
-				6F00F73D1B37AAA500AEE057 /* PQMessageCollectionViewCell.m */,
+				6F00F73C1B37AAA500AEE057 /* PQMessageTableViewCell.h */,
+				6F00F73D1B37AAA500AEE057 /* PQMessageTableViewCell.m */,
 				6FF3EC921B47D9AE0038AF0C /* PQStickerPackTableViewCell.h */,
 				6FF3EC931B47D9AE0038AF0C /* PQStickerPackTableViewCell.m */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		6F7AD0931B5902D9007C4DCD /* Packs */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4EBC71B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.h */,
+				6FB4EBC81B4B7BDA003E9DE9 /* PQGetStickersInfoOperation.m */,
+				6F2189BB1B5026DE000572BD /* Stickers download */,
+				6F8FFCC11B4B01A200D8C06B /* PQBuyStickerPackOperation.h */,
+				6F8FFCC21B4B01A200D8C06B /* PQBuyStickerPackOperation.m */,
+				6F2505651B48DC4200F00274 /* PQStickerPackDownloadOperation.h */,
+				6F2505661B48DC4200F00274 /* PQStickerPackDownloadOperation.m */,
+			);
+			name = Packs;
+			sourceTree = "<group>";
+		};
+		6F7AD0941B5902EE007C4DCD /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				6F7AD0951B590396007C4DCD /* PQMessageAudioUploadOperation.h */,
+				6F7AD0961B590396007C4DCD /* PQMessageAudioUploadOperation.m */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		6F7AD09D1B59676F007C4DCD /* SCSiriWaveformView */ = {
+			isa = PBXGroup;
+			children = (
+				6F7AD09E1B5967B2007C4DCD /* SCSiriWaveformView.h */,
+				6F7AD09F1B5967B2007C4DCD /* SCSiriWaveformView.m */,
+			);
+			name = SCSiriWaveformView;
 			sourceTree = "<group>";
 		};
 		6F935FE51B46E1A500F0FD03 /* Users */ = {
@@ -1969,6 +2019,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F7AD09C1B591AE4007C4DCD /* RecordingOverlayView.xib in Resources */,
 				6F0048361B367498004B570E /* StickerKeyboardView.xib in Resources */,
 				6F18334E1B52ABA600893379 /* RegisterView.xib in Resources */,
 				6F1833501B52ABED00893379 /* LoginView.xib in Resources */,
@@ -2079,7 +2130,7 @@
 				6F9CE3ED1ABB14EE00D716EB /* DDMultiFormatter.m in Sources */,
 				6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */,
 				6F307E2C1B1E12D900D2F6DE /* PQRequestingService.m in Sources */,
-				6F00F73E1B37AAA500AEE057 /* PQMessageCollectionViewCell.m in Sources */,
+				6F00F73E1B37AAA500AEE057 /* PQMessageTableViewCell.m in Sources */,
 				6F9CE5C11ABB16FC00D716EB /* XEP_0223.m in Sources */,
 				6F307E241B1E129D00D2F6DE /* UIImage+Sprite.m in Sources */,
 				6F9CE4071ABB15B000D716EB /* DDXMLDocument.m in Sources */,
@@ -2190,6 +2241,7 @@
 				6F9CE5951ABB16FC00D716EB /* XMPPvCardTempAdrTypes.m in Sources */,
 				6F9CE5A71ABB16FC00D716EB /* XMPPTransports.m in Sources */,
 				6F9CE5C71ABB16FC00D716EB /* XMPPMessage+XEP_0308.m in Sources */,
+				6F7AD0A01B5967B2007C4DCD /* SCSiriWaveformView.m in Sources */,
 				6F9CE5D01ABB16FC00D716EB /* XMPPTimer.m in Sources */,
 				6F9CE4081ABB15B000D716EB /* DDXMLElement.m in Sources */,
 				6F9CE5601ABB16FC00D716EB /* XMPPElement.m in Sources */,
@@ -2206,6 +2258,7 @@
 				6F2505601B48C99800F00274 /* PQGlobalContainer.m in Sources */,
 				6F9CE5881ABB16FC00D716EB /* XMPPRoomMemoryStorage.m in Sources */,
 				6F9CE3E61ABB14EE00D716EB /* DDAbstractDatabaseLogger.m in Sources */,
+				6F7AD09A1B590582007C4DCD /* PQNotificationNameFactory.m in Sources */,
 				6F9CE5631ABB16FC00D716EB /* XMPPMessage.m in Sources */,
 				6F9CE5A11ABB16FC00D716EB /* XMPPMessage+XEP_0066.m in Sources */,
 				6F9CE3EA1ABB14EE00D716EB /* DDTTYLogger.m in Sources */,
@@ -2225,6 +2278,7 @@
 				6FCC0C981B4EC08700114BA7 /* PQStickerKeyboardView.m in Sources */,
 				6F9CE5591ABB16FC00D716EB /* XMPPSCRAMSHA1Authentication.m in Sources */,
 				6F9CE5C91ABB16FC00D716EB /* NSXMLElement+XEP_0335.m in Sources */,
+				6F7AD0971B590396007C4DCD /* PQMessageAudioUploadOperation.m in Sources */,
 				6F00F73B1B37A44600AEE057 /* PQMessage.m in Sources */,
 				6F366F881B41B19A000B3FA8 /* PQFilePathFactory.m in Sources */,
 				6F9CE55A1ABB16FC00D716EB /* XMPPXFacebookPlatformAuthentication.m in Sources */,

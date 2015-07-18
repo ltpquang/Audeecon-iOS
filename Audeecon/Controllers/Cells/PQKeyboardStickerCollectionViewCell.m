@@ -60,11 +60,11 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             //
-            [_delegate didStartHoldingOnCell:self];
+            [self.delegate didStartHoldingOnCell:self withGesture:gesture];
             break;
         case UIGestureRecognizerStateEnded:
             //
-            [_delegate didStopHoldingOnCell:self];
+            [self.delegate didStopHoldingOnCell:self withGesture:gesture];
             break;
         default:
             break;

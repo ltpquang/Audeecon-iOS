@@ -45,6 +45,8 @@
            andFrameRate:(NSInteger)frameRate
         andFramesPerCol:(NSInteger)framesPerCol
         andFramesPerRow:(NSInteger)framesPerRow;
+
+- (void)animateStickerOnImageView:(UIImageView *)imageView;
 @end
 
 // This protocol enables typed collections. i.e.:

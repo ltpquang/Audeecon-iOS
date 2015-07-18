@@ -89,16 +89,18 @@
 }
 
 #pragma mark - PQ Keyboard Sticker Cell Delegate
-- (void)didStartHoldingOnCell:(UICollectionViewCell *)cell {
+- (void)didStartHoldingOnCell:(UICollectionViewCell *)cell
+                  withGesture:(UIGestureRecognizer *)gesture {
     NSIndexPath *path = [self.collectionView indexPathForCell:cell];
     [self.stickerKeyboardDelegate didStartHoldingOnSticker:[self.stickers objectAtIndex:path.row]
-                                             ofStickerPack:self.pack];
+                                               withGesture:gesture];
 }
 
-- (void)didStopHoldingOnCell:(UICollectionViewCell *)cell {
+- (void)didStopHoldingOnCell:(UICollectionViewCell *)cell
+                 withGesture:(UIGestureRecognizer *)gesture {
     NSIndexPath *path = [self.collectionView indexPathForCell:cell];
     [self.stickerKeyboardDelegate didStopHoldingOnSticker:[self.stickers objectAtIndex:path.row]
-                                            ofStickerPack:self.pack];
+                                              withGesture:gesture];
 }
 
 

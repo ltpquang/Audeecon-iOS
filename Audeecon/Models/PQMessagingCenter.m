@@ -11,9 +11,13 @@
 #import "XMPP.h"
 #import "PQSticker.h"
 #import <Realm.h>
+#import "PQMessageAudioUploadOperation.h"
+#import "PQNotificationNameFactory.h"
 
 @interface PQMessagingCenter()
 @property (strong, nonatomic) NSMutableDictionary *messageDictionary;
+@property (strong, nonatomic) NSOperationQueue *sendingQueue;
+@property (strong, nonatomic) NSMutableDictionary *mostRecentSendingDictionary;
 @property (strong, nonatomic) XMPPStream *stream;
 @end
 
@@ -24,6 +28,21 @@
         _messageDictionary = [NSMutableDictionary new];
     }
     return _messageDictionary;
+}
+
+- (NSOperationQueue *)sendingQueue {
+    if (_sendingQueue == nil) {
+        _sendingQueue = [NSOperationQueue new];
+        _sendingQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+    }
+    return _sendingQueue;
+}
+
+- (NSMutableDictionary *)mostRecentSendingDictionary {
+    if (_mostRecentSendingDictionary == nil) {
+        _mostRecentSendingDictionary = [NSMutableDictionary new];
+    }
+    return _mostRecentSendingDictionary;
 }
 
 - (id)initWithXMPPStream:(XMPPStream *)stream {
@@ -77,15 +96,36 @@
 }
 
 - (void)sendMessage:(PQMessage *)message {
-    XMPPMessage *toSendMessage = [XMPPMessage messageWithType:@"chat"
-                                                           to:[XMPPJID jidWithString:message.toJIDString]];
-    NSString *body = [@[message.sticker.stickerId,
-                       message.onlineAudioUri] componentsJoinedByString:@"|"];
-    [toSendMessage addBody:body];
-    [self.stream sendElement:toSendMessage];
+    // Create an audio uploading operation
+    PQMessageAudioUploadOperation *uploadingOperation = [[PQMessageAudioUploadOperation alloc] initWithMessage:message];
+    uploadingOperation.completionBlock = ^() {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // After uploading, send the message
+            XMPPMessage *toSendMessage = [XMPPMessage messageWithType:@"chat"
+                                                                   to:[XMPPJID jidWithString:message.toJIDString]];
+            NSString *body = [@[message.sticker.stickerId,
+                                message.onlineAudioUri] componentsJoinedByString:@"|"];
+            [toSendMessage addBody:body];
+            [self.stream sendElement:toSendMessage];
+        });
+    };
     
+    // Check for previous uploading operation, the current operation must be started after the previous one completed
+    PQMessageAudioUploadOperation *previousOperation = self.mostRecentSendingDictionary[message.toJIDString];
+    if (previousOperation != nil) {
+        [uploadingOperation addDependency:previousOperation];
+    }
+    self.mostRecentSendingDictionary[message.toJIDString] = uploadingOperation;
+    
+    // Notify globaly that the message is going to be sent
+    NSString *notiName = [PQNotificationNameFactory messageStartedSending:message];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notiName object:message];
+    
+    // Uploading the audio
+    [self.sendingQueue addOperation:uploadingOperation];
+    
+    // Add the message to the chat log
     NSMutableArray *messages = [self messagesWithPartnerJIDString:message.toJIDString];
-    
     [messages addObject:message];
 }
 

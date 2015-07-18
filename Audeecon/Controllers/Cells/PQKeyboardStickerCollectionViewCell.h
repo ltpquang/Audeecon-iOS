@@ -29,7 +29,7 @@
 
 @protocol PQKeyboardStickerCellDelegate
 
-- (void)didStartHoldingOnCell:(UICollectionViewCell *)cell;
-- (void)didStopHoldingOnCell:(UICollectionViewCell *)cell;
+- (void)didStartHoldingOnCell:(UICollectionViewCell *)cell withGesture:(UIGestureRecognizer *)gesture;
+- (void)didStopHoldingOnCell:(UICollectionViewCell *)cell withGesture:(UIGestureRecognizer *)gesture;
 
 @end

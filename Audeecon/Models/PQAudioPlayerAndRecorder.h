@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+@class SCSiriWaveformView;
 
 @protocol PQAudioPlayerAndRecorderDelegate;
 
 @interface PQAudioPlayerAndRecorder : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
-- (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate;
+- (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate
+       andWaveformView:(SCSiriWaveformView *)waveformView;
 - (void)startRecording;
 - (void)stopRecordingAndSaveFileWithInfo:(NSDictionary *)infoDict;
 - (void)playAudioFileAtUrl:(NSURL *)filePath;

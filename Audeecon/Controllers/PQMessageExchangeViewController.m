@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "XMPPFramework.h"
 #import "PQMessage.h"
-#import "PQMessageCollectionViewCell.h"
+#import "PQMessageTableViewCell.h"
 #import "PQStickerKeyboardView.h"
 #import "PQSticker.h"
 #import "PQStickerPack.h"
@@ -18,19 +18,22 @@
 #import "PQCurrentUser.h"
 #import "PQOtherUser.h"
 #import "PQMessagingCenter.h"
+#import "SCSiriWaveformView.h"
 
 @interface PQMessageExchangeViewController ()
 @property (nonatomic, strong) PQOtherUser *partner;
-//@property (strong, nonatomic) NSMutableArray *messages;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic, strong) PQStickerKeyboardView *keyboardView;
 @property (nonatomic, strong) PQAudioPlayerAndRecorder *audioRecorderAndPlayer;
 @property (nonatomic, strong) PQSticker *selectedSticker;
-//@property (nonatomic, strong) PQStickerPack *selectedPack;
-@property (nonatomic, strong) PQMessageCollectionViewCell *playingCell;
+@property (nonatomic, strong) PQMessageTableViewCell *playingCell;
 @property (nonatomic, strong) PQRequestingService *requestingService;
 @property (nonatomic, strong) PQMessagingCenter *messagingCenter;
+@property (nonatomic, strong) UIView *messageShowingView;
+@property (weak, nonatomic) IBOutlet UIView *cancelView;
+@property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveformView;
+@property (weak, nonatomic) IBOutlet UIImageView *stickerImageView;
 @end
 
 @implementation PQMessageExchangeViewController
@@ -41,6 +44,16 @@
 
 - (XMPPStream *)xmppStream {
     return [[self appDelegate] xmppStream];
+}
+
+- (UIView *)messageShowingView {
+    if (_messageShowingView == nil) {
+        _messageShowingView = [[[NSBundle mainBundle] loadNibNamed:@"MessageShowingOverlay" owner:self options:nil] lastObject];
+        CGRect frame = self.view.bounds;
+        CGRect newRect = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - self.keyboardView.frame.size.height);
+        [_messageShowingView setFrame:newRect];
+    }
+    return _messageShowingView;
 }
 
 #pragma mark - Controller delegates
@@ -62,9 +75,10 @@
     // Do any additional setup after loading the view.
     [[self appDelegate] setMessageExchangeDelegate:self];
     
-    [self configCollectionView];
-    _audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self];
-    _requestingService = [PQRequestingService new];
+    [self configTableView];
+    self.audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self
+                                   andWaveformView:self.waveformView];
+    self.requestingService = [PQRequestingService new];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,17 +91,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)configCollectionView {
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
-    
-    _flowLayout.minimumInteritemSpacing = 1000.0;
+- (void)configTableView {
     
     UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)];
     tapgesture.numberOfTapsRequired = 2;
     
-    [_collectionView addGestureRecognizer:tapgesture];
+    [self.tableView addGestureRecognizer:tapgesture];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,7 +114,7 @@
 }
 
 - (void)receiveNotificationHandler:(NSNotification *)noti {
-    [self.collectionView reloadData];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Handle gesture
@@ -140,18 +149,7 @@
 
 }
 
-
-
 #pragma mark - Message exchange delegates
-//- (void)didReceiveMessage:(PQMessage *)message {
-//    [_messages addObject:message];
-//    [_collectionView reloadData];
-//    [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:_messages.count-1
-//                                                                inSection:0]
-//                            atScrollPosition:UICollectionViewScrollPositionBottom
-//                                    animated:YES];
-//}
-
 - (void)reloadStickers {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
@@ -159,51 +157,72 @@
 }
 
 #pragma mark - Collection view datasource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PQMessageCollectionViewCell *cell = (PQMessageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MessageCell" forIndexPath:indexPath];
-    [cell configCellUsingMessage:[self.messagingCenter messageAtIndexPath:indexPath
-                                                     withPartnerJIDString:self.partner.jidString]
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PQMessage *message = [self.messagingCenter messageAtIndexPath:indexPath
+                                             withPartnerJIDString:self.partner.jidString];
+    NSString *reuseId = message.isOutgoing ? @"OutgoingMessageCell" : @"IncomingMessageCell";
+    
+    PQMessageTableViewCell *cell = (PQMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseId
+                                                                                             forIndexPath:indexPath];
+    
+    [cell configCellUsingMessage:message
+                         andUser:(message.isOutgoing?[[self appDelegate] currentUser]:self.partner)
                         delegate:self];
     return cell;
 }
 
+
 #pragma mark - Keyboard delegate
 - (void)didStartHoldingOnSticker:(PQSticker *)sticker
-                   ofStickerPack:(PQStickerPack *)pack {
-    NSLog(@"Start holding on sticker %@ of pack %@", sticker.stickerId, pack.packId);
-    [_audioRecorderAndPlayer startRecording];
+                     withGesture:(UIGestureRecognizer *)gesture {
+    [sticker animateStickerOnImageView:self.stickerImageView];
+    [self.audioRecorderAndPlayer startRecording];
+    [self.view addSubview:self.messageShowingView];
+    NSLog(@"Start holding");
 }
 
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
-                  ofStickerPack:(PQStickerPack *)pack {
-    NSLog(@"Stop- holding on sticker %@ of pack %@", sticker.stickerId, pack.packId);
+                    withGesture:(UIGestureRecognizer *)gesture {
+    NSLog(@"Stop holding");
+    NSLog(@"%d", CGRectContainsPoint(self.cancelView.bounds, [gesture locationInView:self.cancelView]));
     
     NSString *from = [[[self xmppStream] myJID] user];
     NSString *to = self.partner.jidString;
     NSString *timestamp = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970] * 1000];
+    NSNumber *isCanceled = CGRectContainsPoint(self.cancelView.bounds, [gesture locationInView:self.cancelView])
+    ? [NSNumber numberWithBool:YES]
+    : [NSNumber numberWithBool:NO];
     
     NSDictionary *infoDict = @{@"sticker":sticker,
                                @"from":from,
                                @"to":to,
-                               @"timestamp":timestamp};
+                               @"timestamp":timestamp,
+                               @"isCanceled":isCanceled};
     
-    //_selectedPack = pack;
     self.selectedSticker = sticker;
     
-    [_audioRecorderAndPlayer stopRecordingAndSaveFileWithInfo:infoDict];
+    [self.audioRecorderAndPlayer stopRecordingAndSaveFileWithInfo:infoDict];
     
+    
+    [self.messageShowingView removeFromSuperview];
+    [self.stickerImageView stopAnimating];
 }
 
 - (void)didChangeLayout {
-    CGPoint offsets = self.collectionView.contentOffset;
-    UIEdgeInsets insets = self.collectionView.contentInset;
-    [self.collectionView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height, insets.right)];
+    CGPoint offsets = self.tableView.contentOffset;
+    UIEdgeInsets insets = self.tableView.contentInset;
+    [self.tableView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height, insets.right)];
     
-    [self.collectionView setContentOffset:CGPointMake(offsets.x, offsets.y - insets.bottom + self.collectionView.contentInset.bottom) animated:YES];
+    [self.tableView setContentOffset:CGPointMake(offsets.x, offsets.y - insets.bottom + self.tableView.contentInset.bottom) animated:YES];
+    
+    
+    CGRect frame = self.view.bounds;
+    CGRect newRect = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - self.keyboardView.frame.size.height);
+    [self.messageShowingView setFrame:newRect];
 }
 
 #pragma mark - Audio recorder delegate
@@ -215,31 +234,23 @@
                                                 toJIDString:self.partner.jidString
                                                  isOutgoing:YES];
     
-    [message uploadAudioWithCompletion:^(BOOL succeeded, NSError *error) {
-        [self.messagingCenter sendMessage:message];
-        [self.collectionView reloadData];
-        NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
+    [self.messagingCenter sendMessage:message];
+    [self.tableView reloadData];
+    NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
                                                                     inSection:0]
-                                atScrollPosition:UICollectionViewScrollPositionBottom
+                                atScrollPosition:UITableViewScrollPositionBottom
                                         animated:YES];
-    }];
-    
-    
 }
 
 - (void)didFinishPlaying {
-    if (_playingCell) {
-        [_playingCell reshowPlayButton];
-    }
-    _playingCell = nil;
 }
 
 #pragma mark - Message cell delegate
-- (void)didReceiveRequestToPlayCell:(PQMessageCollectionViewCell *)cell {
+- (void)didReceiveRequestToPlayCell:(PQMessageTableViewCell *)cell {
     [self didFinishPlaying];
     self.playingCell = cell;
-    NSIndexPath *path = [self.collectionView indexPathForCell:self.playingCell];
+    NSIndexPath *path = [self.tableView indexPathForCell:self.playingCell];
     PQMessage *message = [self.messagingCenter messageAtIndexPath:path withPartnerJIDString:self.partner.jidString];
     [message downloadAudioUsingRequestingService:self.requestingService
                                         complete:^(NSURL *offlineFile) {
