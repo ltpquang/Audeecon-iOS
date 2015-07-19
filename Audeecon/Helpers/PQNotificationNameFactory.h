@@ -10,5 +10,6 @@
 @class PQMessage;
 @interface PQNotificationNameFactory : NSObject
 + (NSString *)messageStartedSending:(PQMessage *)message;
++ (NSString *)messageCompletedSending:(PQMessage *)message;
 + (NSString *)messageCompletedUploading:(PQMessage *)message;
 @end

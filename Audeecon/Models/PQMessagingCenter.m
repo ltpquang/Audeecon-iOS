@@ -100,6 +100,8 @@
     PQMessageAudioUploadOperation *uploadingOperation = [[PQMessageAudioUploadOperation alloc] initWithMessage:message];
     uploadingOperation.completionBlock = ^() {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedUploading:message]
+                                                                object:message];
             // After uploading, send the message
             XMPPMessage *toSendMessage = [XMPPMessage messageWithType:@"chat"
                                                                    to:[XMPPJID jidWithString:message.toJIDString]];
@@ -107,6 +109,8 @@
                                 message.onlineAudioUri] componentsJoinedByString:@"|"];
             [toSendMessage addBody:body];
             [self.stream sendElement:toSendMessage];
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedSending:message]
+                                                                object:message];
         });
     };
     

@@ -13,6 +13,11 @@
 + (NSString *)messageStartedSending:(PQMessage *)message {
     return [@"StartedUploading:" stringByAppendingString:message.offlineAudioUri.lastPathComponent];
 }
+
++ (NSString *)messageCompletedSending:(PQMessage *)message {
+    return [@"CompletedSending:" stringByAppendingString:message.offlineAudioUri.lastPathComponent];
+}
+
 + (NSString *)messageCompletedUploading:(PQMessage *)message {
     return [@"CompletedUploading:" stringByAppendingString:message.offlineAudioUri.lastPathComponent];
 }

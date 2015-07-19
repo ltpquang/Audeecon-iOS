@@ -276,6 +276,9 @@
     [self.currentUser markFriendListForUpdating];
     [_friendListDelegate friendListDidUpdate];
     [[self xmppRoster] fetchRoster];
+    
+    //[_xmppvCardTempModule fetchvCardTempForJID:self.xmppStream.myJID.bareJID ignoreStorage:YES];
+    
     [self goOnline];
 }
 

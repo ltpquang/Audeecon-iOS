@@ -252,14 +252,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rjj-zu-U2l" id="Mk6-V0-zfn">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ncu-Fg-mIh">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultavatar" translatesAutoresizingMaskIntoConstraints="NO" id="Ncu-Fg-mIh">
                                                     <rect key="frame" x="0.0" y="79" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="5nH-C8-rqb"/>
                                                         <constraint firstAttribute="width" constant="36" id="gUi-Rm-cu8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pc6-aT-cOZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultsmile" translatesAutoresizingMaskIntoConstraints="NO" id="Pc6-aT-cOZ">
                                                     <rect key="frame" x="150.5" y="3" width="110" height="110"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="110" id="J1n-Ct-eIn"/>
@@ -280,6 +280,9 @@
                                                         <constraint firstAttribute="height" constant="1" id="G2m-Is-zg1"/>
                                                     </constraints>
                                                 </view>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="usx-l5-hyK">
+                                                    <rect key="frame" x="195" y="48" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Jnq-2H-3Er" firstAttribute="trailing" secondItem="Ncu-Fg-mIh" secondAttribute="trailing" id="6sm-6O-dpX"/>
@@ -288,14 +291,17 @@
                                                 <constraint firstItem="Pc6-aT-cOZ" firstAttribute="centerX" secondItem="c7z-hH-hWs" secondAttribute="centerX" id="KTa-Zs-Gjm"/>
                                                 <constraint firstItem="c7z-hH-hWs" firstAttribute="bottom" secondItem="Mk6-V0-zfn" secondAttribute="bottom" id="KpI-FA-SoH"/>
                                                 <constraint firstItem="c7z-hH-hWs" firstAttribute="leading" secondItem="Jnq-2H-3Er" secondAttribute="trailing" id="S1R-4d-e1C"/>
+                                                <constraint firstItem="Pc6-aT-cOZ" firstAttribute="centerX" secondItem="usx-l5-hyK" secondAttribute="centerX" constant="0.5" id="dbb-Jb-rYa"/>
                                                 <constraint firstItem="Jnq-2H-3Er" firstAttribute="bottom" secondItem="Mk6-V0-zfn" secondAttribute="bottom" id="gzb-Ir-hVI"/>
                                                 <constraint firstItem="Jnq-2H-3Er" firstAttribute="leading" secondItem="Ncu-Fg-mIh" secondAttribute="centerX" id="iLk-F9-Bkg"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ncu-Fg-mIh" secondAttribute="bottom" id="myC-uf-VoJ"/>
+                                                <constraint firstItem="Pc6-aT-cOZ" firstAttribute="centerY" secondItem="usx-l5-hyK" secondAttribute="centerY" id="sXo-rL-z9Z"/>
                                                 <constraint firstItem="c7z-hH-hWs" firstAttribute="top" secondItem="Pc6-aT-cOZ" secondAttribute="bottom" constant="1" id="uR9-Fr-EEe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImage" destination="Ncu-Fg-mIh" id="1hs-7Q-be7"/>
+                                            <outlet property="loadingIndicator" destination="usx-l5-hyK" id="UPW-Me-mO9"/>
                                             <outlet property="mainImage" destination="Pc6-aT-cOZ" id="qPF-fI-TII"/>
                                         </connections>
                                     </tableViewCell>
@@ -305,7 +311,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KP0-xY-GqZ" id="Rc8-6w-Kcr">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SgO-4v-BJE">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultavatar" translatesAutoresizingMaskIntoConstraints="NO" id="SgO-4v-BJE">
                                                     <rect key="frame" x="564" y="79" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="Y3B-2O-1VH"/>
@@ -326,13 +332,16 @@
                                                         <constraint firstAttribute="height" constant="1" id="BOI-wV-GrN"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCQ-er-2zE">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultsmile" translatesAutoresizingMaskIntoConstraints="NO" id="rCQ-er-2zE">
                                                     <rect key="frame" x="347" y="3" width="110" height="110"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="110" id="Pzp-Sb-9PE"/>
                                                         <constraint firstAttribute="width" constant="110" id="xb6-I5-0gS"/>
                                                     </constraints>
                                                 </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GKq-Pj-9RC">
+                                                    <rect key="frame" x="392" y="48" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="nRk-cl-Lno" firstAttribute="top" secondItem="rCQ-er-2zE" secondAttribute="bottom" constant="1" id="68N-6h-GkD"/>
@@ -342,13 +351,16 @@
                                                 <constraint firstItem="SgO-4v-BJE" firstAttribute="leading" secondItem="c9M-rB-x39" secondAttribute="leading" id="LqO-65-XTB"/>
                                                 <constraint firstItem="c9M-rB-x39" firstAttribute="bottom" secondItem="Rc8-6w-Kcr" secondAttribute="bottom" id="MUy-LM-lXL"/>
                                                 <constraint firstAttribute="bottom" secondItem="SgO-4v-BJE" secondAttribute="bottom" id="RfY-fB-mM7"/>
+                                                <constraint firstItem="rCQ-er-2zE" firstAttribute="centerY" secondItem="GKq-Pj-9RC" secondAttribute="centerY" id="SMK-j1-57r"/>
                                                 <constraint firstItem="nRk-cl-Lno" firstAttribute="leading" secondItem="Rc8-6w-Kcr" secondAttribute="centerX" multiplier="0.8" id="Xyh-Ax-fjV"/>
+                                                <constraint firstItem="rCQ-er-2zE" firstAttribute="centerX" secondItem="GKq-Pj-9RC" secondAttribute="centerX" id="ap2-mM-DYB"/>
                                                 <constraint firstItem="rCQ-er-2zE" firstAttribute="centerX" secondItem="nRk-cl-Lno" secondAttribute="centerX" id="dvL-Fi-Zri"/>
                                                 <constraint firstItem="SgO-4v-BJE" firstAttribute="centerX" secondItem="c9M-rB-x39" secondAttribute="trailing" id="jkk-5D-xCA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImage" destination="SgO-4v-BJE" id="fxe-do-b2I"/>
+                                            <outlet property="loadingIndicator" destination="GKq-Pj-9RC" id="lhQ-Sj-3F3"/>
                                             <outlet property="mainImage" destination="rCQ-er-2zE" id="WP6-dl-Rag"/>
                                         </connections>
                                     </tableViewCell>
@@ -565,5 +577,6 @@
     </scenes>
     <resources>
         <image name="defaultavatar" width="640" height="640"/>
+        <image name="defaultsmile" width="610" height="610"/>
     </resources>
 </document>

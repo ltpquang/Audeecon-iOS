@@ -155,7 +155,7 @@
     });
 }
 
-#pragma mark - Collection view datasource
+#pragma mark - Table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
 }
@@ -212,7 +212,7 @@
 - (void)didChangeLayout {
     CGPoint offsets = self.tableView.contentOffset;
     UIEdgeInsets insets = self.tableView.contentInset;
-    [self.tableView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height, insets.right)];
+    [self.tableView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height + 8.0, insets.right)];
     
     [self.tableView setContentOffset:CGPointMake(offsets.x, offsets.y - insets.bottom + self.tableView.contentInset.bottom) animated:YES];
     

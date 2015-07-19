@@ -11,10 +11,12 @@
 #import "PQSticker.h"
 #import "UIImageView+AFNetworking.h"
 #import "PQUser.h"
+#import "PQNotificationNameFactory.h"
 
 @interface PQMessageTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 
 @property (weak, nonatomic) id<PQMessageTableViewCellDelegate> delegate;
@@ -30,6 +32,14 @@
     self.delegate = delegate;
     if (message.sticker.fullsizeData.length != 0) {
         self.mainImage.image = message.sticker.fullsizeImage;
+        if (message.onlineAudioUri.length == 0) {
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(messageCompletedSendingHandler:)
+                                                         name:[PQNotificationNameFactory messageCompletedSending:message]
+                                                       object:nil];
+            self.mainImage.alpha = 0.4;
+            //[self.loadingIndicator startAnimating];
+        }
     }
     else {
         //register for image update
@@ -41,6 +51,11 @@
         //register for image update
     }
     [self configRoundImage];
+}
+
+- (void)messageCompletedSendingHandler:(NSNotification *)noti {
+    self.mainImage.alpha = 1.0;
+    //[self.loadingIndicator stopAnimating];
 }
 
 - (void)configRoundImage {
@@ -57,6 +72,8 @@
 - (void)prepareForReuse {
     self.mainImage.image = [UIImage imageNamed:@"defaultsmile"];
     self.avatarImage.image = [UIImage imageNamed:@"defaultavatar"];
+    self.mainImage.alpha = 1.0;
+    [self.loadingIndicator stopAnimating];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
