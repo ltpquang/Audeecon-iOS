@@ -38,6 +38,7 @@
 		6F46077D1B48387000B637C7 /* UIButton+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607701B48387000B637C7 /* UIButton+PKDownloadButton.m */; };
 		6F46077E1B48387000B637C7 /* UIColor+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */; };
 		6F46077F1B48387000B637C7 /* UIImage+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */; };
+		6F48A60B1B5B4F1100292882 /* PQRecordingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48A60A1B5B4F1100292882 /* PQRecordingOverlayView.m */; };
 		6F5D85931B5439B000EA518D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5D85921B5439B000EA518D /* UIImage+Resize.m */; };
 		6F7AD0971B590396007C4DCD /* PQMessageAudioUploadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD0961B590396007C4DCD /* PQMessageAudioUploadOperation.m */; };
 		6F7AD09A1B590582007C4DCD /* PQNotificationNameFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD0991B590582007C4DCD /* PQNotificationNameFactory.m */; };
@@ -296,6 +297,8 @@
 		6F4607721B48387000B637C7 /* UIColor+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PKDownloadButton.m"; sourceTree = "<group>"; };
 		6F4607731B48387000B637C7 /* UIImage+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PKDownloadButton.h"; sourceTree = "<group>"; };
 		6F4607741B48387000B637C7 /* UIImage+PKDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PKDownloadButton.m"; sourceTree = "<group>"; };
+		6F48A6091B5B4F1100292882 /* PQRecordingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQRecordingOverlayView.h; path = Controllers/Messaging/PQRecordingOverlayView.h; sourceTree = "<group>"; };
+		6F48A60A1B5B4F1100292882 /* PQRecordingOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQRecordingOverlayView.m; path = Controllers/Messaging/PQRecordingOverlayView.m; sourceTree = "<group>"; };
 		6F5D85901B541E3C00EA518D /* PQvCardModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQvCardModuleDelegate.h; path = Protocols/PQvCardModuleDelegate.h; sourceTree = "<group>"; };
 		6F5D85911B5439B000EA518D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Helpers/UIImage+Resize.h"; sourceTree = "<group>"; };
 		6F5D85921B5439B000EA518D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Helpers/UIImage+Resize.m"; sourceTree = "<group>"; };
@@ -795,10 +798,9 @@
 				6F3783BF1B27CA630066EF08 /* Login and register */,
 				6FE61B121B478F7C0035C39F /* Store */,
 				6FCC0C921B4EBFF100114BA7 /* Keyboard */,
+				6F48A60C1B5B504D00292882 /* Messaging */,
 				6FD21D151ABC296F00C4C92E /* PQFriendListViewController.h */,
 				6FD21D161ABC296F00C4C92E /* PQFriendListViewController.m */,
-				6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */,
-				6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -839,6 +841,17 @@
 			);
 			name = DownloadButton;
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		6F48A60C1B5B504D00292882 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				6FFB3E4E1ACB905A00FE8901 /* PQMessageExchangeViewController.h */,
+				6FFB3E4F1ACB905A00FE8901 /* PQMessageExchangeViewController.m */,
+				6F48A6091B5B4F1100292882 /* PQRecordingOverlayView.h */,
+				6F48A60A1B5B4F1100292882 /* PQRecordingOverlayView.m */,
+			);
+			name = Messaging;
 			sourceTree = "<group>";
 		};
 		6F69AF541ABBFE6B00AE6D6A /* Protocols */ = {
@@ -2136,6 +2149,7 @@
 				6F9CE4071ABB15B000D716EB /* DDXMLDocument.m in Sources */,
 				6F9CE5C21ABB16FC00D716EB /* XMPPAttentionModule.m in Sources */,
 				6F9CE3E91ABB14EE00D716EB /* DDLog.m in Sources */,
+				6F48A60B1B5B4F1100292882 /* PQRecordingOverlayView.m in Sources */,
 				6F9CE5961ABB16FC00D716EB /* XMPPvCardTempBase.m in Sources */,
 				6F9CE5CD1ABB16FC00D716EB /* XMPPIDTracker.m in Sources */,
 				6F9CE59A1ABB16FC00D716EB /* XMPPvCardTempTel.m in Sources */,

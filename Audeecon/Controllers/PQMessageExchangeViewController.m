@@ -19,6 +19,7 @@
 #import "PQOtherUser.h"
 #import "PQMessagingCenter.h"
 #import "SCSiriWaveformView.h"
+#import "PQRecordingOverlayView.h"
 
 @interface PQMessageExchangeViewController ()
 @property (nonatomic, strong) PQOtherUser *partner;
@@ -30,10 +31,7 @@
 @property (nonatomic, strong) PQMessageTableViewCell *playingCell;
 @property (nonatomic, strong) PQRequestingService *requestingService;
 @property (nonatomic, strong) PQMessagingCenter *messagingCenter;
-@property (nonatomic, strong) UIView *messageShowingView;
-@property (weak, nonatomic) IBOutlet UIView *cancelView;
-@property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveformView;
-@property (weak, nonatomic) IBOutlet UIImageView *stickerImageView;
+@property (nonatomic, strong) PQRecordingOverlayView *recordingOverlay;
 @end
 
 @implementation PQMessageExchangeViewController
@@ -46,15 +44,17 @@
     return [[self appDelegate] xmppStream];
 }
 
-- (UIView *)messageShowingView {
-    if (_messageShowingView == nil) {
-        _messageShowingView = [[[NSBundle mainBundle] loadNibNamed:@"MessageShowingOverlay" owner:self options:nil] lastObject];
+- (PQRecordingOverlayView *)recordingOverlay {
+    if (_recordingOverlay == nil) {
+        _recordingOverlay = [[[NSBundle mainBundle] loadNibNamed:@"RecordingOverlayView" owner:nil options:nil] lastObject];
         CGRect frame = self.view.bounds;
         CGRect newRect = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - self.keyboardView.frame.size.height);
-        [_messageShowingView setFrame:newRect];
+        [_recordingOverlay setFrame:newRect];
+        [_recordingOverlay configUsingAudioRecorder:self.audioRecorderAndPlayer.recorder];
     }
-    return _messageShowingView;
+    return _recordingOverlay;
 }
+
 
 #pragma mark - Controller delegates
 - (void)configUsingPartner:(PQOtherUser *)partner {
@@ -76,8 +76,7 @@
     [[self appDelegate] setMessageExchangeDelegate:self];
     
     [self configTableView];
-    self.audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self
-                                   andWaveformView:self.waveformView];
+    self.audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self];
     self.requestingService = [PQRequestingService new];
 }
 
@@ -179,23 +178,21 @@
 #pragma mark - Keyboard delegate
 - (void)didStartHoldingOnSticker:(PQSticker *)sticker
                      withGesture:(UIGestureRecognizer *)gesture {
-    [sticker animateStickerOnImageView:self.stickerImageView];
+    [self.recordingOverlay animatingUsingSticker:sticker];
     [self.audioRecorderAndPlayer startRecording];
-    [self.view addSubview:self.messageShowingView];
+    [self.view addSubview:self.recordingOverlay];
     NSLog(@"Start holding");
 }
 
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
                     withGesture:(UIGestureRecognizer *)gesture {
     NSLog(@"Stop holding");
-    NSLog(@"%d", CGRectContainsPoint(self.cancelView.bounds, [gesture locationInView:self.cancelView]));
+    NSLog(@"%d", [self.recordingOverlay cancelViewContainGesture:gesture]);
     
     NSString *from = [[[self xmppStream] myJID] user];
     NSString *to = self.partner.jidString;
     NSString *timestamp = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970] * 1000];
-    NSNumber *isCanceled = CGRectContainsPoint(self.cancelView.bounds, [gesture locationInView:self.cancelView])
-    ? [NSNumber numberWithBool:YES]
-    : [NSNumber numberWithBool:NO];
+    NSNumber *isCanceled = [NSNumber numberWithBool:[self.recordingOverlay cancelViewContainGesture:gesture]];
     
     NSDictionary *infoDict = @{@"sticker":sticker,
                                @"from":from,
@@ -208,8 +205,8 @@
     [self.audioRecorderAndPlayer stopRecordingAndSaveFileWithInfo:infoDict];
     
     
-    [self.messageShowingView removeFromSuperview];
-    [self.stickerImageView stopAnimating];
+    [self.recordingOverlay removeFromSuperview];
+    [self.recordingOverlay stopAnimating];
 }
 
 - (void)didChangeLayout {
@@ -222,7 +219,7 @@
     
     CGRect frame = self.view.bounds;
     CGRect newRect = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - self.keyboardView.frame.size.height);
-    [self.messageShowingView setFrame:newRect];
+    [self.recordingOverlay setFrame:newRect];
 }
 
 #pragma mark - Audio recorder delegate

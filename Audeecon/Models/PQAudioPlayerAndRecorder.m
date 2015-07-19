@@ -8,25 +8,18 @@
 
 #import "PQAudioPlayerAndRecorder.h"
 #import "PQFilePathFactory.h"
-#import "SCSiriWaveformView.h"
 
 @interface PQAudioPlayerAndRecorder()
 @property (nonatomic, weak) id<PQAudioPlayerAndRecorderDelegate> delegate;
-@property (nonatomic, strong) AVAudioRecorder *recorder;
-@property (nonatomic, strong) AVAudioPlayer *player;
 
 @property (nonatomic, strong) NSDictionary *infoDict;
 
-@property (nonatomic, strong) SCSiriWaveformView *waveformView;
-@property (nonatomic, strong) CADisplayLink *displaylink;
 @end
 
 @implementation PQAudioPlayerAndRecorder
-- (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate
-       andWaveformView:(SCSiriWaveformView *)waveformView {
+- (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate {
     if (self = [super init]) {
         _delegate = delegate;
-        _waveformView = waveformView;
         
         NSURL *outputFileURL = [PQFilePathFactory filePathInTemporaryDirectoryForRecordedAudio];
         
@@ -47,38 +40,10 @@
         _recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:&error1];
         _recorder.delegate = self;
         
-        self.displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeters)];
-        [self.displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     }
     return self;
 }
 
-- (void)updateMeters
-{
-    if  (!self.recorder.recording && !self.player.playing) {
-        return;
-    }
-    CGFloat normalizedValue;
-    if ([self.recorder isRecording]) {
-        [self.recorder updateMeters];
-        normalizedValue = [self _normalizedPowerLevelFromDecibels:[self.recorder averagePowerForChannel:0]];
-    }
-    else if (self.player.playing) {
-        [self.player updateMeters];
-        normalizedValue = [self _normalizedPowerLevelFromDecibels:[self.player averagePowerForChannel:0]];
-    }
-    [self.waveformView updateWithLevel:normalizedValue];
-    NSLog(@"%f", normalizedValue);
-}
-
-- (CGFloat)_normalizedPowerLevelFromDecibels:(CGFloat)decibels
-{
-    if (decibels < -60.0f || decibels == 0.0f) {
-        return 0.0f;
-    }
-    
-    return powf((powf(10.0f, 0.05f * decibels) - powf(10.0f, 0.05f * -60.0f)) * (1.0f / (1.0f - powf(10.0f, 0.05f * -60.0f))), 1.0f / 2.0f);
-}
 
 - (void)startRecording {
     if ([self.player isPlaying]) {

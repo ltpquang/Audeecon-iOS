@@ -13,8 +13,10 @@
 @protocol PQAudioPlayerAndRecorderDelegate;
 
 @interface PQAudioPlayerAndRecorder : NSObject <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
-- (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate
-       andWaveformView:(SCSiriWaveformView *)waveformView;
+@property (nonatomic, strong) AVAudioRecorder *recorder;
+@property (nonatomic, strong) AVAudioPlayer *player;
+
+- (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate;
 - (void)startRecording;
 - (void)stopRecordingAndSaveFileWithInfo:(NSDictionary *)infoDict;
 - (void)playAudioFileAtUrl:(NSURL *)filePath;
