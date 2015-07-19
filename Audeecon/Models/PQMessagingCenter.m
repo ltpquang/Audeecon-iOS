@@ -13,11 +13,13 @@
 #import <Realm.h>
 #import "PQMessageAudioUploadOperation.h"
 #import "PQNotificationNameFactory.h"
+#import "PQMessageDownloadOperation.h"
 
 @interface PQMessagingCenter()
 @property (strong, nonatomic) NSMutableDictionary *messageDictionary;
 @property (strong, nonatomic) NSOperationQueue *sendingQueue;
 @property (strong, nonatomic) NSMutableDictionary *mostRecentSendingDictionary;
+@property (strong, nonatomic) NSOperationQueue *receivingQueue;
 @property (strong, nonatomic) XMPPStream *stream;
 @end
 
@@ -43,6 +45,14 @@
         _mostRecentSendingDictionary = [NSMutableDictionary new];
     }
     return _mostRecentSendingDictionary;
+}
+
+- (NSOperationQueue *)receivingQueue {
+    if (_receivingQueue == nil) {
+        _receivingQueue = [NSOperationQueue new];
+        _receivingQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
+    }
+    return _receivingQueue;
 }
 
 - (id)initWithXMPPStream:(XMPPStream *)stream {
@@ -91,8 +101,13 @@
     
     NSMutableArray *messages = [self messagesWithPartnerJIDString:fromJIDString];
     [messages addObject:pqMessage];
-    NSString *receiveNotiName = [@"Received:" stringByAppendingString:fromJIDString];
-    [[NSNotificationCenter defaultCenter] postNotificationName:receiveNotiName object:pqMessage];
+    
+    PQMessageDownloadOperation *messDownloadOperation = [[PQMessageDownloadOperation alloc] initWithMessage:pqMessage
+                                                                                           andDownloadQueue:self.receivingQueue];
+    [self.receivingQueue addOperation:messDownloadOperation];
+    NSLog(@"%@", [PQNotificationNameFactory messageCompletedReceivingFromJIDString:fromJIDString]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedReceivingFromJIDString:fromJIDString]
+                                                        object:pqMessage];
 }
 
 - (void)sendMessage:(PQMessage *)message {

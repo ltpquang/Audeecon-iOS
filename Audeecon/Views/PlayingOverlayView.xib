@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PQPlayingOverlayView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WkT-TX-ne7" customClass="SCSiriWaveformView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="0Cc-K3-Nwe"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
+                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="primaryWaveLineWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="frequency">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultsmile" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-cV-jmX">
+                    <rect key="frame" x="224.5" y="25" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="Ddf-ab-K0k"/>
+                        <constraint firstAttribute="height" constant="150" id="NTZ-ht-v7R"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="OfV-cV-jmX" firstAttribute="centerY" secondItem="WkT-TX-ne7" secondAttribute="centerY" id="KVg-As-8Yi"/>
+                <constraint firstItem="OfV-cV-jmX" firstAttribute="centerX" secondItem="WkT-TX-ne7" secondAttribute="centerX" id="TFu-yL-cLz"/>
+                <constraint firstItem="WkT-TX-ne7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aSr-sv-5xE"/>
+                <constraint firstAttribute="trailing" secondItem="WkT-TX-ne7" secondAttribute="trailing" id="uH2-UH-1mM"/>
+                <constraint firstItem="WkT-TX-ne7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uZV-LN-N1c"/>
+            </constraints>
+            <connections>
+                <outlet property="mainImage" destination="OfV-cV-jmX" id="Hed-XW-OU9"/>
+                <outlet property="waveformView" destination="WkT-TX-ne7" id="1Qm-ue-MVE"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="defaultsmile" width="610" height="610"/>
+    </resources>
+</document>

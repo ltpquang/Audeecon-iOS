@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.14999999999999969" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-9U-IHa" customClass="SCSiriWaveformView">
-                    <rect key="frame" x="0.0" y="65" width="600" height="200"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="eF6-Tg-jrB"/>
@@ -30,17 +30,17 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sdS-Xu-hIc">
-                    <rect key="frame" x="225" y="90" width="150" height="150"/>
+                    <rect key="frame" x="225" y="25" width="150" height="150"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="kDf-c6-lSp"/>
                         <constraint firstAttribute="width" constant="150" id="pr9-U9-CnH"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIg-vo-Dcl">
-                    <rect key="frame" x="0.0" y="265" width="600" height="335"/>
+                    <rect key="frame" x="0.0" y="200" width="600" height="400"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag here to cancel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysY-gV-NB1">
-                            <rect key="frame" x="220" y="156" width="160.5" height="23"/>
+                            <rect key="frame" x="220" y="188.5" width="160.5" height="23"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="dCi-9U-IHa" secondAttribute="trailing" id="2zq-ZH-fdK"/>
                 <constraint firstItem="sdS-Xu-hIc" firstAttribute="centerY" secondItem="dCi-9U-IHa" secondAttribute="centerY" id="4U1-oN-vwq"/>
-                <constraint firstItem="dCi-9U-IHa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="65" id="4r0-oA-oe7"/>
+                <constraint firstItem="dCi-9U-IHa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4r0-oA-oe7"/>
                 <constraint firstAttribute="centerX" secondItem="sdS-Xu-hIc" secondAttribute="centerX" id="Iki-Fq-naQ"/>
                 <constraint firstAttribute="trailing" secondItem="SIg-vo-Dcl" secondAttribute="trailing" id="KCi-VS-PvZ"/>
                 <constraint firstAttribute="bottom" secondItem="SIg-vo-Dcl" secondAttribute="bottom" id="LMA-Yf-TOx"/>

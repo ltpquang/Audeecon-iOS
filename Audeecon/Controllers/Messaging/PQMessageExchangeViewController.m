@@ -19,6 +19,7 @@
 #import "PQOtherUser.h"
 #import "PQMessagingCenter.h"
 #import "SCSiriWaveformView.h"
+#import "PQNotificationNameFactory.h"
 #import "PQRecordingOverlayView.h"
 
 @interface PQMessageExchangeViewController ()
@@ -47,12 +48,17 @@
 - (PQRecordingOverlayView *)recordingOverlay {
     if (_recordingOverlay == nil) {
         _recordingOverlay = [[[NSBundle mainBundle] loadNibNamed:@"RecordingOverlayView" owner:nil options:nil] lastObject];
-        CGRect frame = self.view.bounds;
-        CGRect newRect = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - self.keyboardView.frame.size.height);
-        [_recordingOverlay setFrame:newRect];
+        [_recordingOverlay setFrame:[self OverlayFrame]];
         [_recordingOverlay configUsingAudioRecorder:self.audioRecorderAndPlayer.recorder];
     }
     return _recordingOverlay;
+}
+
+- (CGRect)OverlayFrame {
+    CGRect frame = self.view.bounds;
+    CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
+    CGRect newRect = CGRectMake(frame.origin.x, navBarHeight, frame.size.width, frame.size.height - navBarHeight - self.keyboardView.frame.size.height);
+    return newRect;
 }
 
 
@@ -66,6 +72,10 @@
 - (PQStickerKeyboardView *)keyboardView {
     if (_keyboardView == nil) {
         _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
+//        CGRect viewFrame = self.view.frame;
+//        CGRect keyboardFrame = _keyboardView.frame;
+//        CGRect newRect = CGRectMake(viewFrame.origin.x, viewFrame.size.height - keyboardFrame.size.height, keyboardFrame.size.width, keyboardFrame.size.height);
+//        [_keyboardView setFrame:newRect];
     }
     return _keyboardView;
 }
@@ -75,7 +85,6 @@
     // Do any additional setup after loading the view.
     [[self appDelegate] setMessageExchangeDelegate:self];
     
-    [self configTableView];
     self.audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self];
     self.requestingService = [PQRequestingService new];
 }
@@ -84,19 +93,14 @@
     [super viewDidAppear:animated];
     [self tapGestureHandler];
     [self registerNotifications];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)configTableView {
-    
-    UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)];
-    tapgesture.numberOfTapsRequired = 2;
-    
-    [self.tableView addGestureRecognizer:tapgesture];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -105,15 +109,19 @@
 
 #pragma mark - Notifications
 - (void)registerNotifications {
-    NSString *receiveNotiName = [@"Received:" stringByAppendingString:self.partner.jidString];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveNotificationHandler:)
-                                                 name:receiveNotiName
+                                                 name:[PQNotificationNameFactory messageCompletedReceivingFromJIDString:self.partner.jidString]
                                                object:nil];
 }
 
 - (void)receiveNotificationHandler:(NSNotification *)noti {
     [self.tableView reloadData];
+    NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
+                                                              inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 #pragma mark - Handle gesture
@@ -143,8 +151,15 @@
                                                          multiplier:1.0
                                                            constant:0.0]];
     
+    
     [self.keyboardView configKeyboardWithStickerPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]
                                          delegate:self];
+    
+    NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
+                                                              inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 
 }
 
@@ -157,7 +172,10 @@
 
 #pragma mark - Table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+    NSInteger count = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+    NSLog(@"%i", count);
+    return count;
+    //return [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -210,16 +228,10 @@
 }
 
 - (void)didChangeLayout {
-    CGPoint offsets = self.tableView.contentOffset;
     UIEdgeInsets insets = self.tableView.contentInset;
     [self.tableView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height + 8.0, insets.right)];
     
-    [self.tableView setContentOffset:CGPointMake(offsets.x, offsets.y - insets.bottom + self.tableView.contentInset.bottom) animated:YES];
-    
-    
-    CGRect frame = self.view.bounds;
-    CGRect newRect = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height - self.keyboardView.frame.size.height);
-    [self.recordingOverlay setFrame:newRect];
+    [self.recordingOverlay setFrame:[self OverlayFrame]];
 }
 
 #pragma mark - Audio recorder delegate

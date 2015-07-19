@@ -106,6 +106,7 @@
     }
 }
 
+
 // Specify default values for properties
 
 + (NSDictionary *)defaultPropertyValues

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class PQSticker;
 
 @interface PQRequestingService : NSObject
 - (void)getAllStickerPacksForUser:(NSString *)user
@@ -15,6 +16,9 @@
 - (void)getStickersOfStickerPackWithId:(NSString *)packId
                                success:(void(^)(NSArray *result))successCall
                                failure:(void(^)(NSError *error))failureCall;
+- (void)getStickerWithId:(NSString *)stickerId
+                 success:(void(^)(PQSticker *sticker))successCall
+                 failure:(void(^)(NSError *error))failureCall;
 - (void)downloadAudioFileAtUrl:(NSString *)fileUrl
                       complete:(void(^)(NSURL *filepath))completeCall;
 - (void)registerWithServerForUser:(NSString *)username

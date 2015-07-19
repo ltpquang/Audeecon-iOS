@@ -8,8 +8,8 @@
 
 #import "PQRecordingOverlayView.h"
 #import "SCSiriWaveformView.h"
-#import "PQAudioPlayerAndRecorder.h"
 #import "PQSticker.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface PQRecordingOverlayView()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
@@ -50,7 +50,7 @@
 //        normalizedValue = [self _normalizedPowerLevelFromDecibels:[self.player averagePowerForChannel:0]];
 //    }
     [self.waveformView updateWithLevel:normalizedValue];
-    NSLog(@"%f", normalizedValue);
+    //NSLog(@"%f", normalizedValue);
 }
 
 - (CGFloat)_normalizedPowerLevelFromDecibels:(CGFloat)decibels

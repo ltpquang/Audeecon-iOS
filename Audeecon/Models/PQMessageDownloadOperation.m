@@ -1,31 +1,34 @@
 //
-//  PQStickerDownloadOperation.m
+//  PQMessageDownloadOperation.m
 //  Audeecon
 //
 //  Created by Le Thai Phuc Quang on 7/19/15.
 //  Copyright (c) 2015 QuangLTP. All rights reserved.
 //
 
+#import "PQMessageDownloadOperation.h"
+#import "PQMessage.h"
+#import "PQMessageAudioDownloadOperation.h"
 #import "PQStickerDownloadOperation.h"
-#import "PQStickerImagesDownloadOperation.h"
-#import "PQGetStickerInfoOperation.h"
 #import "PQNotificationNameFactory.h"
+#import "PQSticker.h"
 
-@interface PQStickerDownloadOperation(){
+@interface PQMessageDownloadOperation() {
     BOOL executing;
     BOOL finished;
 }
-@property PQSticker *sticker;
+@property PQMessage *message;
 @property NSOperationQueue *downloadQueue;
+
 @end
 
-@implementation PQStickerDownloadOperation
-- (id)initWithSticker:(PQSticker *)sticker
+@implementation PQMessageDownloadOperation
+- (id)initWithMessage:(PQMessage *)message
      andDownloadQueue:(NSOperationQueue *)downloadQueue {
     if (self = [super init]) {
         executing = NO;
         finished = NO;
-        _sticker = sticker;
+        _message = message;
         _downloadQueue = downloadQueue;
     }
     return self;
@@ -52,23 +55,26 @@
 
 - (void)main {
     dispatch_async(dispatch_get_main_queue(), ^{
-        PQGetStickerInfoOperation *getInfoOpe = [[PQGetStickerInfoOperation alloc] initWithSticker:self.sticker];
-        PQStickerImagesDownloadOperation *imagesDownloadOpe = [[PQStickerImagesDownloadOperation alloc]
-                                                               initWithSticker:self.sticker
-                                                               andQueue:self.downloadQueue
-                                                               andDownloadQueue:self.downloadQueue
-                                                               delegate:nil];
         NSBlockOperation *finishBlock = [NSBlockOperation blockOperationWithBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloading:self.sticker]
-                                                                    object:self.sticker];
+                [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedDownloading:self.message] object:self.message];
+                [self completeOperation];
             });
         }];
-        [imagesDownloadOpe addDependency:getInfoOpe];
-        [finishBlock addDependency:imagesDownloadOpe];
         
-        [self.downloadQueue addOperation:getInfoOpe];
-        [self.downloadQueue addOperation:imagesDownloadOpe];
+        PQMessageAudioDownloadOperation *messageDownloadOperation = [[PQMessageAudioDownloadOperation alloc] initWithMessage:self.message];
+        
+        [finishBlock addDependency:messageDownloadOperation];
+        
+        if (self.message.sticker.fullsizeData.length == 0) {
+            PQStickerDownloadOperation *stickerDownloadOperation = [[PQStickerDownloadOperation alloc] initWithSticker:self.message.sticker
+                                                                                                      andDownloadQueue:self.downloadQueue];
+            [finishBlock addDependency:stickerDownloadOperation];
+            [messageDownloadOperation addDependency:stickerDownloadOperation];
+            [self.downloadQueue addOperation:stickerDownloadOperation];
+        }
+        
+        [self.downloadQueue addOperation:messageDownloadOperation];
         [self.downloadQueue addOperation:finishBlock];
     });
 }

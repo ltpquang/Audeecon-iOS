@@ -16,7 +16,6 @@
 @interface PQMessageTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 
 @property (weak, nonatomic) id<PQMessageTableViewCellDelegate> delegate;
@@ -30,32 +29,60 @@
                        andUser:(PQUser *)user
                       delegate:(id<PQMessageTableViewCellDelegate>)delegate {
     self.delegate = delegate;
+    
     if (message.sticker.fullsizeData.length != 0) {
         self.mainImage.image = message.sticker.fullsizeImage;
+    }
+    else {
+        //register for image update
+        self.mainImage.image = [UIImage imageNamed:@"defaultsmile"];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(messageCompletedDownloadFullsizeImageHandler:)
+                                                     name:[PQNotificationNameFactory stickerCompletedDownloadingFullsizeImage:message.sticker]
+                                                   object:nil];
+    }
+    
+    if (message.isOutgoing) {
         if (message.onlineAudioUri.length == 0) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(messageCompletedSendingHandler:)
                                                          name:[PQNotificationNameFactory messageCompletedSending:message]
                                                        object:nil];
             self.mainImage.alpha = 0.4;
-            //[self.loadingIndicator startAnimating];
         }
     }
     else {
-        //register for image update
+        if (message.offlineAudioUri.length == 0) {
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(messageCompletedDownloadingHandler:)
+                                                         name:[PQNotificationNameFactory messageCompletedDownloading:message] object:nil];
+            self.mainImage.alpha = 0.4;
+        }
     }
+    
     if (user.avatarData.length != 0) {
         self.avatarImage.image = user.avatarImage;
     }
     else {
         //register for image update
     }
+    
     [self configRoundImage];
 }
 
 - (void)messageCompletedSendingHandler:(NSNotification *)noti {
     self.mainImage.alpha = 1.0;
     //[self.loadingIndicator stopAnimating];
+}
+
+- (void)messageCompletedDownloadFullsizeImageHandler:(NSNotification *)noti {
+    self.mainImage.image = [(PQSticker *)noti.object fullsizeImage];
+}
+
+- (void)messageCompletedDownloadingHandler:(NSNotification *)noti {
+    NSLog(@"%@", noti.name);
+    self.mainImage.alpha = 1.0;
+    self.mainImage.image = [[(PQMessage *)noti.object sticker] fullsizeImage];
 }
 
 - (void)configRoundImage {
@@ -73,7 +100,6 @@
     self.mainImage.image = [UIImage imageNamed:@"defaultsmile"];
     self.avatarImage.image = [UIImage imageNamed:@"defaultavatar"];
     self.mainImage.alpha = 1.0;
-    [self.loadingIndicator stopAnimating];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

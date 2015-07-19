@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PQStickerDownloadOperation.h"
+#import "PQStickerImagesDownloadOperation.h"
 
 @class PQStickerPack;
 @protocol PQStickerPackDownloadOperationDelegate;
 
-@interface PQStickerPackDownloadOperation : NSOperation <PQStickerDownloadOperationDelegate>
+@interface PQStickerPackDownloadOperation : NSOperation <PQStickerImagesDownloadOperationDelegate>
 @property NSInteger percentage;
 - (id)initWithStickerPack:(PQStickerPack *)pack
                  delegate:(id<PQStickerPackDownloadOperationDelegate>)delegate;

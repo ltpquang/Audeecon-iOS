@@ -20,6 +20,13 @@
     return result;
 }
 
++ (NSString *)urlToGetAllStickers {
+    NSString *result = [[self baseUrl]
+                        stringByAppendingString:@"/stickers"];
+    NSLog(@"%@", result);
+    return result;
+}
+
 + (NSString *)urlToGetAllUsers {
     NSString *result = [[self baseUrl]
                         stringByAppendingString:@"/users"];
@@ -42,6 +49,14 @@
                         stringByAppendingString:@"/"]
                         stringByAppendingString:packId]
                         stringByAppendingString:@"?size=240"];
+    NSLog(@"%@", result);
+    return result;
+}
+
++ (NSString *)urlToGetStickerWithId:(NSString *)stickerId {
+    NSString *result = [[[self urlToGetAllStickers]
+                        stringByAppendingString:@"/"]
+                        stringByAppendingString:stickerId];
     NSLog(@"%@", result);
     return result;
 }

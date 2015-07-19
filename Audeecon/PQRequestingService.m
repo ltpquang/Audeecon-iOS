@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import "PQUrlService.h"
 #import "PQParsingService.h"
+#import "PQSticker.h"
 #import "PQStickerPack.h"
 #import "PQFilePathFactory.h"
 
@@ -69,6 +70,23 @@
               //Parse result and call the call back
               //NSArray *stickers = (NSArray *)[(NSDictionary *)responseObject objectForKey:@"stickers"];
               NSArray *result = [PQParsingService parseListOfStickersFromArray:(NSArray *)responseObject];
+              successCall(result);
+          }
+          failure:^(NSURLSessionDataTask *task, NSError *error) {
+              failureCall(error);
+          }];
+}
+
+- (void)getStickerWithId:(NSString *)stickerId
+                 success:(void(^)(PQSticker *sticker))successCall
+                 failure:(void(^)(NSError *error))failureCall {
+    [self configWithExpectationOfJsonInRequest:NO
+                             andJsonInResponse:YES];
+    [_manager GET:[PQUrlService urlToGetStickerWithId:stickerId]
+       parameters:nil
+          success:^(NSURLSessionDataTask *task, id responseObject) {
+              //
+              PQSticker *result = [PQParsingService parseStickerFromDictionary:(NSDictionary *)responseObject];
               successCall(result);
           }
           failure:^(NSURLSessionDataTask *task, NSError *error) {

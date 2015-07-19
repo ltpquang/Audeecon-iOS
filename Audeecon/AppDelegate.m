@@ -84,7 +84,7 @@
 }
 
 - (PQMessagingCenter *)messagingCenter {
-    if (_messageExchangeDelegate == nil) {
+    if (_messagingCenter == nil) {
         _messagingCenter = [[PQMessagingCenter alloc] initWithXMPPStream:_xmppStream];
     }
     return _messagingCenter;
@@ -315,7 +315,7 @@
     if ([message hasComposingChatState]) {
         return;
     }
-    NSLog(@"Received message");
+    //NSLog(@"Received message");
     if (message.isChatMessageWithBody) {
         [self.messagingCenter receiveMessage:message];
     }

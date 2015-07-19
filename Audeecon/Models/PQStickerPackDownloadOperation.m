@@ -9,7 +9,7 @@
 #import "PQStickerPackDownloadOperation.h"
 #import "PQSticker.h"
 #import "PQStickerPack.h"
-#import "PQStickerDownloadOperation.h"
+#import "PQStickerImagesDownloadOperation.h"
 #import "PQRequestingService.h"
 #import "PQBuyStickerPackOperation.h"
 #import "PQGetStickersInfoOperation.h"
@@ -103,7 +103,7 @@
         RLMArray<PQSticker> *stickers = self.pack.stickers;
         
         for (PQSticker *sticker in stickers) {
-            PQStickerDownloadOperation *stickerDownloadOpe = [[PQStickerDownloadOperation alloc]
+            PQStickerImagesDownloadOperation *stickerDownloadOpe = [[PQStickerImagesDownloadOperation alloc]
                                                               initWithSticker:sticker
                                                               andQueue:self.downloadQueue
                                                               andDownloadQueue:self.stickerQueue
@@ -142,7 +142,7 @@
     return finished;
 }
 
-- (void)stickerDownloadOperation:(PQStickerDownloadOperation *)operation
+- (void)stickerImagesDownloadOperation:(PQStickerImagesDownloadOperation *)operation
      didFinishDownloadingSticker:(PQSticker *)sticker {
     NSInteger percentage = (NSInteger)(100 * (1 - (float)(self.downloadQueue.operationCount)/(float)(self.pack.stickers.count + 1)));
     self.percentage = percentage;

@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 @class PQMessage;
+@class PQSticker;
+
 @interface PQNotificationNameFactory : NSObject
 + (NSString *)messageStartedSending:(PQMessage *)message;
 + (NSString *)messageCompletedSending:(PQMessage *)message;
 + (NSString *)messageCompletedUploading:(PQMessage *)message;
++ (NSString *)messageCompletedDownloading:(PQMessage *)message;
++ (NSString *)messageCompletedReceivingFromJIDString:(NSString *)jidString;
++ (NSString *)stickerCompletedDownloading:(PQSticker *)sticker;
++ (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker;
 @end

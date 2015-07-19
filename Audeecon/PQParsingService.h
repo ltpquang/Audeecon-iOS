@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@class PQSticker;
 
 @interface PQParsingService : NSObject
 + (NSArray *)parseListOfStickerPacksFromArray:(NSArray *)array;
 + (NSArray *)parseListOfStickersFromArray:(NSArray *)array;
++ (PQSticker *)parseStickerFromDictionary:(NSDictionary *)sticker;
 @end
