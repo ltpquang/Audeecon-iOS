@@ -65,9 +65,6 @@
 #pragma mark - Controller delegates
 - (void)configUsingPartner:(PQOtherUser *)partner {
     _partner = partner;
-    _messagingCenter = [[self appDelegate] messagingCenter];
-    _keyboardView = [[self appDelegate] keyboardView];
-    [_keyboardView setDelegate:self];
     self.title = partner.username;
 }
 
@@ -75,6 +72,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[self appDelegate] setMessageExchangeDelegate:self];
+    self.messagingCenter = [[self appDelegate] messagingCenter];
+    self.keyboardView = [[self appDelegate] keyboardView];
+    [self.keyboardView setDelegate:self];
     
     self.audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self];
     self.requestingService = [PQRequestingService new];

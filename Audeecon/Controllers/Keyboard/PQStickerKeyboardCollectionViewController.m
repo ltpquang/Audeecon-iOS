@@ -18,8 +18,7 @@
 @implementation PQStickerKeyboardCollectionViewController
 
 - (id)initWithStickerPack:(PQStickerPack *)pack
-                 andFrame:(CGRect)frame
-                 delegate:(id<PQStickerKeyboardDelegate>) stickerKeyboardDelegate {
+                 andFrame:(CGRect)frame {
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:[PQKeyboardStickerCollectionViewCell cellSize]];
@@ -31,7 +30,6 @@
     if (self = [super initWithCollectionViewLayout:flowLayout]) {
         _pack = pack;
         _stickers = [pack.stickers valueForKey:@"self"];
-        _stickerKeyboardDelegate = stickerKeyboardDelegate;
 
         [self.view setFrame:frame];
     }
@@ -40,11 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
     [self.collectionView setDelegate:self];
@@ -62,16 +55,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark <UICollectionViewDataSource>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -91,7 +74,6 @@
 #pragma mark - PQ Keyboard Sticker Cell Delegate
 - (void)didStartHoldingOnCell:(UICollectionViewCell *)cell
                   withGesture:(UIGestureRecognizer *)gesture {
-    NSLog(@"SKCVC");
     NSIndexPath *path = [self.collectionView indexPathForCell:cell];
     [self.stickerKeyboardDelegate didStartHoldingOnSticker:[self.stickers objectAtIndex:path.row]
                                                withGesture:gesture];

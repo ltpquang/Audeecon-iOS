@@ -39,8 +39,7 @@
 @implementation PQStickerKeyboardView
 
 #pragma mark - Keyboard actions
-- (void)configKeyboardWithStickerPacks:(NSArray *)packs
-                              delegate:(id<PQStickerKeyboardDelegate>)delegate {
+- (void)configKeyboardWithStickerPacks:(NSArray *)packs {
     // config pack collection view
     _packsCollectionView.delegate = self;
     _packsCollectionView.dataSource = self;
@@ -50,7 +49,6 @@
     
     //config data
     _packs = packs;
-    _delegate = delegate;
     
     // config scroll view
     [_stickersScrollView setDelegate:self];
@@ -65,8 +63,7 @@
         frame.origin.y = 0.0;
         PQStickerKeyboardCollectionViewController *keyboard = [[PQStickerKeyboardCollectionViewController alloc]
                                                                initWithStickerPack:[packs objectAtIndex:i]
-                                                               andFrame:frame
-                                                               delegate:delegate];
+                                                               andFrame:frame];
         
         [_keyboardCollectionViews addObject:keyboard];
         [self.stickersScrollView addSubview:keyboard.view];
@@ -144,7 +141,7 @@
 
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs {
     _packs = packs;
-    [self configKeyboardWithStickerPacks:packs delegate:self.delegate];
+    [self configKeyboardWithStickerPacks:packs];
     [self.packsCollectionView reloadData];
     
     [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]

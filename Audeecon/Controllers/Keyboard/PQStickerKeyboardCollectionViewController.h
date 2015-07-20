@@ -13,7 +13,6 @@
 @interface PQStickerKeyboardCollectionViewController : UICollectionViewController
 <PQKeyboardStickerCellDelegate>
 - (id)initWithStickerPack:(PQStickerPack *)pack
-                 andFrame:(CGRect)frame
-                 delegate:(id<PQStickerKeyboardDelegate>) stickerKeyboardDelegate;
+                 andFrame:(CGRect)frame;
 @property (nonatomic, weak) id<PQStickerKeyboardDelegate> stickerKeyboardDelegate;
 @end

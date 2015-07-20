@@ -280,8 +280,7 @@
                                                }];
     
     // Then update sticker pack for that user
-    [self.keyboardView configKeyboardWithStickerPacks:[self.currentUser.ownedStickerPack valueForKey:@"self"]
-                                             delegate:nil];
+    [self.keyboardView configKeyboardWithStickerPacks:[self.currentUser.ownedStickerPack valueForKey:@"self"]];
     [self.currentUser markFriendListForUpdating];
     [_friendListDelegate friendListDidUpdate];
     [[self xmppRoster] fetchRoster];
@@ -328,8 +327,6 @@
     if (message.isChatMessageWithBody) {
         [self.messagingCenter receiveMessage:message];
     }
-    
-    //[_messageExchangeDelegate didReceiveMessage:mess];
 }
 
 
