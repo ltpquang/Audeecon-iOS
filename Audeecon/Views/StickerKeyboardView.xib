@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wWg-MF-BKi">
-                    <rect key="frame" x="58" y="181" width="262" height="35"/>
+                    <rect key="frame" x="58" y="181" width="224" height="35"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="uid-Ga-zlt">
                         <size key="itemSize" width="37" height="35"/>
@@ -56,45 +56,71 @@
                     </constraints>
                 </scrollView>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tI-fX-Hf5">
-                    <rect key="frame" x="-23" y="-97" width="25" height="65"/>
+                    <rect key="frame" x="-68" y="39" width="50" height="45"/>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pau-xY-V1r">
-                    <rect key="frame" x="-63" y="-43" width="80" height="9"/>
+                    <rect key="frame" x="82" y="-68" width="99" height="3"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qm0-ZH-IX0">
+                    <rect key="frame" x="284" y="183" width="1" height="31"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" placeholder="YES" id="luM-zL-h9B"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2db-ru-1RE">
+                    <rect key="frame" x="287" y="183" width="31" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="31" id="FJS-EV-Fkx"/>
+                        <constraint firstAttribute="height" constant="31" id="XzO-x6-5Am"/>
+                    </constraints>
+                    <state key="normal" image="storeicon"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Qm0-ZH-IX0" secondAttribute="bottom" constant="2" placeholder="YES" id="00u-HO-aHm"/>
                 <constraint firstItem="z8K-R9-2Uo" firstAttribute="top" secondItem="B8q-05-Et4" secondAttribute="top" placeholder="YES" id="0Tj-MP-jvu"/>
                 <constraint firstAttribute="bottom" secondItem="8yG-aq-jWa" secondAttribute="bottom" constant="2" placeholder="YES" id="7gy-b7-Q0l"/>
+                <constraint firstItem="2db-ru-1RE" firstAttribute="leading" secondItem="Qm0-ZH-IX0" secondAttribute="trailing" constant="2" id="A5A-BI-F6l"/>
                 <constraint firstItem="z8K-R9-2Uo" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" placeholder="YES" id="GrG-4P-9Bq"/>
                 <constraint firstItem="F94-7d-v3d" firstAttribute="top" secondItem="ytQ-j9-fCe" secondAttribute="bottom" constant="2" placeholder="YES" id="IMj-rd-wya"/>
                 <constraint firstAttribute="trailing" secondItem="F94-7d-v3d" secondAttribute="trailing" constant="2" placeholder="YES" id="NQp-y4-qaW"/>
                 <constraint firstAttribute="trailing" secondItem="ytQ-j9-fCe" secondAttribute="trailing" placeholder="YES" id="SAJ-As-zjD"/>
-                <constraint firstAttribute="trailing" secondItem="wWg-MF-BKi" secondAttribute="trailing" placeholder="YES" id="Uwo-Qy-OK8"/>
+                <constraint firstAttribute="bottom" secondItem="2db-ru-1RE" secondAttribute="bottom" constant="2" id="Vv5-uu-e8B"/>
                 <constraint firstAttribute="bottom" secondItem="wWg-MF-BKi" secondAttribute="bottom" placeholder="YES" id="YRK-Up-rRv"/>
                 <constraint firstItem="a2Q-Rr-HPq" firstAttribute="top" secondItem="B8q-05-Et4" secondAttribute="top" constant="183" placeholder="YES" id="a1h-a9-WqX"/>
                 <constraint firstAttribute="trailing" secondItem="z8K-R9-2Uo" secondAttribute="trailing" placeholder="YES" id="bj1-gZ-tBf"/>
                 <constraint firstItem="a2Q-Rr-HPq" firstAttribute="leading" secondItem="8yG-aq-jWa" secondAttribute="trailing" constant="4" placeholder="YES" id="feE-ZS-7uj"/>
                 <constraint firstItem="F94-7d-v3d" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" constant="2" placeholder="YES" id="gJF-lT-S1c"/>
+                <constraint firstItem="Qm0-ZH-IX0" firstAttribute="top" secondItem="F94-7d-v3d" secondAttribute="bottom" constant="2" placeholder="YES" id="jkR-lz-AQL"/>
                 <constraint firstItem="8yG-aq-jWa" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" constant="2" placeholder="YES" id="kYA-BU-aG7"/>
                 <constraint firstItem="wWg-MF-BKi" firstAttribute="top" secondItem="F94-7d-v3d" secondAttribute="bottom" placeholder="YES" id="kt1-ZB-Yr7"/>
                 <constraint firstItem="ytQ-j9-fCe" firstAttribute="leading" secondItem="B8q-05-Et4" secondAttribute="leading" placeholder="YES" id="lGS-oh-heM"/>
+                <constraint firstItem="Qm0-ZH-IX0" firstAttribute="leading" secondItem="wWg-MF-BKi" secondAttribute="trailing" constant="2" placeholder="YES" id="lel-Mc-uZe"/>
+                <constraint firstAttribute="trailing" secondItem="2db-ru-1RE" secondAttribute="trailing" constant="2" id="lum-JK-R7e"/>
                 <constraint firstItem="wWg-MF-BKi" firstAttribute="leading" secondItem="a2Q-Rr-HPq" secondAttribute="trailing" constant="2" placeholder="YES" id="m8J-pc-Akq"/>
+                <constraint firstItem="2db-ru-1RE" firstAttribute="top" secondItem="F94-7d-v3d" secondAttribute="bottom" constant="2" id="orH-Of-vfh"/>
                 <constraint firstItem="ytQ-j9-fCe" firstAttribute="top" secondItem="z8K-R9-2Uo" secondAttribute="bottom" constant="2" placeholder="YES" id="svp-vu-MZa"/>
                 <constraint firstAttribute="bottom" secondItem="a2Q-Rr-HPq" secondAttribute="bottom" constant="2" placeholder="YES" id="yHA-2P-3sD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="leftVerticalHairline" destination="a2Q-Rr-HPq" id="OYo-Hv-5ia"/>
                 <outlet property="mainRecommendationImageView" destination="1tI-fX-Hf5" id="PZa-PQ-oVd"/>
                 <outlet property="middleHorizontalHairline" destination="F94-7d-v3d" id="U66-Lg-L2q"/>
-                <outlet property="middleVerticalHairline" destination="a2Q-Rr-HPq" id="lci-mn-i2d"/>
                 <outlet property="modeSwitch" destination="8yG-aq-jWa" id="15e-94-KdX"/>
                 <outlet property="packsCollectionView" destination="wWg-MF-BKi" id="IHA-E8-46O"/>
+                <outlet property="rightVerticalHairline" destination="Qm0-ZH-IX0" id="9wX-Ai-5vR"/>
                 <outlet property="stickersScrollView" destination="ytQ-j9-fCe" id="4aT-0G-zOC"/>
+                <outlet property="storeButton" destination="2db-ru-1RE" id="YAU-Oa-eHw"/>
                 <outlet property="topHorizontalHairline" destination="z8K-R9-2Uo" id="qun-k2-6Fw"/>
                 <outlet property="upComingRecommendationImageView" destination="pau-xY-V1r" id="KI4-Oz-emz"/>
             </connections>
             <point key="canvasLocation" x="801" y="-277"/>
         </view>
     </objects>
+    <resources>
+        <image name="storeicon" width="300" height="300"/>
+    </resources>
 </document>

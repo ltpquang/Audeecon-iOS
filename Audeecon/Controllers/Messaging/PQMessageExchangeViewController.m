@@ -156,10 +156,12 @@
                                          delegate:self];
     
     NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
-                                                              inSection:0]
-                          atScrollPosition:UITableViewScrollPositionBottom
-                                  animated:YES];
+    if (messCount != 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
+                                                                  inSection:0]
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:YES];
+    }
 
 }
 

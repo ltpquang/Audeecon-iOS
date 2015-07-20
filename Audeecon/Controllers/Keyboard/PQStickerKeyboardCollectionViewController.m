@@ -50,6 +50,7 @@
     // Do any additional setup after loading the view.
     [self.collectionView setDelegate:self];
     [self.collectionView setDataSource:self];
+    [self.collectionView setScrollsToTop:NO];
     [self.collectionView setBackgroundColor:[UIColor whiteColor]];
     [self.collectionView setShowsHorizontalScrollIndicator:NO];
     [self.collectionView setShowsVerticalScrollIndicator:NO];
