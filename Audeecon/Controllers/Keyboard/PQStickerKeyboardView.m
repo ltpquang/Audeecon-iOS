@@ -82,8 +82,41 @@
     }
     
     [self updateLayoutForNormalLayout];
-    
     [self setupLongPressRecognizerForMainRecommendationImageView];
+}
+
+- (void)setDelegate:(id<PQStickerKeyboardDelegate>)delegate {
+    _delegate = delegate;
+    for (PQStickerKeyboardCollectionViewController *keyboard in self.keyboardCollectionViews) {
+        [keyboard setStickerKeyboardDelegate:delegate];
+    }
+}
+
+- (void)addToSuperview:(UIView *)superview {
+    [superview addSubview:self];
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
+                                                          attribute:NSLayoutAttributeLeading
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeLeading
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    [self finishUpdateConstraints];
 }
 
 - (void)setupLongPressRecognizerForMainRecommendationImageView {
@@ -666,7 +699,7 @@
     [self setNeedsUpdateConstraints];
     [self setNeedsLayout];
     [self layoutIfNeeded];
-    [self.delegate didChangeLayout];
+    [self.delegate keyboardDidChangeLayout];
 }
 
 - (IBAction)modeSwitchValueChanged:(UISwitch *)sender {

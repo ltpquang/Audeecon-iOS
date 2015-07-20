@@ -18,6 +18,7 @@
 - (void)configKeyboardWithStickerPacks:(NSArray *)packs
                               delegate:(id<PQStickerKeyboardDelegate>)delegate;
 - (void)reloadKeyboardUsingPacks:(NSArray *)packs;
+- (void)addToSuperview:(UIView *)superview;
 
 @property (nonatomic, weak) id<PQStickerKeyboardDelegate> delegate;
 @end
@@ -29,6 +30,6 @@
                      withGesture:(UIGestureRecognizer *)gesture;
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
                     withGesture:(UIGestureRecognizer *)gesture;
-- (void)didChangeLayout;
+- (void)keyboardDidChangeLayout;
 
 @end

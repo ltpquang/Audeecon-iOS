@@ -13,7 +13,6 @@
 @interface PQStickerKeyboardCollectionViewController ()
 @property (nonatomic, strong) PQStickerPack *pack;
 @property (nonatomic, strong) NSArray *stickers;
-@property (nonatomic, weak) id<PQStickerKeyboardDelegate> stickerKeyboardDelegate;
 @end
 
 @implementation PQStickerKeyboardCollectionViewController
@@ -92,6 +91,7 @@
 #pragma mark - PQ Keyboard Sticker Cell Delegate
 - (void)didStartHoldingOnCell:(UICollectionViewCell *)cell
                   withGesture:(UIGestureRecognizer *)gesture {
+    NSLog(@"SKCVC");
     NSIndexPath *path = [self.collectionView indexPathForCell:cell];
     [self.stickerKeyboardDelegate didStartHoldingOnSticker:[self.stickers objectAtIndex:path.row]
                                                withGesture:gesture];

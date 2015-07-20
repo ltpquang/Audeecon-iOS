@@ -17,6 +17,7 @@
 #import "XMPPFramework.h"
 #import "PQGlobalContainer.h"
 #import "PQMessagingCenter.h"
+#import "PQStickerKeyboardView.h"
 
 @class RLMRealm;
 @class PQCurrentUser;
@@ -43,11 +44,13 @@
 @property (weak, nonatomic) id<PQvCardModuleDelegate> vCardModuleDelegate;
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
 @property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
+//@property (weak, nonatomic) id<PQStickerKeyboardDelegate> keyboardDelegate;
 
 @property (strong, nonatomic) PQGlobalContainer *globalContainer;
-//@property (strong, nonatomic) RLMRealm *realm;
+
 @property (strong, nonatomic) PQCurrentUser *currentUser;
 @property (strong, nonatomic) PQMessagingCenter *messagingCenter;
+@property (strong, nonatomic) PQStickerKeyboardView *keyboardView;
 
 - (BOOL)connect;
 - (void)fetchRoster;

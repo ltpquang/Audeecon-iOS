@@ -15,4 +15,5 @@
 - (id)initWithStickerPack:(PQStickerPack *)pack
                  andFrame:(CGRect)frame
                  delegate:(id<PQStickerKeyboardDelegate>) stickerKeyboardDelegate;
+@property (nonatomic, weak) id<PQStickerKeyboardDelegate> stickerKeyboardDelegate;
 @end

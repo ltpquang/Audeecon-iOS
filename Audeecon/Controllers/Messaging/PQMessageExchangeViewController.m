@@ -66,18 +66,9 @@
 - (void)configUsingPartner:(PQOtherUser *)partner {
     _partner = partner;
     _messagingCenter = [[self appDelegate] messagingCenter];
+    _keyboardView = [[self appDelegate] keyboardView];
+    [_keyboardView setDelegate:self];
     self.title = partner.username;
-}
-
-- (PQStickerKeyboardView *)keyboardView {
-    if (_keyboardView == nil) {
-        _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
-//        CGRect viewFrame = self.view.frame;
-//        CGRect keyboardFrame = _keyboardView.frame;
-//        CGRect newRect = CGRectMake(viewFrame.origin.x, viewFrame.size.height - keyboardFrame.size.height, keyboardFrame.size.width, keyboardFrame.size.height);
-//        [_keyboardView setFrame:newRect];
-    }
-    return _keyboardView;
 }
 
 - (void)viewDidLoad {
@@ -91,13 +82,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self tapGestureHandler];
+    [self addKeyboard];
     [self registerNotifications];
     [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.keyboardView removeFromSuperview];
 }
 
 
@@ -124,47 +116,6 @@
                                   animated:YES];
 }
 
-#pragma mark - Handle gesture
-- (void)tapGestureHandler {
-    NSLog(@"Double tap");
-    [self.view addSubview:self.keyboardView];
-    [self.keyboardView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
-                                                          attribute:NSLayoutAttributeLeading
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.keyboardView
-                                                          attribute:NSLayoutAttributeLeading
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
-                                                          attribute:NSLayoutAttributeTrailing
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.keyboardView
-                                                          attribute:NSLayoutAttributeTrailing
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.keyboardView
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-    
-    
-    [self.keyboardView configKeyboardWithStickerPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]
-                                         delegate:self];
-    
-    NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
-    if (messCount != 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
-                                                                  inSection:0]
-                              atScrollPosition:UITableViewScrollPositionBottom
-                                      animated:YES];
-    }
-
-}
-
 #pragma mark - Message exchange delegates
 - (void)reloadStickers {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -177,7 +128,6 @@
     NSInteger count = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
     NSLog(@"%i", count);
     return count;
-    //return [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -194,6 +144,18 @@
     return cell;
 }
 
+#pragma mark - Add keyboard
+- (void)addKeyboard {
+    [self.keyboardView addToSuperview:self.view];
+    NSInteger messCount = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
+    if (messCount != 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messCount-1
+                                                                  inSection:0]
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:YES];
+    }
+    
+}
 
 #pragma mark - Keyboard delegate
 - (void)didStartHoldingOnSticker:(PQSticker *)sticker
@@ -229,7 +191,7 @@
     [self.recordingOverlay stopAnimating];
 }
 
-- (void)didChangeLayout {
+- (void)keyboardDidChangeLayout {
     UIEdgeInsets insets = self.tableView.contentInset;
     [self.tableView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height + 8.0, insets.right)];
     

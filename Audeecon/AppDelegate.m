@@ -90,6 +90,13 @@
     return _messagingCenter;
 }
 
+- (PQStickerKeyboardView *)keyboardView {
+    if (_keyboardView == nil) {
+        _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
+    }
+    return _keyboardView;
+}
+
 
 - (void)clearTemperaryFolder {
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -273,6 +280,8 @@
                                                }];
     
     // Then update sticker pack for that user
+    [self.keyboardView configKeyboardWithStickerPacks:[self.currentUser.ownedStickerPack valueForKey:@"self"]
+                                             delegate:nil];
     [self.currentUser markFriendListForUpdating];
     [_friendListDelegate friendListDidUpdate];
     [[self xmppRoster] fetchRoster];
