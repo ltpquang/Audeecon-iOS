@@ -64,6 +64,10 @@
     [self.recorder record];
 }
 
+- (void)stopPlaying {
+    [self.player stop];
+}
+
 - (void)stopRecordingAndSaveFileWithInfo:(NSDictionary *)infoDict {
     self.infoDict = infoDict;
     

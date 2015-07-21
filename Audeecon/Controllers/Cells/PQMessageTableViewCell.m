@@ -68,6 +68,7 @@
     }
     
     [self configRoundImage];
+    [self setupCell];
 }
 
 - (void)messageCompletedSendingHandler:(NSNotification *)noti {

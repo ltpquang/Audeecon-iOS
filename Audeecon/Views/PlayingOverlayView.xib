@@ -29,7 +29,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultsmile" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-cV-jmX">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultsmile" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-cV-jmX">
                     <rect key="frame" x="224.5" y="25" width="150" height="150"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="Ddf-ab-K0k"/>

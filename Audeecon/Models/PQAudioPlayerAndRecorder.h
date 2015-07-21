@@ -19,6 +19,7 @@
 - (id)initWithDelegate:(id<PQAudioPlayerAndRecorderDelegate>)delegate;
 - (void)startRecording;
 - (void)stopRecordingAndSaveFileWithInfo:(NSDictionary *)infoDict;
+- (void)stopPlaying;
 - (void)playAudioFileAtUrl:(NSURL *)filePath;
 @end
 

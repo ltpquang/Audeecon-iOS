@@ -21,6 +21,7 @@
 #import "SCSiriWaveformView.h"
 #import "PQNotificationNameFactory.h"
 #import "PQRecordingOverlayView.h"
+#import "PQPlayingOverlayView.h"
 
 @interface PQMessageExchangeViewController ()
 @property (nonatomic, strong) PQOtherUser *partner;
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) PQRequestingService *requestingService;
 @property (nonatomic, strong) PQMessagingCenter *messagingCenter;
 @property (nonatomic, strong) PQRecordingOverlayView *recordingOverlay;
+@property (nonatomic, strong) PQPlayingOverlayView *playingOverlay;
 @end
 
 @implementation PQMessageExchangeViewController
@@ -52,6 +54,15 @@
         [_recordingOverlay configUsingAudioRecorder:self.audioRecorderAndPlayer.recorder];
     }
     return _recordingOverlay;
+}
+
+- (PQPlayingOverlayView *)playingOverlay {
+    if (_playingOverlay == nil) {
+        _playingOverlay = [[[NSBundle mainBundle] loadNibNamed:@"PlayingOverlayView" owner:nil options:nil] lastObject];
+        [_playingOverlay setFrame:[self OverlayFrame]];
+        [_playingOverlay configRunLoop];
+    }
+    return _playingOverlay;
 }
 
 - (CGRect)OverlayFrame {
@@ -196,6 +207,7 @@
     [self.tableView setContentInset:UIEdgeInsetsMake(insets.top, insets.left, self.keyboardView.frame.size.height + 8.0, insets.right)];
     
     [self.recordingOverlay setFrame:[self OverlayFrame]];
+    [self.playingOverlay setFrame:[self OverlayFrame]];
 }
 
 #pragma mark - Audio recorder delegate
@@ -217,19 +229,24 @@
 }
 
 - (void)didFinishPlaying {
+    [self.playingOverlay stop];
 }
 
-#pragma mark - Message cell delegate
-- (void)didReceiveRequestToPlayCell:(PQMessageTableViewCell *)cell {
-    [self didFinishPlaying];
-    self.playingCell = cell;
-    NSIndexPath *path = [self.tableView indexPathForCell:self.playingCell];
-    PQMessage *message = [self.messagingCenter messageAtIndexPath:path withPartnerJIDString:self.partner.jidString];
-    [message downloadAudioUsingRequestingService:self.requestingService
-                                        complete:^(NSURL *offlineFile) {
-                                            [self.audioRecorderAndPlayer playAudioFileAtUrl:offlineFile];
-                                        }];
+#pragma mark - Table view cell delegate
+- (void)didStartHoldingOnCell:(UITableViewCell *)cell {
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    PQMessage *message = [self.messagingCenter messageAtIndexPath:path
+                                             withPartnerJIDString:self.partner.jidString];
+    if (message.offlineAudioUri.length != 0) {
+        [self.playingOverlay startPlayingUsingSticker:message
+                            andAudioRecorderAndPlayer:self.audioRecorderAndPlayer
+                                               onView:self.view];
+    }
     
+}
+
+- (void)didStopHoldingOnCell:(UITableViewCell *)cell {
+    [self.playingOverlay stop];
 }
 /*
 #pragma mark - Navigation

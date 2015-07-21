@@ -9,32 +9,48 @@
 #import "PQPlayingOverlayView.h"
 #import "SCSiriWaveformView.h"
 #import <AVFoundation/AVFoundation.h>
+#import "PQSticker.h"
+#import "PQMessage.h"
+#import "PQAudioPlayerAndRecorder.h"
 
 @interface PQPlayingOverlayView()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
 @property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveformView;
-@property (strong, nonatomic) AVAudioPlayer *player;
+@property (strong, nonatomic) PQAudioPlayerAndRecorder *audioRecorderAndPlayer;
 @end
 
 @implementation PQPlayingOverlayView
 
 
-- (void)configUsingAudioPlayer:(AVAudioPlayer *)player {
-    _player = player;
-    
+- (void)configRunLoop {
     CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeters)];
     [displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 
+- (void)startPlayingUsingSticker:(PQMessage *)message
+       andAudioRecorderAndPlayer:(PQAudioPlayerAndRecorder *)audioRecorderAndPlayer
+                          onView:(UIView *)view {
+    self.audioRecorderAndPlayer = audioRecorderAndPlayer;
+    [self.audioRecorderAndPlayer playAudioFileAtUrl:[NSURL fileURLWithPath:message.offlineAudioUri]];
+    [message.sticker animateStickerOnImageView:self.mainImage];
+    [view addSubview:self];
+}
+
+- (void)stop {
+    [self.mainImage stopAnimating];
+    [self.audioRecorderAndPlayer stopPlaying];
+    [self removeFromSuperview];
+}
+
 - (void)updateMeters
 {
-    if  (!self.player.playing) {
+    if  (!self.audioRecorderAndPlayer.player.playing) {
         return;
     }
     CGFloat normalizedValue;
-    if (self.player.playing) {
-        [self.player updateMeters];
-        normalizedValue = [self _normalizedPowerLevelFromDecibels:[self.player averagePowerForChannel:0]];
+    if (self.audioRecorderAndPlayer.player.playing) {
+        [self.audioRecorderAndPlayer.player updateMeters];
+        normalizedValue = [self _normalizedPowerLevelFromDecibels:[self.audioRecorderAndPlayer.player averagePowerForChannel:0]];
     }
     [self.waveformView updateWithLevel:normalizedValue];
     //NSLog(@"%f", normalizedValue);
