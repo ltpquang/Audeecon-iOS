@@ -81,8 +81,7 @@
 @property (strong, nonatomic) NSArray *packs;
 @property (strong, nonatomic) NSMutableArray *keyboardCollectionViews;
 
-@property (strong, nonatomic) PQStickerPack *selectedPack;
-@property (strong, nonatomic) PQSticker *selectedSticker;
+
 @end
 
 @implementation PQStickerKeyboardView
@@ -141,13 +140,25 @@
             [self.keyboardCollectionViews addObject:keyboard];
             [self.stickersScrollView addSubview:keyboard.view];
         }
-        else {
-            UIView *dummy = [[UIView alloc] initWithFrame:frame];
-            [self.stickersScrollView addSubview:dummy];
-        }
     }
+    NSIndexPath *selecting = [[self.packsCollectionView indexPathsForSelectedItems] firstObject];
+    
     [self.packsCollectionView reloadData];
     [self updateKeyboardDelegates:self.delegate];
+    
+    if (selecting == nil) {
+        if (self.packs.count != 0 && ![(PQStickerPack *)self.packs[0] needToBeUpdated]) {
+            [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0
+                                                                               inSection:0]
+                                                   animated:NO
+                                             scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+        }
+    }
+    else {
+        [self.packsCollectionView selectItemAtIndexPath:selecting
+                                               animated:NO
+                                         scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    }
 }
 
 - (void)setDelegate:(id<PQStickerKeyboardDelegate>)delegate {
@@ -186,19 +197,18 @@
     return _packs.count;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
+    return ![pack needToBeUpdated];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (collectionView.tag == 0) { //pack
-        PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
-        _selectedPack = pack;
-        if (![pack needToBeUpdated]) {
-            CGRect frame = self.stickersScrollView.frame;
-            frame.origin.x = frame.size.width * indexPath.row;
-            frame.origin.y = 0;
-            [self.stickersScrollView scrollRectToVisible:frame animated:YES];
-        }
-        else {
-            [pack downloadDataAndStickersUsingOperationQueue:[NSOperationQueue mainQueue]];
-        }
+    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
+    if (![pack needToBeUpdated]) {
+        CGRect frame = self.stickersScrollView.frame;
+        frame.origin.x = frame.size.width * indexPath.row;
+        frame.origin.y = 0;
+        [self.stickersScrollView scrollRectToVisible:frame animated:YES];
     }
 }
 

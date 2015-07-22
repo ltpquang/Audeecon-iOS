@@ -11,6 +11,7 @@
 
 @interface PQKeyboardPackCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 @end
 
@@ -24,11 +25,18 @@
 }
 
 + (CGSize)cellSize {
-    return CGSizeMake(37, 33);
+    return CGSizeMake(37, 35);
 }
 
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack {
-    _mainImage.image = pack.thumbnailImage;
+    if ([pack needToBeUpdated]) {
+        self.mainImage.image = nil;
+        [self.loadingIndicator startAnimating];
+    }
+    else {
+        self.mainImage.image = pack.thumbnailImage;
+        [self.loadingIndicator stopAnimating];
+    }
 }
 
 - (void)setSelected:(BOOL)selected {
