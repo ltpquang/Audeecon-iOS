@@ -10,6 +10,7 @@
 #import "PQRequestingService.h"
 #import "PQGetStickersInfoOperation.h"
 #import <RLMRealm.h>
+#import "PQNotificationNameFactory.h"
 
 @interface PQStickerPack()
 @property (weak) PQStickerPackDownloadOperation *downloadOperation;
@@ -60,9 +61,9 @@
 
 - (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue {
     if (![self needToBeUpdated]) {
-        [self stickerPackDownloadOperation:nil
-           didFinishDownloadingStickerPack:self
-                                     error:nil];
+//        [self stickerPackDownloadOperation:nil
+//           didFinishDownloadingStickerPack:self
+//                                     error:nil];
         NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{}];
         [queue addOperation:operation];
         return operation;
@@ -88,17 +89,9 @@
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
      didFinishDownloadingStickerPack:(PQStickerPack *)pack
                                error:(NSError *)error {
-//    NSLog(@"Pack downloaded: %@", pack.packId);
-//    NSLog(@"Thumbnail: %lu", (unsigned long)self.thumbnailData.length);
-//    for (PQSticker *sticker in pack.stickers) {
-//        NSLog(@"--Sticker: %@", sticker.stickerId);
-//        NSLog(@"------Thumbnail: %lu - %lu", (unsigned long)sticker.thumbnailUri.length, (unsigned long)sticker.thumbnailData.length);
-//        NSLog(@"------Fullsize: %lu - %lu", (unsigned long)sticker.fullsizeUri.length, (unsigned long)sticker.fullsizeUri.length);
-//        NSLog(@"------Sprite: %lu - %lu", (unsigned long)sticker.spriteUri.length, (unsigned long)sticker.spriteData.length);
-//        
-//    }
     self.status = StickerPackStatusDownloaded;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackCompletedDownloading] object:nil];
 }
 
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation

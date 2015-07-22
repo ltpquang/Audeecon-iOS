@@ -15,8 +15,8 @@
 @protocol PQStickerKeyboardDelegate;
 
 @interface PQStickerKeyboardView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate>
-- (void)configKeyboardWithStickerPacks:(NSArray *)packs;
-- (void)reloadKeyboardUsingPacks:(NSArray *)packs;
+- (void)configKeyboard;
+//- (void)reloadKeyboardUsingPacks:(NSArray *)packs;
 - (void)addToSuperview:(UIView *)superview;
 
 @property (nonatomic, weak) id<PQStickerKeyboardDelegate> delegate;

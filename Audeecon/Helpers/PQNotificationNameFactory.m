@@ -38,4 +38,8 @@
 + (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker {
     return [@"CompletedDownloadStickerFullsizeImage:" stringByAppendingString:sticker.stickerId];
 }
+
++ (NSString *)stickerPackCompletedDownloading {
+    return @"CompletedDownloadingStickerPack";
+}
 @end

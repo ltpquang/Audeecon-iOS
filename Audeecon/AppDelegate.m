@@ -19,6 +19,7 @@
 #import <Realm.h>
 #import "PQUser.h"
 #import "PQCurrentUser.h"
+#import "PQNotificationNameFactory.h"
 
 @interface AppDelegate ()
 
@@ -272,7 +273,6 @@
                                                success:^{
                                                    //
                                                    NSLog(@"Callback success on app delegate");
-                                                   [_messageExchangeDelegate reloadStickers];
                                                }
                                                failure:^(NSError *error) {
                                                    //
@@ -280,7 +280,7 @@
                                                }];
     
     // Then update sticker pack for that user
-    [self.keyboardView configKeyboardWithStickerPacks:[self.currentUser.ownedStickerPack valueForKey:@"self"]];
+    [self.keyboardView configKeyboard];
     [self.currentUser markFriendListForUpdating];
     [_friendListDelegate friendListDidUpdate];
     [[self xmppRoster] fetchRoster];

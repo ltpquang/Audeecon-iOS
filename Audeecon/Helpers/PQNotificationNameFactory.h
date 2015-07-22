@@ -18,4 +18,5 @@
 + (NSString *)messageCompletedReceivingFromJIDString:(NSString *)jidString;
 + (NSString *)stickerCompletedDownloading:(PQSticker *)sticker;
 + (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker;
++ (NSString *)stickerPackCompletedDownloading;
 @end

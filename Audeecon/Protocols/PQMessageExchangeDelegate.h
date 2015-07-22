@@ -10,6 +10,6 @@
 #import "PQMessage.h"
 
 @protocol PQMessageExchangeDelegate <NSObject>
-- (void)didReceiveMessage:(PQMessage *)message;
-- (void)reloadStickers;
+//- (void)didReceiveMessage:(PQMessage *)message;
+//- (void)reloadStickers;
 @end

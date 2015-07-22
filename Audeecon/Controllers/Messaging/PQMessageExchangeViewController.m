@@ -128,16 +128,16 @@
 }
 
 #pragma mark - Message exchange delegates
-- (void)reloadStickers {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
-    });
-}
+//- (void)reloadStickers {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
+//    });
+//}
 
 #pragma mark - Table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger count = [self.messagingCenter messageCountWithPartnerJIDString:self.partner.jidString];
-    NSLog(@"%i", count);
+    //NSLog(@"%i", count);
     return count;
 }
 

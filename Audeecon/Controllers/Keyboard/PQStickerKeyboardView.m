@@ -13,6 +13,9 @@
 #import "PQRequestingService.h"
 #import "PQStickerPack.h"
 #import "PQSticker.h"
+#import "AppDelegate.h"
+#import "PQCurrentUser.h"
+#import "PQNotificationNameFactory.h"
 
 @interface PQStickerKeyboardView()
 // Top hairline
@@ -83,10 +86,20 @@
 @end
 
 @implementation PQStickerKeyboardView
+#pragma mark - App utilities
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+- (NSArray *)ownedStickerPacks {
+    return [[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"];
+}
 
 #pragma mark - Keyboard actions
-- (void)configKeyboardWithStickerPacks:(NSArray *)packs {
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)configKeyboard {
     // config pack collection view
     _packsCollectionView.delegate = self;
     _packsCollectionView.dataSource = self;
@@ -94,48 +107,109 @@
     [_packsCollectionView registerNib:[PQKeyboardPackCollectionViewCell nib]
            forCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier]];
     
-    //config data
-    _packs = packs;
-    
-    // config scroll view
     [_stickersScrollView setDelegate:self];
     [_stickersScrollView setScrollsToTop:NO];
-    CGSize scrollSize = self.stickersScrollView.frame.size;
-    self.stickersScrollView.contentSize = CGSizeMake(scrollSize.width * (CGFloat)packs.count, scrollSize.height);
     
-    _keyboardCollectionViews = [NSMutableArray new];
-    for (int i = 0; i < packs.count; ++i) {
-        CGRect frame = self.stickersScrollView.bounds;
-        frame.origin.x = frame.size.width * (CGFloat)i;
-        frame.origin.y = 0.0;
-        PQStickerKeyboardCollectionViewController *keyboard = [[PQStickerKeyboardCollectionViewController alloc]
-                                                               initWithStickerPack:[packs objectAtIndex:i]
-                                                               andFrame:frame];
-        
-        [_keyboardCollectionViews addObject:keyboard];
-        [self.stickersScrollView addSubview:keyboard.view];
-    }
-    
-    
-    
-    
-    if (packs.count != 0 && [[(PQStickerPack *)packs[0] thumbnailData] length] != 0) {
-        [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                               animated:YES
-                                         scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-    }
+    [self updateStickerPacks];
     
     [self updateLayoutForNormalLayout];
    // [self updateLayoutForAutoRecommendationLayout];
     [self setupLongPressRecognizerForMainRecommendationImageView];
+    [self registerForNotification];
+}
+
+- (void)updateStickerPacks {
+    //config data
+    self.packs = [self ownedStickerPacks];
+    
+    [self.stickersScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    // config scroll view
+    CGSize scrollSize = self.stickersScrollView.frame.size;
+    self.stickersScrollView.contentSize = CGSizeMake(scrollSize.width * (CGFloat)self.packs.count, scrollSize.height);
+    
+    self.keyboardCollectionViews = [NSMutableArray new];
+    for (int i = 0; i < self.packs.count; ++i) {
+        CGRect frame = self.stickersScrollView.bounds;
+        frame.origin.x = frame.size.width * (CGFloat)i;
+        frame.origin.y = 0.0;
+        if ([[(PQStickerPack *)self.packs[i] thumbnailData] length] != 0) {
+            PQStickerKeyboardCollectionViewController *keyboard = [[PQStickerKeyboardCollectionViewController alloc]
+                                                                   initWithStickerPack:self.packs[i]
+                                                                   andFrame:frame];
+            
+            [self.keyboardCollectionViews addObject:keyboard];
+            [self.stickersScrollView addSubview:keyboard.view];
+        }
+        else {
+            UIView *dummy = [[UIView alloc] initWithFrame:frame];
+            [self.stickersScrollView addSubview:dummy];
+        }
+    }
+    [self.packsCollectionView reloadData];
+    [self updateKeyboardDelegates:self.delegate];
 }
 
 - (void)setDelegate:(id<PQStickerKeyboardDelegate>)delegate {
     _delegate = delegate;
+    [self updateKeyboardDelegates:delegate];
+}
+
+- (void)updateKeyboardDelegates:(id<PQStickerKeyboardDelegate>)delegate {
     for (PQStickerKeyboardCollectionViewController *keyboard in self.keyboardCollectionViews) {
         [keyboard setStickerKeyboardDelegate:delegate];
     }
 }
+
+- (void)registerForNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(packDownloadCompleteHandler:)
+                                                 name:[PQNotificationNameFactory stickerPackCompletedDownloading]
+                                               object:nil];
+}
+
+- (void)packDownloadCompleteHandler:(NSNotification *)noti {
+    [self updateStickerPacks];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat width = scrollView.frame.size.width;
+    NSInteger index = floor((scrollView.contentOffset.x - width / 2) / width) + 1;
+    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                           animated:NO
+                                     scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+}
+
+#pragma mark - Collection view delegates
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return _packs.count;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView.tag == 0) { //pack
+        PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
+        _selectedPack = pack;
+        if (![pack needToBeUpdated]) {
+            CGRect frame = self.stickersScrollView.frame;
+            frame.origin.x = frame.size.width * indexPath.row;
+            frame.origin.y = 0;
+            [self.stickersScrollView scrollRectToVisible:frame animated:YES];
+        }
+        else {
+            [pack downloadDataAndStickersUsingOperationQueue:[NSOperationQueue mainQueue]];
+        }
+    }
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
+    PQKeyboardPackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
+    
+    [cell configCellUsingStickerPack:pack];
+    return cell;
+}
+
 
 - (void)addToSuperview:(UIView *)superview {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -165,7 +239,6 @@
 }
 
 - (void)setupLongPressRecognizerForMainRecommendationImageView {
-    //self.backgroundColor = [UIColor darkGrayColor];
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                       action:@selector(longPressHandler:)];
     [longPressRecognizer setMinimumPressDuration:0.25];
@@ -185,16 +258,6 @@
         default:
             break;
     }
-}
-
-- (void)reloadKeyboardUsingPacks:(NSArray *)packs {
-    _packs = packs;
-    [self configKeyboardWithStickerPacks:packs];
-    [self.packsCollectionView reloadData];
-    
-    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                           animated:YES
-                                     scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 - (void)removeAllConstraints {
@@ -426,43 +489,6 @@
     
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat width = scrollView.frame.size.width;
-    NSInteger index = floor((scrollView.contentOffset.x - width / 2) / width) + 1;
-    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
-                                           animated:NO
-                                     scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-}
-
-#pragma mark - Collection view delegates
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    return _packs.count;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (collectionView.tag == 0) { //pack
-        PQStickerPack *pack = [_packs objectAtIndex:indexPath.row];
-        _selectedPack = pack;
-        if (![pack needToBeUpdated]) {
-            CGRect frame = self.stickersScrollView.frame;
-            frame.origin.x = frame.size.width * indexPath.row;
-            frame.origin.y = 0;
-            [self.stickersScrollView scrollRectToVisible:frame animated:YES];
-        }
-        else {
-            [pack downloadDataAndStickersUsingOperationQueue:[NSOperationQueue mainQueue]];
-        }
-    }
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
-    PQKeyboardPackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PQKeyboardPackCollectionViewCell reuseIdentifier] forIndexPath:indexPath];
-    
-    [cell configCellUsingStickerPack:pack];
-    return cell;
-}
 
 
 /*

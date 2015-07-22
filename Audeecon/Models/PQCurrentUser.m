@@ -11,6 +11,7 @@
 #import "PQStickerPack.h"
 #import <Realm.h>
 #import "XMPPvCardTemp.h"
+#import "PQNotificationNameFactory.h"
 
 @implementation PQCurrentUser
 
@@ -60,7 +61,7 @@
                                                  [ope addDependency:[pack downloadDataAndStickersUsingOperationQueue:queue]];
                                              }
                                              [queue addOperation:ope];
-                                             
+                                             [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackCompletedDownloading] object:nil];
                                          }
                                          failure:^(NSError *error) {
                                              //
