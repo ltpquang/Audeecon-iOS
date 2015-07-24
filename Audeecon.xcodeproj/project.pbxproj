@@ -27,7 +27,6 @@
 		6F366F851B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F366F841B41AF14000B3FA8 /* PQAudioPlayerAndRecorder.m */; };
 		6F366F881B41B19A000B3FA8 /* PQFilePathFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */; };
 		6F3783C51B27CADA0066EF08 /* PQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */; };
-		6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */; };
 		6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */; };
 		6F4607771B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607631B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.m */; };
 		6F4607781B48387000B637C7 /* PKCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4607651B48387000B637C7 /* PKCircleProgressView.m */; };
@@ -280,8 +279,6 @@
 		6F366F871B41B19A000B3FA8 /* PQFilePathFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQFilePathFactory.m; path = Helpers/PQFilePathFactory.m; sourceTree = "<group>"; };
 		6F3783C31B27CADA0066EF08 /* PQLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginViewController.h; path = "Controllers/Login and register/PQLoginViewController.h"; sourceTree = "<group>"; };
 		6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQLoginViewController.m; path = "Controllers/Login and register/PQLoginViewController.m"; sourceTree = "<group>"; };
-		6F3783C61B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQUpdateAdditionalInfoViewController.h; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.h"; sourceTree = "<group>"; };
-		6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQUpdateAdditionalInfoViewController.m; path = "Controllers/Login and register/PQUpdateAdditionalInfoViewController.m"; sourceTree = "<group>"; };
 		6F4607601B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+PKDownloadButtonAnimations.h"; sourceTree = "<group>"; };
 		6F4607611B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+PKDownloadButtonAnimations.m"; sourceTree = "<group>"; };
 		6F4607621B48387000B637C7 /* NSLayoutConstraint+PKDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PKDownloadButton.h"; sourceTree = "<group>"; };
@@ -807,8 +804,6 @@
 			children = (
 				6F3783C31B27CADA0066EF08 /* PQLoginViewController.h */,
 				6F3783C41B27CADA0066EF08 /* PQLoginViewController.m */,
-				6F3783C61B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.h */,
-				6F3783C71B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m */,
 			);
 			name = "Login and register";
 			sourceTree = "<group>";
@@ -2154,7 +2149,6 @@
 			files = (
 				6FB4EBCC1B4B94C7003E9DE9 /* PQUser.m in Sources */,
 				6F9CE5C51ABB16FC00D716EB /* XMPPMessageCarbons.m in Sources */,
-				6F3783C81B27D05B0066EF08 /* PQUpdateAdditionalInfoViewController.m in Sources */,
 				6FE61B181B4790E10035C39F /* PQStickerTableViewController.m in Sources */,
 				6F9CE5911ABB16FC00D716EB /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				6F9CE5B11ABB16FC00D716EB /* XMPPMessageArchivingCoreDataStorage.m in Sources */,

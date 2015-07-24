@@ -203,7 +203,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
+    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row]; 
     if (![pack needToBeUpdated]) {
         CGRect frame = self.stickersScrollView.frame;
         frame.origin.x = frame.size.width * indexPath.row;

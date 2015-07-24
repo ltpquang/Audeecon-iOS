@@ -54,9 +54,11 @@
 
 - (BOOL)connect;
 - (void)fetchRoster;
-- (NSManagedObjectContext *)managedObjectContext_roster;
+//- (NSManagedObjectContext *)managedObjectContext_roster;
 
 - (void)authenticateUsingPassword;
 - (void)registerUsingPassword;
+
+- (void)updateCurrentUserStickerPacks;
 @end
 

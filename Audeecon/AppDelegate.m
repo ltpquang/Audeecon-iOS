@@ -268,7 +268,21 @@
         [realm addObject:self.currentUser];
         [realm commitWriteTransaction];
     }
+    // Then update sticker pack for that user
+    [self updateCurrentUserStickerPacks];
     
+    
+    [self.keyboardView configKeyboard];
+    [self.currentUser markFriendListForUpdating];
+    [_friendListDelegate friendListDidUpdate];
+    [[self xmppRoster] fetchRoster];
+    
+    //[_xmppvCardTempModule fetchvCardTempForJID:self.xmppStream.myJID.bareJID ignoreStorage:YES];
+    
+    [self goOnline];
+}
+
+- (void)updateCurrentUserStickerPacks {
     [self.currentUser updateOwnedStickerPackUsingQueue:[[self globalContainer] stickerPackDownloadQueue]
                                                success:^{
                                                    //
@@ -278,16 +292,6 @@
                                                    //
                                                    NSLog(@"Update sticker packs failure");
                                                }];
-    
-    // Then update sticker pack for that user
-    [self.keyboardView configKeyboard];
-    [self.currentUser markFriendListForUpdating];
-    [_friendListDelegate friendListDidUpdate];
-    [[self xmppRoster] fetchRoster];
-    
-    //[_xmppvCardTempModule fetchvCardTempForJID:self.xmppStream.myJID.bareJID ignoreStorage:YES];
-    
-    [self goOnline];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error {

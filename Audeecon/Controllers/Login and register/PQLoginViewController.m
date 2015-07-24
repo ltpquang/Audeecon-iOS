@@ -265,6 +265,7 @@
     [[PQRequestingService new] registerWithServerForUser:self.username
                                                  success:^{
                                                      // Dismiss
+                                                     [[self appDelegate] updateCurrentUserStickerPacks];
                                                      [[[self appDelegate] window] setRootViewController:[self.storyboard instantiateInitialViewController]];
                                                      [self.hud hide:YES];
                                                  }
