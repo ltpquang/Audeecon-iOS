@@ -33,7 +33,7 @@
 
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack {
     self.pack = pack;
-    self.stickerPackDownloadManager = [[self appDelegate] stickerPackStatusManager];
+    self.stickerPackDownloadManager = [[self appDelegate] stickerPackDownloadManager];
     self.nameLabel.text = pack.name;
     self.artistLabel.text = pack.artist;
     self.descriptionLabel.text = pack.packDescription;

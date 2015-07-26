@@ -19,4 +19,5 @@
 
 + (NSString *)urlToGetAllUsers;
 + (NSString *)urlToBuyStickerPackForUser:(NSString *)username;
++ (NSString *)urlToGetRecommendedStickersForUser:(NSString *)username;
 @end

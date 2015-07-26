@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "PQCurrentUser.h"
 #import "PQNotificationNameFactory.h"
+#import "PQStickerRecommender.h"
 
 @interface PQStickerKeyboardView()
 // Top hairline
@@ -80,8 +81,8 @@
 // Data
 @property (strong, nonatomic) NSArray *packs;
 @property (strong, nonatomic) NSMutableArray *keyboardCollectionViews;
-
-
+@property (strong, nonatomic) PQStickerRecommender *stickerRecommender;
+@property (strong, nonatomic) NSArray *recommendedList;
 @end
 
 @implementation PQStickerKeyboardView
@@ -108,6 +109,9 @@
     
     [_stickersScrollView setDelegate:self];
     [_stickersScrollView setScrollsToTop:NO];
+    self.stickerRecommender = [[self appDelegate] stickerRecommender];
+    
+    [self updateRecommendedStickers];
     
     [self updateStickerPacks];
     
@@ -161,6 +165,20 @@
     }
 }
 
+- (void)updateRecommendedStickers {
+    self.recommendedList = [self.stickerRecommender curentRecommendedStickers];
+    if (self.recommendedList.count != 0) {
+        self.mainRecommendationImageView.image = [(PQSticker *)self.recommendedList[0] fullsizeImage];
+        self.upComingRecommendationImageView.image = [(PQSticker *)self.recommendedList[1] fullsizeImage];
+        [self.mainRecommendationImageView setUserInteractionEnabled:YES];
+    }
+    else {
+        self.mainRecommendationImageView.image = [UIImage imageNamed:@"defaultsmile"];
+        self.upComingRecommendationImageView.image = [UIImage imageNamed:@"defaultsmile"];
+        [self.mainRecommendationImageView setUserInteractionEnabled:NO];
+    }
+}
+
 - (void)setDelegate:(id<PQStickerKeyboardDelegate>)delegate {
     _delegate = delegate;
     [self updateKeyboardDelegates:delegate];
@@ -181,10 +199,18 @@
                                              selector:@selector(packDownloadCompleteHandler:)
                                                  name:[PQNotificationNameFactory ownedStickerPacksDidUpdate]
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(recommenderUpdatedHandler:)
+                                                 name:[PQNotificationNameFactory recommendedStickersChanged]
+                                               object:nil];
 }
 
 - (void)packDownloadCompleteHandler:(NSNotification *)noti {
     [self updateStickerPacks];
+}
+
+- (void)recommenderUpdatedHandler:(NSNotification *)noti {
+    [self updateRecommendedStickers];
 }
 
 - (IBAction)storeButtonTUI:(id)sender {
@@ -270,11 +296,11 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             //
-            [self.delegate didStartHoldingOnSticker:nil withGesture:gesture];
+            [self.delegate didStartHoldingOnSticker:self.recommendedList[0] withGesture:gesture];
             break;
         case UIGestureRecognizerStateEnded:
             //
-            [self.delegate didStopHoldingOnSticker:nil withGesture:gesture];
+            [self.delegate didStopHoldingOnSticker:self.recommendedList[0] withGesture:gesture];
             break;
         default:
             break;
@@ -319,8 +345,8 @@
     [self finishUpdateConstraints];
     
     
-    self.upComingRecommendationImageView.image = [(PQStickerPack *)self.packs[0] thumbnailImage];
-    self.mainRecommendationImageView.image = [(PQStickerPack *)self.packs[1] thumbnailImage];
+    //self.upComingRecommendationImageView.image = [(PQStickerPack *)self.packs[0] thumbnailImage];
+    //self.mainRecommendationImageView.image = [(PQStickerPack *)self.packs[1] thumbnailImage];
 }
 
 - (void)updateLayoutForNormalLayout {

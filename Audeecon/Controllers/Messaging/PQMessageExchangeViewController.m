@@ -23,6 +23,7 @@
 #import "PQRecordingOverlayView.h"
 #import "PQPlayingOverlayView.h"
 #import "PQStoreViewController.h"
+#import "PQStickerRecommender.h"
 
 @interface PQMessageExchangeViewController ()
 @property (nonatomic, strong) PQOtherUser *partner;
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) PQMessagingCenter *messagingCenter;
 @property (nonatomic, strong) PQRecordingOverlayView *recordingOverlay;
 @property (nonatomic, strong) PQPlayingOverlayView *playingOverlay;
+@property (nonatomic, strong) PQStickerRecommender *stickerRecommender;
 @end
 
 @implementation PQMessageExchangeViewController
@@ -90,6 +92,8 @@
     
     self.audioRecorderAndPlayer = [[PQAudioPlayerAndRecorder alloc] initWithDelegate:self];
     self.requestingService = [PQRequestingService new];
+    
+    self.stickerRecommender = [[self appDelegate] stickerRecommender];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -195,6 +199,10 @@
     
     [self.recordingOverlay removeFromSuperview];
     [self.recordingOverlay stopAnimating];
+    
+    if (![isCanceled boolValue]) {
+        [self.stickerRecommender updateRecommenderUsingSticker:sticker];
+    }
 }
 
 - (void)didTapOnStoreButton {

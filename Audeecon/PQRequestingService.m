@@ -147,4 +147,36 @@
                               }];
     [_downloadTask resume];
 }
+
+- (void)getRecommendedStickersForUser:(NSString *)username
+                         usingSticker:(NSString *)stickerId
+                              success:(void(^)(NSArray *result))successCall
+                              failure:(void(^)(NSError *error))failureCall {
+    if (stickerId.length != 0) {
+        NSDictionary *param = @{@"sticker_id":stickerId};
+        [self configWithExpectationOfJsonInRequest:YES
+                                 andJsonInResponse:YES];
+        [_manager POST:[PQUrlService urlToGetRecommendedStickersForUser:username]
+            parameters:param
+               success:^(NSURLSessionDataTask *task, id responseObject) {
+                   //
+                   successCall(responseObject);
+               }
+               failure:^(NSURLSessionDataTask *task, NSError *error) {
+                   failureCall(error);
+               }];
+    }
+    else {
+        [self configWithExpectationOfJsonInRequest:NO
+                                 andJsonInResponse:YES];
+        [_manager GET:[PQUrlService urlToGetRecommendedStickersForUser:username]
+           parameters:nil
+              success:^(NSURLSessionDataTask *task, id responseObject) {
+                  successCall(responseObject);
+              }
+              failure:^(NSURLSessionDataTask *task, NSError *error) {
+                  failureCall(error);
+              }];
+    }
+}
 @end

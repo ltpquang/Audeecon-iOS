@@ -37,7 +37,7 @@
     [self setupStream];
     [self setupAmazon];
     [self updateRealmSchema];
-    self.stickerPackStatusManager = [[PQStickerPackDownloadManager alloc] init];
+    self.stickerPackDownloadManager = [[PQStickerPackDownloadManager alloc] init];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
     //login = nil;
@@ -97,6 +97,14 @@
         _keyboardView = [[[NSBundle mainBundle] loadNibNamed:@"StickerKeyboardView" owner:nil options:nil] lastObject];
     }
     return _keyboardView;
+}
+
+- (PQStickerRecommender *)stickerRecommender {
+    if (_stickerRecommender == nil) {
+        _stickerRecommender = [[PQStickerRecommender alloc] initWithUsername:self.currentUser.username];
+        [_stickerRecommender getRecommendedStickers];
+    }
+    return _stickerRecommender;
 }
 
 

@@ -34,11 +34,33 @@
     return result;
 }
 
-+ (NSString *)urlToGetAllStickerPacksForUser:(NSString *)username {
-    NSString *result = [[[[self urlToGetAllUsers]
++ (NSString *)urlToGetUser:(NSString *)username {
+    NSString *result = [[[self urlToGetAllUsers]
                         stringByAppendingString:@"/"]
-                        stringByAppendingString:username]
+                        stringByAppendingString:username];
+    NSLog(@"%@", result);
+    return  result;
+}
+
++ (NSString *)urlToGetAllStickerPacksForUser:(NSString *)username {
+    NSString *result = [[self urlToGetUser:username]
                         stringByAppendingString:@"/packs"];
+    NSLog(@"%@", result);
+    return result;
+}
+
++ (NSString *)urlToBuyStickerPackForUser:(NSString *)username {
+    //audeecon.herokuapp.com/api/v2/users/:username/purchase
+    NSString *result = [[self urlToGetUser:username]
+                        stringByAppendingString:@"/purchase"];
+    NSLog(@"%@", result);
+    return result;
+}
+
++ (NSString *)urlToGetRecommendedStickersForUser:(NSString *)username {
+    //audeecon.herokuapp.com/api/v2/users/:username/recommend
+    NSString *result = [[self urlToGetUser:username]
+                        stringByAppendingString:@"/recommend"];
     NSLog(@"%@", result);
     return result;
 }
@@ -68,17 +90,6 @@
 + (NSString *)urlToDefaultAvatar {
     //return @"https://s3.amazonaws.com/audeecon-us/default/defaultavatar.jpeg";
     return @"";
-}
-
-+ (NSString *)urlToBuyStickerPackForUser:(NSString *)username {
-    //audeecon.herokuapp.com/api/v1/users/:username/purchase
-    //pack_id:
-    NSString *result = [[[[self urlToGetAllUsers]
-                        stringByAppendingString:@"/"]
-                        stringByAppendingString:username]
-                        stringByAppendingString:@"/purchase"];
-    NSLog(@"%@", result);
-    return result;
 }
 
 @end

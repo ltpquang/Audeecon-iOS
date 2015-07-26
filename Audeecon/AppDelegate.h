@@ -19,6 +19,7 @@
 #import "PQMessagingCenter.h"
 #import "PQStickerKeyboardView.h"
 #import "PQStickerPackDownloadManager.h"
+#import "PQStickerRecommender.h"
 
 @class RLMRealm;
 @class PQCurrentUser;
@@ -52,11 +53,11 @@
 @property (strong, nonatomic) PQCurrentUser *currentUser;
 @property (strong, nonatomic) PQMessagingCenter *messagingCenter;
 @property (strong, nonatomic) PQStickerKeyboardView *keyboardView;
-@property (strong, nonatomic) PQStickerPackDownloadManager *stickerPackStatusManager;
+@property (strong, nonatomic) PQStickerPackDownloadManager *stickerPackDownloadManager;
+@property (strong, nonatomic) PQStickerRecommender *stickerRecommender;
 
 - (BOOL)connect;
 - (void)fetchRoster;
-//- (NSManagedObjectContext *)managedObjectContext_roster;
 
 - (void)authenticateUsingPassword;
 - (void)registerUsingPassword;

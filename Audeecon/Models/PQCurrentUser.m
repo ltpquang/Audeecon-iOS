@@ -106,7 +106,7 @@
     PQStickerPack *newPack = [PQStickerPack createOrUpdateInDefaultRealmWithValue:pack];
     [[self ownedStickerPack] addObject:newPack];
     NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
-    [[[self appDelegate] stickerPackStatusManager] downloadStickerPack:newPack
+    [[[self appDelegate] stickerPackDownloadManager] downloadStickerPack:newPack
                                                     usingDownloadQueue:queue];
     [realm commitWriteTransaction];
     [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory ownedStickerPacksDidUpdate] object:nil];
@@ -121,7 +121,7 @@
     }
     [realm deleteObject:pack];
     [realm commitWriteTransaction];
-    [[[self appDelegate] stickerPackStatusManager] cancelStickPack:pack];
+    [[[self appDelegate] stickerPackDownloadManager] cancelStickPack:pack];
 }
 
 #pragma mark - Friends managing

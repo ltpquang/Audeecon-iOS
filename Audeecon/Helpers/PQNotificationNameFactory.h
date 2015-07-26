@@ -24,5 +24,6 @@
 + (NSString *)stickerPackChangedProgress:(PQStickerPack *)stickerPack;
 + (NSString *)stickerPackChangedStatus:(NSString *)stickerPackId;
 + (NSString *)ownedStickerPacksDidUpdate;
++ (NSString *)recommendedStickersChanged;
 @end
 

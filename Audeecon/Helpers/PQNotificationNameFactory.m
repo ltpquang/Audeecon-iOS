@@ -59,4 +59,8 @@
 + (NSString *)ownedStickerPacksDidUpdate {
     return @"OwnedStickerPacksDidUpdate";
 }
+
++ (NSString *)recommendedStickersChanged {
+    return @"RecommendedStickersChanged";
+}
 @end
