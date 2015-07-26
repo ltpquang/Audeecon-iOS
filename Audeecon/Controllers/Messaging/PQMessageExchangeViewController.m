@@ -22,6 +22,7 @@
 #import "PQNotificationNameFactory.h"
 #import "PQRecordingOverlayView.h"
 #import "PQPlayingOverlayView.h"
+#import "PQStoreViewController.h"
 
 @interface PQMessageExchangeViewController ()
 @property (nonatomic, strong) PQOtherUser *partner;
@@ -127,12 +128,6 @@
                                   animated:YES];
 }
 
-#pragma mark - Message exchange delegates
-//- (void)reloadStickers {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.keyboardView reloadKeyboardUsingPacks:[[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"]];
-//    });
-//}
 
 #pragma mark - Table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -200,6 +195,16 @@
     
     [self.recordingOverlay removeFromSuperview];
     [self.recordingOverlay stopAnimating];
+}
+
+- (void)didTapOnStoreButton {
+    // Load up sticker store
+    NSLog(@"Store button tap");
+    PQStoreViewController *storeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"StoreViewController"];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:storeVC];
+    [self presentViewController:navVC
+                       animated:YES
+                     completion:nil];
 }
 
 - (void)keyboardDidChangeLayout {

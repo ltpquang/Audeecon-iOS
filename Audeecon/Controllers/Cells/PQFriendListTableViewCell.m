@@ -65,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNicknameNotification:) name:nicknameNotiName object:nil];
     
     NSString *isOnlineNotiName = [username stringByAppendingString:@"IsOnlineChanged"];
-    NSLog(@"Registered: %@", isOnlineNotiName);
+    //NSLog(@"Registered: %@", isOnlineNotiName);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveIsOnlineNotification:) name:isOnlineNotiName object:nil];
 }
 

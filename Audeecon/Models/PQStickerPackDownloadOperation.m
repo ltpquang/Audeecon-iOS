@@ -24,6 +24,7 @@
 @property PQStickerPack *pack;
 @property NSOperationQueue *downloadQueue;
 @property NSOperationQueue *stickerQueue;
+@property NSInteger doneCount;
 @property (weak) id<PQStickerPackDownloadOperationDelegate> delegate;
 @end
 
@@ -57,6 +58,7 @@
     self.downloadQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
     self.stickerQueue = [[NSOperationQueue alloc] init];
     self.stickerQueue.maxConcurrentOperationCount = -1;
+    self.doneCount = 0;
     [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
     
     executing = YES;
@@ -108,6 +110,9 @@
                                                               andQueue:self.downloadQueue
                                                               andDownloadQueue:self.stickerQueue
                                                               delegate:self];
+            stickerDownloadOpe.completionBlock = ^() {
+                ++self.doneCount;
+            };
             
             [buyStickerPackOpe addDependency:stickerDownloadOpe];
             [self.downloadQueue addOperation:stickerDownloadOpe];
@@ -144,9 +149,11 @@
 
 - (void)stickerImagesDownloadOperation:(PQStickerImagesDownloadOperation *)operation
      didFinishDownloadingSticker:(PQSticker *)sticker {
-    NSInteger percentage = (NSInteger)(100 * (1 - (float)(self.downloadQueue.operationCount)/(float)(self.pack.stickers.count + 1)));
-    self.percentage = percentage;
+    NSInteger totalCount = self.pack.stickers.count + 1;
+    NSInteger doneCount = self.doneCount;
+    NSInteger donePercentage = (NSInteger)(((float)doneCount/(float)totalCount) * 100.0);
+    self.percentage = donePercentage;
     [self.delegate stickerPackDownloadOperation:self
-                          didUpdateWithProgress:percentage];
+                          didUpdateWithProgress:donePercentage];
 }
 @end

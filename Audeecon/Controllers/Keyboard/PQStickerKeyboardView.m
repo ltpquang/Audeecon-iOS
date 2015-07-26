@@ -177,19 +177,30 @@
                                              selector:@selector(packDownloadCompleteHandler:)
                                                  name:[PQNotificationNameFactory stickerPackCompletedDownloading]
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(packDownloadCompleteHandler:)
+                                                 name:[PQNotificationNameFactory ownedStickerPacksDidUpdate]
+                                               object:nil];
 }
 
 - (void)packDownloadCompleteHandler:(NSNotification *)noti {
     [self updateStickerPacks];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat width = scrollView.frame.size.width;
-    NSInteger index = floor((scrollView.contentOffset.x - width / 2) / width) + 1;
-    [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
-                                           animated:NO
-                                     scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+- (IBAction)storeButtonTUI:(id)sender {
+    [self.delegate didTapOnStoreButton];
 }
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.stickersScrollView) {
+        CGFloat width = scrollView.frame.size.width;
+        NSInteger index = floor((scrollView.contentOffset.x - width / 2) / width) + 1;
+        [self.packsCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                                               animated:NO
+                                         scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    }
+}
+
 
 #pragma mark - Collection view delegates
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -203,7 +214,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row]; 
+    PQStickerPack *pack = [self.packs objectAtIndex:indexPath.row];
     if (![pack needToBeUpdated]) {
         CGRect frame = self.stickersScrollView.frame;
         frame.origin.x = frame.size.width * indexPath.row;

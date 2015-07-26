@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class PQMessage;
 @class PQSticker;
+@class PQStickerPack;
 
 @interface PQNotificationNameFactory : NSObject
 + (NSString *)messageStartedSending:(PQMessage *)message;
@@ -19,4 +20,9 @@
 + (NSString *)stickerCompletedDownloading:(PQSticker *)sticker;
 + (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker;
 + (NSString *)stickerPackCompletedDownloading;
++ (NSString *)stickerPackStartedPending;
++ (NSString *)stickerPackChangedProgress:(PQStickerPack *)stickerPack;
++ (NSString *)stickerPackChangedStatus:(NSString *)stickerPackId;
++ (NSString *)ownedStickerPacksDidUpdate;
 @end
+

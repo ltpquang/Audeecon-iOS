@@ -194,6 +194,7 @@
 		6F9CE5CF1ABB16FC00D716EB /* XMPPStringPrep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE5511ABB16FC00D716EB /* XMPPStringPrep.m */; };
 		6F9CE5D01ABB16FC00D716EB /* XMPPTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9CE5531ABB16FC00D716EB /* XMPPTimer.m */; };
 		6F9CE5D31ABB17FC00D716EB /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9CE5D21ABB17FC00D716EB /* libresolv.dylib */; };
+		6FA5C8901B636CC800E93E69 /* PQStickerPackDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5C88F1B636CC800E93E69 /* PQStickerPackDownloadManager.m */; };
 		6FAF56041B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF56031B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib */; };
 		6FAF56061B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FAF56051B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib */; };
 		6FAF56091B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF56081B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.m */; };
@@ -632,6 +633,8 @@
 		6F9CE5531ABB16FC00D716EB /* XMPPTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPTimer.m; sourceTree = "<group>"; };
 		6F9CE5D11ABB173000D716EB /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XMPPFramework.h; path = Frameworks/XMPPFramework.h; sourceTree = "<group>"; };
 		6F9CE5D21ABB17FC00D716EB /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		6FA5C88E1B636CC800E93E69 /* PQStickerPackDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQStickerPackDownloadManager.h; path = Models/PQStickerPackDownloadManager.h; sourceTree = "<group>"; };
+		6FA5C88F1B636CC800E93E69 /* PQStickerPackDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQStickerPackDownloadManager.m; path = Models/PQStickerPackDownloadManager.m; sourceTree = "<group>"; };
 		6FAF56031B36C3BC0091281C /* KeyboardPackCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardPackCollectionViewCell.xib; path = Views/KeyboardPackCollectionViewCell.xib; sourceTree = "<group>"; };
 		6FAF56051B36C3D30091281C /* KeyboardStickerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeyboardStickerCollectionViewCell.xib; path = Views/KeyboardStickerCollectionViewCell.xib; sourceTree = "<group>"; };
 		6FAF56071B36C5BD0091281C /* PQKeyboardPackCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQKeyboardPackCollectionViewCell.h; path = Controllers/Cells/PQKeyboardPackCollectionViewCell.h; sourceTree = "<group>"; };
@@ -956,6 +959,8 @@
 				6F8AF40B1B46F6FC0099F63A /* PQSticker.m */,
 				6F8AF40D1B46FB0B0099F63A /* PQStickerPack.h */,
 				6F8AF40E1B46FB0B0099F63A /* PQStickerPack.m */,
+				6FA5C88E1B636CC800E93E69 /* PQStickerPackDownloadManager.h */,
+				6FA5C88F1B636CC800E93E69 /* PQStickerPackDownloadManager.m */,
 			);
 			name = Stickers;
 			sourceTree = "<group>";
@@ -2341,6 +2346,7 @@
 				6F9CE58D1ABB16FC00D716EB /* XMPPRoom.m in Sources */,
 				6F9CE5B61ABB16FC00D716EB /* XMPPMessage+XEP_0184.m in Sources */,
 				6F46077B1B48387000B637C7 /* PKPendingView.m in Sources */,
+				6FA5C8901B636CC800E93E69 /* PQStickerPackDownloadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

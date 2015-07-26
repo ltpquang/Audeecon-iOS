@@ -16,7 +16,6 @@
 
 @interface PQStickerKeyboardView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate>
 - (void)configKeyboard;
-//- (void)reloadKeyboardUsingPacks:(NSArray *)packs;
 - (void)addToSuperview:(UIView *)superview;
 
 @property (nonatomic, weak) id<PQStickerKeyboardDelegate> delegate;
@@ -29,6 +28,7 @@
                      withGesture:(UIGestureRecognizer *)gesture;
 - (void)didStopHoldingOnSticker:(PQSticker *)sticker
                     withGesture:(UIGestureRecognizer *)gesture;
+- (void)didTapOnStoreButton;
 - (void)keyboardDidChangeLayout;
 
 @end

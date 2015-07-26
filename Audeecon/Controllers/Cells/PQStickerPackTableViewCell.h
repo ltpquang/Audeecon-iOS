@@ -10,6 +10,7 @@
 #import "PKDownloadButton.h"
 
 @class PQStickerPack;
+@class PQStickerPackDownloadManager;
 
 @interface PQStickerPackTableViewCell : UITableViewCell <PKDownloadButtonDelegate>
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack;

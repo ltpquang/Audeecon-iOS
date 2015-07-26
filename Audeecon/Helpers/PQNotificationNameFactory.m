@@ -9,6 +9,7 @@
 #import "PQNotificationNameFactory.h"
 #import "PQMessage.h"
 #import "PQSticker.h"
+#import "PQStickerPack.h"
 
 @implementation PQNotificationNameFactory
 + (NSString *)messageStartedSending:(PQMessage *)message {
@@ -41,5 +42,21 @@
 
 + (NSString *)stickerPackCompletedDownloading {
     return @"CompletedDownloadingStickerPack";
+}
+
++ (NSString *)stickerPackStartedPending {
+    return @"StartedPendingStickerPack";
+}
+
++ (NSString *)stickerPackChangedProgress:(PQStickerPack *)stickerPack {
+    return [@"ChangeInDownloadProgress:" stringByAppendingString:stickerPack.packId];
+}
+
++ (NSString *)stickerPackChangedStatus:(NSString *)stickerPackId {
+    return [@"ChangedStatus:" stringByAppendingString:stickerPackId];
+}
+
++ (NSString *)ownedStickerPacksDidUpdate {
+    return @"OwnedStickerPacksDidUpdate";
 }
 @end

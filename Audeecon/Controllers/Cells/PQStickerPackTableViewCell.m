@@ -10,6 +10,10 @@
 #import "PQStickerPack.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+#import "PQStickerPackDownloadManager.h"
+#import "PQNotificationNameFactory.h"
+#import <Realm.h>
+#import "PQCurrentUser.h"
 
 @interface PQStickerPackTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
@@ -18,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet PKDownloadButton *downloadButton;
 @property (strong, nonatomic) PQStickerPack *pack;
-
+@property (strong, nonatomic) PQStickerPackDownloadManager *stickerPackDownloadManager;
 @end
 
 @implementation PQStickerPackTableViewCell
@@ -29,6 +33,7 @@
 
 - (void)configCellUsingStickerPack:(PQStickerPack *)pack {
     self.pack = pack;
+    self.stickerPackDownloadManager = [[self appDelegate] stickerPackStatusManager];
     self.nameLabel.text = pack.name;
     self.artistLabel.text = pack.artist;
     self.descriptionLabel.text = pack.packDescription;
@@ -43,8 +48,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(statusChanged:)
-                                                 name:@"StatusChanged"
-                                               object:self.pack];
+                                                 name:[PQNotificationNameFactory stickerPackChangedStatus:self.pack.packId]
+                                               object:nil];
     [self evaluateStatusAndUpdateDownloadButton];
 }
 
@@ -60,24 +65,21 @@
 }
 
 - (void)evaluateStatusAndUpdateDownloadButton {
-    switch (self.pack.status) {
+    StickerPackStatus status = [self.stickerPackDownloadManager statusForStickerPackWithId:self.pack.packId];
+    switch (status) {
         case StickerPackStatusNotAvailable:
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
-            NSLog(@"Not available");
             break;
         case StickerPackStatusPending:
             self.downloadButton.state = kPKDownloadButtonState_Pending;
-            NSLog(@"Pending");
             break;
         case StickerPackStatusDownloading:
             self.downloadButton.state = kPKDownloadButtonState_Downloading;
-            self.downloadButton.stopDownloadButton.progress = (float)self.pack.percentage/100.0;
-            NSLog(@"Downloading");
-            NSLog(@"%f", self.downloadButton.stopDownloadButton.progress);
+            NSInteger percentage = [self.stickerPackDownloadManager progressForStickerPackWithId:self.pack.packId];
+            self.downloadButton.stopDownloadButton.progress = (float)percentage/100.0;
             break;
         case StickerPackStatusDownloaded:
             self.downloadButton.state = kPKDownloadButtonState_Downloaded;
-            NSLog(@"Downloaded");
             break;
     }
 }
@@ -91,22 +93,27 @@
         case kPKDownloadButtonState_StartDownload: {
             self.downloadButton.state = kPKDownloadButtonState_Pending;
             // Download sticker pack info
-            NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
-            [self.pack downloadDataAndStickersUsingOperationQueue:queue];
+            [[[self appDelegate] currentUser] downloadStickerPackFromTheStore:self.pack];
             break;
         }
-        case kPKDownloadButtonState_Pending:
+        case kPKDownloadButtonState_Pending: {
             // Cancel download
+            [[[self appDelegate] currentUser] removeStickerPack:self.pack];
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             break;
-        case kPKDownloadButtonState_Downloading:
+        }
+        case kPKDownloadButtonState_Downloading: {
             // Cancel download
+            [[[self appDelegate] currentUser] removeStickerPack:self.pack];
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             break;
-        case kPKDownloadButtonState_Downloaded:
+        }
+        case kPKDownloadButtonState_Downloaded: {
+            [[[self appDelegate] currentUser] removeStickerPack:self.pack];
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             // Delete pack
             break;
+        }
         default:
             NSAssert(NO, @"unsupported state");
             break;

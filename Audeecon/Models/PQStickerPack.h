@@ -10,12 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "PQSticker.h"
 #import "PQStickerPackDownloadOperation.h"
-typedef enum : NSUInteger {
-    StickerPackStatusNotAvailable,
-    StickerPackStatusPending,
-    StickerPackStatusDownloading,
-    StickerPackStatusDownloaded
-} StickerPackStatus;
+
 
 @class PQRequestingService;
 @interface PQStickerPack : RLMObject <PQStickerPackDownloadOperationDelegate>
@@ -28,8 +23,6 @@ typedef enum : NSUInteger {
 @property RLMArray<PQSticker> *stickers;
 //Excluded in realm
 @property (nonatomic) UIImage *thumbnailImage;
-@property StickerPackStatus status;
-@property (nonatomic) NSInteger percentage;
 @property (nonatomic) BOOL needToBeUpdated;
 
 - (id)initWithPackId:(NSString *)packId
@@ -37,9 +30,6 @@ typedef enum : NSUInteger {
            andArtist:(NSString *)artist
       andDescription:(NSString *)packDescription
      andThumbnailUri:(NSString *)thumbnailUri;
-//- (void)downloadStickersUsingRequestingService:(PQRequestingService *)requestingService
-//                                       success:(void(^)())successCall
-//                                       failure:(void(^)(NSError *error))failureCall;
 - (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue;
 @end
 

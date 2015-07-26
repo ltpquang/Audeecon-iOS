@@ -22,6 +22,8 @@
 - (void)updateOwnedStickerPackUsingQueue:(NSOperationQueue *)queue
                                  success:(void(^)())successCall
                                  failure:(void(^)(NSError *error))failureCall;
+- (void)downloadStickerPackFromTheStore:(PQStickerPack *)pack;
+- (void)removeStickerPack:(PQStickerPack *)pack;
 
 - (void)updateFriendListUsingXMPPJID:(XMPPJID *)jid;
 - (void)markFriendListForUpdating;

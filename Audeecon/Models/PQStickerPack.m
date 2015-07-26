@@ -30,7 +30,6 @@
         _artist = artist;
         _packDescription = packDescription;
         _thumbnailUri = thumbnailUri;
-        _status = StickerPackStatusNotAvailable;
     }
     return self;
 }
@@ -61,10 +60,12 @@
 
 - (NSOperation *)downloadDataAndStickersUsingOperationQueue:(NSOperationQueue *)queue {
     if (![self needToBeUpdated]) {
-//        [self stickerPackDownloadOperation:nil
-//           didFinishDownloadingStickerPack:self
-//                                     error:nil];
-        NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{}];
+        NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter]  postNotificationName:[PQNotificationNameFactory stickerPackCompletedDownloading]
+                                                                     object:self];
+            });
+        }];
         [queue addOperation:operation];
         return operation;
     }
@@ -80,8 +81,8 @@
         self.downloadOperation = operation;
         [queue addOperation:getStickerInfos];
         [queue addOperation:operation];
-        self.status = StickerPackStatusPending;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackStartedPending]
+                                                            object:self];
         return operation;
     }
 }
@@ -89,16 +90,19 @@
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
      didFinishDownloadingStickerPack:(PQStickerPack *)pack
                                error:(NSError *)error {
-    self.status = StickerPackStatusDownloaded;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackCompletedDownloading] object:nil];
+    NSLog(@"Post downloaded");
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackCompletedDownloading]
+                                                        object:self];
 }
 
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
                didUpdateWithProgress:(NSInteger)percentage {
-    self.status = StickerPackStatusDownloading;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"StatusChanged" object:self];
     //NSLog(@"%i", percentage);
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackChangedProgress:self]
+                                                        object:nil
+                                                      userInfo:@{@"percentage":[NSNumber numberWithInt:percentage]}];
+    
+
 }
 // Specify default values for properties
 

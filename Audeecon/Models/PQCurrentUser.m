@@ -12,8 +12,14 @@
 #import <Realm.h>
 #import "XMPPvCardTemp.h"
 #import "PQNotificationNameFactory.h"
+#import "AppDelegate.h"
 
 @implementation PQCurrentUser
+
+#pragma mark - App utilities
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
 
 - (NSMutableArray *)awatingJIDs {
     if (!_awatingJIDs) {
@@ -22,6 +28,7 @@
     return  _awatingJIDs;
 }
 
+#pragma mark - Stickers managing
 - (BOOL)stickerPacksNeedToBeReplacedByStickerPacks:(NSArray *)newArray {
     NSArray *oldIds = [self.ownedStickerPack valueForKeyPath:@"packId"];
     NSArray *newIds = [newArray valueForKeyPath:@"packId"];
@@ -30,6 +37,36 @@
     NSCountedSet *newSet = [NSCountedSet setWithArray:newIds];
     
     return ![oldSet isEqualToSet:newSet];
+}
+
+- (void)updateListOfOwnedStickerPackUsingReturnedList:(NSArray *)returned {
+    NSArray *oldIds = [self.ownedStickerPack valueForKey:@"packId"];
+    NSArray *newIds = [returned valueForKey:@"packId"];
+    
+    NSSet *oldSet = [NSSet setWithArray:oldIds];
+    NSSet *newSet = [NSSet setWithArray:newIds];
+    
+    NSMutableSet *toRemove = [NSMutableSet new];
+    [toRemove setSet:oldSet];
+    [toRemove minusSet:newSet];
+    
+    NSMutableSet *toAdd = [NSMutableSet new];
+    [toAdd setSet:newSet];
+    [toAdd minusSet:oldSet];
+    
+    for (int i = self.ownedStickerPack.count-1; i >= 0; --i) {
+        NSString *packId = [(PQStickerPack *)self.ownedStickerPack[i] packId];
+        if ([toRemove containsObject:packId]) {
+            [self.ownedStickerPack removeObjectAtIndex:i];
+        }
+    }
+    
+    for (PQStickerPack *pack in returned) {
+        if ([toAdd containsObject:pack.packId]) {
+            PQStickerPack *newPack = [PQStickerPack createOrUpdateInDefaultRealmWithValue:pack];
+            [self.ownedStickerPack addObject:newPack];
+        }
+    }
 }
 
 - (void)updateOwnedStickerPackUsingQueue:(NSOperationQueue *)queue
@@ -42,14 +79,7 @@
                                              RLMRealm *realm = [RLMRealm defaultRealm];
                                              if ([self stickerPacksNeedToBeReplacedByStickerPacks:result]) {
                                                  [realm beginWriteTransaction];
-                                                 [realm deleteObjects:self.ownedStickerPack];
-                                                 [self.ownedStickerPack removeAllObjects];
-                                                 
-                                                 for (PQStickerPack *pack in result) {
-                                                     PQStickerPack *returnPack = [PQStickerPack createOrUpdateInDefaultRealmWithValue:pack];
-                                                     [self.ownedStickerPack addObject:returnPack];
-                                                 }
-                                                 
+                                                 [self updateListOfOwnedStickerPackUsingReturnedList:result];
                                                  [realm commitWriteTransaction];
                                              }
                                              NSBlockOperation *ope = [NSBlockOperation blockOperationWithBlock:^{
@@ -61,7 +91,8 @@
                                                  [ope addDependency:[pack downloadDataAndStickersUsingOperationQueue:queue]];
                                              }
                                              [queue addOperation:ope];
-                                             [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackCompletedDownloading] object:nil];
+                                             //This notification is used to notify the keyboard about there are incoming sticker packs, but the packs' data is not ready, so that the sticker keyboard can show up loading indicators
+                                             [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory ownedStickerPacksDidUpdate] object:nil];
                                          }
                                          failure:^(NSError *error) {
                                              //
@@ -69,7 +100,31 @@
                                          }];
 }
 
+- (void)downloadStickerPackFromTheStore:(PQStickerPack *)pack {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    PQStickerPack *newPack = [PQStickerPack createOrUpdateInDefaultRealmWithValue:pack];
+    [[self ownedStickerPack] addObject:newPack];
+    NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
+    [[[self appDelegate] stickerPackStatusManager] downloadStickerPack:newPack
+                                                    usingDownloadQueue:queue];
+    [realm commitWriteTransaction];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory ownedStickerPacksDidUpdate] object:nil];
+}
 
+- (void)removeStickerPack:(PQStickerPack *)pack {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    NSUInteger removed = [[self ownedStickerPack] indexOfObject:pack];
+    if (removed != NSNotFound) {
+        [[self ownedStickerPack] removeObjectAtIndex:removed];
+    }
+    [realm deleteObject:pack];
+    [realm commitWriteTransaction];
+    [[[self appDelegate] stickerPackStatusManager] cancelStickPack:pack];
+}
+
+#pragma mark - Friends managing
 - (void)updateFriendListUsingXMPPJID:(XMPPJID *)jid {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
@@ -156,7 +211,7 @@
             
             NSString *onlineNoti = [user.username stringByAppendingString:@"IsOnlineChanged"];
             [[NSNotificationCenter defaultCenter] postNotificationName:onlineNoti object:user];
-            NSLog(@"Posted: %@", onlineNoti);
+            //NSLog(@"Posted: %@", onlineNoti);
         }
     }
 }

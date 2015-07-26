@@ -37,6 +37,7 @@
     [self setupStream];
     [self setupAmazon];
     [self updateRealmSchema];
+    self.stickerPackStatusManager = [[PQStickerPackDownloadManager alloc] init];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
     //login = nil;
@@ -277,7 +278,6 @@
     [_friendListDelegate friendListDidUpdate];
     [[self xmppRoster] fetchRoster];
     
-    //[_xmppvCardTempModule fetchvCardTempForJID:self.xmppStream.myJID.bareJID ignoreStorage:YES];
     
     [self goOnline];
 }

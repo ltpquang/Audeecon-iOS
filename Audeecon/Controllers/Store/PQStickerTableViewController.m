@@ -85,27 +85,25 @@
 
 #pragma mark - Refresh control delegate
 - (void)refresh {
-//    NSString *username = self.forOnlineStore ? @"" : [[[self appDelegate] currentUser] username];
-//    if (self.forOnlineStore) {
-//        [self.requestingService getAllStickerPacksForUser:username
-//                                                  success:^(NSArray *result) {
-//                                                      //
-//                                                      [[self appDelegate] globalContainer].stickerPacks = result;
-//                                                      self.stickerPacks = [self updateStickerPacksArray:[result mutableCopy]
-//                                                                                 usingStickerPacksArray:[[[self appDelegate] globalContainer] stickerPacks]];
-//                                                      [self.tableView reloadData];
-//                                                      [self.refreshControl endRefreshing];
-//                                                  }
-//                                                  failure:^(NSError *error) {
-//                                                      //
-//                                                      [self.refreshControl endRefreshing];
-//                                                  }];
-//    }
-//    else {
-//        self.stickerPacks = [[[self appDelegate] globalContainer] stickerPacks];
-//        [self.tableView reloadData];
-//        [self.refreshControl endRefreshing];
-//    }
+    NSString *username = self.forOnlineStore ? @"" : [[[self appDelegate] currentUser] username];
+    if (self.forOnlineStore) {
+        [self.requestingService getAllStickerPacksForUser:username
+                                                  success:^(NSArray *result) {
+                                                      //
+                                                      self.stickerPacks = result;
+                                                      [self.tableView reloadData];
+                                                      [self.refreshControl endRefreshing];
+                                                  }
+                                                  failure:^(NSError *error) {
+                                                      //
+                                                      [self.refreshControl endRefreshing];
+                                                  }];
+    }
+    else {
+        self.stickerPacks = [[[[self appDelegate] currentUser] ownedStickerPack] valueForKey:@"self"];
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }
 }
 #pragma mark - Utilities
 - (NSArray *)updateStickerPacksArray:(NSMutableArray *)packs
@@ -147,76 +145,14 @@
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15.0]}
                                              context:nil];
-    return bound.size.height;// + 30;
+    return bound.size.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     NSArray *stickers = self.stickerPacks;
     CGFloat descriptionHeight = [self computePackDescriptionHeightWithText:[[stickers objectAtIndex:indexPath.row] packDescription]];
     return descriptionHeight + 88;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSArray *stickers = _isSearching ? _searchResultStickerPacks : _stickerPacks;
-//    _selectedPack = [stickers objectAtIndex:indexPath.row];
-//    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    
-//    [self performSegueWithIdentifier:@"GoToStickerPackSegue" sender:self];
-//}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

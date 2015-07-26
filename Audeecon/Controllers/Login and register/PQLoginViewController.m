@@ -126,7 +126,7 @@
     [super viewDidAppear:animated];
     if (!self.viewLoaded) {
         [self setupView];
-        self.loginUsernameTextField.text = @"addtest01"; //@"ltpquang";
+        self.loginUsernameTextField.text = @"addtest00"; //@"ltpquang";
         self.loginPasswordTextField.text = @"123123";
         
         self.registerFullnameTextField.text = @"Add Friend Test ";

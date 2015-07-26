@@ -18,6 +18,7 @@
 #import "PQGlobalContainer.h"
 #import "PQMessagingCenter.h"
 #import "PQStickerKeyboardView.h"
+#import "PQStickerPackDownloadManager.h"
 
 @class RLMRealm;
 @class PQCurrentUser;
@@ -51,6 +52,7 @@
 @property (strong, nonatomic) PQCurrentUser *currentUser;
 @property (strong, nonatomic) PQMessagingCenter *messagingCenter;
 @property (strong, nonatomic) PQStickerKeyboardView *keyboardView;
+@property (strong, nonatomic) PQStickerPackDownloadManager *stickerPackStatusManager;
 
 - (BOOL)connect;
 - (void)fetchRoster;

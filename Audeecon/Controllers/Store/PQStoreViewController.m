@@ -55,14 +55,7 @@
 }
 
 - (IBAction)closeButtonTUI:(id)sender {
-    //
-//    NSArray *packs = [[[self appDelegate] globalContainer] stickerPacks];
-//    NSOperationQueue *queue = [[[self appDelegate] globalContainer] stickerPackDownloadQueue];
-//    //PQRequestingService *requestingService = [PQRequestingService new];
-//    PQStickerPack *pack = [packs objectAtIndex:0];
-//    
-//    [pack downloadDataAndStickersUsingOperationQueue:queue];
-//    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender {
