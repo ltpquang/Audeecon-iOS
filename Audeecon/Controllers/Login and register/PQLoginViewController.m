@@ -200,7 +200,6 @@
         self.hud.labelText = @"Uploading...";
         self.hud.mode = MBProgressHUDModeAnnularDeterminate;
         [self performSelectorInBackground:@selector(uploadImage:) withObject:self.updateInfoAvatarImageView.image];
-        //[self uploadImage:self.updateInfoAvatarImageView.image];
     }
     else {
         // Update info

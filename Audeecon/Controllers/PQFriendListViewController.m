@@ -14,6 +14,13 @@
 #import "PQHostnameFactory.h"
 #import "PQCurrentUser.h"
 #import "PQNotificationNameFactory.h"
+#import <DBCameraCollectionViewController.h>
+#import <DBCameraContainerViewController.h>
+#import <DBCameraView.h>
+#import <AWSS3.h>
+#import <AWSCore.h>
+#import "PQFilePathFactory.h"
+#import "PQUrlService.h"
 
 @interface PQFriendListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,6 +28,7 @@
 @property (strong, nonatomic) RLMArray<PQOtherUser> *friends;
 @property (strong, nonatomic) UIImageView *profilePicture;
 @property BOOL isUISet;
+@property MBProgressHUD *hud;
 @end
 
 @implementation PQFriendListViewController
@@ -33,6 +41,7 @@
     [[self appDelegate] setStreamConnectDelegate:self];
     [[self appDelegate] setLoginDelegate:self];
     [[self appDelegate] setFriendListDelegate:self];
+    [[self appDelegate] setVCardModuleDelegate:self];
     if ([[[self appDelegate] xmppStream] isDisconnected]) {
         [[self appDelegate] connect];
     }
@@ -100,10 +109,13 @@
 - (void)infoButtonTUI:(UIGestureRecognizer *)sender {
     UIActionSheet *infoSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                            delegate:self
-                                                  cancelButtonTitle:@"Cancel"
+                                                  cancelButtonTitle:nil//@"Cancel"
                                              destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Sign out", nil];
+                                                  otherButtonTitles:nil];//@"Change profile picture", @"Sign out", nil];
     infoSheet.tag = 1;
+    [infoSheet addButtonWithTitle:@"Change profile picture"];
+    [infoSheet addButtonWithTitle:@"Sign out"];
+    infoSheet.cancelButtonIndex = [infoSheet addButtonWithTitle:@"Cancel"];
     [infoSheet showInView:self.view];
 }
 
@@ -255,8 +267,14 @@
         }
     }
     else if (actionSheet.tag == 1) { //Self info action sheet
-        if (buttonIndex != actionSheet.cancelButtonIndex) {
+        if (buttonIndex == 0) {
+            // Change profile pic
+            [self loadCamera];
+            
+        }
+        if (buttonIndex == 1) {
             [[self appDelegate] signOutAndDestroyViewController:self.navigationController];
+            //NSLog(@"1");
         }
     }
 }
@@ -295,7 +313,111 @@
     }
 }
 
+#pragma mark - Camera
+- (void)loadCamera
+{
+    DBCameraViewController *cameraController = [DBCameraViewController initWithDelegate:self];
+    [cameraController setForceQuadCrop:YES];
+    
+    DBCameraContainerViewController *container = [[DBCameraContainerViewController alloc] initWithDelegate:self cameraSettingsBlock:^(DBCameraView *cameraView, id container) {
+        //
+        [cameraView.photoLibraryButton setHidden:NO];
+        [cameraView.cameraButton setHidden:NO];
+        [cameraView.flashButton setHidden:YES];
+    }];
+    [container setCameraViewController:cameraController];
+    [container setFullScreenMode];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:container];
+    [nav setNavigationBarHidden:YES];
+    [self presentViewController:nav animated:YES completion:nil];
+}
 
+- (void)camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata {
+    [cameraViewController restoreFullScreenMode];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.delegate = self;
+    self.hud.minSize = CGSizeMake(135.f, 135.f);
+    
+    
+    self.hud.labelText = @"Uploading...";
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    [self performSelectorInBackground:@selector(uploadImage:) withObject:image];
+}
+
+- (void)uploadImage:(UIImage *)image {
+    NSURL *fileUrl = [PQFilePathFactory filePathInTemporaryDirectoryForAvatarImage];
+    
+    [UIImageJPEGRepresentation(image, 1.0) writeToFile:fileUrl.path atomically:YES];
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *filepath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"avatar.png"];
+    
+    NSString *timestamp = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970] * 1000];
+    __block NSString *username = nil;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        username = [[[self appDelegate] currentUser] username];
+    });
+    NSString *onlineFileName = [NSString stringWithFormat:@"%@-%@.jpeg", username, timestamp]; // [self.username stringByAppendingString:@".jpeg"];
+    
+    AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
+    uploadRequest.bucket = @"audeecon-us/avatar";
+    uploadRequest.key = onlineFileName;
+    uploadRequest.body = fileUrl;
+    uploadRequest.uploadProgress = ^(int64_t bytes, int64_t totalBytes, int64_t totalBytesExpected) {
+        NSLog(@"%lld - %lld - %lld", bytes, totalBytes, totalBytesExpected);
+        float progress = (float)(totalBytes * 100.0 / totalBytesExpected);
+        NSLog(@"%f", progress);
+        self.hud.progress = progress/100;
+    };
+    
+    AWSS3TransferManager *transferManager = [AWSS3TransferManager S3TransferManagerForKey:@"defaulttransfermanager"];
+    
+    [[transferManager upload:uploadRequest] continueWithExecutor:[AWSExecutor mainThreadExecutor]
+                                                       withBlock:^id(AWSTask *task) {
+                                                           if (task.error != nil) {
+                                                               //complete(NO, task.error);
+                                                           }
+                                                           else {
+                                                               NSString *fileUrl = [PQUrlService urlToS3FileWithFileName:[@"avatar/" stringByAppendingString:onlineFileName]];
+                                                               NSLog(@"%@", fileUrl);
+                                                               [self updatevCardUsingAvatarUrl:fileUrl];
+                                                               self.hud.mode = MBProgressHUDModeIndeterminate;
+                                                               self.hud.labelText = @"Updating...";
+                                                           }
+                                                           return nil;
+                                                       }];
+}
+
+- (void)updatevCardUsingAvatarUrl:(NSString *)fileUrl {
+    XMPPvCardTemp *myvCardTemp = [[[self appDelegate] xmppvCardTempModule] myvCardTemp];
+    if (myvCardTemp == nil) {
+        NSXMLElement *vCardXML = [NSXMLElement elementWithName:@"vCard" xmlns:@"vcard-temp"];
+        myvCardTemp = [XMPPvCardTemp vCardTempFromElement:vCardXML];
+    }
+    [myvCardTemp setNickname:[[[self appDelegate] currentUser] nickname]];
+    [myvCardTemp setUrl:fileUrl];
+    [[[self appDelegate] xmppvCardTempModule] updateMyvCardTemp:myvCardTemp];
+    [[self appDelegate] setVCardModuleDelegate:self];
+}
+
+#pragma mark - HUD delegates
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [_hud removeFromSuperview];
+    _hud = nil;
+}
+
+#pragma mark - vCard module delegates
+- (void)vCardModuleDidUpdateMyvCard {
+    [self.hud hide:YES];
+    XMPPJID *jid = [XMPPJID jidWithString:[[[self appDelegate] currentUser] jidString]];
+    [[[self appDelegate] xmppvCardTempModule] fetchvCardTempForJID:jid ignoreStorage:YES];
+}
+
+- (void)vCardModuleDidNotUpdateMyvCard:(DDXMLElement *)error {
+    
+}
 
 
 @end

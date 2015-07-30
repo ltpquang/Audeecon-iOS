@@ -113,15 +113,23 @@
 }
 
 - (void)removeStickerPack:(PQStickerPack *)pack {
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm beginWriteTransaction];
-    NSUInteger removed = [[self ownedStickerPack] indexOfObject:pack];
-    if (removed != NSNotFound) {
-        [[self ownedStickerPack] removeObjectAtIndex:removed];
-    }
-    [realm deleteObject:pack];
-    [realm commitWriteTransaction];
     [[[self appDelegate] stickerPackDownloadManager] cancelStickPack:pack];
+    [[PQRequestingService new] unBuyStickerPack:pack.packId
+                                        forUser:self.username
+                                        success:^{
+                                            RLMRealm *realm = [RLMRealm defaultRealm];
+                                            [realm beginWriteTransaction];
+                                            NSUInteger removed = [[self ownedStickerPack] indexOfObject:pack];
+                                            if (removed != NSNotFound) {
+                                                [[self ownedStickerPack] removeObjectAtIndex:removed];
+                                            }
+                                            //[realm deleteObject:pack];
+                                            [realm commitWriteTransaction];
+                                            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory ownedStickerPacksDidUpdate] object:nil];
+                                        }
+                                        failure:^(NSError *error) {
+                                            NSLog(@"Unbuy failed");
+                                        }];
 }
 
 #pragma mark - Friends managing

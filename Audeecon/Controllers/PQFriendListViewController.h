@@ -12,6 +12,9 @@
 #import "PQLoginDelegate.h"
 #import "PQFriendListDelegate.h"
 #import "PQFriendListTableViewCell.h"
+#import <DBCameraViewController.h>
+#import <MBProgressHUD.h>
+#import "PQvCardModuleDelegate.h"
 
 @interface PQFriendListViewController : UIViewController
 <UITableViewDataSource,
@@ -22,7 +25,10 @@ PQFriendListDelegate,
 NSFetchedResultsControllerDelegate,
 UIAlertViewDelegate,
 PQFriendListCellDelegate,
-UIActionSheetDelegate>
+UIActionSheetDelegate,
+DBCameraViewControllerDelegate,
+MBProgressHUDDelegate,
+PQvCardModuleDelegate>
 
 
 @end

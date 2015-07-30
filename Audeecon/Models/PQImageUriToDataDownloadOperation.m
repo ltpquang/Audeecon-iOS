@@ -66,7 +66,8 @@
         
         AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        [manager GET:self.uri parameters:nil
+        [manager GET:self.uri
+          parameters:nil
              success:^(NSURLSessionDataTask *task, NSData *responseObject) {
                  if (responseObject.length == 0) {
                      NSLog(@"DOWNLOAD DATA ERROR");

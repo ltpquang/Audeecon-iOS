@@ -63,6 +63,7 @@
                                                         RLMRealm *realm = [RLMRealm defaultRealm];
                                                         [realm beginWriteTransaction];
                                                         self.avatarData = result;
+                                                        self.avatarImage = nil;
                                                         [realm commitWriteTransaction];
                                                     }];
     operation.completionBlock = ^() {

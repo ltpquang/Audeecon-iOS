@@ -70,7 +70,7 @@
     NSString *result = [[[[self urlToGetAllStickerPacks]
                         stringByAppendingString:@"/"]
                         stringByAppendingString:packId]
-                        stringByAppendingString:@"?size=240"];
+                        stringByAppendingString:@"?size=256"];
     NSLog(@"%@", result);
     return result;
 }

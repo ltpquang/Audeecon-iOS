@@ -28,6 +28,10 @@
                forUser:(NSString *)username
                success:(void(^)())successCall
                failure:(void(^)(NSError *error))failureCall;
+- (void)unBuyStickerPack:(NSString *)packId
+                 forUser:(NSString *)username
+                 success:(void(^)())successCall
+                 failure:(void(^)(NSError *error))failureCall;
 - (void)getRecommendedStickersForUser:(NSString *)username
                          usingSticker:(NSString *)stickerId
                               success:(void(^)(NSArray *result))successCall

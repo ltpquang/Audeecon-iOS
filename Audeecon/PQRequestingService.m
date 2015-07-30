@@ -111,6 +111,23 @@
            }];
 }
 
+- (void)unBuyStickerPack:(NSString *)packId
+                 forUser:(NSString *)username
+                 success:(void(^)())successCall
+                 failure:(void(^)(NSError *error))failureCall {
+    NSDictionary *param = @{@"pack_id":packId};
+    [self configWithExpectationOfJsonInRequest:YES
+                             andJsonInResponse:YES];
+    [_manager PUT:[PQUrlService urlToBuyStickerPackForUser:username]
+       parameters:param
+          success:^(NSURLSessionDataTask *task, id responseObject) {
+              successCall();
+          }
+          failure:^(NSURLSessionDataTask *task, NSError *error) {
+              failureCall(error);
+          }];
+}
+
 - (void)registerWithServerForUser:(NSString *)username
                           success:(void(^)())successCall
                           failure:(void(^)(NSError *error))failureCall {
