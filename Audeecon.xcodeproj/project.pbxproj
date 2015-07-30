@@ -322,7 +322,6 @@
 		6F5D85921B5439B000EA518D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Helpers/UIImage+Resize.m"; sourceTree = "<group>"; };
 		6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQRegisterDelegate.h; path = Protocols/PQRegisterDelegate.h; sourceTree = "<group>"; };
 		6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQFriendListDelegate.h; path = Protocols/PQFriendListDelegate.h; sourceTree = "<group>"; };
-		6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageExchangeDelegate.h; path = Protocols/PQMessageExchangeDelegate.h; sourceTree = "<group>"; };
 		6F69AF571ABC10EE00AE6D6A /* PQLoginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQLoginDelegate.h; path = Protocols/PQLoginDelegate.h; sourceTree = "<group>"; };
 		6F7AD0951B590396007C4DCD /* PQMessageAudioUploadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageAudioUploadOperation.h; path = Models/PQMessageAudioUploadOperation.h; sourceTree = "<group>"; };
 		6F7AD0961B590396007C4DCD /* PQMessageAudioUploadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageAudioUploadOperation.m; path = Models/PQMessageAudioUploadOperation.m; sourceTree = "<group>"; };
@@ -887,7 +886,6 @@
 				6F64E05F1B27E31400B73F61 /* PQRegisterDelegate.h */,
 				6F5D85901B541E3C00EA518D /* PQvCardModuleDelegate.h */,
 				6F69AF551ABBFEB000AE6D6A /* PQFriendListDelegate.h */,
-				6F69AF561ABBFEDD00AE6D6A /* PQMessageExchangeDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

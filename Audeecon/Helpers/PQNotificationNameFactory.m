@@ -63,4 +63,16 @@
 + (NSString *)recommendedStickersChanged {
     return @"RecommendedStickersChanged";
 }
+
++ (NSString *)userAvatarChanged:(NSString *)username {
+    return [@"AvatarChanged:" stringByAppendingString:username];
+}
+
++ (NSString *)userNicknameChanged:(NSString *)username {
+    return [@"NicknameChanged:" stringByAppendingString:username];
+}
+
++ (NSString *)userOnlineStatusChanged:(NSString *)username {
+    return [@"OnlineStatusChanged:" stringByAppendingString:username];
+}
 @end

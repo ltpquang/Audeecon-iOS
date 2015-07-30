@@ -10,12 +10,6 @@
 #import "DDXML.h"
 
 @protocol PQFriendListDelegate <NSObject>
-//- (void)friendDidOnline:(NSString *)friendName;
-//- (void)friendDidOffline:(NSString *)friendName;
-
-//- (void)didBeginReceivingFriendItems;
-//- (void)didReceiveFriendItem:(DDXMLElement *)friendElement withOnlineStatus:(BOOL)isOnline;
-//- (void)didEndReceivingFriendItems;
 
 - (void)friendListDidUpdate;
 

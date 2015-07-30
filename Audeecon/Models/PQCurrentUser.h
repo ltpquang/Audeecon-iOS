@@ -32,6 +32,7 @@
                         usingvCardTemp:(XMPPvCardTemp *)vCard;
 - (void)addAwaitingJid:(XMPPJID *)awaitingJid;
 - (XMPPJID *)awaitingJidToProcess;
+- (void)removeFriendWithJID:(XMPPJID *)jid;
 
 - (void)updateFriendListUsingPresence:(XMPPPresence *)presence;
 

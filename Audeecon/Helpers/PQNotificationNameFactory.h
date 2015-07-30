@@ -25,5 +25,8 @@
 + (NSString *)stickerPackChangedStatus:(NSString *)stickerPackId;
 + (NSString *)ownedStickerPacksDidUpdate;
 + (NSString *)recommendedStickersChanged;
++ (NSString *)userAvatarChanged:(NSString *)username;
++ (NSString *)userNicknameChanged:(NSString *)username;
++ (NSString *)userOnlineStatusChanged:(NSString *)username;
 @end
 

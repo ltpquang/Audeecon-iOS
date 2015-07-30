@@ -78,6 +78,27 @@
 }
 
 #pragma mark - App delegate actions
+- (void)signOutAndDestroyViewController:(UIViewController *)toDestroy {
+    [self disconnect];
+    [self clearAllUserData];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginView"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    self.window.rootViewController = navController;
+    toDestroy = nil;
+}
+
+- (void)clearAllUserData {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userPassword"];
+    [[NSFileManager defaultManager] removeItemAtPath:[RLMRealm defaultRealmPath] error:nil];
+    self.globalContainer = nil;
+    self.messagingCenter = nil;
+    self.keyboardView = nil;
+    self.stickerRecommender = nil;
+    [self clearTemperaryFolder];
+}
+
 - (PQGlobalContainer *)globalContainer {
     if (_globalContainer == nil) {
         _globalContainer = [PQGlobalContainer new];
@@ -255,7 +276,6 @@
 #pragma mark - XMPPStream authenticating delegates
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     NSLog(@"didAuthenticate");
-    [_loginDelegate loginDidAuthenticate];
     
     NSString *dfRealmPath = [[[[RLMRealm defaultRealmPath]
                                stringByDeletingLastPathComponent]
@@ -287,6 +307,7 @@
     [[self xmppRoster] fetchRoster];
     
     
+    [self.loginDelegate loginDidAuthenticate];
     [self goOnline];
 }
 
@@ -387,6 +408,7 @@
     [self.currentUser removeNotUpdatedFriends];
     [_friendListDelegate friendListDidUpdate];
 }
+
 
 #pragma mark - XMPPvCardAvatar delegates
 - (void)xmppvCardAvatarModule:(XMPPvCardAvatarModule *)vCardTempModule

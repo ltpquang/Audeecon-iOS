@@ -10,13 +10,15 @@
 #import "PQFriendListTableViewCell.h"
 #import "XMPPUserCoreDataStorageObject.h"
 #import "PQOtherUser.h"
+#import "PQNotificationNameFactory.h"
 
 @interface PQFriendListTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIView *onlineIndicator;
-@property BOOL avatarRounded;
+@property (strong, nonatomic) id<PQFriendListCellDelegate> delegate;
+@property BOOL firstTimeSetup;
 @end
 
 @implementation PQFriendListTableViewCell
@@ -35,11 +37,14 @@
     // Configure the view for the selected state
 }
 
-- (void)configUsingUser:(PQOtherUser *)user {
-    if (!self.avatarRounded) {
+- (void)configUsingUser:(PQOtherUser *)user
+               delegate:(id<PQFriendListCellDelegate>)delegate {
+    if (!self.firstTimeSetup) {
         self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width/2;
         self.avatarImageView.layer.masksToBounds = YES;
-        self.avatarRounded = YES;
+        self.delegate = delegate;
+        [self setupCell];
+        self.firstTimeSetup = YES;
     }
     self.nicknameLabel.text = user.nickname;
     self.usernameLabel.text = user.username;
@@ -58,15 +63,20 @@
 }
 
 - (void)registerNotificationsWithUsername:(NSString *)username {
-    NSString *avatarNotiName = [username stringByAppendingString:@"AvatarChanged"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAvatarNotification:) name:avatarNotiName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveAvatarNotification:)
+                                                 name:[PQNotificationNameFactory userAvatarChanged:username]
+                                               object:nil];
     
-    NSString *nicknameNotiName = [username stringByAppendingString:@"NicknameChanged"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNicknameNotification:) name:nicknameNotiName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNicknameNotification:)
+                                                 name:[PQNotificationNameFactory userNicknameChanged:username]
+                                               object:nil];
     
-    NSString *isOnlineNotiName = [username stringByAppendingString:@"IsOnlineChanged"];
-    //NSLog(@"Registered: %@", isOnlineNotiName);
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveIsOnlineNotification:) name:isOnlineNotiName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveIsOnlineNotification:)
+                                                 name:[PQNotificationNameFactory userOnlineStatusChanged:username]
+                                               object:nil];
 }
 
 - (void)receiveAvatarNotification:(NSNotification *)noti {
@@ -91,5 +101,26 @@
     self.avatarImageView.image = [UIImage imageNamed:@"defaultavatar"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (void)setupCell {
+    //self.backgroundColor = [UIColor darkGrayColor];
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                      action:@selector(longPressHandler:)];
+    [longPressRecognizer setMinimumPressDuration:0.8];
+    [self addGestureRecognizer:longPressRecognizer];
+}
 
+- (void)longPressHandler:(UILongPressGestureRecognizer *)gesture {
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+            //
+            [self.delegate didStartHoldingOnCell:self];
+            break;
+//        case UIGestureRecognizerStateEnded:
+//            //
+//            [self.delegate didStopHoldingOnCell:self];
+//            break;
+        default:
+            break;
+    }
+}
 @end

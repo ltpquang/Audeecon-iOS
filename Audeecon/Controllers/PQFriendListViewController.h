@@ -11,8 +11,18 @@
 #import "PQStreamConnectDelegate.h"
 #import "PQLoginDelegate.h"
 #import "PQFriendListDelegate.h"
+#import "PQFriendListTableViewCell.h"
 
-@interface PQFriendListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PQStreamConnectDelegate, PQLoginDelegate, PQFriendListDelegate, NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
+@interface PQFriendListViewController : UIViewController
+<UITableViewDataSource,
+UITableViewDelegate,
+PQStreamConnectDelegate,
+PQLoginDelegate,
+PQFriendListDelegate,
+NSFetchedResultsControllerDelegate,
+UIAlertViewDelegate,
+PQFriendListCellDelegate,
+UIActionSheetDelegate>
 
 
 @end

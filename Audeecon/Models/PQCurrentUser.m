@@ -209,11 +209,25 @@
             }
             [realm commitWriteTransaction];
             
-            NSString *onlineNoti = [user.username stringByAppendingString:@"IsOnlineChanged"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:onlineNoti object:user];
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userOnlineStatusChanged:self.username]
+                                                                object:user];
             //NSLog(@"Posted: %@", onlineNoti);
         }
     }
+}
+
+- (void)removeFriendWithJID:(XMPPJID *)jid {
+    [[[self appDelegate] xmppRoster] removeUser:jid];
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    for (int i = 0; i < self.friends.count; ++i) {
+        PQOtherUser *toRemove = self.friends[i];
+        if ([toRemove.username isEqualToString:jid.user]) {
+            [self.friends removeObjectAtIndex:i];
+            [realm deleteObject:toRemove];
+        }
+    }
+    [realm commitWriteTransaction];
 }
 // Specify default values for properties
 

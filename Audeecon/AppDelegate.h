@@ -12,7 +12,6 @@
 #import "PQRegisterDelegate.h"
 #import "PQvCardModuleDelegate.h"
 #import "PQFriendListDelegate.h"
-#import "PQMessageExchangeDelegate.h"
 #import "XMPPStream.h"
 #import "XMPPFramework.h"
 #import "PQGlobalContainer.h"
@@ -45,8 +44,6 @@
 @property (weak, nonatomic) id<PQRegisterDelegate> registerDelegate;
 @property (weak, nonatomic) id<PQvCardModuleDelegate> vCardModuleDelegate;
 @property (weak, nonatomic) id<PQFriendListDelegate> friendListDelegate;
-@property (weak, nonatomic) id<PQMessageExchangeDelegate> messageExchangeDelegate;
-//@property (weak, nonatomic) id<PQStickerKeyboardDelegate> keyboardDelegate;
 
 @property (strong, nonatomic) PQGlobalContainer *globalContainer;
 
@@ -63,5 +60,7 @@
 - (void)registerUsingPassword;
 
 - (void)updateCurrentUserStickerPacks;
+
+- (void)signOutAndDestroyViewController:(UIViewController *)toDestroy;
 @end
 

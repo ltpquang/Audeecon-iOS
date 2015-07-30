@@ -85,7 +85,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[self appDelegate] setMessageExchangeDelegate:self];
     self.messagingCenter = [[self appDelegate] messagingCenter];
     self.keyboardView = [[self appDelegate] keyboardView];
     [self.keyboardView setDelegate:self];

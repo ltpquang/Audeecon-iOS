@@ -30,7 +30,11 @@
                                                 usingSticker:@""
                                                      success:^(NSArray *result) {
                                                          //
-                                                         self.recommendedStickers = [[self stickerArrayFromIdArray:result] mutableCopy];
+                                                         NSMutableArray *ids = [NSMutableArray new];
+                                                         for (NSString *string in result) {
+                                                             [ids addObject:(NSString *)string];
+                                                         }
+                                                         self.recommendedStickers = [[self stickerArrayFromIdArray:ids] mutableCopy];
                                                          [self postNotification];
                                                      }
                                                      failure:^(NSError *error) {
@@ -45,7 +49,11 @@
                                                 usingSticker:sticker.stickerId
                                                      success:^(NSArray *result) {
                                                          //
-                                                         self.recommendedStickers = [[self stickerArrayFromIdArray:result] mutableCopy];
+                                                         NSMutableArray *ids = [NSMutableArray new];
+                                                         for (NSString *string in result) {
+                                                             [ids addObject:(NSString *)string];
+                                                         }
+                                                         self.recommendedStickers = [[self stickerArrayFromIdArray:ids] mutableCopy];
                                                          [self postNotification];
                                                      }
                                                      failure:^(NSError *error) {
@@ -59,8 +67,12 @@
 
 - (NSArray *)stickerArrayFromIdArray:(NSArray *)ids {
     NSString *keyName = @"stickerId";
-    RLMResults *results = [PQSticker objectsInRealm:[RLMRealm defaultRealm]
-                                      withPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", keyName, ids]];
+    PQSticker *st = [PQSticker objectForPrimaryKey:ids[0]];
+    
+    RLMResults *results = [PQSticker objectsWithPredicate:[NSPredicate
+                                                           predicateWithFormat:
+                                                           [NSString stringWithFormat:@"%@ IN %%@", keyName],
+                                                           ids]];//[NSPredicate predicateWithFormat:@"%K IN %@", keyName, ids]];
     return [results valueForKey:@"self"];
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PQMessageExchangeDelegate.h"
 #import "XMPPFramework.h"
 #import "PQStickerKeyboardView.h"
 #import "PQAudioPlayerAndRecorder.h"
@@ -17,6 +16,6 @@
 @class PQOtherUser;
 
 @interface PQMessageExchangeViewController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, PQMessageExchangeDelegate, PQStickerKeyboardDelegate, PQAudioPlayerAndRecorderDelegate, PQMessageTableViewCellDelegate>
+<UITableViewDelegate, UITableViewDataSource, PQStickerKeyboardDelegate, PQAudioPlayerAndRecorderDelegate, PQMessageTableViewCellDelegate>
 - (void)configUsingPartner:(PQOtherUser *)partner;
 @end

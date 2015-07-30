@@ -10,7 +10,16 @@
 @class XMPPUserCoreDataStorageObject;
 @class PQOtherUser;
 
+@protocol PQFriendListCellDelegate;
+
 @interface PQFriendListTableViewCell : UITableViewCell
 //- (void)configUsingUser:(XMPPUserCoreDataStorageObject *)user;
-- (void)configUsingUser:(PQOtherUser *)user;
+- (void)configUsingUser:(PQOtherUser *)user
+               delegate:(id<PQFriendListCellDelegate>)delegate;
+@end
+
+@protocol PQFriendListCellDelegate <NSObject>
+
+- (void)didStartHoldingOnCell:(UITableViewCell *)cell;
+
 @end

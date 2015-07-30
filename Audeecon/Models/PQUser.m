@@ -11,6 +11,7 @@
 #import <Realm.h>
 #import "AppDelegate.h"
 #import "PQImageUriToDataDownloadOperation.h"
+#import "PQNotificationNameFactory.h"
 
 @implementation PQUser
 
@@ -41,8 +42,8 @@
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     self.nickname = vCard.nickname;
-    NSString *nicknameNoti = [self.username stringByAppendingString:@"NicknameChanged"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:nicknameNoti object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userNicknameChanged:self.username]
+                                                        object:self];
     [realm commitWriteTransaction];
     if (![self.avatarUrl isEqualToString:vCard.url] ||
         (self.avatarUrl.length != 0 && self.avatarData.length == 0)) {
@@ -63,14 +64,11 @@
                                                         [realm beginWriteTransaction];
                                                         self.avatarData = result;
                                                         [realm commitWriteTransaction];
-                                                        [[NSNotificationCenter defaultCenter]
-                                                         postNotificationName:@"AvatarImageDataChanged"
-                                                         object:self];
                                                     }];
     operation.completionBlock = ^() {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *notificationName = [self.username stringByAppendingString:@"AvatarChanged"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userAvatarChanged:self.username]
+                                                                object:self];
         });
     };
     
