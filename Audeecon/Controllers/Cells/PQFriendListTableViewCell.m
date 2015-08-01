@@ -77,6 +77,7 @@
                                              selector:@selector(receiveIsOnlineNotification:)
                                                  name:[PQNotificationNameFactory userOnlineStatusChanged:username]
                                                object:nil];
+    NSLog(@"%@ - Registered", [PQNotificationNameFactory userOnlineStatusChanged:username]);
 }
 
 - (void)receiveAvatarNotification:(NSNotification *)noti {

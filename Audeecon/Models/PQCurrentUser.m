@@ -217,9 +217,9 @@
             }
             [realm commitWriteTransaction];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userOnlineStatusChanged:self.username]
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userOnlineStatusChanged:user.username]
                                                                 object:user];
-            //NSLog(@"Posted: %@", onlineNoti);
+            NSLog(@"%@ - Posted", [PQNotificationNameFactory userOnlineStatusChanged:self.username]);
         }
     }
 }

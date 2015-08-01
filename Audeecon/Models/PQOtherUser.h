@@ -17,7 +17,6 @@ typedef enum : NSUInteger {
 } PQUserStatus;
 
 @interface PQOtherUser : PQUser
-// Excluded
 @property (nonatomic) BOOL isOnline;
 @property BOOL isUpdated;
 @end
