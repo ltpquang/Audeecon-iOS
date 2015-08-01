@@ -1991,6 +1991,7 @@
 				6FB93B661ABB0E4E0067224E /* Frameworks */,
 				6FB93B671ABB0E4E0067224E /* Resources */,
 				98FF7F62F149857D16CFDFDB /* Copy Pods Resources */,
+				6F08FAB51B6AA17D0018C30D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2032,6 +2033,7 @@
 				TargetAttributes = {
 					6FB93B681ABB0E4E0067224E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 4632F27GCZ;
 					};
 					6FB93B811ABB0E4E0067224E = {
 						CreatedOnToolsVersion = 6.2;
@@ -2132,6 +2134,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AudeeconTests/Pods-AudeeconTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6F08FAB51B6AA17D0018C30D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" de5f363780638267344471c685c2fc69d92f3198 73cc874c7a4bacc87d433bd4b48d8751592af630ac57eebfdab13749210b4eac";
 		};
 		98FF7F62F149857D16CFDFDB /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2489,6 +2504,8 @@
 			baseConfigurationReference = F128F7970A6A7E9FD4E5179B /* Pods-Audeecon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2501,6 +2518,7 @@
 					"$(PROJECT_DIR)/Frameworks/Vendor/libidn",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2509,6 +2527,8 @@
 			baseConfigurationReference = F2477F89A04EA61F51664207 /* Pods-Audeecon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2521,6 +2541,7 @@
 					"$(PROJECT_DIR)/Frameworks/Vendor/libidn",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

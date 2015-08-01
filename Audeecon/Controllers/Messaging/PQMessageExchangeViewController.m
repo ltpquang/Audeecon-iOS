@@ -79,7 +79,7 @@
 #pragma mark - Controller delegates
 - (void)configUsingPartner:(PQOtherUser *)partner {
     _partner = partner;
-    self.title = partner.username;
+    self.title = partner.nickname;
 }
 
 - (void)viewDidLoad {

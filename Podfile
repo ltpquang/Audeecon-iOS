@@ -4,6 +4,8 @@ platform :ios, '7.0'
 
 target 'Audeecon' do
 pod 'Realm'
+pod 'Fabric'
+pod 'Crashlytics'
 pod 'AFNetworking'
 pod 'DBCamera'
 pod 'MBProgressHUD'

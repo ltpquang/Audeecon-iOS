@@ -20,6 +20,8 @@
 #import "PQUser.h"
 #import "PQCurrentUser.h"
 #import "PQNotificationNameFactory.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -34,6 +36,7 @@
     // Override point for customization after application launch.
     [self clearTemperaryFolder];
     //[self setupParse];
+    [Fabric with:@[CrashlyticsKit]];
     [self setupStream];
     [self setupAmazon];
     [self updateRealmSchema];

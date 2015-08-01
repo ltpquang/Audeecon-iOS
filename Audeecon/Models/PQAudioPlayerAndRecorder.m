@@ -81,10 +81,14 @@
     if ([self.recorder isRecording]) {
         return;
     }
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+    //[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    AVAudioSession *playbackSession = [AVAudioSession sharedInstance];
+    [playbackSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [playbackSession setActive:YES error:nil];
     NSError *error = nil;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:&error];
     [self.player setDelegate:self];
+    [self.player setVolume:1.0];
     [self.player prepareToPlay];
     [self.player setMeteringEnabled:YES];
     [self.player play];

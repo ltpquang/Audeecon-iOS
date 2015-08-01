@@ -79,14 +79,17 @@
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloadingFullsizeImage:self.sticker] object:self.sticker];
                                                                         }];
         
-        PQImageUriToDataDownloadOperation *spriteDownloadOperation = [[PQImageUriToDataDownloadOperation alloc]
-                                                                      initWithUri:self.sticker.spriteUri
-                                                                      andComleteBlock:^(NSData *resultData) {
-                                                                          RLMRealm *realm = [RLMRealm defaultRealm];
-                                                                          [realm beginWriteTransaction];
-                                                                          self.sticker.spriteData = resultData;
-                                                                          [realm commitWriteTransaction];
-                                                                      }];
+        PQImageUriToDataDownloadOperation *spriteDownloadOperation = nil;
+        if (self.sticker.spriteUri.length != 0) {
+            spriteDownloadOperation = [[PQImageUriToDataDownloadOperation alloc]
+                                                                          initWithUri:self.sticker.spriteUri
+                                                                          andComleteBlock:^(NSData *resultData) {
+                                                                              RLMRealm *realm = [RLMRealm defaultRealm];
+                                                                              [realm beginWriteTransaction];
+                                                                              self.sticker.spriteData = resultData;
+                                                                              [realm commitWriteTransaction];
+                                                                          }];
+        }
         
         
         NSBlockOperation *finishBlock = [NSBlockOperation blockOperationWithBlock:^{
@@ -98,7 +101,9 @@
         }];
         [finishBlock addDependency:thumbnailDownloadOperation];
         [finishBlock addDependency:fullsizeDownloadOperation];
-        [finishBlock addDependency:spriteDownloadOperation];
+        if (self.sticker.spriteUri.length != 0) {
+            [finishBlock addDependency:spriteDownloadOperation];
+        }
         
         [self.downloadQueue addOperation:thumbnailDownloadOperation];
         [self.downloadQueue addOperation:fullsizeDownloadOperation];

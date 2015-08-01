@@ -43,7 +43,9 @@
 }
 
 - (void)updateRecommenderUsingSticker:(PQSticker *)sticker {
-    [self.recommendedStickers removeObjectAtIndex:0];
+    if (self.recommendedStickers.count != 0) {
+        [self.recommendedStickers removeObjectAtIndex:0];
+    }
     [self postNotification];
     [[PQRequestingService new] getRecommendedStickersForUser:self.username
                                                 usingSticker:sticker.stickerId
