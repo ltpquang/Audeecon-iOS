@@ -126,13 +126,13 @@
     [super viewDidAppear:animated];
     if (!self.viewLoaded) {
         [self setupView];
-        self.loginUsernameTextField.text = @"tlgiang"; //@"ltpquang";
-        self.loginPasswordTextField.text = @"123123";
+        //self.loginUsernameTextField.text = @"tlgiang"; //@"ltpquang";
+        //self.loginPasswordTextField.text = @"123123";
         
-        self.registerFullnameTextField.text = @"Add Friend Test ";
-        self.registerUsernameTextField.text = @"addtest";
-        self.registerPasswordTextField.text = @"123123";
-        self.registerConfirmPasswordTextField.text = @"123123";
+        //self.registerFullnameTextField.text = @"Add Friend Test ";
+        //self.registerUsernameTextField.text = @"addtest";
+        //self.registerPasswordTextField.text = @"123123";
+        //self.registerConfirmPasswordTextField.text = @"123123";
     }
 }
 

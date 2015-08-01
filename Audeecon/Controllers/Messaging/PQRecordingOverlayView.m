@@ -68,10 +68,12 @@
 
 - (void)animatingUsingSticker:(PQSticker *)sticker {
     [sticker animateStickerOnImageView:self.mainImage];
+    [sticker freeUpSticker];
 }
 
 - (void)stopAnimating {
     [self.mainImage stopAnimating];
+    self.mainImage.animationImages = nil;
 }
 
 @end

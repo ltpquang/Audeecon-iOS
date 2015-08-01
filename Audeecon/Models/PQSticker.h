@@ -47,6 +47,7 @@
         andFramesPerRow:(NSInteger)framesPerRow;
 
 - (void)animateStickerOnImageView:(UIImageView *)imageView;
+- (void)freeUpSticker;
 @end
 
 // This protocol enables typed collections. i.e.:

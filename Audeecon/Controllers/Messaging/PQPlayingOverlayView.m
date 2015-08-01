@@ -33,11 +33,13 @@
     self.audioRecorderAndPlayer = audioRecorderAndPlayer;
     [self.audioRecorderAndPlayer playAudioFileAtUrl:[NSURL fileURLWithPath:message.offlineAudioUri]];
     [message.sticker animateStickerOnImageView:self.mainImage];
+    [message.sticker freeUpSticker];
     [view addSubview:self];
 }
 
 - (void)stop {
     [self.mainImage stopAnimating];
+    self.mainImage.animationImages = nil;
     [self.audioRecorderAndPlayer stopPlaying];
     [self removeFromSuperview];
 }

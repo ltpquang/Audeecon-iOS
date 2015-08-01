@@ -288,7 +288,7 @@
 - (void)setupLongPressRecognizerForMainRecommendationImageView {
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                       action:@selector(longPressHandler:)];
-    [longPressRecognizer setMinimumPressDuration:0.25];
+    [longPressRecognizer setMinimumPressDuration:0.08];
     [self.mainRecommendationImageView addGestureRecognizer:longPressRecognizer];
 }
 

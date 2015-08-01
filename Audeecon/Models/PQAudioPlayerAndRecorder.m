@@ -81,7 +81,6 @@
     if ([self.recorder isRecording]) {
         return;
     }
-    //[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     AVAudioSession *playbackSession = [AVAudioSession sharedInstance];
     [playbackSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     [playbackSession setActive:YES error:nil];

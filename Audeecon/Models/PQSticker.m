@@ -106,6 +106,10 @@
     }
 }
 
+- (void)freeUpSticker {
+    self.spriteArray = nil;
+}
+
 
 // Specify default values for properties
 

@@ -52,7 +52,7 @@
     //self.backgroundColor = [UIColor darkGrayColor];
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                       action:@selector(longPressHandler:)];
-    [longPressRecognizer setMinimumPressDuration:0.25];
+    [longPressRecognizer setMinimumPressDuration:0.08];
     [self addGestureRecognizer:longPressRecognizer];
 }
 
