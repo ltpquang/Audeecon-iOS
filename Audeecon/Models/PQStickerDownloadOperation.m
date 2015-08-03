@@ -10,6 +10,7 @@
 #import "PQStickerImagesDownloadOperation.h"
 #import "PQGetStickerInfoOperation.h"
 #import "PQNotificationNameFactory.h"
+#import "PQSticker.h"
 
 @interface PQStickerDownloadOperation(){
     BOOL executing;
@@ -60,7 +61,7 @@
                                                                delegate:nil];
         NSBlockOperation *finishBlock = [NSBlockOperation blockOperationWithBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloading:self.sticker]
+                [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloading:self.sticker.stickerId]
                                                                     object:self.sticker];
             });
         }];

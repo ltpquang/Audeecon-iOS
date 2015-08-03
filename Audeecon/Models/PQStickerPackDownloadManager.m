@@ -39,7 +39,7 @@
     self.downloadStatus[pack.packId] = [NSNumber numberWithInt:StickerPackStatusDownloaded];
     self.downloadProgress[pack.packId] = @100;
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:[PQNotificationNameFactory stickerPackChangedProgress:pack]
+                                                    name:[PQNotificationNameFactory stickerPackChangedProgress:pack.packId]
                                                   object:nil];
     [self postStatusChangedNotificationForStickerPackId:pack.packId];
 }
@@ -50,7 +50,7 @@
     self.downloadProgress[pack.packId] = @0;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(stickerPackDownloadProgressChangeHandler:)
-                                                 name:[PQNotificationNameFactory stickerPackChangedProgress:pack]
+                                                 name:[PQNotificationNameFactory stickerPackChangedProgress:pack.packId]
                                                object:nil];
     [self postStatusChangedNotificationForStickerPackId:pack.packId];
 }

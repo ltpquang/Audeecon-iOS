@@ -76,7 +76,7 @@
                                                                             [realm beginWriteTransaction];
                                                                             self.sticker.fullsizeData = resultData;
                                                                             [realm commitWriteTransaction];
-                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloadingFullsizeImage:self.sticker] object:self.sticker];
+                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloadingFullsizeImage:self.sticker.stickerId] object:self.sticker];
                                                                         }];
         
         PQImageUriToDataDownloadOperation *spriteDownloadOperation = nil;

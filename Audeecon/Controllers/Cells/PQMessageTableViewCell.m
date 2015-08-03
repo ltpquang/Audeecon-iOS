@@ -39,7 +39,7 @@
         self.mainImage.image = [UIImage imageNamed:@"defaultsmile"];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(messageCompletedDownloadFullsizeImageHandler:)
-                                                     name:[PQNotificationNameFactory stickerCompletedDownloadingFullsizeImage:message.sticker]
+                                                     name:[PQNotificationNameFactory stickerCompletedDownloadingFullsizeImage:message.sticker.stickerId]
                                                    object:nil];
     }
     

@@ -98,7 +98,7 @@
 - (void)stickerPackDownloadOperation:(PQStickerPackDownloadOperation *)operation
                didUpdateWithProgress:(NSInteger)percentage {
     //NSLog(@"%i", percentage);
-    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackChangedProgress:self]
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerPackChangedProgress:self.packId]
                                                         object:nil
                                                       userInfo:@{@"percentage":[NSNumber numberWithInt:percentage]}];
     

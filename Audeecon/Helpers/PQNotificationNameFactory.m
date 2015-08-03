@@ -7,9 +7,6 @@
 //
 
 #import "PQNotificationNameFactory.h"
-#import "PQMessage.h"
-#import "PQSticker.h"
-#import "PQStickerPack.h"
 
 @implementation PQNotificationNameFactory
 + (NSString *)messageStartedSending:(NSString *)messageId {
@@ -36,12 +33,12 @@
     return [@"MessageDidChangeReadStatus:" stringByAppendingString:messageId];
 }
 
-+ (NSString *)stickerCompletedDownloading:(PQSticker *)sticker {
-    return [@"CompletedDownloading:" stringByAppendingString:sticker.stickerId];
++ (NSString *)stickerCompletedDownloading:(NSString *)stickerId {
+    return [@"CompletedDownloading:" stringByAppendingString:stickerId];
 }
 
-+ (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker {
-    return [@"CompletedDownloadStickerFullsizeImage:" stringByAppendingString:sticker.stickerId];
++ (NSString *)stickerCompletedDownloadingFullsizeImage:(NSString *)stickerId {
+    return [@"CompletedDownloadStickerFullsizeImage:" stringByAppendingString:stickerId];
 }
 
 + (NSString *)stickerPackCompletedDownloading {
@@ -52,12 +49,12 @@
     return @"StartedPendingStickerPack";
 }
 
-+ (NSString *)stickerPackChangedProgress:(PQStickerPack *)stickerPack {
-    return [@"ChangeInDownloadProgress:" stringByAppendingString:stickerPack.packId];
++ (NSString *)stickerPackChangedProgress:(NSString *)packId {
+    return [@"ChangeInDownloadProgress:" stringByAppendingString:packId];
 }
 
-+ (NSString *)stickerPackChangedStatus:(NSString *)stickerPackId {
-    return [@"ChangedStatus:" stringByAppendingString:stickerPackId];
++ (NSString *)stickerPackChangedStatus:(NSString *)packId {
+    return [@"ChangedStatus:" stringByAppendingString:packId];
 }
 
 + (NSString *)ownedStickerPacksDidUpdate {
