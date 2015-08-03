@@ -115,7 +115,7 @@
     PQMessageAudioUploadOperation *uploadingOperation = [[PQMessageAudioUploadOperation alloc] initWithMessage:message];
     uploadingOperation.completionBlock = ^() {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedUploading:message]
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedUploading:message.messageId]
                                                                 object:message];
             // After uploading, send the message
             XMPPMessage *toSendMessage = [XMPPMessage messageWithType:@"chat"
@@ -124,7 +124,7 @@
                                 message.onlineAudioUri] componentsJoinedByString:@"|"];
             [toSendMessage addBody:body];
             [self.stream sendElement:toSendMessage];
-            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedSending:message]
+            [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedSending:message.messageId]
                                                                 object:message];
         });
     };
@@ -137,7 +137,7 @@
     self.mostRecentSendingDictionary[message.toJIDString] = uploadingOperation;
     
     // Notify globaly that the message is going to be sent
-    NSString *notiName = [PQNotificationNameFactory messageStartedSending:message];
+    NSString *notiName = [PQNotificationNameFactory messageStartedSending:message.messageId];
     [[NSNotificationCenter defaultCenter] postNotificationName:notiName object:message];
     
     // Uploading the audio

@@ -57,7 +57,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSBlockOperation *finishBlock = [NSBlockOperation blockOperationWithBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedDownloading:self.message] object:self.message];
+                [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageCompletedDownloading:self.message.messageId] object:self.message];
                 [self completeOperation];
             });
         }];

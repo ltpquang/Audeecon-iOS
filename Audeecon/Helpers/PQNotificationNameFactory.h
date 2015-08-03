@@ -12,12 +12,12 @@
 @class PQStickerPack;
 
 @interface PQNotificationNameFactory : NSObject
-+ (NSString *)messageStartedSending:(PQMessage *)message;
-+ (NSString *)messageCompletedSending:(PQMessage *)message;
-+ (NSString *)messageCompletedUploading:(PQMessage *)message;
-+ (NSString *)messageCompletedDownloading:(PQMessage *)message;
++ (NSString *)messageStartedSending:(NSString *)messageId;
++ (NSString *)messageCompletedSending:(NSString *)messageId;
++ (NSString *)messageCompletedUploading:(NSString *)messageId;
++ (NSString *)messageCompletedDownloading:(NSString *)messageId;
 + (NSString *)messageCompletedReceivingFromJIDString:(NSString *)jidString;
-+ (NSString *)messageDidChangeReadStatus:(PQMessage *)message;
++ (NSString *)messageDidChangeReadStatus:(NSString *)messageId;
 + (NSString *)stickerCompletedDownloading:(PQSticker *)sticker;
 + (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker;
 + (NSString *)stickerPackCompletedDownloading;

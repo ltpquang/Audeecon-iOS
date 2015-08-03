@@ -32,6 +32,7 @@
         _toJIDString = toJIDString;
         _isOutgoing = isOutgoing;
         _isRead = NO;
+        _messageId = [[onlineAudioUri lastPathComponent] stringByDeletingPathExtension];
     }
     return self;
 }
@@ -48,13 +49,14 @@
         _toJIDString = toJIDString;
         _isOutgoing = isOutgoing;
         _isRead = NO;
+        _messageId = [[offlineAudioUri lastPathComponent] stringByDeletingPathExtension];
     }
     return self;
 }
 
 - (void)markAsRead {
     self.isRead = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageDidChangeReadStatus:self]
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageDidChangeReadStatus:self.messageId]
                                                         object:nil];
 }
 

@@ -10,6 +10,7 @@
 #import "XMPPFramework.h"
 #import "PQStickerKeyboardView.h"
 #import "PQAudioPlayerAndRecorder.h"
+#import "PQMessageTableViewCell.h"
 
 @protocol PQStickerKeyboardDelegate;
 @protocol PQMessageTableViewCellDelegate;

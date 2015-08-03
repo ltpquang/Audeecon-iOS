@@ -12,28 +12,28 @@
 #import "PQStickerPack.h"
 
 @implementation PQNotificationNameFactory
-+ (NSString *)messageStartedSending:(PQMessage *)message {
-    return [@"StartedUploading:" stringByAppendingString:message.offlineAudioUri.lastPathComponent];
++ (NSString *)messageStartedSending:(NSString *)messageId {
+    return [@"StartedUploading:" stringByAppendingString:messageId];
 }
 
-+ (NSString *)messageCompletedSending:(PQMessage *)message {
-    return [@"CompletedSending:" stringByAppendingString:message.offlineAudioUri.lastPathComponent];
++ (NSString *)messageCompletedSending:(NSString *)messageId {
+    return [@"CompletedSending:" stringByAppendingString:messageId];
 }
 
-+ (NSString *)messageCompletedUploading:(PQMessage *)message {
-    return [@"CompletedUploading:" stringByAppendingString:message.offlineAudioUri.lastPathComponent];
++ (NSString *)messageCompletedUploading:(NSString *)messageId {
+    return [@"CompletedUploading:" stringByAppendingString:messageId];
 }
 
-+ (NSString *)messageCompletedDownloading:(PQMessage *)message {
-    return [@"CompletedDownloadingMessage:" stringByAppendingString:message.onlineAudioUri.lastPathComponent];
++ (NSString *)messageCompletedDownloading:(NSString *)messageId {
+    return [@"CompletedDownloadingMessage:" stringByAppendingString:messageId];
 }
 
 + (NSString *)messageCompletedReceivingFromJIDString:(NSString *)jidString {
     return [@"Received:" stringByAppendingString:jidString];
 }
 
-+ (NSString *)messageDidChangeReadStatus:(PQMessage *)message {
-    return [@"MessageDidChangeReadStatus:" stringByAppendingString:message.onlineAudioUri.lastPathComponent];
++ (NSString *)messageDidChangeReadStatus:(NSString *)messageId {
+    return [@"MessageDidChangeReadStatus:" stringByAppendingString:messageId];
 }
 
 + (NSString *)stickerCompletedDownloading:(PQSticker *)sticker {

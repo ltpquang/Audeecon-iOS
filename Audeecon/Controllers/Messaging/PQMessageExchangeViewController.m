@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "XMPPFramework.h"
 #import "PQMessage.h"
-#import "PQMessageTableViewCell.h"
 #import "PQStickerKeyboardView.h"
 #import "PQSticker.h"
 #import "PQStickerPack.h"
@@ -181,7 +180,7 @@
     NSLog(@"%d", [self.recordingOverlay cancelViewContainGesture:gesture]);
     
     NSString *from = [[[self xmppStream] myJID] user];
-    NSString *to = self.partner.jidString;
+    NSString *to = self.partner.username;
     NSString *timestamp = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970] * 1000];
     NSNumber *isCanceled = [NSNumber numberWithBool:[self.recordingOverlay cancelViewContainGesture:gesture]];
     

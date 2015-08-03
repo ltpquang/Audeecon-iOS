@@ -13,6 +13,7 @@
 @class PQRequestingService;
 
 @interface PQMessage : NSObject
+@property NSString *messageId;
 @property PQSticker *sticker;
 @property NSString *onlineAudioUri;
 @property NSString *offlineAudioUri;

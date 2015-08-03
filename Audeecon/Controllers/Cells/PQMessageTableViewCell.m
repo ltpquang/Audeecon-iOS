@@ -47,7 +47,7 @@
         if (message.onlineAudioUri.length == 0) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(messageCompletedSendingHandler:)
-                                                         name:[PQNotificationNameFactory messageCompletedSending:message]
+                                                         name:[PQNotificationNameFactory messageCompletedSending:message.messageId]
                                                        object:nil];
             self.mainImage.alpha = 0.4;
         }
@@ -57,7 +57,7 @@
         if (message.offlineAudioUri.length == 0) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(messageCompletedDownloadingHandler:)
-                                                         name:[PQNotificationNameFactory messageCompletedDownloading:message]
+                                                         name:[PQNotificationNameFactory messageCompletedDownloading:message.messageId]
                                                        object:nil];
             self.mainImage.alpha = 0.4;
         }
@@ -69,7 +69,7 @@
             [self.readIndicatorLabel setHidden:YES];
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(messageDidChangeReadStatus:)
-                                                         name:[PQNotificationNameFactory messageDidChangeReadStatus:message]
+                                                         name:[PQNotificationNameFactory messageDidChangeReadStatus:message.messageId]
                                                        object:nil];
         }
     }

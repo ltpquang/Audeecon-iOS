@@ -69,7 +69,6 @@
 
 - (NSArray *)stickerArrayFromIdArray:(NSArray *)ids {
     NSString *keyName = @"stickerId";
-    PQSticker *st = [PQSticker objectForPrimaryKey:ids[0]];
     
     RLMResults *results = [PQSticker objectsWithPredicate:[NSPredicate
                                                            predicateWithFormat:
