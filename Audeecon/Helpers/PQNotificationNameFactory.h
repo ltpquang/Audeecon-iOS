@@ -17,6 +17,7 @@
 + (NSString *)messageCompletedUploading:(PQMessage *)message;
 + (NSString *)messageCompletedDownloading:(PQMessage *)message;
 + (NSString *)messageCompletedReceivingFromJIDString:(NSString *)jidString;
++ (NSString *)messageDidChangeReadStatus:(PQMessage *)message;
 + (NSString *)stickerCompletedDownloading:(PQSticker *)sticker;
 + (NSString *)stickerCompletedDownloadingFullsizeImage:(PQSticker *)sticker;
 + (NSString *)stickerPackCompletedDownloading;

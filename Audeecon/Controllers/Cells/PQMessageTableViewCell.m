@@ -16,6 +16,7 @@
 @interface PQMessageTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
+@property (weak, nonatomic) IBOutlet UILabel *readIndicatorLabel;
 
 
 @property (weak, nonatomic) id<PQMessageTableViewCellDelegate> delegate;
@@ -50,13 +51,26 @@
                                                        object:nil];
             self.mainImage.alpha = 0.4;
         }
+        [self.readIndicatorLabel setHidden:YES];
     }
     else {
         if (message.offlineAudioUri.length == 0) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(messageCompletedDownloadingHandler:)
-                                                         name:[PQNotificationNameFactory messageCompletedDownloading:message] object:nil];
+                                                         name:[PQNotificationNameFactory messageCompletedDownloading:message]
+                                                       object:nil];
             self.mainImage.alpha = 0.4;
+        }
+        
+        if (message.isRead) {
+            [self.readIndicatorLabel setHidden:NO];
+        }
+        else {
+            [self.readIndicatorLabel setHidden:YES];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(messageDidChangeReadStatus:)
+                                                         name:[PQNotificationNameFactory messageDidChangeReadStatus:message]
+                                                       object:nil];
         }
     }
     
@@ -67,13 +81,13 @@
         //register for image update
     }
     
+    
     [self configRoundImage];
     [self setupCell];
 }
 
 - (void)messageCompletedSendingHandler:(NSNotification *)noti {
     self.mainImage.alpha = 1.0;
-    //[self.loadingIndicator stopAnimating];
 }
 
 - (void)messageCompletedDownloadFullsizeImageHandler:(NSNotification *)noti {
@@ -84,6 +98,10 @@
     NSLog(@"%@", noti.name);
     self.mainImage.alpha = 1.0;
     self.mainImage.image = [[(PQMessage *)noti.object sticker] fullsizeImage];
+}
+
+- (void)messageDidChangeReadStatus:(NSNotification *)noti {
+    [self.readIndicatorLabel setHidden:NO];
 }
 
 - (void)configRoundImage {
@@ -101,6 +119,7 @@
     self.mainImage.image = [UIImage imageNamed:@"defaultsmile"];
     self.avatarImage.image = [UIImage imageNamed:@"defaultavatar"];
     self.mainImage.alpha = 1.0;
+    self.readIndicatorLabel.hidden = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

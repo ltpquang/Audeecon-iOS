@@ -250,6 +250,7 @@
     PQMessage *message = [self.messagingCenter messageAtIndexPath:path
                                              withPartnerJIDString:self.partner.jidString];
     if (message.offlineAudioUri.length != 0) {
+        [message markAsRead];
         [self.playingOverlay startPlayingUsingSticker:message
                             andAudioRecorderAndPlayer:self.audioRecorderAndPlayer
                                                onView:self.view];

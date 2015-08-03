@@ -11,12 +11,12 @@
 #import "DDXML.h"
 #import "DDXMLElement.h"
 #import "NSXMLElement+XMPP.h"
-//#import <Parse/Parse.h>
 #import "PQRequestingService.h"
 #import <AWSCore.h>
 #import <AWSS3.h>
 #import "PQUrlService.h"
 #import "PQFilePathFactory.h"
+#import "PQNotificationNameFactory.h"
 
 @implementation PQMessage
 
@@ -31,6 +31,7 @@
         _fromJIDString = fromJIDString;
         _toJIDString = toJIDString;
         _isOutgoing = isOutgoing;
+        _isRead = NO;
     }
     return self;
 }
@@ -46,48 +47,16 @@
         _fromJIDString = fromJIDString;
         _toJIDString = toJIDString;
         _isOutgoing = isOutgoing;
+        _isRead = NO;
     }
     return self;
 }
 
-//- (id)initWithSender:(NSString *)sender
-//       andStickerUri:(NSString *)stickerUri
-//  andOfflineAudioUri:(NSString *)offlineAudioUri {
-//    if (self = [super init]) {
-//        _sender = sender;
-//        _stickerUri = stickerUri;
-//        _offlineAudioUri = offlineAudioUri;
-//    }
-//    return self;
-//}
-
-//- (id)initWithXmlElement:(DDXMLElement *)element {
-//    if (self = [super init]) {
-//        NSString *body = [[element elementForName:@"body"] stringValue];
-//        NSString *from = [[element attributeForName:@"from"] stringValue];
-//        
-//        _sender = from;
-//        
-//        NSArray *arr = [body componentsSeparatedByString:@"|"];
-//        _stickerUri = arr[0];
-//        _onlineAudioUri = arr[1];
-//    }
-//    return self;
-//}
-//
-//- (DDXMLElement *)xmlElementSendTo:(NSString *)toUser {
-//    NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-//    NSArray *arr = @[_stickerUri, _onlineAudioUri];
-//    NSString *bodyString = [arr componentsJoinedByString:@"|"];
-//    [body setStringValue:bodyString];
-//    
-//    NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-//    [message addAttributeWithName:@"type" stringValue:@"chat"];
-//    [message addAttributeWithName:@"to" stringValue:toUser];
-//    [message addChild:body];
-//    
-//    return message;
-//}
+- (void)markAsRead {
+    self.isRead = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory messageDidChangeReadStatus:self]
+                                                        object:nil];
+}
 
 - (void)uploadAudioWithCompletion:(void(^)(BOOL, NSError *))complete {
     if (_offlineAudioUri.length == 0) {

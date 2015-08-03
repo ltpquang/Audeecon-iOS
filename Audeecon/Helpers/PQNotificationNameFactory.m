@@ -32,6 +32,10 @@
     return [@"Received:" stringByAppendingString:jidString];
 }
 
++ (NSString *)messageDidChangeReadStatus:(PQMessage *)message {
+    return [@"MessageDidChangeReadStatus:" stringByAppendingString:message.onlineAudioUri.lastPathComponent];
+}
+
 + (NSString *)stickerCompletedDownloading:(PQSticker *)sticker {
     return [@"CompletedDownloading:" stringByAppendingString:sticker.stickerId];
 }

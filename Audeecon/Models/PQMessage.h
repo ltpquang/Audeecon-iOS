@@ -19,6 +19,7 @@
 @property NSString *fromJIDString;
 @property NSString *toJIDString;
 @property BOOL isOutgoing;
+@property BOOL isRead;
 
 - (id)initWithSticker:(PQSticker *)sticker
     andOnlineAudioUri:(NSString *)onlineAudioUri
@@ -30,14 +31,7 @@
         fromJIDString:(NSString *)fromJIDString
           toJIDString:(NSString *)toJIDString
            isOutgoing:(BOOL)isOutgoing;
-
-//- (id)initWithSender:(NSString *)sender
-//       andStickerUri:(NSString *)stickerUri
-//  andOfflineAudioUri:(NSString *)offlineAudioUri;
-
-//- (id)initWithXmlElement:(DDXMLElement *)element;
-//
-//- (DDXMLElement *)xmlElementSendTo:(NSString *)toUser;
+- (void)markAsRead;
 
 - (void)uploadAudioWithCompletion:(void(^)(BOOL, NSError *))complete;
 - (void)downloadAudioUsingRequestingService:(PQRequestingService *)requestingService
