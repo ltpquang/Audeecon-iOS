@@ -41,6 +41,10 @@
     return [@"CompletedDownloadStickerFullsizeImage:" stringByAppendingString:stickerId];
 }
 
++ (NSString *)stickerCompletedDownloadingThumbnailImage:(NSString *)stickerId {
+    return [@"CompletedDownloadStickerThumbnailImage:" stringByAppendingString:stickerId];
+}
+
 + (NSString *)stickerPackCompletedDownloading {
     return @"CompletedDownloadingStickerPack";
 }

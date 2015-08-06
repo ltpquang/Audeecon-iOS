@@ -16,11 +16,22 @@
 #import "PQMessageDownloadOperation.h"
 
 @interface PQMessagingCenter()
+@property (strong, nonatomic) XMPPStream *stream;
+// Message dictionary is used to save the chat log
+// Key: the partner
+// Value: the array containing all the back and forth messages
 @property (strong, nonatomic) NSMutableDictionary *messageDictionary;
 @property (strong, nonatomic) NSOperationQueue *sendingQueue;
+// Most recent sending dictionary is used to save the last sent message
+// to ensure that all the message will be sent after the previous one completed sending
+// Key: the partner
+// Value: the operation of the last sending message
 @property (strong, nonatomic) NSMutableDictionary *mostRecentSendingDictionary;
 @property (strong, nonatomic) NSOperationQueue *receivingQueue;
-@property (strong, nonatomic) XMPPStream *stream;
+// Have new unacknown messages dictionary indicates that whether we have new unacknown
+// messages with specified user or not, this is not similar to unread messages, because sometimes we
+// have unread messages but we are acknown about them
+@property (strong, nonatomic) NSMutableDictionary *haveNewUnacknownMessagesDictionary;
 @end
 
 
@@ -53,6 +64,51 @@
         _receivingQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
     }
     return _receivingQueue;
+}
+
+- (NSMutableDictionary *)haveNewUnacknownMessagesDictionary {
+    if (_haveNewUnacknownMessagesDictionary == nil) {
+        _haveNewUnacknownMessagesDictionary = [NSMutableDictionary new];
+    }
+    return _haveNewUnacknownMessagesDictionary;
+}
+
+- (void)setHaveNewUnacknownMessages:(BOOL)isHaveNew
+                       forJIDString:(NSString *)jidString {
+    if (isHaveNew) {
+        self.haveNewUnacknownMessagesDictionary[jidString] = @1;
+    }
+    else {
+        self.haveNewUnacknownMessagesDictionary[jidString] = @0;
+    }
+}
+
+- (void)acknowMessagesWithJIDString:(NSString *)jidString {
+    [self setHaveNewUnacknownMessages:NO forJIDString:jidString];
+}
+
+- (BOOL)haveNewUnacknownMessagesWithJIDString:(NSString *)jidString {
+    NSNumber *number = self.haveNewUnacknownMessagesDictionary[jidString];
+    if (number && [number boolValue]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSInteger)unreadMessageCountForJIDString:(NSString *)jid {
+    NSArray *messages = [self messagesWithPartnerJIDString:jid];
+    int count = 0;
+    for (PQMessage *mess in messages) {
+        if (!mess.isOutgoing && !mess.isRead) {
+            ++count;
+        }
+    }
+    return count;
+}
+
+- (PQSticker *)lastIncomingMessageStickerForJIDString:(NSString *)jid {
+    NSArray *messages = [self messagesWithPartnerJIDString:jid];
+    return [(PQMessage *)[messages lastObject] sticker];
 }
 
 - (id)initWithXMPPStream:(XMPPStream *)stream {
@@ -101,7 +157,7 @@
     
     NSMutableArray *messages = [self messagesWithPartnerJIDString:fromJIDString];
     [messages addObject:pqMessage];
-    
+    [self setHaveNewUnacknownMessages:YES forJIDString:fromJIDString];
     PQMessageDownloadOperation *messDownloadOperation = [[PQMessageDownloadOperation alloc] initWithMessage:pqMessage
                                                                                            andDownloadQueue:self.receivingQueue];
     [self.receivingQueue addOperation:messDownloadOperation];

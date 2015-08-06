@@ -229,9 +229,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    PQMessageExchangeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MessageExchangeView"];
     PQOtherUser *partner = [self.friends objectAtIndex:indexPath.row];
+    [[[self appDelegate] messagingCenter] acknowMessagesWithJIDString:partner.jidString];
+    [tableView beginUpdates];
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [tableView endUpdates];
+    PQMessageExchangeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MessageExchangeView"];
     [vc configUsingPartner:partner];
     [self.navigationController showViewController:vc sender:self];
 }

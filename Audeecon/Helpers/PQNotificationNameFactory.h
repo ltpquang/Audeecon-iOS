@@ -16,6 +16,7 @@
 + (NSString *)messageCompletedReceivingFromJIDString:(NSString *)jidString;
 + (NSString *)messageDidChangeReadStatus:(NSString *)messageId;
 + (NSString *)stickerCompletedDownloading:(NSString *)stickerId;
++ (NSString *)stickerCompletedDownloadingThumbnailImage:(NSString *)stickerId;
 + (NSString *)stickerCompletedDownloadingFullsizeImage:(NSString *)stickerId;
 + (NSString *)stickerPackCompletedDownloading;
 + (NSString *)stickerPackStartedPending;

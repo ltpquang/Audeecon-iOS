@@ -11,13 +11,18 @@
 #import "XMPPUserCoreDataStorageObject.h"
 #import "PQOtherUser.h"
 #import "PQNotificationNameFactory.h"
+#import "PQSticker.h"
+#import "PQMessagingCenter.h"
+#import <UIImageView+AFNetworking.h>
 
 @interface PQFriendListTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIView *onlineIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *lastMessageThumbnailImageView;
 @property (strong, nonatomic) id<PQFriendListCellDelegate> delegate;
+@property (strong, nonatomic) NSString *jidString;
 @property BOOL firstTimeSetup;
 @end
 
@@ -33,7 +38,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -46,6 +50,7 @@
         [self setupCell];
         self.firstTimeSetup = YES;
     }
+    self.jidString = user.jidString;
     self.nicknameLabel.text = user.nickname;
     self.usernameLabel.text = user.username;
     if (user.avatarData.length != 0) {
@@ -58,8 +63,42 @@
         [self.onlineIndicator setHidden:YES];
     }
     
+    PQMessagingCenter *center = [[self appDelegate] messagingCenter];
+    [self configUIForUnacknownMessagesUsingMessagingCenter:center];
+    [self configUIForLastMessageThumbnailUsingMessagingCenter:center];
+    
     [self registerNotificationsWithUsername:user.username];
     
+}
+
+- (void)configUIForUnacknownMessagesUsingMessagingCenter:(PQMessagingCenter *)center {
+    if ([center haveNewUnacknownMessagesWithJIDString:self.jidString]) {
+        [self.nicknameLabel setTextColor:[UIColor blueColor]];
+        [self.usernameLabel setTextColor:[UIColor blueColor]];
+    }
+    else {
+        [self.nicknameLabel setTextColor:[UIColor blackColor]];
+        [self.usernameLabel setTextColor:[UIColor darkGrayColor]];
+    }
+}
+
+- (void)configUIForLastMessageThumbnailUsingMessagingCenter:(PQMessagingCenter *)center {
+    PQSticker *sticker = [center lastIncomingMessageStickerForJIDString:self.jidString];
+    if (sticker == nil) {
+        self.lastMessageThumbnailImageView.hidden = YES;
+        return;
+    }
+    if (sticker.thumbnailData.length != 0) {
+        self.lastMessageThumbnailImageView.hidden = NO;
+        self.lastMessageThumbnailImageView.image = sticker.thumbnailImage;
+    }
+    else {
+        self.lastMessageThumbnailImageView.hidden = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(stickerDidUpdateNotification:)
+                                                     name:[PQNotificationNameFactory stickerCompletedDownloadingThumbnailImage:sticker.stickerId]
+                                                   object:nil];
+    }
 }
 
 - (void)registerNotificationsWithUsername:(NSString *)username {
@@ -76,6 +115,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveIsOnlineNotification:)
                                                  name:[PQNotificationNameFactory userOnlineStatusChanged:username]
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveMessageNotification:)
+                                                 name:[PQNotificationNameFactory messageCompletedReceivingFromJIDString:self.jidString]
                                                object:nil];
     NSLog(@"%@ - Registered", [PQNotificationNameFactory userOnlineStatusChanged:username]);
 }
@@ -97,13 +140,29 @@
     }
 }
 
+- (void)stickerDidUpdateNotification:(NSNotification *)noti {
+    UIImage *image = noti.userInfo[@"thumbnailImage"];
+    self.lastMessageThumbnailImageView.hidden = NO;
+    [self.lastMessageThumbnailImageView setImage:image];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:[PQNotificationNameFactory stickerCompletedDownloadingThumbnailImage:[(PQSticker *)noti.object stickerId]]
+                                                  object:nil];
+}
+
+- (void)receiveMessageNotification:(NSNotification *)noti {
+    PQMessagingCenter *center = [[self appDelegate] messagingCenter];
+    [self configUIForUnacknownMessagesUsingMessagingCenter:center];
+    [self configUIForLastMessageThumbnailUsingMessagingCenter:center];
+}
+
 - (void)prepareForReuse {
     self.onlineIndicator.hidden = YES;
+    self.lastMessageThumbnailImageView.hidden = NO;
+    self.lastMessageThumbnailImageView.image = [UIImage imageNamed:@"defaultsmile"];
     self.avatarImageView.image = [UIImage imageNamed:@"defaultavatar"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)setupCell {
-    //self.backgroundColor = [UIColor darkGrayColor];
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                       action:@selector(longPressHandler:)];
     [longPressRecognizer setMinimumPressDuration:0.8];
