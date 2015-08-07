@@ -93,7 +93,7 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQ0-OI-i4K">
                                                             <rect key="frame" x="0.0" y="8" width="10" height="2"/>
-                                                            <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.1960784314" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="Eeq-3N-RP3"/>
                                                                 <constraint firstAttribute="width" constant="10" id="Vth-RU-Lu3"/>
@@ -101,7 +101,7 @@
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UD-nm-Bo4">
                                                             <rect key="frame" x="8" y="0.0" width="2" height="10"/>
-                                                            <color key="backgroundColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.1960784314" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="10" id="Y8C-Xd-uYT"/>
                                                                 <constraint firstAttribute="width" constant="2" id="ftb-9o-Zw6"/>
