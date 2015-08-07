@@ -39,6 +39,9 @@
 }
 
 - (void)updateInfoUsingvCard:(XMPPvCardTemp *)vCard {
+    if (vCard.nickname.length == 0) {
+        return;
+    }
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     self.nickname = vCard.nickname;

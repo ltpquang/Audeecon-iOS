@@ -94,6 +94,8 @@
     
     self.profilePicture.layer.cornerRadius = 12.0;
     self.profilePicture.layer.masksToBounds = YES;
+    self.profilePicture.layer.borderWidth = 1.0;
+    self.profilePicture.layer.borderColor = [[UIColor whiteColor] CGColor];
     [self.profilePicture setFrame:CGRectMake(0, 0, 36, 36)];
     [self.profilePicture addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                         action:@selector(infoButtonTUI:)]];

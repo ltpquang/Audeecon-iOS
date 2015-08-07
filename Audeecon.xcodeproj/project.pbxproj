@@ -45,6 +45,7 @@
 		6F48A61A1B5BB46900292882 /* PQStickerDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48A6191B5BB46900292882 /* PQStickerDownloadOperation.m */; };
 		6F48A61D1B5BC98E00292882 /* PQMessageAudioDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48A61C1B5BC98E00292882 /* PQMessageAudioDownloadOperation.m */; };
 		6F48A6201B5BD1F700292882 /* PQMessageDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F48A61F1B5BD1F700292882 /* PQMessageDownloadOperation.m */; };
+		6F565BB01B74707B002242F2 /* PQColorProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F565BAF1B74707B002242F2 /* PQColorProvider.m */; };
 		6F5D85931B5439B000EA518D /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5D85921B5439B000EA518D /* UIImage+Resize.m */; };
 		6F7AD0971B590396007C4DCD /* PQMessageAudioUploadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD0961B590396007C4DCD /* PQMessageAudioUploadOperation.m */; };
 		6F7AD09A1B590582007C4DCD /* PQNotificationNameFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7AD0991B590582007C4DCD /* PQNotificationNameFactory.m */; };
@@ -317,6 +318,8 @@
 		6F48A61C1B5BC98E00292882 /* PQMessageAudioDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageAudioDownloadOperation.m; path = Models/PQMessageAudioDownloadOperation.m; sourceTree = "<group>"; };
 		6F48A61E1B5BD1F700292882 /* PQMessageDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQMessageDownloadOperation.h; path = Models/PQMessageDownloadOperation.h; sourceTree = "<group>"; };
 		6F48A61F1B5BD1F700292882 /* PQMessageDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQMessageDownloadOperation.m; path = Models/PQMessageDownloadOperation.m; sourceTree = "<group>"; };
+		6F565BAE1B74707B002242F2 /* PQColorProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQColorProvider.h; path = Helpers/PQColorProvider.h; sourceTree = "<group>"; };
+		6F565BAF1B74707B002242F2 /* PQColorProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PQColorProvider.m; path = Helpers/PQColorProvider.m; sourceTree = "<group>"; };
 		6F5D85901B541E3C00EA518D /* PQvCardModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PQvCardModuleDelegate.h; path = Protocols/PQvCardModuleDelegate.h; sourceTree = "<group>"; };
 		6F5D85911B5439B000EA518D /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "Helpers/UIImage+Resize.h"; sourceTree = "<group>"; };
 		6F5D85921B5439B000EA518D /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "Helpers/UIImage+Resize.m"; sourceTree = "<group>"; };
@@ -800,6 +803,8 @@
 				6F5D85921B5439B000EA518D /* UIImage+Resize.m */,
 				6F7AD0981B590582007C4DCD /* PQNotificationNameFactory.h */,
 				6F7AD0991B590582007C4DCD /* PQNotificationNameFactory.m */,
+				6F565BAE1B74707B002242F2 /* PQColorProvider.h */,
+				6F565BAF1B74707B002242F2 /* PQColorProvider.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2355,6 +2360,7 @@
 				6F9CE5A51ABB16FC00D716EB /* XMPPMessage+XEP_0085.m in Sources */,
 				6F9CE58C1ABB16FC00D716EB /* XMPPMUC.m in Sources */,
 				6F1833531B52D42300893379 /* PQTextField.m in Sources */,
+				6F565BB01B74707B002242F2 /* PQColorProvider.m in Sources */,
 				6F48A6141B5B6E6000292882 /* PQMessageExchangeViewController.m in Sources */,
 				6F2189C11B502C6E000572BD /* PQImageUriToDataDownloadOperation.m in Sources */,
 				6F4607761B48387000B637C7 /* CALayer+PKDownloadButtonAnimations.m in Sources */,

@@ -206,9 +206,13 @@
 - (void)didTapOnStoreButton {
     // Load up sticker store
     NSLog(@"Store button tap");
-    PQStoreViewController *storeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"StoreViewController"];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:storeVC];
-    [self presentViewController:navVC
+//    PQStoreViewController *storeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"StoreViewController"];
+//    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:storeVC];
+//    [self presentViewController:navVC
+//                       animated:YES
+//                     completion:nil];
+    UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"StoreNavigationController"];
+    [self presentViewController:nav
                        animated:YES
                      completion:nil];
 }

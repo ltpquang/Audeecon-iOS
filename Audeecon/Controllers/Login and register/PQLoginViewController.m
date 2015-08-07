@@ -94,7 +94,18 @@
     self.updateInfoAvatarImageView.layer.cornerRadius = self.updateInfoAvatarImageView.bounds.size.width/2;
     self.updateInfoAvatarImageView.layer.masksToBounds = YES;
     self.updateInfoAvatarImageView.layer.borderWidth = 1.0;
-    self.updateInfoAvatarImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveInfoImageTapGestureHandler:)];
+    self.updateInfoAvatarImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    [self.loginUsernameTextField setTintColor:[UIColor whiteColor]];
+    [self.loginPasswordTextField setTintColor:[UIColor whiteColor]];
+    
+    [self.registerFullnameTextField setTintColor:[UIColor whiteColor]];
+    [self.registerUsernameTextField setTintColor:[UIColor whiteColor]];
+    [self.registerPasswordTextField setTintColor:[UIColor whiteColor]];
+    [self.registerConfirmPasswordTextField setTintColor:[UIColor whiteColor]];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveInfoImageTapGestureHandler:)];
     tap.numberOfTapsRequired = 1;
     [self.updateInfoAvatarImageView addGestureRecognizer:tap];
     

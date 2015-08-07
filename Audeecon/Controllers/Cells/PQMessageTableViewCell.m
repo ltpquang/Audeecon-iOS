@@ -12,6 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "PQUser.h"
 #import "PQNotificationNameFactory.h"
+#import "PQColorProvider.h"
 
 @interface PQMessageTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
@@ -108,11 +109,12 @@
     if (self.imageRounded) {
         return;
     }
-    self.avatarImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.avatarImage.layer.borderColor = [[PQColorProvider primaryColor] CGColor];
     self.avatarImage.layer.borderWidth = 1.0;
     self.avatarImage.layer.cornerRadius = self.avatarImage.bounds.size.width / 2.0;
     self.avatarImage.layer.masksToBounds = YES;
     self.imageRounded = YES;
+    
 }
 
 - (void)prepareForReuse {

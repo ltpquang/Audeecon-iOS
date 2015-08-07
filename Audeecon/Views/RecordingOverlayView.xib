@@ -19,7 +19,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
-                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="value" red="0.1960784314" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="primaryWaveLineWidth">
                             <real key="value" value="2"/>

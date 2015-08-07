@@ -14,6 +14,7 @@
 #import "PQSticker.h"
 #import "PQMessagingCenter.h"
 #import <UIImageView+AFNetworking.h>
+#import "PQColorProvider.h"
 
 @interface PQFriendListTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -46,6 +47,8 @@
     if (!self.firstTimeSetup) {
         self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width/2;
         self.avatarImageView.layer.masksToBounds = YES;
+        self.avatarImageView.layer.borderWidth = 1.0;
+        self.avatarImageView.layer.borderColor = [[PQColorProvider primaryColor] CGColor];
         self.delegate = delegate;
         [self setupCell];
         self.firstTimeSetup = YES;
@@ -77,7 +80,8 @@
         [self.usernameLabel setTextColor:[UIColor blueColor]];
     }
     else {
-        [self.nicknameLabel setTextColor:[UIColor blackColor]];
+        //[self.nicknameLabel setTextColor:[UIColor blackColor]];
+        [self.nicknameLabel setTextColor:[PQColorProvider primaryColor]];
         [self.usernameLabel setTextColor:[UIColor darkGrayColor]];
     }
 }
