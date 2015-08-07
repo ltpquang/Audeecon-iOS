@@ -11,4 +11,5 @@
 
 @interface PQColorProvider : NSObject
 + (UIColor *)primaryColor;
++ (UIColor *)primaryComplement;
 @end

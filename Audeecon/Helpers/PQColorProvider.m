@@ -12,4 +12,7 @@
 + (UIColor *)primaryColor {
     return [UIColor colorWithRed:50.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
 }
++ (UIColor *)primaryComplement {
+    return [UIColor colorWithRed:1.0 green:95.0/255.0 blue:0 alpha:1.0];
+}
 @end

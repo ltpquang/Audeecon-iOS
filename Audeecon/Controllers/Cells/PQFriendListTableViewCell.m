@@ -76,13 +76,10 @@
 
 - (void)configUIForUnacknownMessagesUsingMessagingCenter:(PQMessagingCenter *)center {
     if ([center haveNewUnacknownMessagesWithJIDString:self.jidString]) {
-        [self.nicknameLabel setTextColor:[UIColor blueColor]];
-        [self.usernameLabel setTextColor:[UIColor blueColor]];
+        [self.nicknameLabel setTextColor:[PQColorProvider primaryComplement]];
     }
     else {
-        //[self.nicknameLabel setTextColor:[UIColor blackColor]];
         [self.nicknameLabel setTextColor:[PQColorProvider primaryColor]];
-        [self.usernameLabel setTextColor:[UIColor darkGrayColor]];
     }
 }
 
