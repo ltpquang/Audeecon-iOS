@@ -19,3 +19,6 @@
 
 "cropmode.title" = "Kırpma Oranı";
 "cropmode.square" = "Kare";
+
+"cameraimage.nopolicy" = "Please enable the permissions in order to use your Camera. Check your permissions in Settings > Privacy > Camera";
+"cameraimage.noconnection" = "Could not connect to camera. Please check your permissions in Settings > Privacy > Camera";

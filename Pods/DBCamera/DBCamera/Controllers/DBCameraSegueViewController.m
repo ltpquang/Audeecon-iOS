@@ -13,6 +13,7 @@
 #import "DBCameraFilterCell.h"
 #import "DBCameraLoadingView.h"
 #import "UIImage+TintColor.h"
+#import "UIImage+Bundle.h"
 #import "GrayscaleContrastFilter.h"
 
 #import <GPUImage/GPUImage.h>
@@ -21,7 +22,7 @@
 
 #ifndef DBCameraLocalizedStrings
 #define DBCameraLocalizedStrings(key) \
-NSLocalizedStringFromTable(key, @"DBCamera", nil)
+[[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"DBCamera" ofType:@"bundle"]] localizedStringForKey:(key) value:@"" table:@"DBCamera"]
 #endif
 
 #define buttonMargin 20.0f
@@ -42,8 +43,6 @@ static const CGSize kFilterCellSize = { 75, 90 };
 @property (nonatomic, strong) UIView *navigationBar, *bottomBar;
 @property (nonatomic, strong) UIButton *useButton, *retakeButton, *cropButton;
 @property (nonatomic, strong) DBCameraLoadingView *loadingView;
-
-@property (nonatomic, strong) UIImage *stockThumbnail;
 @end
 
 @implementation DBCameraSegueViewController
@@ -63,14 +62,23 @@ static const CGSize kFilterCellSize = { 75, 90 };
         
         _cropArray = @[ @320, @213, @240, @192, @180 ];
         _filtersList = @[ @"normal", @"1977", @"amaro", @"grey", @"hudson", @"mayfair", @"nashville", @"valencia", @"contrastgrey", @"vignette" ];
+        
+        NSBundle *bundle = [NSBundle bundleForClass:self.class];
+        NSURL *filter1977      = [NSURL fileURLWithPath:[bundle pathForResource:@"1977"      ofType:@"acv"]];
+        NSURL *filterAmaro     = [NSURL fileURLWithPath:[bundle pathForResource:@"amaro"     ofType:@"acv"]];
+        NSURL *filterHudson    = [NSURL fileURLWithPath:[bundle pathForResource:@"Hudson"    ofType:@"acv"]];
+        NSURL *filterMayfair   = [NSURL fileURLWithPath:[bundle pathForResource:@"mayfair"   ofType:@"acv"]];
+        NSURL *filterNashville = [NSURL fileURLWithPath:[bundle pathForResource:@"Nashville" ofType:@"acv"]];
+        NSURL *filterValencia  = [NSURL fileURLWithPath:[bundle pathForResource:@"1977"      ofType:@"acv"]];
+        
         _filterMapping = @{ @0:[[GPUImageFilter alloc] init],
-                            @1:[[GPUImageToneCurveFilter alloc] initWithACV:@"1977"],
-                            @2:[[GPUImageToneCurveFilter alloc] initWithACV:@"amaro"],
+                            @1:[[GPUImageToneCurveFilter alloc] initWithACVURL:filter1977],
+                            @2:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterAmaro],
                             @3:[[GPUImageGrayscaleFilter alloc] init],
-                            @4:[[GPUImageToneCurveFilter alloc] initWithACV:@"Hudson"],
-                            @5:[[GPUImageToneCurveFilter alloc] initWithACV:@"mayfair"],
-                            @6:[[GPUImageToneCurveFilter alloc] initWithACV:@"Nashville"],
-                            @7:[[GPUImageToneCurveFilter alloc] initWithACV:@"Valencia"],
+                            @4:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterHudson],
+                            @5:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterMayfair],
+                            @6:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterNashville],
+                            @7:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterValencia],
                             @8:[[GrayscaleContrastFilter alloc] init],
                             @9:vignetteFilterGroup};
         
@@ -78,9 +86,6 @@ static const CGSize kFilterCellSize = { 75, 90 };
         
         [self setSourceImage:image];
         [self setPreviewImage:thumb];
-        [self setStockThumbnail:thumb];
-        
-        
         [self setCropRect:(CGRect){ 0, 320 }];
         [self setMinimumScale:.2];
         [self setMaximumScale:10];
@@ -91,7 +96,9 @@ static const CGSize kFilterCellSize = { 75, 90 };
 
 - (void)initVignetteFilter {
     vignetteFilter = [[GPUImageVignetteFilter alloc] init];
-    vignetteToneCurveFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"Vignette"];
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    NSURL *vignetteFilterACVURL = [NSURL fileURLWithPath:[bundle pathForResource:@"Vignette" ofType:@"acv"]];
+    vignetteToneCurveFilter = [[GPUImageToneCurveFilter alloc] initWithACVURL:vignetteFilterACVURL];
     vignetteFilterGroup = [[GPUImageFilterGroup alloc] init];
     
     [vignetteFilterGroup addFilter:vignetteToneCurveFilter];
@@ -121,7 +128,6 @@ static const CGSize kFilterCellSize = { 75, 90 };
     [self.view addSubview:self.bottomBar];
     [self.view setClipsToBounds:YES];
     
-    
     if( self.cameraSegueConfigureBlock )
         self.cameraSegueConfigureBlock(self);
 }
@@ -130,7 +136,6 @@ static const CGSize kFilterCellSize = { 75, 90 };
 {
     [super viewWillAppear:animated];
     
-    [self cropImage];
     if ( _forceQuadCrop ) {
         [self setCropMode:YES];
         [self setCropRect:_pFrame];
@@ -179,7 +184,6 @@ static const CGSize kFilterCellSize = { 75, 90 };
 
 - (void) saveImage
 {
-    /*
     if ( [_delegate respondsToSelector:@selector(camera:didFinishWithImage:withMetadata:)] ) {
         if ( _cropMode )
             [self cropImage];
@@ -188,36 +192,25 @@ static const CGSize kFilterCellSize = { 75, 90 };
             [_delegate camera:self didFinishWithImage:transform withMetadata:self.capturedImageMetadata];
         }
     }
-     */
-    if ( [_delegate respondsToSelector:@selector(camera:didFinishWithImage:withMetadata:)] ) {
-        UIImage *transform = [_filterMapping[@(_selectedFilterIndex.row)] imageByFilteringImage:self.sourceImage];
-        [_delegate camera:self didFinishWithImage:transform withMetadata:self.capturedImageMetadata];
-    }
 }
 
 - (void) cropImage
 {
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         CGImageRef resultRef = [self newTransformedImage:self.imageView.transform
                                              sourceImage:self.sourceImage.CGImage
                                               sourceSize:self.sourceImage.size
                                        sourceOrientation:self.sourceImage.imageOrientation
-                                             outputWidth:640.0//self.outputWidth ? self.outputWidth : self.sourceImage.size.width
+                                             outputWidth:self.outputWidth ? self.outputWidth : self.sourceImage.size.width
                                                 cropRect:self.cropRect
                                            imageViewSize:self.imageView.bounds.size];
         dispatch_async(dispatch_get_main_queue(), ^{
             UIImage *transform =  [UIImage imageWithCGImage:resultRef scale:1.0 orientation:UIImageOrientationUp];
             CGImageRelease(resultRef);
-            [self setPreviewImage:transform];
-            [self setSourceImage:transform];
-            [_filtersView reloadData];
-            NSLog(@"Cropped");
-            //transform = [_filterMapping[@(_selectedFilterIndex.row)] imageByFilteringImage:transform];
-            //[_delegate camera:self didFinishWithImage:transform withMetadata:self.capturedImageMetadata];
+            transform = [_filterMapping[@(_selectedFilterIndex.row)] imageByFilteringImage:transform];
+            [_delegate camera:self didFinishWithImage:transform withMetadata:self.capturedImageMetadata];
         });
     });
-     
 }
 
 - (void) setCropMode:(BOOL)cropMode
@@ -322,8 +315,8 @@ static const CGSize kFilterCellSize = { 75, 90 };
     if ( !_cropButton) {
         _cropButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cropButton setBackgroundColor:[UIColor clearColor]];
-        [_cropButton setImage:[[UIImage imageNamed:@"Crop"] tintImageWithColor:self.tintColor] forState:UIControlStateNormal];
-        [_cropButton setImage:[[UIImage imageNamed:@"Crop"] tintImageWithColor:self.selectedTintColor] forState:UIControlStateSelected];
+        [_cropButton setImage:[[UIImage imageInBundleNamed:@"Crop"] tintImageWithColor:self.tintColor] forState:UIControlStateNormal];
+        [_cropButton setImage:[[UIImage imageInBundleNamed:@"Crop"] tintImageWithColor:self.selectedTintColor] forState:UIControlStateSelected];
         [_cropButton setFrame:(CGRect){ CGRectGetMidX(self.view.bounds) - 15, 15, 30, 30 }];
         [_cropButton addTarget:self action:@selector(cropModeAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -378,7 +371,7 @@ static const CGSize kFilterCellSize = { 75, 90 };
     [self.filtersView reloadData];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIImage *filteredImage = [_filterMapping[@(indexPath.row)] imageByFilteringImage:self.stockThumbnail];
+        UIImage *filteredImage = [_filterMapping[@(indexPath.row)] imageByFilteringImage:self.sourceImage];
         [self.loadingView removeFromSuperview];
         [self.imageView setImage:filteredImage];
     });

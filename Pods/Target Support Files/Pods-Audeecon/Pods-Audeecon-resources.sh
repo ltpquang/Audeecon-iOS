@@ -59,13 +59,7 @@ install_resource()
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "DBCamera/DBCamera/Resources/DBCameraImages.xcassets"
-  install_resource "DBCamera/DBCamera/Localizations/en.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/es.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/it.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/pt.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/ru.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/sv-SE.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/tr.lproj"
+  install_resource "DBCamera/DBCamera/Localizations/DBCamera.bundle"
   install_resource "DBCamera/DBCamera/Filters/1977.acv"
   install_resource "DBCamera/DBCamera/Filters/amaro.acv"
   install_resource "DBCamera/DBCamera/Filters/Hudson.acv"
@@ -81,13 +75,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "DBCamera/DBCamera/Resources/DBCameraImages.xcassets"
-  install_resource "DBCamera/DBCamera/Localizations/en.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/es.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/it.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/pt.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/ru.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/sv-SE.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/tr.lproj"
+  install_resource "DBCamera/DBCamera/Localizations/DBCamera.bundle"
   install_resource "DBCamera/DBCamera/Filters/1977.acv"
   install_resource "DBCamera/DBCamera/Filters/amaro.acv"
   install_resource "DBCamera/DBCamera/Filters/Hudson.acv"

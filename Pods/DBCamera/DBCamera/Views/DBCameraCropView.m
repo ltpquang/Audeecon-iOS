@@ -25,8 +25,7 @@
         [self setOpaque:NO];
         [self setBackgroundColor:[UIColor clearColor]];
         [self setUserInteractionEnabled:YES];
-        //[self.layer setOpacity:.7];
-        [self.layer setOpacity:1.0];
+        [self.layer setOpacity:.7];
         
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [_imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];

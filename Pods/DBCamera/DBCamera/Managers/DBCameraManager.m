@@ -71,7 +71,7 @@
 
 - (BOOL) setupSessionWithPreset:(NSString *)sessionPreset error:(NSError **)error
 {
-    _videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self frontCamera] error:error];
+    _videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backCamera] error:error];
     
     _stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     [_stillImageOutput setOutputSettings:@{ AVVideoCodecKey : AVVideoCodecJPEG }];
@@ -111,6 +111,20 @@
 - (void) captureImageForDeviceOrientation:(UIDeviceOrientation)deviceOrientation
 {
     AVCaptureConnection *videoConnection = [DBCameraManager connectionWithMediaType:AVMediaTypeVideo fromConnections:_stillImageOutput.connections];
+
+    if (!videoConnection) {
+        NSError *error = [NSError errorWithDomain:@"DBCamera"
+                                             code:-1
+                                         userInfo:@{
+                                                 NSLocalizedFailureReasonErrorKey : @"cameraimage.noconnection"
+                                         }];
+
+        if ([_delegate respondsToSelector:@selector(captureImageFailedWithError:)]) {
+            [_delegate captureImageFailedWithError:error];
+        }
+
+        return;
+    }
     
     if ( [videoConnection isVideoOrientationSupported] ) {
         switch (deviceOrientation) {
@@ -133,7 +147,7 @@
     }
     
     [videoConnection setVideoScaleAndCropFactor:_maxScale];
-    
+
     __weak AVCaptureSession *captureSessionBlock = _captureSession;
     __weak id<DBCameraManagerDelegate>delegateBlock = _delegate;
     

@@ -24,7 +24,7 @@
 
 #ifndef DBCameraLocalizedStrings
 #define DBCameraLocalizedStrings(key) \
-NSLocalizedStringFromTable(key, @"DBCamera", nil)
+[[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"DBCamera" ofType:@"bundle"]] localizedStringForKey:(key) value:@"" table:@"DBCamera"]
 #endif
 
 @interface DBCameraViewController () <DBCameraManagerDelegate, DBCameraViewDelegate> {
@@ -138,16 +138,18 @@ NSLocalizedStringFromTable(key, @"DBCamera", nil)
     [self.cameraManager performSelector:@selector(stopRunning) withObject:nil afterDelay:0.0];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     _cameraManager = nil;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
 }
 
 - (void) checkForLibraryImage
@@ -273,13 +275,6 @@ NSLocalizedStringFromTable(key, @"DBCamera", nil)
     }
 }
 
-- (void) disPlayGridViewToCameraView:(BOOL)show
-{
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.cameraGridView.alpha = (show ? 1.0 : 0.0);
-    } completion:NULL];
-}
-
 #pragma mark - CameraManagerDelagate
 
 - (void) closeCamera
@@ -294,7 +289,9 @@ NSLocalizedStringFromTable(key, @"DBCamera", nil)
 }
 
 - (void) cameraView:(UIView *)camera showGridView:(BOOL)show {
-    [self disPlayGridViewToCameraView:!show];
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.cameraGridView.alpha = (show ? 1.0 : 0.0);
+    } completion:NULL];
 }
 
 - (void) triggerFlashForMode:(AVCaptureFlashMode)flashMode
@@ -326,7 +323,7 @@ NSLocalizedStringFromTable(key, @"DBCamera", nil)
         [segue setTintColor:self.tintColor];
         [segue setSelectedTintColor:self.selectedTintColor];
         [segue setForceQuadCrop:_forceQuadCrop];
-        [segue enableGestures:NO];
+        [segue enableGestures:YES];
         [segue setDelegate:self.delegate];
         [segue setCapturedImageMetadata:finalMetadata];
         [segue setCameraSegueConfigureBlock:self.cameraSegueConfigureBlock];
@@ -385,6 +382,25 @@ NSLocalizedStringFromTable(key, @"DBCamera", nil)
         return;
 
     _processingPhoto = YES;
+
+    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
+        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+
+        if (status == AVAuthorizationStatusDenied || status == AVAuthorizationStatusRestricted) {
+            [[[UIAlertView alloc] initWithTitle:DBCameraLocalizedStrings(@"general.error.title")
+                                        message:DBCameraLocalizedStrings(@"cameraimage.nopolicy")
+                                       delegate:nil
+                              cancelButtonTitle:@"Ok"
+                              otherButtonTitles:nil, nil] show];
+
+            return;
+        }
+        else if (status == AVAuthorizationStatusNotDetermined) {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:nil];
+
+            return;
+        }
+    }
 
     [self.cameraManager captureImageForDeviceOrientation:_deviceOrientation];
 }

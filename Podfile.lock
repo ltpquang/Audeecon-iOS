@@ -20,39 +20,39 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AWSAutoScaling (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSCloudWatch (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSCognito (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSCore (2.2.2)
-  - AWSDynamoDB (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSEC2 (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSElasticLoadBalancing (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSKinesis (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSLambda (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSMachineLearning (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSMobileAnalytics (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSS3 (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSSES (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSSimpleDB (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSSNS (2.2.2):
-    - AWSCore (= 2.2.2)
-  - AWSSQS (2.2.2):
-    - AWSCore (= 2.2.2)
+  - AWSAutoScaling (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSCloudWatch (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSCognito (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSCore (2.2.3)
+  - AWSDynamoDB (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSEC2 (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSElasticLoadBalancing (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSKinesis (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSLambda (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSMachineLearning (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSMobileAnalytics (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSS3 (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSSES (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSSimpleDB (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSSNS (2.2.3):
+    - AWSCore (= 2.2.3)
+  - AWSSQS (2.2.3):
+    - AWSCore (= 2.2.3)
   - Crashlytics (3.1.0)
-  - DBCamera (2.3.16):
+  - DBCamera (2.4.1):
     - GPUImage (~> 0.1)
   - Fabric (1.2.8):
     - Fabric/Base (= 1.2.8)
@@ -90,24 +90,24 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AWSAutoScaling: 4a178f86ecc44d8d3e2f1cb807e9d303762f8636
-  AWSCloudWatch: 18282e8e3c90a78afea7e7b368feb8736821f281
-  AWSCognito: c7364b3ac4bf8e5849eead5c678513084750c32e
-  AWSCore: 3e969334460cc7ba16504fb2e074f59f95880800
-  AWSDynamoDB: 26acc42c6a6b98cd03112d3e8e733dde9b9b595e
-  AWSEC2: 848442150e9ec0f2746f5e6ee2a72c677fe6a0e2
-  AWSElasticLoadBalancing: 5c98f723f850ae21831ae3c8439c3a2b1790db1b
-  AWSKinesis: 2764560fdb8ee5bc4373cc236bd5377c638901c2
-  AWSLambda: 6606d7d64ada65b9523373090bc94afce68392dc
-  AWSMachineLearning: 3da838a2f58352a023dfaa1a3447583dfef8ac77
-  AWSMobileAnalytics: cf091087c94ef969111fb38f798eb9514f173971
-  AWSS3: 4f89fcc0ef11303f94f561310979a0d2ec816fff
-  AWSSES: dc4bb949af7300c566aa05b6859e1578139561e8
-  AWSSimpleDB: b5b2113a68ee82cf37cb4f988a8cd7b38f15c39b
-  AWSSNS: a984cf9ea5286e57a3cbd8f819cc9f71cf270dec
-  AWSSQS: d60d84d7e5c759d893c880fb0315d7801c85f105
-  Crashlytics: ef9a58a4e806b316a1748c06432f6f847ba09ac6
-  DBCamera: c88a0deea468d153f54196e56a423301c7092737
+  AWSAutoScaling: f9dd3c2eedfc12bbd712626bd3649e467cf4900d
+  AWSCloudWatch: f21ebb0d32e04b77187126268c8d838168b52b00
+  AWSCognito: ae340057e5f8c535aabd39234c7bd5b704b1955e
+  AWSCore: 30510dc1bf3e4cc975868ed4cc9ae16ba402790b
+  AWSDynamoDB: e3a88b170845ae0aea73d1daf2dcfd8faa9495ed
+  AWSEC2: 82fba6f3049399dd159c6ef73bf55e737f39457f
+  AWSElasticLoadBalancing: 9dce58a6fe3cd582cab07e61125fc5cbadf159ce
+  AWSKinesis: ad16d2d79f086abf2d2a98b59ae62216924e1137
+  AWSLambda: e65dd2fbec1c56fff17ccca243d6922ebf7517e9
+  AWSMachineLearning: ea869caf9aa368d13f431cbb63d3a491bf09b912
+  AWSMobileAnalytics: d6207510bbceeefed28bcf7694df544b29c8162d
+  AWSS3: 9c03206264668b69ca94e4f05caa8926a4b0660f
+  AWSSES: a7e09d062c0d05e2cedfb73ee1f596cce3ac6d77
+  AWSSimpleDB: 117db44141ac9542d59c8448d82969750a4e533e
+  AWSSNS: fac1edf1fd6ba5c74cd446330278f930e089fd79
+  AWSSQS: 888f04ee28a2050aeced66e96415cdbf6c073865
+  Crashlytics: 93e2f86363d53c002c6366a9d87e41f2eaee87c3
+  DBCamera: 7a4343a541e1264610f9f33176552b93170a843e
   Fabric: a9eabe53915e9f1db55a84dd2838737928675878
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
