@@ -27,5 +27,6 @@
 + (NSString *)userAvatarChanged:(NSString *)username;
 + (NSString *)userNicknameChanged:(NSString *)username;
 + (NSString *)userOnlineStatusChanged:(NSString *)username;
++ (NSString *)userFriendRequestListChanged;
 @end
 

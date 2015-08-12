@@ -58,6 +58,7 @@ PODS:
     - Fabric/Base (= 1.2.8)
   - Fabric/Base (1.2.8)
   - GPUImage (0.1.7)
+  - JSBadgeView (1.4.1)
   - MBProgressHUD (0.9.1)
   - Realm (0.94.0):
     - Realm/Headers (= 0.94.0)
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - Crashlytics
   - DBCamera
   - Fabric
+  - JSBadgeView
   - MBProgressHUD
   - Realm
   - Realm/Headers
@@ -110,7 +112,8 @@ SPEC CHECKSUMS:
   DBCamera: 7a4343a541e1264610f9f33176552b93170a843e
   Fabric: a9eabe53915e9f1db55a84dd2838737928675878
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Realm: a046149653e0ca220b65b5783da907aa5b74d86c
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.38.2

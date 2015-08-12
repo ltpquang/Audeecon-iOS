@@ -21,6 +21,8 @@
 #import <AWSCore.h>
 #import "PQFilePathFactory.h"
 #import "PQUrlService.h"
+#import <JSBadgeView.h>
+#import "PQColorProvider.h"
 
 @interface PQFriendListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,6 +31,7 @@
 @property (strong, nonatomic) UIImageView *profilePicture;
 @property BOOL isUISet;
 @property MBProgressHUD *hud;
+@property JSBadgeView *friendRequestCountBadge;
 @end
 
 @implementation PQFriendListViewController
@@ -123,10 +126,33 @@
 
 #pragma mark - Add friends
 - (void)setupAddFriendButton {
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self
-                                                                               action:@selector(addButtonTUI:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    UIButton *plusButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [plusButton setFrame:CGRectMake(0, 0, 44, 44)];
+    [plusButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+    [plusButton addTarget:self
+                   action:@selector(addButtonTUI:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    self.friendRequestCountBadge = [[JSBadgeView alloc] initWithParentView:plusButton alignment:JSBadgeViewAlignmentTopRight];
+    self.friendRequestCountBadge.badgePositionAdjustment = CGPointMake(-11, 11);
+    self.friendRequestCountBadge.badgeTextFont = [UIFont systemFontOfSize:11 weight:UIFontWeightMedium];
+    self.friendRequestCountBadge.badgeBackgroundColor = [PQColorProvider primaryComplement];
+    [self configFriendRequestCountLabel];
+    UIBarButtonItem *barbutton = [[UIBarButtonItem alloc] initWithCustomView:plusButton];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    spacer.width = -15;
+    self.navigationItem.rightBarButtonItems = @[spacer, barbutton];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(friendRequestListChangedHandler:)
+                                                 name:[PQNotificationNameFactory userFriendRequestListChanged]
+                                               object:nil];
+}
+
+- (void)friendRequestListChangedHandler:(NSNotification *)noti {
+    [self configFriendRequestCountLabel];
 }
 
 - (void)addButtonTUI:(UIButton *)sender {
@@ -136,6 +162,16 @@
     }
     else {
         [self addFriendAlertView];
+    }
+}
+
+- (void)configFriendRequestCountLabel {
+    if ([[[[self appDelegate] currentUser] awatingJIDs] count] != 0) {
+        self.friendRequestCountBadge.hidden = NO;
+        self.friendRequestCountBadge.badgeText = [NSString stringWithFormat:@"%i",[[[[self appDelegate] currentUser] awatingJIDs] count]];
+    }
+    else {
+        self.friendRequestCountBadge.hidden = YES;
     }
 }
 

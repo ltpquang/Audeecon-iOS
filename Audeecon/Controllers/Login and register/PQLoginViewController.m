@@ -84,8 +84,6 @@
 }
 
 - (void)setupView {
-//    CGRect frame = CGRectMake(0.0, 145.0, self.view.frame.size.width, self.view.frame.size.width);
-//    self.mainScrollView = [[UIScrollView alloc] initWithFrame:frame];
     CGSize scrollSize = self.mainScrollView.frame.size;
     
     self.loginView = [[[NSBundle mainBundle] loadNibNamed:@"LoginView" owner:self options:nil] lastObject];
@@ -108,6 +106,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveInfoImageTapGestureHandler:)];
     tap.numberOfTapsRequired = 1;
     [self.updateInfoAvatarImageView addGestureRecognizer:tap];
+    
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoTapGestureHandler:)];
+    tap.numberOfTapsRequired = 1;
+    [self.mainLogo addGestureRecognizer:tap2];
     
     [self.loginView setFrame:CGRectMake(0.0, 0.0, scrollSize.width, scrollSize.height)];
     [self.registerView setFrame:CGRectMake(scrollSize.width, 0.0, scrollSize.width, scrollSize.height)];
@@ -140,10 +142,10 @@
         //self.loginUsernameTextField.text = @"tlgiang"; //@"ltpquang";
         //self.loginPasswordTextField.text = @"123123";
         
-        //self.registerFullnameTextField.text = @"Add Friend Test ";
-        //self.registerUsernameTextField.text = @"addtest";
-        //self.registerPasswordTextField.text = @"123123";
-        //self.registerConfirmPasswordTextField.text = @"123123";
+        self.registerFullnameTextField.text = @"Add Friend Test ";
+        self.registerUsernameTextField.text = @"addtest";
+        self.registerPasswordTextField.text = @"123123";
+        self.registerConfirmPasswordTextField.text = @"123123";
     }
 }
 
@@ -199,6 +201,10 @@
 
 - (void)saveInfoImageTapGestureHandler:(UITapGestureRecognizer *)gesture {
     [self loadCamera];
+}
+
+- (void)logoTapGestureHandler:(UITapGestureRecognizer *)gesture {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)saveInfoButtonTUI:(id)sender {

@@ -6,6 +6,7 @@ target 'Audeecon' do
 pod 'Realm'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'JSBadgeView'
 pod 'AFNetworking'
 pod 'DBCamera'
 pod 'MBProgressHUD'

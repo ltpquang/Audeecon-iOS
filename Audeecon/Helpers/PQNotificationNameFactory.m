@@ -80,4 +80,8 @@
 + (NSString *)userOnlineStatusChanged:(NSString *)username {
     return [@"OnlineStatusChanged:" stringByAppendingString:username];
 }
+
++ (NSString *)userFriendRequestListChanged {
+    return @"FriendRequestListChanged";
+}
 @end

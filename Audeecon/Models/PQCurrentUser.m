@@ -194,11 +194,15 @@
 
 - (void)addAwaitingJid:(XMPPJID *)awaitingJid {
     [self.awatingJIDs addObject:awaitingJid];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userFriendRequestListChanged]
+                                                        object:nil];
 }
 
 - (XMPPJID *)awaitingJidToProcess {
     XMPPJID *result = self.awatingJIDs.firstObject;
     [self.awatingJIDs removeObjectAtIndex:0];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory userFriendRequestListChanged]
+                                                        object:nil];
     return result;
 }
 
