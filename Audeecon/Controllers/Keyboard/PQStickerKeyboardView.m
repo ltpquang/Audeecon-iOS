@@ -169,7 +169,9 @@
     self.recommendedList = [self.stickerRecommender curentRecommendedStickers];
     if (self.recommendedList.count != 0) {
         self.mainRecommendationImageView.image = [(PQSticker *)self.recommendedList[0] fullsizeImage];
-        self.upComingRecommendationImageView.image = [(PQSticker *)self.recommendedList[1] fullsizeImage];
+        if (self.recommendedList.count != 1) {
+            self.upComingRecommendationImageView.image = [(PQSticker *)self.recommendedList[1] fullsizeImage];
+        }
         [self.mainRecommendationImageView setUserInteractionEnabled:YES];
     }
     else {
