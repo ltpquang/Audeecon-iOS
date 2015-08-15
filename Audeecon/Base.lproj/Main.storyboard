@@ -135,7 +135,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="nR5-HO-gUg" secondAttribute="trailing" id="1RV-2g-nKj"/>
-                                                <constraint firstItem="9SJ-Dz-xoJ" firstAttribute="left" secondItem="Ufu-k2-SQp" secondAttribute="left" constant="8" id="3ew-Ai-bs5"/>
+                                                <constraint firstItem="9SJ-Dz-xoJ" firstAttribute="leading" secondItem="Ufu-k2-SQp" secondAttribute="leading" constant="8" id="3ew-Ai-bs5"/>
                                                 <constraint firstItem="MP3-tj-5Jf" firstAttribute="top" secondItem="Ufu-k2-SQp" secondAttribute="topMargin" id="5vH-SF-O8m"/>
                                                 <constraint firstItem="MP3-tj-5Jf" firstAttribute="trailing" secondItem="Ufu-k2-SQp" secondAttribute="trailingMargin" id="7ZL-z5-4vJ"/>
                                                 <constraint firstItem="lum-KA-HLz" firstAttribute="top" secondItem="Ufu-k2-SQp" secondAttribute="topMargin" constant="6" id="7cS-cg-uFV"/>
@@ -176,9 +176,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ig6-FR-Q4W" secondAttribute="bottom" id="Gtd-HJ-igy"/>
-                            <constraint firstItem="ig6-FR-Q4W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="WGr-A9-RwX"/>
-                            <constraint firstItem="ig6-FR-Q4W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="ZgM-yt-JSd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ig6-FR-Q4W" secondAttribute="trailing" constant="-16" id="cgz-mQ-otA"/>
+                            <constraint firstItem="ig6-FR-Q4W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="WGr-A9-RwX"/>
+                            <constraint firstItem="ig6-FR-Q4W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZgM-yt-JSd"/>
+                            <constraint firstAttribute="trailing" secondItem="ig6-FR-Q4W" secondAttribute="trailing" id="cgz-mQ-otA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9mC-si-Vf0">
@@ -342,9 +342,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="ynI-wt-Q5G" secondAttribute="trailing" constant="-16" id="M4X-dS-z9Z"/>
+                            <constraint firstAttribute="trailing" secondItem="ynI-wt-Q5G" secondAttribute="trailing" id="M4X-dS-z9Z"/>
                             <constraint firstItem="ynI-wt-Q5G" firstAttribute="top" secondItem="1YW-5H-Jdu" secondAttribute="topMargin" id="Oe5-OE-GrD"/>
-                            <constraint firstItem="ynI-wt-Q5G" firstAttribute="leading" secondItem="1YW-5H-Jdu" secondAttribute="leadingMargin" constant="-16" id="T5Q-vS-7KG"/>
+                            <constraint firstItem="ynI-wt-Q5G" firstAttribute="leading" secondItem="1YW-5H-Jdu" secondAttribute="leading" id="T5Q-vS-7KG"/>
                             <constraint firstItem="3Vv-fl-Irz" firstAttribute="top" secondItem="ynI-wt-Q5G" secondAttribute="bottom" id="oLJ-oW-NzR"/>
                         </constraints>
                     </view>

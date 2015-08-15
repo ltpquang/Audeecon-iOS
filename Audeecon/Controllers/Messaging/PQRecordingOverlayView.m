@@ -63,7 +63,10 @@
 }
 
 - (BOOL)cancelViewContainGesture:(UIGestureRecognizer *)gesture {
-    return CGRectContainsPoint(self.cancelView.bounds, [gesture locationInView:self.cancelView]) ? YES : NO;
+    return CGRectContainsPoint(self.cancelView.bounds, [gesture locationInView:self.cancelView])
+    || CGRectContainsPoint(self.mainImage.bounds, [gesture locationInView:self.mainImage])
+    || CGRectContainsPoint(self.waveformView.bounds, [gesture locationInView:self.waveformView])
+    ? YES : NO;
 }
 
 - (void)animatingUsingSticker:(PQSticker *)sticker {

@@ -50,6 +50,7 @@
 
 - (void)main {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"Audio download operation starts");
         [self.message downloadAudioUsingRequestingService:[PQRequestingService new]
                                                  complete:^(NSURL *url) {
                                                      [self completeOperation];

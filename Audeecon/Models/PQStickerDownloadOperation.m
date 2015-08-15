@@ -61,6 +61,7 @@
                                                                delegate:nil];
         NSBlockOperation *finishBlock = [NSBlockOperation blockOperationWithBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self completeOperation];
                 [[NSNotificationCenter defaultCenter] postNotificationName:[PQNotificationNameFactory stickerCompletedDownloading:self.sticker.stickerId]
                                                                     object:self.sticker];
             });

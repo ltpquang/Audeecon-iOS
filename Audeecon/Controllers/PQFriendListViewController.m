@@ -135,7 +135,7 @@
     
     self.friendRequestCountBadge = [[JSBadgeView alloc] initWithParentView:plusButton alignment:JSBadgeViewAlignmentTopRight];
     self.friendRequestCountBadge.badgePositionAdjustment = CGPointMake(-11, 11);
-    self.friendRequestCountBadge.badgeTextFont = [UIFont systemFontOfSize:11 weight:UIFontWeightMedium];
+    //self.friendRequestCountBadge.badgeTextFont = [UIFont systemFontOfSize:11 weight:UIFontWeightMedium];
     self.friendRequestCountBadge.badgeBackgroundColor = [PQColorProvider primaryComplement];
     [self configFriendRequestCountLabel];
     UIBarButtonItem *barbutton = [[UIBarButtonItem alloc] initWithCustomView:plusButton];
@@ -274,7 +274,8 @@
     [tableView endUpdates];
     PQMessageExchangeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MessageExchangeView"];
     [vc configUsingPartner:partner];
-    [self.navigationController showViewController:vc sender:self];
+    //[self.navigationController showViewController:vc sender:self];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Friend list table view cell delegate
