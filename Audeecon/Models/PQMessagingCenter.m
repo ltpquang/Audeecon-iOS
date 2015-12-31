@@ -92,7 +92,7 @@
     if (number && [number boolValue]) {
         return YES;
     }
-    return NO;
+    return NO; 
 }
 
 - (NSInteger)unreadMessageCountForJIDString:(NSString *)jid {
